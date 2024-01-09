@@ -17,6 +17,7 @@
 		100D38AD2B44844F00498977 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 100D38AC2B44844F00498977 /* Assets.xcassets */; };
 		100D38B12B44852700498977 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B02B44852700498977 /* ContentView.swift */; };
 		3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */; };
+		3B2021792B4CE5EC0010CA02 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2021782B4CE5EC0010CA02 /* PageControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		100D38AC2B44844F00498977 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		100D38B02B44852700498977 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "Spon-us/ContentView.swift"; sourceTree = SOURCE_ROOT; };
 		3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalReceivedListView.swift; sourceTree = "<group>"; };
+		3B2021782B4CE5EC0010CA02 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
 				100D38B02B44852700498977 /* ContentView.swift */,
 				3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */,
+				3B2021782B4CE5EC0010CA02 /* PageControl.swift */,
 				100D38AC2B44844F00498977 /* Assets.xcassets */,
 				100D38A12B44834700498977 /* Preview Content */,
 			);
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2021792B4CE5EC0010CA02 /* PageControl.swift in Sources */,
 				100D389A2B44833500498977 /* FontManager.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,

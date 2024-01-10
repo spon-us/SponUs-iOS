@@ -131,16 +131,17 @@ struct MyNoticeView: View {
         ScrollView {
             LazyVStack(spacing: 0){
                 ScrollView(.horizontal) {
-                    LazyHStack {
+                    LazyHStack(spacing: 10) {
                         ForEach(0 ..< 5) { trip in
                             
                             Image("TestPhoto")
                                 .resizable()
                                 .scaledToFill()
-                                .frame(height: 300)
-                                .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                                .padding(.horizontal, 20)
+                                .frame(height: 380)
+//                                .clipShape(RoundedRectangle(cornerRadius: 25.0))
+//                                .padding(.horizontal, 20)
                                 .containerRelativeFrame(.horizontal)
+//                                .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 10)
                                 .scrollTransition(.animated, axis: .horizontal) { content, phase in
                                     content
                                         .opacity(phase.isIdentity ? 1.0 : 0.8)
@@ -153,7 +154,9 @@ struct MyNoticeView: View {
                     
                 }
                 .scrollTargetBehavior(.viewAligned)
+                .safeAreaPadding(.horizontal, 45.0) //se일때는 40
                 
+                LazyVStack(alignment: .leading, spacing: 0) {
                 
                 HStack{
                     Image("ic_eye_small")
@@ -165,7 +168,7 @@ struct MyNoticeView: View {
                 .foregroundColor(Color.sponusGrey700)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 
-                LazyVStack(alignment: .leading, spacing: 0) {
+                
                     HStack{
                         Text("스포대학교 총학생회")
                             .font(.Body10)
@@ -190,6 +193,7 @@ struct MyNoticeView: View {
                             Text("유형")
                                 .font(.Body10)
                                 .foregroundColor(Color.sponusGrey700)
+                                
                             Spacer()
                             
                             Text("협찬")
@@ -234,10 +238,11 @@ struct MyNoticeView: View {
                         .fill(Color.sponusGrey200)
                         .frame(maxWidth: .infinity, maxHeight: 1)
                         .padding(.top, 24)
-                    
+
                 }
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
+//            .padding(.horizontal, 20)
             
         }
     }

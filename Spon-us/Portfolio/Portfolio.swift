@@ -115,7 +115,7 @@ struct Portfolio: View {
                         Text("진행 중").font(.Body01).opacity(0).padding(.bottom, 18)
                         Rectangle().frame(height: 1).foregroundStyle(.sponusGrey500)
                     }
-                    HStack {
+                    HStack(spacing: 20) {
                         VStack(spacing: 0) {
                             publishingButton.padding(.bottom, 18)
                             if ($progressStatus.isPublishing.wrappedValue == true) {
@@ -138,6 +138,7 @@ struct Portfolio: View {
                     }
                 }
                 
+                // 게시 중
                 if ($progressStatus.isPublishing.wrappedValue == true) {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 0) {
@@ -149,7 +150,7 @@ struct Portfolio: View {
                                             HStack(spacing: 0) {
                                                 (publishingDummyData[index].thumbNail ?? Image(.icCancel))
                                                     .resizable().frame(width: 158, height: 158)
-                                                    .overlay(Rectangle().stroke(.sponusGrey100, lineWidth: 1))
+                                                    .border(.sponusGrey100)
                                                 
                                                 VStack(alignment: .leading, spacing: 5) {
                                                     
@@ -167,14 +168,12 @@ struct Portfolio: View {
                                                     HStack(spacing: 4) {
                                                         Button {} label: {
                                                             Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
-                                                        }
-                                                        .frame(height: 40).frame(maxWidth: .infinity)
-                                                        .overlay(Rectangle().stroke(.sponusGrey100, lineWidth: 1))
+                                                                .frame(height: 40).frame(maxWidth: .infinity)
+                                                        }.border(.sponusGrey100)
                                                         
                                                         Button {} label: {
                                                             Image(.icMore).resizable().frame(width: 40, height: 40)
-                                                        }
-                                                        .overlay(Rectangle().stroke(Color.sponusGrey100, lineWidth: 1))
+                                                        }.border(.sponusGrey100)
                                                     }
                                                 }.padding(.leading, 20)
                                             }.padding(.top, 32).padding(.bottom, 16)
@@ -187,9 +186,12 @@ struct Portfolio: View {
                     }.scrollIndicators(.hidden)
 
                 }
+
+
+                // 진행 중
                 if ($progressStatus.isProgressing.wrappedValue == true) {
                     ScrollView {
-                        VStack(spacing: 0) {
+                        VStack {
                             ForEach(progressingDummyData.indices) { index in
                                 NavigationLink(
                                     destination: DetailView(publishingPost: nil, progressingPost: progressingDummyData[index],
@@ -199,7 +201,7 @@ struct Portfolio: View {
                                             HStack(spacing: 0) {
                                                 (progressingDummyData[index].thumbNail ?? Image(.icCancel))
                                                     .resizable().frame(width: 158, height: 158)
-                                                    .overlay(Rectangle().stroke(.sponusGrey100, lineWidth: 1))
+                                                    .border(.sponusGrey100)
                                                 
                                                 VStack(alignment: .leading, spacing: 5) {
                                                     Text(progressingDummyData[index].postCategory ?? "nil")
@@ -213,8 +215,24 @@ struct Portfolio: View {
                                                     
                                                 }.padding(.leading, 20)
                                             }.padding(.top, 32).padding(.bottom, 24)
-                                            
-                                            Divider().backgroundStyle(.sponusGrey200).padding(.bottom, 16)
+                                            HStack {
+                                                Button {} label: {
+                                                    Text("협업 중단")
+                                                        .font(.Caption01)
+                                                        .frame(width: 157, height: 40)
+                                                        .foregroundStyle(.sponusRed)
+                                                        .border(.sponusRed)
+                                                }
+                                                Spacer()
+                                                Button {} label: {
+                                                    Text("협업 완료")
+                                                        .font(.Caption01)
+                                                        .frame(width: 157, height: 40)
+                                                        .foregroundStyle(.sponusPrimary)
+                                                        .border(.sponusPrimary)
+                                                }
+                                            }
+                                            Divider().backgroundStyle(.sponusGrey200)
                                         }.frame(maxWidth: .infinity, maxHeight: .infinity)
                                     }
                                 )
@@ -222,6 +240,9 @@ struct Portfolio: View {
                         }
                     }.scrollIndicators(.hidden)
                 }
+                
+                
+                // 완료
                 if ($progressStatus.isComplete.wrappedValue == true) {
                     ScrollView {
                         VStack(spacing: 0) {
@@ -233,7 +254,7 @@ struct Portfolio: View {
                                             HStack(spacing: 0) {
                                                 (publishingDummyData[index].thumbNail ?? Image(.icCancel))
                                                     .resizable().frame(width: 158, height: 158)
-                                                    .overlay(Rectangle().stroke(.sponusGrey100, lineWidth: 1))
+                                                    .border(.sponusGrey100)
                                                 
                                                 VStack(alignment: .leading, spacing: 5) {
                                                     
@@ -253,12 +274,12 @@ struct Portfolio: View {
                                                             Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
                                                         }
                                                         .frame(height: 40).frame(maxWidth: .infinity)
-                                                        .overlay(Rectangle().stroke(.sponusGrey100, lineWidth: 1))
+                                                        .border(.sponusGrey100)
                                                         
                                                         Button {} label: {
                                                             Image(.icMore).resizable().frame(width: 40, height: 40)
                                                         }
-                                                        .overlay(Rectangle().stroke(Color.sponusGrey100, lineWidth: 1))
+                                                        .border(.sponusGrey100)
                                                     }
                                                 }.padding(.leading, 20)
                                             }
@@ -286,13 +307,13 @@ struct DetailView: View {
     var body: some View {
         VStack {
             if (publishingPost != nil) {
-                Text("Post Title: \(publishingPost?.postTitle ?? "")")
+                Text("Post Title: \(publishingPost?.postTitle ?? "nil")")
             }
             if (progressingPost != nil) {
-                Text("Post Title: \(progressingPost?.postTitle ?? "")")
+                Text("Post Title: \(progressingPost?.postTitle ?? "nil")")
             }
             if (completePost != nil) {
-                Text("Post Title: \(publishingPost?.postTitle ?? "")")
+                Text("Post Title: \(publishingPost?.postTitle ?? "nil")")
             }
         }
         .navigationTitle("Detail")

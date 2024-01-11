@@ -8,12 +8,6 @@
 import SwiftUI
 
 
-struct Item:Identifiable {
-    var id = UUID()
-    let color: Color
-    let text: String
-}
-
 
 
 struct ProposalReceivedListView: View {
@@ -93,8 +87,6 @@ struct ProposalReceivedCell: View {
                 
                 
                 
-                
-                
                 NavigationLink(destination: {
                     EmptyView()
                 }, label: {
@@ -138,10 +130,10 @@ struct MyNoticeView: View {
                                 .resizable()
                                 .scaledToFill()
                                 .frame(height: 380)
-//                                .clipShape(RoundedRectangle(cornerRadius: 25.0))
-//                                .padding(.horizontal, 20)
+                            //                                .clipShape(RoundedRectangle(cornerRadius: 25.0))
+                            //                                .padding(.horizontal, 20)
                                 .containerRelativeFrame(.horizontal)
-//                                .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 10)
+                            //                                .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 10)
                                 .scrollTransition(.animated, axis: .horizontal) { content, phase in
                                     content
                                         .opacity(phase.isIdentity ? 1.0 : 0.8)
@@ -153,22 +145,23 @@ struct MyNoticeView: View {
                     .scrollTargetLayout()
                     
                 }
+                //                .scrollIndicators(.)
                 .scrollTargetBehavior(.viewAligned)
                 .safeAreaPadding(.horizontal, 45.0) //se일때는 40
                 
                 LazyVStack(alignment: .leading, spacing: 0) {
-                
-                HStack{
-                    Image("ic_eye_small")
-                    Text("989")
-                    Image("ic_saved_small")
-                    Text("34")
-                }
-                .font(.English16)
-                .foregroundColor(Color.sponusGrey700)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                
-                
+                    
+                    HStack{
+                        Image("ic_eye_small")
+                        Text("989")
+                        Image("ic_saved_small")
+                        Text("34")
+                    }
+                    .font(.English16)
+                    .foregroundColor(Color.sponusGrey700)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    
+                    
                     HStack{
                         Text("스포대학교 총학생회")
                             .font(.Body10)
@@ -193,7 +186,7 @@ struct MyNoticeView: View {
                             Text("유형")
                                 .font(.Body10)
                                 .foregroundColor(Color.sponusGrey700)
-                                
+                            
                             Spacer()
                             
                             Text("협찬")
@@ -238,57 +231,16 @@ struct MyNoticeView: View {
                         .fill(Color.sponusGrey200)
                         .frame(maxWidth: .infinity, maxHeight: 1)
                         .padding(.top, 24)
-
+                    
                 }
                 .padding(.horizontal, 20)
             }
-//            .padding(.horizontal, 20)
+            //            .padding(.horizontal, 20)
             
         }
     }
 }
 
-struct MyNoticeView2: View {
-    
-    @State private var scrollEffectValue: Double = 13
-    @State private var activePageIndex: Int = 0
-    
-    let tileWidth: CGFloat = 300
-    let tilePadding: CGFloat = 20
-    let numberOfTiles: Int = 5
-    
-    
-    var body: some View {
-        PagingScrollView(activePageIndex: $activePageIndex, tileWidth: tileWidth, tilePadding: tilePadding) {
-            ForEach(0..<numberOfTiles, id: \.self) { index in
-                GeometryReader { geometry2 in
-                    TileView(icon: "\(index + 1).circle")
-                        .scaleEffect(activePageIndex == index ? 1.0 : 0.8) // Adjust the scale factor
-                        .onTapGesture {
-                            print("tap on index: \(index)")
-                        }
-                }
-            }
-        }
-        .frame(height: 128)
-    }
-}
-
-struct TileView: View {
-    let icon: String
-    
-    var body: some View {
-        //        RoundedRectangle(cornerRadius: 20).fill(Color.gray)
-        //            .overlay(Image(icon).imageScale(.large))
-        //            .frame(height: 128)
-        Image("TestPhoto")
-            .resizable()
-            .scaledToFill()
-            .frame(height: 300)
-            .clipShape(RoundedRectangle(cornerRadius: 25.0))
-            .padding(.horizontal, 20)
-    }
-}
 
 #Preview {
     ProposalReceivedListView()
@@ -299,10 +251,7 @@ struct TileView: View {
     MyNoticeView()
     
 }
-//#Preview {
-//    MyNoticeView2()
-//
-//}
+
 
 
 

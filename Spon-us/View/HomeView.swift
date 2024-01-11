@@ -39,9 +39,8 @@ struct HomeView: View {
                 .padding(.top, 20)
                 
                 HStack {
-                    Button(action: {
-                        
-                    }) {
+                    
+                    NavigationLink(destination: ProposalReceivedListView(), label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
@@ -63,7 +62,8 @@ struct HomeView: View {
                                 .foregroundColor(Color("sponus_grey800")).fixedSize(horizontal: true, vertical: false)
                                 .padding(.top, 8)
                         }
-                    }
+                    })
+                    
                     
                     Button(action: {
                         

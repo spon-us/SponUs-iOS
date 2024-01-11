@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @State var isPresented = false
+    @State private var progressStatus  = Portfolio.ProgressStatus()
+    
     let searchItem: some View = {
         Button(action: {
             
@@ -93,33 +97,38 @@ struct HomeView: View {
                     }
                     .padding(.leading, 14)
                     
-                    Button(action: {
+                    
+                    NavigationLink {
+                        Portfolio(progressStatus: progressStatus)
+                    } label: {
                         
-                    }) {
-                        VStack {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .frame(width: 60, height: 60)
-                                    .foregroundColor(Color("sponus_grey50"))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 16)
-                                            .stroke(Color("sponus_grey200"), lineWidth: 1)
-                                    )
+                            VStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .frame(width: 60, height: 60)
+                                        .foregroundColor(Color("sponus_grey50"))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(Color("sponus_grey200"), lineWidth: 1)
+                                        )
+                                    
+                                    Image("Wallet")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                }
                                 
-                                Image("Wallet")
-                                    .resizable()
-                                    .frame(width: 40, height: 40)
+                                Text("포트폴리오")
+                                    .font(.Body10)
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(Color("sponus_grey800"))
+                                    .fixedSize(horizontal: true, vertical: false)
+                                    .padding(.top, 8)
                             }
-                            
-                            Text("포트폴리오")
-                                .font(.Body10)
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(Color("sponus_grey800"))
-                                .fixedSize(horizontal: true, vertical: false)
-                                .padding(.top, 8)
-                        }
+                        
+                        .padding(.leading, 14)
                     }
-                    .padding(.leading, 14)
+
+
                     
                     Button(action: {
                         

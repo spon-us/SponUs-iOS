@@ -64,11 +64,11 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
-				DF91F4022B4863B60021291A /* Portfolio */,
 				100D389F2B44833F00498977 /* Info.plist */,
 				100D38942B44833500498977 /* Font */,
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
 				100D38B02B44852700498977 /* ContentView.swift */,
+				DF91F4032B4864330021291A /* Portfolio.swift */,
 				100D38AC2B44844F00498977 /* Assets.xcassets */,
 				100D38A12B44834700498977 /* Preview Content */,
 			);
@@ -94,14 +94,6 @@
 			);
 			name = "Preview Content";
 			path = "Preview Content/Preview Content";
-			sourceTree = "<group>";
-		};
-		DF91F4022B4863B60021291A /* Portfolio */ = {
-			isa = PBXGroup;
-			children = (
-				DF91F4032B4864330021291A /* Portfolio.swift */,
-			);
-			path = Portfolio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

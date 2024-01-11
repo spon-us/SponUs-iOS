@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+struct CustomBackButton: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        Button {
+            self.presentationMode.wrappedValue.dismiss()
+        } 
+        label: {
+            Image(.icBack)
+        }
+    }
+}
+
+
 struct Portfolio: View {
     @State var progressStatus: ProgressStatus
     
@@ -87,7 +101,9 @@ struct Portfolio: View {
     }
     
     var backButton: some View {
-        Button {} label: { Image(.icBack) }
+        Button {
+            
+        } label: { Image(.icBack) }
     }
     
     var publishingButton: some View {
@@ -136,233 +152,232 @@ struct Portfolio: View {
     }
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                ZStack {
+        VStack {
+            ZStack {
+                VStack(spacing: 0) {
+                    Text("진행 중").font(.Body01).opacity(0).padding(.bottom, 18)
+                    Rectangle().frame(height: 1).foregroundStyle(.sponusGrey500)
+                }
+                HStack(spacing: 20) {
                     VStack(spacing: 0) {
-                        Text("진행 중").font(.Body01).opacity(0).padding(.bottom, 18)
-                        Rectangle().frame(height: 1).foregroundStyle(.sponusGrey500)
-                    }
-                    HStack(spacing: 20) {
-                        VStack(spacing: 0) {
-                            publishingButton.padding(.bottom, 18)
-                            if ($progressStatus.isPublishing.wrappedValue == true) {
-                                Rectangle().frame(height: 2).foregroundStyle(.sponusPrimary)
-                            }
-                        }.fixedSize()
-                        VStack(spacing: 0) {
-                            progressingButton.padding(.bottom, 18)
-                            if ($progressStatus.isProgressing.wrappedValue == true) {
-                                Rectangle().frame(height: 2).foregroundStyle(.sponusPrimary)
-                            }
-                        }.fixedSize()
-                        VStack(spacing: 0) {
-                            completedButton.padding(.bottom, 18)
-                            if ($progressStatus.isCompleted.wrappedValue == true) {
-                                Rectangle().frame(height: 2).foregroundStyle(.sponusPrimary)
-                            }
-                        }.fixedSize()
-                        Spacer()
-                    }
+                        publishingButton.padding(.bottom, 18)
+                        if ($progressStatus.isPublishing.wrappedValue == true) {
+                            Rectangle().frame(height: 2).foregroundStyle(.sponusPrimary)
+                        }
+                    }.fixedSize()
+                    VStack(spacing: 0) {
+                        progressingButton.padding(.bottom, 18)
+                        if ($progressStatus.isProgressing.wrappedValue == true) {
+                            Rectangle().frame(height: 2).foregroundStyle(.sponusPrimary)
+                        }
+                    }.fixedSize()
+                    VStack(spacing: 0) {
+                        completedButton.padding(.bottom, 18)
+                        if ($progressStatus.isCompleted.wrappedValue == true) {
+                            Rectangle().frame(height: 2).foregroundStyle(.sponusPrimary)
+                        }
+                    }.fixedSize()
+                    Spacer()
                 }
-                
-                // 게시 중
-                if ($progressStatus.isPublishing.wrappedValue == true) {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 0) {
-                            ForEach(publishingDummyData.indices) { index in
-                                NavigationLink(
-                                    destination: DetailView(publishingPost: publishingDummyData[index], progressingPost: nil, completedPost: nil),
-                                    label: {
-                                        VStack(spacing: 0) {
-                                            HStack(spacing: 0) {
-                                                (publishingDummyData[index].thumbNail ?? Image(.icCancel))
-                                                    .resizable().frame(width: 158, height: 158)
-                                                    .border(.sponusGrey100)
+            }
+            
+            // 게시 중
+            if ($progressStatus.isPublishing.wrappedValue == true) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        ForEach(publishingDummyData.indices) { index in
+                            NavigationLink(
+                                destination: DetailView(publishingPost: publishingDummyData[index], progressingPost: nil, completedPost: nil),
+                                label: {
+                                    VStack(spacing: 0) {
+                                        HStack(spacing: 0) {
+                                            (publishingDummyData[index].thumbNail ?? Image(.icCancel))
+                                                .resizable().frame(width: 158, height: 158)
+                                                .border(.sponusGrey100)
+                                            
+                                            VStack(alignment: .leading, spacing: 5) {
                                                 
-                                                VStack(alignment: .leading, spacing: 5) {
-                                                    
-                                                    HStack(spacing: 2) {
-                                                        Spacer()
-                                                        Image(.icSaved).resizable().frame(width: 20, height: 20)
-                                                        Text(String(publishingDummyData[index].savedNumber ?? 0))
-                                                            .font(.English12).foregroundStyle(.sponusGrey700)
-                                                    }
-                                                    switch publishingDummyData[index].postCategory {
-                                                    case .sponsorship:
-                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case .linkedproject:
-                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case nil:
-                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    }
-                                                    Text(publishingDummyData[index].postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading)
+                                                HStack(spacing: 2) {
                                                     Spacer()
-                                                    
-                                                    HStack(spacing: 4) {
-                                                        Button {} label: {
-                                                            Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
-                                                                .frame(height: 40).frame(maxWidth: .infinity)
-                                                        }.border(.sponusGrey100)
-                                                        
-                                                        Button {} label: {
-                                                            Image(.icMore).resizable().frame(width: 40, height: 40)
-                                                        }.border(.sponusGrey100)
-                                                    }
-                                                }.padding(.leading, 20)
-                                            }.padding(.top, 32)
-                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    }
-                                )
-                            }
-                        }
-                    }.scrollIndicators(.hidden)
-
-                }
-
-
-                // 진행 중
-                if ($progressStatus.isProgressing.wrappedValue == true) {
-                    ScrollView {
-                        VStack {
-                            ForEach(progressingDummyData.indices) { index in
-                                NavigationLink(
-                                    destination: DetailView(publishingPost: nil, progressingPost: progressingDummyData[index],
-                                                            completedPost: nil),
-                                    label: {
-                                        VStack(alignment:.leading, spacing: 0) {
-                                            HStack(spacing: 0) {
-                                                (progressingDummyData[index].thumbNail ?? Image(.icCancel))
-                                                    .resizable().frame(width: 158, height: 158)
-                                                    .border(.sponusGrey100)
-                                                
-                                                VStack(alignment: .leading, spacing: 5) {
-                                                    switch progressingDummyData[index].postCategory {
-                                                    case .sponsorship:
-                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case .linkedproject:
-                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case nil:
-                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    }
-                                                    Text(progressingDummyData[index].postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
-                                                    
-                                                    HStack(spacing: 6) {
-                                                        (progressingDummyData[index].companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                        Text("with \(progressingDummyData[index].companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
-                                                    }.padding(.bottom)
-                                                    
-                                                }.padding(.leading, 20)
-                                            }.padding(.top, 32).padding(.bottom, 24)
-                                            HStack {
-                                                Button {} label: {
-                                                    Text("협업 중단")
-                                                        .font(.Caption01)
-                                                        .frame(width: 157, height: 40)
-                                                        .foregroundStyle(.sponusRed)
-                                                        .border(.sponusRed)
+                                                    Image(.icSaved).resizable().frame(width: 20, height: 20)
+                                                    Text(String(publishingDummyData[index].savedNumber ?? 0))
+                                                        .font(.English12).foregroundStyle(.sponusGrey700)
                                                 }
+                                                switch publishingDummyData[index].postCategory {
+                                                case .sponsorship:
+                                                    Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                case .linkedproject:
+                                                    Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                case nil:
+                                                    Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                }
+                                                Text(publishingDummyData[index].postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading)
                                                 Spacer()
-                                                Button {} label: {
-                                                    Text("협업 완료")
-                                                        .font(.Caption01)
-                                                        .frame(width: 157, height: 40)
-                                                        .foregroundStyle(.sponusPrimary)
-                                                        .border(.sponusPrimary)
-                                                }
-                                            }
-                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    }
-                                )
-                            }
-                        }
-                    }.scrollIndicators(.hidden)
-                }
-                
-                
-                // 완료
-                if ($progressStatus.isCompleted.wrappedValue == true) {
-                    ScrollView {
-                        VStack {
-                            ForEach(completedDummyData.indices) { index in
-                                NavigationLink(
-                                    destination: DetailView(publishingPost: nil, progressingPost: progressingDummyData[index],
-                                                            completedPost: nil),
-                                    label: {
-                                        VStack(alignment:.leading, spacing: 0) {
-                                            HStack(spacing: 0) {
-                                                (completedDummyData[index].thumbNail ?? Image(.icCancel))
-                                                    .resizable().frame(width: 158, height: 158)
-                                                    .border(.sponusGrey100)
                                                 
-                                                VStack(alignment: .leading, spacing: 5) {
-                                                    switch completedDummyData[index].postCategory {
-                                                    case .sponsorship:
-                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case .linkedproject:
-                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case nil:
-                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    }
-                                                    Text(completedDummyData[index].postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
-                                                    
-                                                    HStack(spacing: 6) {
-                                                        (completedDummyData[index].companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                        Text("with \(completedDummyData[index].companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
-                                                    }.padding(.bottom)
-                                                    
-                                                }.padding(.leading, 20)
-                                            }.padding(.top, 32).padding(.bottom, 24)
-                                            VStack(spacing: 0) {
-                                                switch completedDummyData[index].completedReportStatus {
-                                                case .reportNotSubmitted:
+                                                HStack(spacing: 4) {
                                                     Button {} label: {
-                                                        Text("보고서 작성하기")
-                                                            .font(.Caption01)
-                                                            .frame(height: 40)
-                                                            .frame(maxWidth: .infinity)
-                                                            .foregroundStyle(.sponusRed)
-                                                            .border(.sponusRed)
-                                                    }
-                                                case .reportSubmitted:
-                                                    Text("협업이 중단된 공고입니다")
+                                                        Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
+                                                            .frame(height: 40).frame(maxWidth: .infinity)
+                                                    }.border(.sponusGrey100)
+                                                    
+                                                    Button {} label: {
+                                                        Image(.icMore).resizable().frame(width: 40, height: 40)
+                                                    }.border(.sponusGrey100)
+                                                }
+                                            }.padding(.leading, 20)
+                                        }.padding(.top, 32)
+                                        Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+                                    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                                }
+                            )
+                        }
+                    }
+                }.scrollIndicators(.hidden)
+
+            }
+
+
+            // 진행 중
+            if ($progressStatus.isProgressing.wrappedValue == true) {
+                ScrollView {
+                    VStack {
+                        ForEach(progressingDummyData.indices) { index in
+                            NavigationLink(
+                                destination: DetailView(publishingPost: nil, progressingPost: progressingDummyData[index],
+                                                        completedPost: nil),
+                                label: {
+                                    VStack(alignment:.leading, spacing: 0) {
+                                        HStack(spacing: 0) {
+                                            (progressingDummyData[index].thumbNail ?? Image(.icCancel))
+                                                .resizable().frame(width: 158, height: 158)
+                                                .border(.sponusGrey100)
+                                            
+                                            VStack(alignment: .leading, spacing: 5) {
+                                                switch progressingDummyData[index].postCategory {
+                                                case .sponsorship:
+                                                    Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                case .linkedproject:
+                                                    Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                case nil:
+                                                    Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                }
+                                                Text(progressingDummyData[index].postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                                                
+                                                HStack(spacing: 6) {
+                                                    (progressingDummyData[index].companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                    Text("with \(progressingDummyData[index].companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
+                                                }.padding(.bottom)
+                                                
+                                            }.padding(.leading, 20)
+                                        }.padding(.top, 32).padding(.bottom, 24)
+                                        HStack {
+                                            Button {} label: {
+                                                Text("협업 중단")
+                                                    .font(.Caption01)
+                                                    .frame(width: 157, height: 40)
+                                                    .foregroundStyle(.sponusRed)
+                                                    .border(.sponusRed)
+                                            }
+                                            Spacer()
+                                            Button {} label: {
+                                                Text("협업 완료")
+                                                    .font(.Caption01)
+                                                    .frame(width: 157, height: 40)
+                                                    .foregroundStyle(.sponusPrimary)
+                                                    .border(.sponusPrimary)
+                                            }
+                                        }
+                                        Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+                                    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                                }
+                            )
+                        }
+                    }
+                }.scrollIndicators(.hidden)
+            }
+            
+            
+            // 완료
+            if ($progressStatus.isCompleted.wrappedValue == true) {
+                ScrollView {
+                    VStack {
+                        ForEach(completedDummyData.indices) { index in
+                            NavigationLink(
+                                destination: DetailView(publishingPost: nil, progressingPost: progressingDummyData[index],
+                                                        completedPost: nil),
+                                label: {
+                                    VStack(alignment:.leading, spacing: 0) {
+                                        HStack(spacing: 0) {
+                                            (completedDummyData[index].thumbNail ?? Image(.icCancel))
+                                                .resizable().frame(width: 158, height: 158)
+                                                .border(.sponusGrey100)
+                                            
+                                            VStack(alignment: .leading, spacing: 5) {
+                                                switch completedDummyData[index].postCategory {
+                                                case .sponsorship:
+                                                    Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                case .linkedproject:
+                                                    Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                case nil:
+                                                    Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                }
+                                                Text(completedDummyData[index].postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                                                
+                                                HStack(spacing: 6) {
+                                                    (completedDummyData[index].companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                    Text("with \(completedDummyData[index].companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
+                                                }.padding(.bottom)
+                                                
+                                            }.padding(.leading, 20)
+                                        }.padding(.top, 32).padding(.bottom, 24)
+                                        VStack(spacing: 0) {
+                                            switch completedDummyData[index].completedReportStatus {
+                                            case .reportNotSubmitted:
+                                                Button {} label: {
+                                                    Text("보고서 작성하기")
                                                         .font(.Caption01)
                                                         .frame(height: 40)
                                                         .frame(maxWidth: .infinity)
-                                                        .foregroundStyle(.sponusGrey700)
-                                                        .border(.sponusGrey100)
-                                                case .unsuccessfulTermination:
-                                                    Button {} label: {
-                                                        Text("보고서 보러가기")
-                                                            .font(.Caption01)
-                                                            .frame(height: 40)
-                                                            .frame(maxWidth: .infinity)
-                                                            .foregroundStyle(.sponusPrimary)
-                                                            .border(.sponusPrimary)
-                                                    }
-                                                case nil:
-                                                    Text("nil")
-                                                        .font(.Caption01)
-                                                        .frame(height: 40)
                                                         .foregroundStyle(.sponusRed)
                                                         .border(.sponusRed)
                                                 }
+                                            case .reportSubmitted:
+                                                Text("협업이 중단된 공고입니다")
+                                                    .font(.Caption01)
+                                                    .frame(height: 40)
+                                                    .frame(maxWidth: .infinity)
+                                                    .foregroundStyle(.sponusGrey700)
+                                                    .border(.sponusGrey100)
+                                            case .unsuccessfulTermination:
+                                                Button {} label: {
+                                                    Text("보고서 보러가기")
+                                                        .font(.Caption01)
+                                                        .frame(height: 40)
+                                                        .frame(maxWidth: .infinity)
+                                                        .foregroundStyle(.sponusPrimary)
+                                                        .border(.sponusPrimary)
+                                                }
+                                            case nil:
+                                                Text("nil")
+                                                    .font(.Caption01)
+                                                    .frame(height: 40)
+                                                    .foregroundStyle(.sponusRed)
+                                                    .border(.sponusRed)
                                             }
-                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    }
-                                )
-                            }
+                                        }
+                                        Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+                                    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                                }
+                            )
                         }
-                    }.scrollIndicators(.hidden)
-                }
-            }.padding()
-                .navigationTitle("포트폴리오").font(.Body01)
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(leading: backButton)
-        }
+                    }
+                }.scrollIndicators(.hidden)
+            }
+        }.padding()
+            .navigationTitle("포트폴리오").font(.Body01)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomBackButton())
     }
 }
 

@@ -80,7 +80,6 @@
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
 				100D38B02B44852700498977 /* ContentView.swift */,
 				3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */,
-				DF91F4032B4864330021291A /* Portfolio.swift */,
 				100D38AC2B44844F00498977 /* Assets.xcassets */,
 				100D38A12B44834700498977 /* Preview Content */,
 			);
@@ -111,6 +110,7 @@
 		100D38B42B4EF18C00498977 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DF91F4032B4864330021291A /* Portfolio.swift */,
 				100D38B22B4EF15600498977 /* HomeView.swift */,
 				100D38B52B4EF51E00498977 /* SavedView.swift */,
 				100D38B72B4EF54100498977 /* CategoryView.swift */,

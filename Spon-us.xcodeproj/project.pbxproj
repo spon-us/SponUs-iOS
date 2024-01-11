@@ -16,6 +16,7 @@
 		100D38A72B44836800498977 /* Spon_usApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38A62B44836800498977 /* Spon_usApp.swift */; };
 		100D38AD2B44844F00498977 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 100D38AC2B44844F00498977 /* Assets.xcassets */; };
 		100D38B12B44852700498977 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B02B44852700498977 /* ContentView.swift */; };
+		DF91F4042B4864330021291A /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91F4032B4864330021291A /* Portfolio.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		100D38A62B44836800498977 /* Spon_usApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spon_usApp.swift; sourceTree = "<group>"; };
 		100D38AC2B44844F00498977 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		100D38B02B44852700498977 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "Spon-us/ContentView.swift"; sourceTree = SOURCE_ROOT; };
+		DF91F4032B4864330021291A /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
+				DF91F4022B4863B60021291A /* Portfolio */,
 				100D389F2B44833F00498977 /* Info.plist */,
 				100D38942B44833500498977 /* Font */,
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
@@ -91,6 +94,14 @@
 			);
 			name = "Preview Content";
 			path = "Preview Content/Preview Content";
+			sourceTree = "<group>";
+		};
+		DF91F4022B4863B60021291A /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				DF91F4032B4864330021291A /* Portfolio.swift */,
+			);
+			path = Portfolio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF91F4042B4864330021291A /* Portfolio.swift in Sources */,
 				100D389A2B44833500498977 /* FontManager.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,
@@ -305,6 +317,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Spon-us/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -333,6 +346,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Spon-us/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

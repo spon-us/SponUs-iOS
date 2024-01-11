@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+struct CustomBackButton: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        Button {
+            self.presentationMode.wrappedValue.dismiss()
+        }
+        label: {
+            Image(.icBack)
+        }
+    }
+}
+
 struct HomeView: View {
     
     @State var isPresented = false

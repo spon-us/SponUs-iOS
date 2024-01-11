@@ -21,6 +21,7 @@
 		100D38B82B4EF54100498977 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B72B4EF54100498977 /* CategoryView.swift */; };
 		100D38BA2B4EF54C00498977 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B92B4EF54C00498977 /* MyView.swift */; };
 		3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */; };
+		DF91F4042B4864330021291A /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91F4032B4864330021291A /* Portfolio.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		100D38B72B4EF54100498977 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		100D38B92B4EF54C00498977 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalReceivedListView.swift; sourceTree = "<group>"; };
+		DF91F4032B4864330021291A /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
 				100D38B02B44852700498977 /* ContentView.swift */,
 				3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */,
+				DF91F4032B4864330021291A /* Portfolio.swift */,
 				100D38AC2B44844F00498977 /* Assets.xcassets */,
 				100D38A12B44834700498977 /* Preview Content */,
 			);
@@ -191,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				100D38BA2B4EF54C00498977 /* MyView.swift in Sources */,
+				DF91F4042B4864330021291A /* Portfolio.swift in Sources */,
 				100D389A2B44833500498977 /* FontManager.swift in Sources */,
 				100D38B62B4EF51E00498977 /* SavedView.swift in Sources */,
 				100D38B82B4EF54100498977 /* CategoryView.swift in Sources */,
@@ -333,6 +337,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Spon-us/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -361,6 +366,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Spon-us/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

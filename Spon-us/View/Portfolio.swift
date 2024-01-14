@@ -16,6 +16,7 @@ struct Portfolio: View {
     @State var showingPublishingToTopAlert = false
     @State var showingPublishingStopOfferAlert = false
     @State var showingPublishingRemoveAlert = false
+
     @State var showingStopCoworkPopup = false
     @State var showingCoworkCompletedPopup = false
     @State var showingStopCoworkCancelPopup = false
@@ -24,6 +25,7 @@ struct Portfolio: View {
     @State var activeNavLinkToModify = false
     @State var activeNavLinkToMakeReport = false
     @State var activeNavLinkToReport = false
+
     
     @State private var currentConfirmationDialogID: UUID?
     @State private var currentToTopID: UUID?
@@ -575,6 +577,7 @@ struct Portfolio: View {
                     ReportView(post: dummyData[index])
                 }
             }
+
     }
 }
 

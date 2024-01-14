@@ -42,7 +42,7 @@ struct HomeView: View {
     }()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 TabView {
                     ForEach(1...3, id: \.self) { index in

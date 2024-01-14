@@ -68,7 +68,7 @@ struct HomeView: View {
     }()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 15) {

@@ -14,6 +14,7 @@ struct Portfolio: View {
     @State var showingPublishingToTopAlert = false
     @State var showingPublishingStopOfferAlert = false
     @State var showingPublishingRemoveAlert = false
+    @State var activeNavLinkToModify = false
     
     @State private var currentConfirmationDialogID: UUID?
     @State private var currentToTopID: UUID?
@@ -266,7 +267,9 @@ struct Portfolio: View {
                                                             Image(.icMore).resizable().frame(width: 40, height: 40).border(.sponusGrey100)
                                                         }.confirmationDialog("ic_more", isPresented: $showingPublishingConfirmationDialog, titleVisibility: .hidden, actions: {
                                                             Button("수정하기") {
+                                                                activeNavLinkToModify = true
                                                                 showingPublishingConfirmationDialog = false
+                                                                
                                                             }
                                                             Button("제안 그만 받기") {
                                                                 showingPublishingStopOfferAlert = true
@@ -294,22 +297,18 @@ struct Portfolio: View {
                                                             return Alert(title: Text("nil"))
                                                         }
                                                         .alert(isPresented: $showingPublishingStopOfferAlert) {
-                                                            if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
-                                                                return Alert(
-                                                                        title: Text("해당 공고를 내립니다"),
-                                                                        message: Text("내린 공고는 되돌리기 어렵습니다."),
-                                                                        primaryButton: .destructive(
-                                                                            Text("내리기"),
-                                                                            action: {hidePublishingPost()}
-                                                                        ),
-                                                                        secondaryButton: .cancel(
-                                                                            Text("취소")
-                                                                        )
+                                                            Alert(
+                                                                    title: Text("해당 공고를 내립니다"),
+                                                                    message: Text("내린 공고는 되돌리기 어렵습니다."),
+                                                                    primaryButton: .destructive(
+                                                                        Text("내리기"),
+                                                                        action: {hidePublishingPost()}
+                                                                    ),
+                                                                    secondaryButton: .cancel(
+                                                                        Text("취소")
                                                                     )
-                                                            }
-                                                            return Alert(title: Text("nil"))
+                                                            )
                                                         }
-                                                        
                                                     }
                                                 }.padding(.leading, 20)
                                             }.padding(.top, 32)
@@ -470,6 +469,11 @@ struct Portfolio: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
+            .navigationDestination(isPresented: $activeNavLinkToModify) {
+                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
+                    ModifyView(post: dummyData[index])
+                }
+            }
     }
 }
 
@@ -477,6 +481,8 @@ struct DetailView: View {
     var post: Portfolio.Post?
     var body: some View {
         Text("Post Title: \(post?.postTitle ?? "nil")")
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomBackButton())
         .navigationTitle("Detail")
     }
 }
@@ -487,6 +493,8 @@ struct ModifyView: View {
     var body: some View {
         Text("Post Title: \(post?.postTitle ?? "nil")")
         .navigationTitle("Modify")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: CustomBackButton())
     }
 }
 

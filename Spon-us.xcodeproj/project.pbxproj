@@ -21,6 +21,8 @@
 		100D38B82B4EF54100498977 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B72B4EF54100498977 /* CategoryView.swift */; };
 		100D38BA2B4EF54C00498977 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B92B4EF54C00498977 /* MyView.swift */; };
 		3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */; };
+		3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D142B54AA55000D6006 /* EditPostView.swift */; };
+		3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */; };
 		DF91F4042B4864330021291A /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91F4032B4864330021291A /* Portfolio.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		100D38B72B4EF54100498977 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		100D38B92B4EF54C00498977 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalReceivedListView.swift; sourceTree = "<group>"; };
+		3BFC8D142B54AA55000D6006 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
+		3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiImagePicker.swift; sourceTree = "<group>"; };
 		DF91F4032B4864330021291A /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,12 +78,14 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
+				3BFC8D192B54D43C000D6006 /* Helper */,
 				100D389F2B44833F00498977 /* Info.plist */,
 				100D38942B44833500498977 /* Font */,
 				100D38B42B4EF18C00498977 /* View */,
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
 				100D38B02B44852700498977 /* ContentView.swift */,
 				3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */,
+				3BFC8D142B54AA55000D6006 /* EditPostView.swift */,
 				100D38AC2B44844F00498977 /* Assets.xcassets */,
 				100D38A12B44834700498977 /* Preview Content */,
 			);
@@ -119,6 +125,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		3BFC8D192B54D43C000D6006 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,6 +149,8 @@
 			dependencies = (
 			);
 			name = "Spon-us";
+			packageProductDependencies = (
+			);
 			productName = "Spon-us";
 			productReference = 100D387D2B44826500498977 /* Spon-us.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +179,9 @@
 				Base,
 			);
 			mainGroup = 100D38742B44826500498977;
+			packageReferences = (
+				3BFC8D162B54B016000D6006 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
+			);
 			productRefGroup = 100D387E2B44826500498977 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -195,9 +214,11 @@
 			files = (
 				100D38BA2B4EF54C00498977 /* MyView.swift in Sources */,
 				DF91F4042B4864330021291A /* Portfolio.swift in Sources */,
+				3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */,
 				100D389A2B44833500498977 /* FontManager.swift in Sources */,
 				100D38B62B4EF51E00498977 /* SavedView.swift in Sources */,
 				100D38B82B4EF54100498977 /* CategoryView.swift in Sources */,
+				3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */,
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,
@@ -407,6 +428,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3BFC8D162B54B016000D6006 /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mikaoj/BSImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 100D38752B44826500498977 /* Project object */;
 }

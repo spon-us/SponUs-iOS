@@ -52,9 +52,9 @@ struct HomeView: View {
     @State private var progressStatus  = Portfolio.ProgressStatus()
     
     let searchItem: some View = {
-        Button(action: {
-            
-        }) {
+        NavigationLink {
+            SearchView()
+        } label: {
             Image("ic_search")
         }
     }()

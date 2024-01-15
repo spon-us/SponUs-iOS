@@ -24,6 +24,7 @@
 		3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D142B54AA55000D6006 /* EditPostView.swift */; };
 		3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */; };
 		3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */; };
+		807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807BF83E2B51BCD400A659B9 /* SearchView.swift */; };
 		DF91F4042B4864330021291A /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91F4032B4864330021291A /* Portfolio.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		3BFC8D142B54AA55000D6006 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiImagePicker.swift; sourceTree = "<group>"; };
 		3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		807BF83E2B51BCD400A659B9 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		DF91F4032B4864330021291A /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				100D38B52B4EF51E00498977 /* SavedView.swift */,
 				100D38B72B4EF54100498977 /* CategoryView.swift */,
 				100D38B92B4EF54C00498977 /* MyView.swift */,
+				807BF83E2B51BCD400A659B9 /* SearchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
+				807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */,
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,
 				3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */,
 			);

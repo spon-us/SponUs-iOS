@@ -133,7 +133,6 @@ struct EditPostView: View {
         .onDisappear{
             print("disappear")
         }
-        //        }
     }
 }
 

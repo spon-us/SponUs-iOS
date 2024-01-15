@@ -9,7 +9,8 @@ import SwiftUI
 import PhotosUI
 
 struct MultipleImagePicker: View {
-    @State private var selectedImages: [UIImage] = []
+//    @State private var selectedImages: [UIImage] = []
+    @Binding var selectedImages: [UIImage]
     @State private var isImagePickerPresented = false
     
     var body: some View {

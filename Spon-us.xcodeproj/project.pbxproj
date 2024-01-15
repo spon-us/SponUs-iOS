@@ -26,6 +26,7 @@
 		3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */; };
 		807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807BF83E2B51BCD400A659B9 /* SearchView.swift */; };
 		DF91F4042B4864330021291A /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91F4032B4864330021291A /* Portfolio.swift */; };
+		DFCD247C2B54D08100B00515 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = DFCD247B2B54D08100B00515 /* PopupView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFCD247C2B54D08100B00515 /* PopupView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +158,7 @@
 			);
 			name = "Spon-us";
 			packageProductDependencies = (
+				DFCD247B2B54D08100B00515 /* PopupView */,
 			);
 			productName = "Spon-us";
 			productReference = 100D387D2B44826500498977 /* Spon-us.app */;
@@ -187,6 +190,7 @@
 			mainGroup = 100D38742B44826500498977;
 			packageReferences = (
 				3BFC8D162B54B016000D6006 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
+				DFCD247A2B54D08100B00515 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 100D387E2B44826500498977 /* Products */;
 			projectDirPath = "";
@@ -451,6 +455,23 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+		DFCD247A2B54D08100B00515 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DFCD247B2B54D08100B00515 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCD247A2B54D08100B00515 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 100D38752B44826500498977 /* Project object */;
 }

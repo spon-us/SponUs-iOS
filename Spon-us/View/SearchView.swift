@@ -108,6 +108,7 @@ struct SearchView: View {
         return parts
     }
 }
+
 struct SearchBarView: View {
     @Binding var searchData: String
     var body: some View {
@@ -127,6 +128,7 @@ struct SearchBarView: View {
         .padding(.vertical, 19)
     }
 }
+
 struct SponUsDivider: View {
     var body: some View {
         Rectangle()

@@ -206,13 +206,13 @@ struct SponUsPostImageCell: View {
     }
 }
 
-struct SponUsDivider: View {
-    var body: some View {
-        Rectangle()
-            .fill(Color.sponusBlack)
-            .frame(maxWidth: .infinity, maxHeight: 1)
-    }
-}
+//struct SponUsDivider: View {
+//    var body: some View {
+//        Rectangle()
+//            .fill(Color.sponusBlack)
+//            .frame(maxWidth: .infinity, maxHeight: 1)
+//    }
+//}
 
 struct PostRectangleCell: View {
     

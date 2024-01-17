@@ -9,6 +9,31 @@ import SwiftUI
 
 import PopupView
 
+// 버튼 탭 애니메이션 X
+struct CustomButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+    }
+}
+
+struct SponUsReportTextfieldStyle: TextFieldStyle {
+    
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        
+        ZStack {
+            Rectangle()
+                .fill(Color.clear)
+                .stroke(Color.sponusGrey100, lineWidth: 1)
+                .frame(maxWidth: .infinity, maxHeight: 56)
+            
+            // 텍스트필드
+            configuration
+                .font(.Body06)
+                .padding(.vertical, 8)
+        }
+    }
+}
+
 struct Portfolio: View {
     @State var progressStatus: ProgressStatus
     
@@ -603,13 +628,6 @@ struct ModifyView: View {
     }
 }
 
-// 버튼 탭 애니메이션 X
-struct CustomButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-    }
-}
-
 
 struct MakeReportView: View {
     
@@ -636,10 +654,10 @@ struct MakeReportView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16){
                     
-                    SponUsPostCell(text: "보고서 제목", isComplete: $postTitle)
+                    SponUsPostCell(text: "보고서 제목", isComplete: $postTitle).padding(.top, 16)
                     
-                    TextField("ex. 대동제 협찬 보고서", text: $postTitle)
-                        .textFieldStyle(SponUsTextfieldStyle())
+                    TextField("    ex. 대동제 협찬 보고서", text: $postTitle)
+                        .textFieldStyle(SponUsReportTextfieldStyle())
                         .padding(.bottom, 16)
                     
                     SponUsPostCell(text: "보고서 내용", isComplete: $postDetail)
@@ -675,7 +693,30 @@ struct MakeReportView: View {
                     
                     SponUsPostImageCell(text: "파일 첨부", selectedImages: $selectedImages)
                     
-                    MultipleImagePicker(selectedImages: $selectedImages)
+                    HStack {
+                        Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
+                        Spacer()
+                        Button {} 
+                        label: {
+                            Image(.icUpload).resizable().frame(width: 24, height: 24)
+                        }.padding(.trailing, 20)
+                    }.padding(.vertical, 8).border(.sponusGrey100)
+                    HStack {
+                        Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
+                        Spacer()
+                        Button {}
+                        label: {
+                            Image(.icUpload).resizable().frame(width: 24, height: 24)
+                        }.padding(.trailing, 20)
+                    }.padding(.vertical, 8).border(.sponusGrey100)
+                    HStack {
+                        Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
+                        Spacer()
+                        Button {}
+                        label: {
+                            Image(.icUpload).resizable().frame(width: 24, height: 24)
+                        }.padding(.trailing, 20)
+                    }.padding(.vertical, 8).border(.sponusGrey100)
 
                     Text("상세 내용이 적힌 파일을 첨부해 주세요\n(MS Word, MS PowerPoint, HWP, PDF)")
                         .font(.Caption02)
@@ -688,7 +729,7 @@ struct MakeReportView: View {
                 .padding(.bottom, 20)
             }
             
-            let compleBtnInActive = postTitle.isEmpty || selectedImages.isEmpty || postSelectedCategory.isEmpty || postSelectedField.isEmpty || postDetail.isEmpty
+            let compleBtnInActive = postTitle.isEmpty || selectedImages.isEmpty || postDetail.isEmpty
             
             //                NavigationLink(destination: EmptyView(), label: {
             //                    Text("수정완료")

@@ -593,7 +593,7 @@ struct Portfolio: View {
                 }
             }
             .navigationDestination(isPresented: $activeNavLinkToMakeReport) {
-                MakeReportView(popup: .constant(false))
+                MakeReportView()
 //                if let index = dummyData.firstIndex(where: { $0.id == currentMakeReportID }) {
 //                    MakeReportView(post: dummyData[index])
 //                }
@@ -637,128 +637,146 @@ struct MakeReportView: View {
     @State private var postSelectedField = ""
     @State private var postDetail = ""
     
+    @State var showingPopup = false
+    
     @FocusState var focusContentsTextEditor: Bool
     
-    @Binding var popup: Bool
     
     @Environment(\.presentationMode) var presentationMode
 
+    func createPopup() -> some View {
+        HStack {
+            Text("작성이 완료되었습니다").font(.Body03).foregroundStyle(.sponusPrimary)
+        }.frame(height: 56).frame(maxWidth: .infinity).background(Color.sponusSecondary)
+    }
+    
     var body: some View {
         let postContentsTextEditor = TextEditor(text: $postDetail)
                                         .frame(minHeight: 162)
                                         .padding(.bottom, 16)
                                         .font(.Caption02)
-        
-        //        NavigationView {
-        VStack(spacing: 0) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16){
-                    
-                    SponUsPostCell(text: "보고서 제목", isComplete: $postTitle).padding(.top, 16)
-                    
-                    TextField("    ex. 대동제 협찬 보고서", text: $postTitle)
-                        .textFieldStyle(SponUsReportTextfieldStyle())
-                        .padding(.bottom, 16)
-                    
-                    SponUsPostCell(text: "보고서 내용", isComplete: $postDetail)
-                    
-                    ZStack (alignment: .leading) {
-                        postContentsTextEditor.focused($focusContentsTextEditor, equals: true)
-                        if postDetail.isEmpty {
-                            Button(action: {
-                                focusContentsTextEditor = true
-                                print("focus")
-                            }) {
-                                VStack {
-                                    Text("보고서에 대한 자세한 내용을 적어주세요.\nex. 진행 배경, 진행 내용, 기대 효과, 희망 사항")
-                                        .font(.Caption02)
-                                        .foregroundStyle(.sponusGrey600)
-                                        .padding(.leading)
-                                        .padding(.top)
-                                    Spacer()
-                                }
-                            }.buttonStyle(CustomButtonStyle())
+        ZStack {
+            //        NavigationView {
+            VStack(spacing: 0) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16){
+                        
+                        SponUsPostCell(text: "보고서 제목", isComplete: $postTitle).padding(.top, 16)
+                        
+                        TextField("    ex. 대동제 협찬 보고서", text: $postTitle)
+                            .textFieldStyle(SponUsReportTextfieldStyle())
+                            .padding(.bottom, 16)
+                        
+                        SponUsPostCell(text: "보고서 내용", isComplete: $postDetail)
+                        
+                        ZStack (alignment: .leading) {
+                            postContentsTextEditor.focused($focusContentsTextEditor, equals: true)
+                            if postDetail.isEmpty {
+                                Button(action: {
+                                    focusContentsTextEditor = true
+                                    print("focus")
+                                }) {
+                                    VStack {
+                                        Text("보고서에 대한 자세한 내용을 적어주세요.\nex. 진행 배경, 진행 내용, 기대 효과, 희망 사항")
+                                            .font(.Caption02)
+                                            .foregroundStyle(.sponusGrey600)
+                                            .padding(.leading)
+                                            .padding(.top)
+                                        Spacer()
+                                    }
+                                }.buttonStyle(CustomButtonStyle())
 
-                        }
-                    }.border(.sponusGrey100)
-                    
-                    SponUsPostImageCell(text: "이미지 첨부", selectedImages: $selectedImages)
-                    
-                    MultipleImagePicker(selectedImages: $selectedImages)
-                    
-                    Text("보고서를 대표할 수 있는 이미지를 첨부해 주세요.")
-                        .font(.Caption02)
-                        .foregroundStyle(.sponusGrey600)
-                        .padding(.bottom, 16)
-                    
-                    SponUsPostImageCell(text: "파일 첨부", selectedImages: $selectedImages)
-                    
-                    HStack {
-                        Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
-                        Spacer()
-                        Button {} 
-                        label: {
-                            Image(.icUpload).resizable().frame(width: 24, height: 24)
-                        }.padding(.trailing, 20)
-                    }.padding(.vertical, 8).border(.sponusGrey100)
-                    HStack {
-                        Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
-                        Spacer()
-                        Button {}
-                        label: {
-                            Image(.icUpload).resizable().frame(width: 24, height: 24)
-                        }.padding(.trailing, 20)
-                    }.padding(.vertical, 8).border(.sponusGrey100)
-                    HStack {
-                        Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
-                        Spacer()
-                        Button {}
-                        label: {
-                            Image(.icUpload).resizable().frame(width: 24, height: 24)
-                        }.padding(.trailing, 20)
-                    }.padding(.vertical, 8).border(.sponusGrey100)
+                            }
+                        }.border(.sponusGrey100)
+                        
+                        SponUsPostImageCell(text: "이미지 첨부", selectedImages: $selectedImages)
+                        
+                        MultipleImagePicker(selectedImages: $selectedImages)
+                        
+                        Text("보고서를 대표할 수 있는 이미지를 첨부해 주세요.")
+                            .font(.Caption02)
+                            .foregroundStyle(.sponusGrey600)
+                            .padding(.bottom, 16)
+                        
+                        SponUsPostImageCell(text: "파일 첨부", selectedImages: $selectedImages)
+                        
+                        HStack {
+                            Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
+                            Spacer()
+                            Button {}
+                            label: {
+                                Image(.icUpload).resizable().frame(width: 24, height: 24)
+                            }.padding(.trailing, 20)
+                        }.padding(.vertical, 8).border(.sponusGrey100)
+                        HStack {
+                            Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
+                            Spacer()
+                            Button {}
+                            label: {
+                                Image(.icUpload).resizable().frame(width: 24, height: 24)
+                            }.padding(.trailing, 20)
+                        }.padding(.vertical, 8).border(.sponusGrey100)
+                        HStack {
+                            Text("파일 선택").font(.Body10).foregroundStyle(.sponusGrey700).padding(.leading, 20)
+                            Spacer()
+                            Button {}
+                            label: {
+                                Image(.icUpload).resizable().frame(width: 24, height: 24)
+                            }.padding(.trailing, 20)
+                        }.padding(.vertical, 8).border(.sponusGrey100)
 
-                    Text("상세 내용이 적힌 파일을 첨부해 주세요\n(MS Word, MS PowerPoint, HWP, PDF)")
-                        .font(.Caption02)
-                        .foregroundStyle(.sponusGrey600)
-                        .padding(.bottom, 16)
+                        Text("상세 내용이 적힌 파일을 첨부해 주세요\n(MS Word, MS PowerPoint, HWP, PDF)")
+                            .font(.Caption02)
+                            .foregroundStyle(.sponusGrey600)
+                            .padding(.bottom, 16)
+                    }
+                    .font(.Heading09)
+                    .foregroundColor(Color.sponusBlack)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
                 }
-                .font(.Heading09)
-                .foregroundColor(Color.sponusBlack)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 20)
+                
+                let compleBtnInActive = postTitle.isEmpty || selectedImages.isEmpty || postDetail.isEmpty
+                
+                //                NavigationLink(destination: EmptyView(), label: {
+                //                    Text("수정완료")
+                //                        .font(.Body01)
+                //                        .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
+                //                      .frame(maxWidth: .infinity)
+                //                      .padding(.top, 20)
+                //                      .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
+                //                })
+                //                .disabled(compleBtnInActive)
+                
+                Button(action: {
+                    showingPopup = true
+                }, label: {
+                    Text("작성완료")
+                        .font(.Body01)
+                        .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 20)
+                        .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
+                }).disabled(compleBtnInActive)
             }
-            
-            let compleBtnInActive = postTitle.isEmpty || selectedImages.isEmpty || postDetail.isEmpty
-            
-            //                NavigationLink(destination: EmptyView(), label: {
-            //                    Text("수정완료")
-            //                        .font(.Body01)
-            //                        .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
-            //                      .frame(maxWidth: .infinity)
-            //                      .padding(.top, 20)
-            //                      .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
-            //                })
-            //                .disabled(compleBtnInActive)
-            
-            Button(action: {
+            .navigationTitle("보고서 작성").font(.Body01)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomBackButton())
+            .onDisappear{
+                print("disappear")
+            }
+        }.popup(isPresented: $showingPopup) {
+            createPopup().onDisappear(){
                 self.presentationMode.wrappedValue.dismiss()
-                popup = true
-            }, label: {
-                Text("수정완료")
-                    .font(.Body01)
-                    .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 20)
-                    .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
-            }).disabled(compleBtnInActive)
-        }
-        .navigationTitle("보고서 작성").font(.Body01)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
-        .onDisappear{
-            print("disappear")
+            }
+        } customize: {
+            $0.type(.floater(verticalPadding: 16))
+              .position(.bottom)
+              .animation(.spring)
+              .closeOnTap(true)
+              .closeOnTapOutside(true)
+              .autohideIn(2)
         }
         //        }
     }
@@ -780,5 +798,5 @@ struct ReportView: View {
 //    Portfolio(progressStatus: Portfolio.ProgressStatus())
 //}
 #Preview {
-    MakeReportView(popup: .constant(false))
+    MakeReportView()
 }

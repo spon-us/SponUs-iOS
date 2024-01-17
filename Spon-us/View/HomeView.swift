@@ -169,9 +169,7 @@ struct HomeView: View {
                         }
                     })
                     
-                    Button(action: {
-                        
-                    }) {
+                    NavigationLink(destination: ProposalSentView(), label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
@@ -194,8 +192,8 @@ struct HomeView: View {
                                 .fixedSize(horizontal: true, vertical: false)
                                 .padding(.top, 8)
                         }
-                    }
-                    .padding(.leading, 14)
+                        .padding(.leading, 14)
+                    })
                     
                     NavigationLink {
                         Portfolio(progressStatus: progressStatus)

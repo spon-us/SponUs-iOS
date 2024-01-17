@@ -568,9 +568,10 @@ struct Portfolio: View {
                 }
             }
             .navigationDestination(isPresented: $activeNavLinkToMakeReport) {
-                if let index = dummyData.firstIndex(where: { $0.id == currentMakeReportID }) {
-                    MakeReportView(post: dummyData[index])
-                }
+                MakeReportView(popup: .constant(false))
+//                if let index = dummyData.firstIndex(where: { $0.id == currentMakeReportID }) {
+//                    MakeReportView(post: dummyData[index])
+//                }
             }
             .navigationDestination(isPresented: $activeNavLinkToReport) {
                 if let index = dummyData.firstIndex(where: { $0.id == currentReportID }) {
@@ -602,14 +603,123 @@ struct ModifyView: View {
     }
 }
 
+// 버튼 탭 애니메이션 X
+struct CustomButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+    }
+}
+
+
 struct MakeReportView: View {
-    var post: Portfolio.Post?
+    
+    @State private var postTitle = ""
+    @State private var selectedImages: [UIImage] = []
+    @State private var postSelectedCategory = ""
+    @State private var postSelectedField = ""
+    @State private var postDetail = ""
+    
+    @FocusState var focusContentsTextEditor: Bool
+    
+    @Binding var popup: Bool
+    
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
-        Text("Post Title: \(post?.postTitle ?? "nil")")
-        .navigationTitle("Make Report")
+        let postContentsTextEditor = TextEditor(text: $postDetail)
+                                        .frame(minHeight: 162)
+                                        .padding(.bottom, 16)
+                                        .font(.Caption02)
+        
+        //        NavigationView {
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16){
+                    
+                    SponUsPostCell(text: "보고서 제목", isComplete: $postTitle)
+                    
+                    TextField("ex. 대동제 협찬 보고서", text: $postTitle)
+                        .textFieldStyle(SponUsTextfieldStyle())
+                        .padding(.bottom, 16)
+                    
+                    SponUsPostCell(text: "보고서 내용", isComplete: $postDetail)
+                    
+                    ZStack (alignment: .leading) {
+                        postContentsTextEditor.focused($focusContentsTextEditor, equals: true)
+                        if postDetail.isEmpty {
+                            Button(action: {
+                                focusContentsTextEditor = true
+                                print("focus")
+                            }) {
+                                VStack {
+                                    Text("보고서에 대한 자세한 내용을 적어주세요.\nex. 진행 배경, 진행 내용, 기대 효과, 희망 사항")
+                                        .font(.Caption02)
+                                        .foregroundStyle(.sponusGrey600)
+                                        .padding(.leading)
+                                        .padding(.top)
+                                    Spacer()
+                                }
+                            }.buttonStyle(CustomButtonStyle())
+
+                        }
+                    }.border(.sponusGrey100)
+                    
+                    SponUsPostImageCell(text: "이미지 첨부", selectedImages: $selectedImages)
+                    
+                    MultipleImagePicker(selectedImages: $selectedImages)
+                    
+                    Text("보고서를 대표할 수 있는 이미지를 첨부해 주세요.")
+                        .font(.Caption02)
+                        .foregroundStyle(.sponusGrey600)
+                        .padding(.bottom, 16)
+                    
+                    SponUsPostImageCell(text: "파일 첨부", selectedImages: $selectedImages)
+                    
+                    MultipleImagePicker(selectedImages: $selectedImages)
+
+                    Text("상세 내용이 적힌 파일을 첨부해 주세요\n(MS Word, MS PowerPoint, HWP, PDF)")
+                        .font(.Caption02)
+                        .foregroundStyle(.sponusGrey600)
+                        .padding(.bottom, 16)
+                }
+                .font(.Heading09)
+                .foregroundColor(Color.sponusBlack)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
+            }
+            
+            let compleBtnInActive = postTitle.isEmpty || selectedImages.isEmpty || postSelectedCategory.isEmpty || postSelectedField.isEmpty || postDetail.isEmpty
+            
+            //                NavigationLink(destination: EmptyView(), label: {
+            //                    Text("수정완료")
+            //                        .font(.Body01)
+            //                        .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
+            //                      .frame(maxWidth: .infinity)
+            //                      .padding(.top, 20)
+            //                      .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
+            //                })
+            //                .disabled(compleBtnInActive)
+            
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+                popup = true
+            }, label: {
+                Text("수정완료")
+                    .font(.Body01)
+                    .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 20)
+                    .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
+            }).disabled(compleBtnInActive)
+        }
+        .navigationTitle("보고서 작성").font(.Body01)
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
+        .onDisappear{
+            print("disappear")
+        }
+        //        }
     }
 }
 
@@ -628,3 +738,6 @@ struct ReportView: View {
 //#Preview {
 //    Portfolio(progressStatus: Portfolio.ProgressStatus())
 //}
+#Preview {
+    MakeReportView(popup: .constant(false))
+}

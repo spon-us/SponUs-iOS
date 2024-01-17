@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+import PhotosUI
+
+
 struct ContentView: View {
     @State private var selectedTab: Int = 0
 

@@ -156,7 +156,6 @@ struct SponUsTextfieldStyle: TextFieldStyle {
     }
 }
 
-
 struct SponUsPostCell: View {
     
     var text: String

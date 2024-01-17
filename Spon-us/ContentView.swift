@@ -44,12 +44,9 @@ struct ContentView: View {
                 }
                 .tag(3)
         }
-        .onChange(of: selectedTab) { newValue in
-            print("Selected tab: \(newValue)")
-        }
     }
 }
 
-//#Preview {
-//    ContentView()
-//}
+#Preview {
+    ContentView()
+}

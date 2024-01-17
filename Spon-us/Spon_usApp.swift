@@ -11,7 +11,7 @@ import SwiftUI
 struct Spon_usApp: App {
     var body: some Scene {
         WindowGroup {
-            MyNoticeView()
+            ContentView()
         }
     }
 }

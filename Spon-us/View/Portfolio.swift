@@ -262,7 +262,8 @@ struct Portfolio: View {
                         ForEach(dummyData, id: \.id) { dummy in
                             if (dummy.postProgressStatus == .publishing && dummy.displayInPublishing == true) {
                                 NavigationLink(
-                                    destination: DetailView(post: dummy),
+                                    destination: MyNoticeView(),
+                                    // destination: DetailView(post: dummy),
                                     label: {
                                         VStack(spacing: 0) {
                                             HStack(spacing: 0) {
@@ -388,7 +389,8 @@ struct Portfolio: View {
                             ForEach(dummyData) { dummy in
                                 if (dummy.postProgressStatus == .progressing) {
                                     NavigationLink(
-                                        destination: DetailView(post: dummy),
+                                        destination: MyNoticeView(),
+//                                        destination: DetailView(post: dummy),
                                         label: {
                                             VStack(alignment:.leading, spacing: 0) {
                                                 HStack(spacing: 0) {
@@ -504,7 +506,8 @@ struct Portfolio: View {
                         ForEach(dummyData) { dummy in
                             if (dummy.postProgressStatus == .completed) {
                                 NavigationLink(
-                                    destination: DetailView(post: dummy),
+                                    destination: MyNoticeView(),
+//                                    destination: DetailView(post: dummy),
                                     label: {
                                         VStack(alignment:.leading, spacing: 0) {
                                             HStack(spacing: 0) {

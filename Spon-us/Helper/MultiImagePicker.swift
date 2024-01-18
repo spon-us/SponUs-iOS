@@ -20,8 +20,6 @@ struct MultipleImagePicker: View {
                     Image(uiImage: image)
                         .resizable()
                         .frame(width: 79, height: 79)
-                    //                        .aspectRatio(contentMode: .fill)
-                    //                        .frame(maxWidth: 79, maxHeight: 79)
                 }
                 
                 Button(action: {
@@ -30,7 +28,6 @@ struct MultipleImagePicker: View {
                     Rectangle()
                         .fill(.clear)
                         .stroke(Color.sponusGrey100, lineWidth: 1)
-                    //                            .frame(maxWidth: 79, maxHeight: 79)
                         .frame(width: 79, height: 79)
                         .overlay(
                             Image("post_image")

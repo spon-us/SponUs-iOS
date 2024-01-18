@@ -133,7 +133,6 @@ struct EditPostView: View {
         .onDisappear{
             print("disappear")
         }
-        //        }
     }
 }
 
@@ -156,7 +155,6 @@ struct SponUsTextfieldStyle: TextFieldStyle {
         }
     }
 }
-
 
 struct SponUsPostCell: View {
     

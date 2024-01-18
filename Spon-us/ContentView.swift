@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+import PhotosUI
+
+
 struct ContentView: View {
     @State private var selectedTab: Int = 0
 
@@ -43,9 +46,6 @@ struct ContentView: View {
                         .font(.English18)
                 }
                 .tag(3)
-        }
-        .onChange(of: selectedTab) { newValue in
-            print("Selected tab: \(newValue)")
         }
     }
 }

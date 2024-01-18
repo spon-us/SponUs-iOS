@@ -856,40 +856,6 @@ struct ReportView: View {
     }
 }
 
-struct ModifyView: View {
-    var post: Portfolio.Post?
-
-    var body: some View {
-        Text("Post Title: \(post?.postTitle ?? "nil")")
-        .navigationTitle("Modify")
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
-    }
-}
-
-struct MakeReportView: View {
-    var post: Portfolio.Post?
-
-    var body: some View {
-        Text("Post Title: \(post?.postTitle ?? "nil")")
-        .navigationTitle("Make Report")
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
-    }
-}
-
-struct ReportView: View {
-    var post: Portfolio.Post?
-
-    var body: some View {
-        Text("Post Title: \(post?.postTitle ?? "nil")")
-        .navigationTitle("Report")
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
-    }
-}
-
-
 //#Preview {
 //    Portfolio(progressStatus: Portfolio.ProgressStatus())
 //}

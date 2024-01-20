@@ -9,14 +9,14 @@ import SwiftUI
 
 struct CustomBackButton: View {
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         Button {
             self.presentationMode.wrappedValue.dismiss()
         }
-        label: {
-            Image(.icBack)
-        }
+    label: {
+        Image(.icBack)
+    }
     }
 }
 
@@ -100,13 +100,13 @@ struct HomeView: View {
                                             .foregroundColor(Color.sponusWhite)
                                             .frame(width: 211, alignment: .bottomLeading)
                                             .padding(.top, 8)
-                
+                                        
                                         HStack {
                                             Text(getAdPeriod(forIndex: index))
                                                 .font(.English14)
                                                 .foregroundColor(Color.sponusGrey600)
                                                 .padding(.top, 1)
-                                        
+                                            
                                             Spacer()
                                             
                                             Image("btn_move")
@@ -169,7 +169,7 @@ struct HomeView: View {
                         }
                     })
                     
-                    NavigationLink(destination: ProposalSentView(), label: {
+                    NavigationLink(destination: SendOfferView(), label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)

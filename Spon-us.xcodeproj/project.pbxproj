@@ -20,7 +20,7 @@
 		100D38B62B4EF51E00498977 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B52B4EF51E00498977 /* SavedView.swift */; };
 		100D38B82B4EF54100498977 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B72B4EF54100498977 /* CategoryView.swift */; };
 		100D38BA2B4EF54C00498977 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B92B4EF54C00498977 /* MyView.swift */; };
-		106720022B5835FA00493354 /* ProposalSentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106720012B5835FA00493354 /* ProposalSentView.swift */; };
+		106720022B5835FA00493354 /* SendOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106720012B5835FA00493354 /* SendOfferView.swift */; };
 		3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */; };
 		3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D142B54AA55000D6006 /* EditPostView.swift */; };
 		3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */; };
@@ -46,7 +46,7 @@
 		100D38B52B4EF51E00498977 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		100D38B72B4EF54100498977 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		100D38B92B4EF54C00498977 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
-		106720012B5835FA00493354 /* ProposalSentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalSentView.swift; sourceTree = "<group>"; };
+		106720012B5835FA00493354 /* SendOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferView.swift; sourceTree = "<group>"; };
 		3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalReceivedListView.swift; sourceTree = "<group>"; };
 		3BFC8D142B54AA55000D6006 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiImagePicker.swift; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 				100D38B72B4EF54100498977 /* CategoryView.swift */,
 				100D38B92B4EF54C00498977 /* MyView.swift */,
 				807BF83E2B51BCD400A659B9 /* SearchView.swift */,
-				106720012B5835FA00493354 /* ProposalSentView.swift */,
+				106720012B5835FA00493354 /* SendOfferView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
-				106720022B5835FA00493354 /* ProposalSentView.swift in Sources */,
+				106720022B5835FA00493354 /* SendOfferView.swift in Sources */,
 				807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */,
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,
 				3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */,

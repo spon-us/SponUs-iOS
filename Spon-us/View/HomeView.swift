@@ -20,6 +20,19 @@ struct CustomBackButton: View {
     }
 }
 
+struct CustomHomeButton: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        Button {}
+        label: {
+            Image(.icHome)
+                .renderingMode(.template)
+                .foregroundStyle(.black)
+        }
+    }
+}
+
 func getAdText(forIndex index: Int) -> String {
     switch index {
     case 1:
@@ -366,5 +379,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    CustomHomeButton()
 }

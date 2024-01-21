@@ -204,6 +204,32 @@ struct SponUsPostImageCell: View {
     }
 }
 
+struct SponUsPostFileCell: View {
+    
+    var text: String
+    @Binding var selectedURLsFile1: [URL]
+    @Binding var selectedURLsFile2: [URL]
+    @Binding var selectedURLsFile3: [URL]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Text(text)
+                
+                if (selectedURLsFile1.isEmpty && selectedURLsFile2.isEmpty && selectedURLsFile3.isEmpty) {
+                    Image("ic_check")
+                }
+                else{
+                    Text("")
+                }
+            }
+            
+            SponUsDivider()
+        }
+        
+    }
+}
+
 //struct SponUsDivider: View {
 //    var body: some View {
 //        Rectangle()

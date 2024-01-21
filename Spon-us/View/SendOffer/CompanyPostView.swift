@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CompanyPostView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -170,6 +172,13 @@ struct CompanyPostView: View {
             }
             .background(Color.sponusGrey600)
         }
+        .gesture(
+            DragGesture().onEnded { value in
+                if value.translation.width > 100 {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        )
         .navigationBarBackButtonHidden(true)
         .navigationTitle("기업 공고").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)

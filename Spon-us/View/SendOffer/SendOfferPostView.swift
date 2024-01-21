@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SendOfferPostView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -103,6 +105,13 @@ struct SendOfferPostView: View {
                 .background(Color.sponusBlack)
             })
         }
+        .gesture(
+            DragGesture().onEnded { value in
+                if value.translation.width > 100 {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        )
         .navigationTitle("보낸 제안").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)

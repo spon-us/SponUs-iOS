@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct SendOfferView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         if hasData() {
             ScrollView {
                 VStack(spacing: 0) {
-                    
                     Text("12.20 WED")
                         .font(.English01)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(Color.sponusBlack)
-                        .padding(.top, 32)
+                        .padding(.top, 16)
                     
                     Rectangle()
                         .fill(Color.sponusBlack)
@@ -27,10 +28,16 @@ struct SendOfferView: View {
                     ForEach(1 ..< 4) { item in
                         SendOfferCell(status: getStatus(for: item))
                     }
-                    
                 }
                 .padding(.horizontal, 20)
             }
+            .gesture(
+                DragGesture().onEnded { value in
+                    if value.translation.width > 100 {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            )
             .navigationTitle("보낸 제안").font(.Body01)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)

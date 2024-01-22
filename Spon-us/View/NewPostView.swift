@@ -1,14 +1,17 @@
 //
-//  EditPostView.swift
+//  NewPostView.swift
 //  Spon-us
 //
-//  Created by 황인성 on 2024/01/15.
+//  Created by 김수민 on 1/22/24.
 //
 
 import SwiftUI
-import PhotosUI
+import PopupView
+import UniformTypeIdentifiers
+import MobileCoreServices
 
-struct EditPostView: View {
+
+struct NewPostView: View {
     
     @State private var postTitle = ""
     @State private var selectedImages: [UIImage] = []
@@ -16,10 +19,17 @@ struct EditPostView: View {
     @State private var postSelectedField = ""
     @State private var postDetail = ""
     
-    
+    @State var showingPopup = false
+    @State var showingPreviewAlert = false
+    @State var goToPreview = false
     @Binding var popup: Bool
     
     @Environment(\.presentationMode) var presentationMode
+    func createPopup() -> some View {
+        HStack {
+            Text("작성이 완료되었습니다").font(.Body03).foregroundStyle(.sponusPrimary)
+        }.frame(height: 56).frame(maxWidth: .infinity).background(Color.sponusSecondary)
+    }
     
     let postCategory = ["협찬", "제휴", "연계프로젝트"]
     let postField = ["기획/아이디어", "광고/마케팅", "디자인", "사진/영상", "IT/소프트웨어/게임", "기타"]
@@ -29,13 +39,15 @@ struct EditPostView: View {
     var body: some View {
         //        NavigationView {
         VStack(spacing: 0) {
+            var compleBtnInActive = postTitle.isEmpty || selectedImages.isEmpty || postSelectedCategory.isEmpty || postSelectedField.isEmpty || postDetail.isEmpty
             ScrollView {
                 VStack(alignment: .leading, spacing: 16){
                     
-                    SponUsPostCell(text: "공고 제목", isComplete: $postTitle)
+                    SponUsPostCell(text: "공고 제목", isComplete: $postTitle).padding(.top, 10)
                     
                     TextField("ex. 스포대학교 대학생 협찬", text: $postTitle)
                         .textFieldStyle(SponUsTextfieldStyle())
+                        .frame(height: 56)
                         .padding(.bottom, 16)
                     
                     SponUsPostImageCell(text: "공고 이미지", selectedImages: $selectedImages)
@@ -80,7 +92,7 @@ struct EditPostView: View {
                             .overlay(
                                 VStack {
                                     Text("공고에 대한 자세한 내용을 적어주세요.\nex. 진행 배경, 진행 내용, 기대 효과, 희망 사항")
-                                        .font(.caption2)
+                                        .font(.Caption02)
                                         .padding(.top, 20)
                                         .foregroundColor(postDetail.isEmpty ? Color.sponusGrey600 : Color.clear)
                                     
@@ -95,6 +107,24 @@ struct EditPostView: View {
                         
                     }
                     
+                    HStack {
+                        Spacer()
+                        Button {
+                            if (compleBtnInActive == true) {
+                                showingPreviewAlert = true
+                            }
+                            else {
+                                goToPreview = true
+                            }
+                        }
+                    label: {
+                        Text("미리보기").font(.Body10).foregroundStyle(.sponusGrey700).frame(width: 73, height: 37)
+                    }.border(.sponusGrey700)
+                        Spacer()
+                    }.padding(.top, 32)
+                    
+                    Spacer().frame(height: 127)
+                    
                 }
                 .font(.Heading09)
                 .foregroundColor(Color.sponusBlack)
@@ -102,171 +132,43 @@ struct EditPostView: View {
                 .padding(.bottom, 20)
             }
             
-            var compleBtnInActive = postTitle.isEmpty || selectedImages.isEmpty || postSelectedCategory.isEmpty || postSelectedField.isEmpty || postDetail.isEmpty
-            
-            //                NavigationLink(destination: EmptyView(), label: {
-            //                    Text("수정완료")
-            //                        .font(.Body01)
-            //                        .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
-            //                      .frame(maxWidth: .infinity)
-            //                      .padding(.top, 20)
-            //                      .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
-            //                })
-            //                .disabled(compleBtnInActive)
-            
             Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-                popup = true
+//                self.presentationMode.wrappedValue.dismiss()
+                showingPopup = true
             }, label: {
-                Text("수정완료")
+                Text("작성 완료")
                     .font(.Body01)
                     .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 20)
                     .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
             }).disabled(compleBtnInActive)
+            .navigationDestination(isPresented: $goToPreview) {
+                    
+            }
+        }.popup(isPresented: $showingPopup) {
+            createPopup().onDisappear(){
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        } customize: {
+            $0.type(.floater(verticalPadding: 16))
+              .position(.bottom)
+              .animation(.spring)
+              .closeOnTap(true)
+              .closeOnTapOutside(true)
+              .autohideIn(2)
         }
-        .navigationTitle("게시글 수정").font(.Body01)
+        .navigationTitle("새 공고 작성").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
+        .toolbar(.hidden, for: .tabBar)
         .onDisappear{
             print("disappear")
         }
     }
 }
-
-
-struct SponUsTextfieldStyle: TextFieldStyle {
-    
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        
-        ZStack {
-            Rectangle()
-                .fill(Color.clear)
-                .stroke(Color.sponusGrey100, lineWidth: 1)
-                .frame(maxWidth: .infinity, maxHeight: 56)
-            
-            // 텍스트필드
-            configuration
-                .font(.Body06)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 8)
-        }
-    }
-}
-
-struct SponUsPostCell: View {
-    
-    var text: String
-    @Binding var isComplete: String
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text(text)
-                
-                if isComplete.isEmpty{
-                    Image("ic_check")
-                }
-                else{
-                    Text("")
-                }
-            }
-            
-            SponUsDivider()
-        }
-        
-    }
-}
-
-struct SponUsPostImageCell: View {
-    
-    var text: String
-    @Binding var selectedImages: [UIImage]
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text(text)
-                
-                if selectedImages.isEmpty{
-                    Image("ic_check")
-                }
-                else{
-                    Text("")
-                }
-            }
-            
-            SponUsDivider()
-        }
-        
-    }
-}
-
-struct SponUsPostFileCell: View {
-    
-    var text: String
-    @Binding var selectedURLsFile1: [URL]
-    @Binding var selectedURLsFile2: [URL]
-    @Binding var selectedURLsFile3: [URL]
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text(text)
-                
-                if (selectedURLsFile1.isEmpty && selectedURLsFile2.isEmpty && selectedURLsFile3.isEmpty) {
-                    Image("ic_check")
-                }
-                else{
-                    Text("")
-                }
-            }
-            
-            SponUsDivider()
-        }
-        
-    }
-}
-
-//struct SponUsDivider: View {
-//    var body: some View {
-//        Rectangle()
-//            .fill(Color.sponusBlack)
-//            .frame(maxWidth: .infinity, maxHeight: 1)
-//    }
-//}
-
-struct PostRectangleCell: View {
-    
-    var item: String
-    @Binding var selectedString: String
-    
-    var body: some View {
-        
-        Button(action: {
-            selectedString = item
-            print(selectedString)
-        }, label: {
-            Text(item)
-                .font(.Body06)
-                .foregroundColor(item == selectedString ? Color.sponusBlack : Color.sponusGrey600)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .lineLimit(1)
-                .overlay(
-                    Rectangle()
-                        .stroke(item == selectedString ? Color.sponusBlack : Color.sponusGrey100, lineWidth: 1)
-                        .frame(maxWidth: .infinity)
-                )
-        })
-    }
-}
-
-
-
 #Preview {
-    EditPostView(popup: .constant(false))
+    NewPostView(popup: .constant(false))
 }
 

@@ -85,7 +85,7 @@ struct SendOfferPostView: View {
                 
             }
             
-            NavigationLink(destination: EmptyView(), label: {
+            NavigationLink(destination: ChargerInfoView(), label: {
                 ZStack(alignment: .leading) {
                     Text("담당자 정보 확인하기")
                         .font(.Body01)

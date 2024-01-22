@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
+    
     var body: some View {
         VStack(spacing: 0) {
             
-            Rectangle()
-              .foregroundColor(.clear)
-              .frame(maxWidth: .infinity, maxHeight: 111)
-              .background(Color(red: 0.18, green: 0.2, blue: 0.21).opacity(0.8))
+//            Rectangle()
+//            .fill(Color(red: 0.18, green: 0.2, blue: 0.21).opacity(0.6))
+////              .foregroundColor(.clear)
+//              .frame(maxWidth: .infinity, maxHeight: 111)
+              
             
             ScrollView {
 //                VStack{
@@ -50,7 +53,7 @@ struct ProfileView: View {
                       .padding(.bottom, 16)
                     
                     SponUsDivider()
-                        .padding(.bottom, 22)
+                        .padding(.bottom, 24)
                     
                     // English/English08
                     HStack(spacing: 13) {
@@ -62,6 +65,10 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 24)
                     
+                    Button("Open Default App") {
+                                openDefaultApp()
+                            }
+                    
                     HStack(spacing: 13) {
                         Text("www.musinsa.com")
                             .font(.English08)
@@ -70,6 +77,13 @@ struct ProfileView: View {
                         Image("ic_link")
                     }
                     .padding(.bottom, 24)
+                    
+                    Button("Open External App") {
+                                openExternalApp()
+                            }
+                    
+                    
+                    
                     
                     HStack(spacing: 13) {
                         Text("facebook")
@@ -80,12 +94,90 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 42)
                     
+                    // Korean/Heading/Heading09
+                    Text("활동 기록")
+                        .font(.Heading09)
+                      .foregroundColor(Color.sponusBlack)
+                      .padding(.bottom, 16)
+                    
+                    SponUsDivider()
+                        .padding(.bottom, 24)
+                    
+                    HStack {
+                        Text("게시 중 공고")
+                            .font(.Body06)
+                        .foregroundColor(Color.sponusGrey800)
+                        
+                        Spacer()
+                        
+                        Text("1건")
+                            .font(.English07)
+                          .foregroundColor(Color.sponusPrimary)
+                    }
+                    .frame(width: 133)
+                    .padding(.bottom, 20)
+                    
+                    HStack {
+                        Text("게시 중 공고")
+                            .font(.Body06)
+                        .foregroundColor(Color.sponusGrey800)
+                        
+                        Spacer()
+                        
+                        Text("1건")
+                            .font(.English07)
+                          .foregroundColor(Color.sponusPrimary)
+                    }
+                    .frame(width: 133)
+                    .padding(.bottom, 20)
+                    
+                    HStack {
+                        Text("게시 중 공고")
+                            .font(.Body06)
+                        .foregroundColor(Color.sponusGrey800)
+                        
+                        Spacer()
+                        
+                        Text("1건")
+                            .font(.English07)
+                          .foregroundColor(Color.sponusPrimary)
+                    }
+                    .frame(width: 133)
+                    
+                    
                 }
                 .padding(.leading, 40)
             }
             
         }
+        .navigationTitle("프로필").font(.Body01)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: CustomBackButton())
+        .navigationBarBackground()
     }
+    
+    func openDefaultApp() {
+            guard let url = URL(string: "https://musinsa.com") else {
+                return
+            }
+
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    
+    func openExternalApp() {
+            // Replace "externalapp://" with the actual URL scheme or custom URL supported by the external app
+            guard let url = URL(string: "instagram://") else {
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                // Handle the case where the external app cannot be opened
+                print("External app not installed or supported.")
+            }
+        }
 }
 
 #Preview {

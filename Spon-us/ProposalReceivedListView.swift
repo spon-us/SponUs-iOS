@@ -16,7 +16,7 @@ struct ProposalReceivedListView: View {
     
     var body: some View {
         
-//        NavigationView {
+        NavigationView {
             
             ScrollView{
                 
@@ -50,7 +50,11 @@ struct ProposalReceivedListView: View {
                         .padding(.top, 8)
                     
                     ForEach(1 ..< 5) { item in
-                        ProposalReceivedCell()
+                        
+//                        NavigationLink(destination: ProposalReceivedListView2(), label: {
+                            ProposalReceivedCell()
+//                        })
+                        
                     }
                     
                     
@@ -63,7 +67,106 @@ struct ProposalReceivedListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
-//        }
+        }
+    }
+}
+
+struct ProposalReceivedListView2: View {
+    var body: some View {
+        ScrollView{
+            
+            VStack(spacing: 0){
+                
+                HStack(spacing: 0){
+                    Image("post_list_dummy_image")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    //                        .frame(width: 158, height: 158)
+                        .padding(.trailing, 20)
+                    
+                    
+                    
+                    LazyVStack(alignment: .leading, spacing: 12){
+                        Text("협찬")
+                            .font(.Caption02)
+                            .foregroundColor(Color.sponusGrey700)
+                        
+                        
+                        Text("2024 스포대학교\n대동제 협찬")
+                            .font(.Body07)
+                            .foregroundColor(Color.sponusBlack)
+                        
+                        
+                        
+                        NavigationLink(destination: {
+                            MyNoticeView()
+                        }, label: {
+                            HStack{
+                                Text("내 공고 보기")
+                                
+                                
+                                Image("ic_go")
+                                    .frame(width: 16, height: 16)
+                            }
+                            .font(.Body10)
+                            .foregroundStyle(Color.sponusPrimary)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 10)
+                            .overlay(
+                                Rectangle()
+                                    .stroke(Color.sponusPrimary, lineWidth: 1)
+                            )
+                        })
+                    }.padding(.trailing, 20)
+                }
+                .padding(.trailing, 20)
+                .padding(.top, 16)
+                
+                
+                Text("12.24 SUN")
+                    .font(.English01)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color.sponusBlack)
+                    .padding(.top, 32)
+                
+                Rectangle()
+                    .fill(Color.sponusBlack)
+                    .frame(maxWidth: .infinity, maxHeight: 1)
+                    .padding(.top, 8)
+                
+                
+                HStack(spacing: 0) {
+                    Image("Rectangle 1232")
+                        .frame(width: 79, height: 79)
+                        .padding(.trailing, 17)
+                    
+                    VStack(alignment: .leading, spacing: 6) {
+                        
+                        Text("무신사 담당자")
+                            .font(.Body07)
+                          .foregroundColor(Color.sponusBlack)
+                        
+                        
+                        Text("안녕하세요 무신사입니다")
+                            .font(.Body10)
+                          .foregroundColor(Color.sponusGrey800)
+
+                    }
+                    
+                    Spacer()
+                    
+                    Image("ic_go")
+                }
+                .padding(.top, 16)
+                
+            }
+            .padding(.horizontal, 20)
+        }
+        .navigationBarItems(leading: CustomBackButton())
+        .navigationTitle("받은 제안").font(.Body01)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        
     }
 }
 
@@ -71,7 +174,7 @@ struct ProposalReceivedListView: View {
 struct ProposalReceivedCell: View {
     var body: some View {
         HStack(spacing: 0){
-            Image("ic_sponus")
+            Image("post_list_dummy_image")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             //                        .frame(width: 158, height: 158)
@@ -92,7 +195,7 @@ struct ProposalReceivedCell: View {
                 
                 
                 NavigationLink(destination: {
-                    EmptyView()
+                    ProposalReceivedListView2()
                 }, label: {
                     HStack{
                         Text("받은 제안서")
@@ -101,6 +204,7 @@ struct ProposalReceivedCell: View {
                         Image("ic_go")
                             .frame(width: 16, height: 16)
                     }
+                    .font(.Body10)
                     .foregroundStyle(Color.sponusPrimary)
                     .padding(.vertical, 8)
                     .padding(.horizontal, 10)
@@ -121,7 +225,7 @@ struct MyNoticeView: View {
     @State var popup = false
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack(spacing: 0) {
 //                if popup == true{
 //                    Text("popup = true")
@@ -167,15 +271,16 @@ struct MyNoticeView: View {
                             .foregroundColor(Color.sponusGrey700)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             
-                            
-                            HStack{
-                                Text("스포대학교 총학생회")
-                                    .font(.Body10)
-                                    .foregroundColor(Color.sponusPrimary)
-                                
-                                Image("ic_go")
-                                    .frame(width: 16, height: 16)
-                            }
+                            NavigationLink(destination: ProfileView(), label: {
+                                HStack{
+                                    Text("스포대학교 총학생회")
+                                        .font(.Body10)
+                                        .foregroundColor(Color.sponusPrimary)
+                                    
+                                    Image("ic_go")
+                                        .frame(width: 16, height: 16)
+                                }
+                            })
                             .padding(.top, 23)
                             // Korean/Heading/Heading05
                             Text("2024 스포대학교\n대동제 협찬")
@@ -254,13 +359,22 @@ struct MyNoticeView: View {
                       .background(Color.sponusBlack)
                 })
             }
-        }
+            .navigationTitle("내 공고").font(.Body01)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomBackButton())
+//        }
     }
 }
 
 
 #Preview {
     ProposalReceivedListView()
+    
+}
+
+#Preview {
+    ProposalReceivedListView2()
     
 }
 

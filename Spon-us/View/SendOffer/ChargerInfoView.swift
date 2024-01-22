@@ -109,7 +109,7 @@ struct ChargerInfoView: View {
                             .foregroundColor(Color.sponusGrey800)
                         
                         Text("월 - 금")
-                            .font(.English08)
+                            .font(.Body06)
                             .foregroundColor(Color.sponusBlack)
                             .padding(.leading, 54)
                     }
@@ -160,7 +160,7 @@ struct ChargerInfoView: View {
                         Text("전화")
                             .font(.Body06)
                             .foregroundColor(Color.sponusBlack)
-                            .padding(.leading, 12)
+                            .padding(.leading, 4)
                     }
                     .padding(.top, 20)
                     

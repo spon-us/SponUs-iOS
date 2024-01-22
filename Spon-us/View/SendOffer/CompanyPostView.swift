@@ -13,7 +13,7 @@ struct CompanyPostView: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
-                LazyVStack(spacing: 0){
+                LazyVStack(spacing: 0) {
                     ScrollView(.horizontal) {
                         LazyHStack(spacing: 10) {
                             ForEach(4...6, id: \.self) { index in

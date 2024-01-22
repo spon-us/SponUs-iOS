@@ -15,84 +15,90 @@ struct SearchView: View {
     
     var body: some View {
         VStack(spacing: 0){
+            SearchBarView(searchData: $searchData)
             SponUsDivider().frame(width: 335)
                 .foregroundColor(searchData=="" ? .sponusBlack : .sponusPrimary)
                 .padding(.bottom, 48)
-                .padding(.top, 15)
-            
-            if (searchData == ""){
-                VStack(alignment: .leading, spacing: 36){
+                .padding(.top, 0)
+            NavigationView {
+                if (searchData == ""){
+                    VStack(alignment: .leading, spacing: 36){
+                        VStack(alignment: .leading, spacing: 16){
+                            HStack(){
+                                Text("최근 검색어").font(.Body01)
+                                Spacer()
+                            }
+                            VStack(spacing: 8){
+                                HStack(spacing: 8){
+                                    ForEach(0..<3, id: \.self){index in
+                                        SearchCategoryButton(content: dummyData3[index], isDelete: true)
+                                    }
+                                    Spacer()
+                                }
+                                HStack(spacing: 8){
+                                    ForEach(0..<3, id: \.self){index in
+                                        SearchCategoryButton(content: dummyData3[3+index], isDelete: true)
+                                    }
+                                    Spacer()
+                                }
+                                HStack(spacing: 8){
+                                    ForEach(0..<2, id: \.self){index in
+                                        SearchCategoryButton(content: dummyData3[6+index], isDelete: true)
+                                    }
+                                    Spacer()
+                                }
+                            }
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 16){
+                            Text("스포너스 추천 검색어").font(.Body01)
+                            HStack(spacing: 8){
+                                SearchCategoryButton(content: "마케팅", isDelete: false)
+                                SearchCategoryButton(content: "디자인", isDelete: false)
+                                SearchCategoryButton(content: "연계 프로젝트", isDelete: false)
+                            }
+                        }
+                        Spacer()
+                    }.padding(.horizontal, 20)
+                } else {
                     VStack(alignment: .leading, spacing: 16){
                         HStack(){
-                            Text("최근 검색어").font(.Body01)
+                            Text("공고 정보").font(.Body06)
                             Spacer()
                         }
-                        VStack(spacing: 8){
-                            HStack(spacing: 8){
-                                ForEach(0..<3, id: \.self){index in
-                                    SearchCategoryButton(content: dummyData3[index], isDelete: true)
+                        ForEach(0..<3, id: \.self){ index in
+                            NavigationLink(destination: SearchPostView()){
+                                HStack(spacing: 0) {
+                                    ForEach(splitText(dummyData1[index], with: searchData), id: \.self) { text in
+                                            Text(text)
+                                            .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
+                                    }
                                 }
-                                Spacer()
                             }
-                            HStack(spacing: 8){
-                                ForEach(0..<3, id: \.self){index in
-                                    SearchCategoryButton(content: dummyData3[3+index], isDelete: true)
+                            SponUsDivider().foregroundColor(.sponusGrey100)
+                        }
+                        Text("기업 정보").font(.Body06)
+                        HStack(spacing: 12){
+                            Image("company_dummy").frame(width: 46, height: 46)
+                            VStack(spacing: 1){
+                                HStack(spacing: 0) {
+                                    ForEach(splitText(dummyData2[0], with: searchData), id: \.self) { text in
+                                        Text(text)
+                                            .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
+                                    }
                                 }
-                                Spacer()
-                            }
-                            HStack(spacing: 8){
-                                ForEach(0..<2, id: \.self){index in
-                                    SearchCategoryButton(content: dummyData3[6+index], isDelete: true)
-                                }
-                                Spacer()
+                                Text(dummyData2[1]).foregroundColor(.sponusGrey700).font(.Body10)
                             }
                         }
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 16){
-                        Text("스포너스 추천 검색어").font(.Body01)
-                        HStack(spacing: 8){
-                            SearchCategoryButton(content: "마케팅", isDelete: false)
-                            SearchCategoryButton(content: "디자인", isDelete: false)
-                            SearchCategoryButton(content: "연계 프로젝트", isDelete: false)
-                        }
-                    }
-                }.padding(.horizontal, 20)
-            } else {
-                VStack(alignment: .leading, spacing: 16){
-                    HStack(){
-                        Text("공고 정보").font(.Body06)
                         Spacer()
-                    }
-                    ForEach(0..<3, id: \.self){ index in
-                        HStack(spacing: 0) {
-                            ForEach(splitText(dummyData1[index], with: searchData), id: \.self) { text in
-                                Text(text)
-                                    .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
-                            }
-                        }
-                        SponUsDivider().foregroundColor(.sponusGrey100)
-                    }
-                    Text("기업 정보").font(.Body06)
-                    HStack(spacing: 12){
-                        Image("company_dummy").frame(width: 46, height: 46)
-                        VStack(spacing: 1){
-                            HStack(spacing: 0) {
-                                ForEach(splitText(dummyData2[0], with: searchData), id: \.self) { text in
-                                    Text(text)
-                                        .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
-                                }
-                            }
-                            Text(dummyData2[1]).foregroundColor(.sponusGrey700).font(.Body10)
-                        }
-                    }
-                }.padding(.horizontal, 20)
+                    }.padding(.horizontal, 20)
+                }
+                Spacer()
             }
-            Spacer()
-        }
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: SearchBarView(searchData: $searchData))
+        .toolbar(.hidden, for: .tabBar)
+        }
+        .navigationBarHidden(true)
     }
     func splitText(_ text: String, with keyword: String) -> [String] {
         var parts: [String] = []

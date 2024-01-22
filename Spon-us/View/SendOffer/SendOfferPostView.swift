@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SendOfferPostView: View {
     @Environment(\.presentationMode) var presentationMode
-    
+    @State private var isShowingActivityView = false
+    @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -85,25 +86,28 @@ struct SendOfferPostView: View {
                 
             }
             
-            NavigationLink(destination: ChargerInfoView(), label: {
-                ZStack(alignment: .leading) {
+
+            HStack(){
+                HStack(spacing: 16){
+
+                    Button(action: {
+                        isShowingActivityView = true
+                    }) {
+                        Image("ic_share_white")
+                            .frame(width: 24, height: 24)
+                            .padding(.top, 20)
+                    }.sheet(isPresented: $isShowingActivityView) {
+                        ActivityView(activityItems: activityItems)
+                    }
+                }.padding(.leading, 36)
+                NavigationLink(destination: EmptyView()){
                     Text("담당자 정보 확인하기")
                         .font(.Body01)
                         .foregroundColor(Color.sponusPrimaryDarkmode)
                         .frame(maxWidth: .infinity)
                         .padding(.top, 20)
-                    
-                    Button(action: {
-                        
-                    }) {
-                        Image("ic_share_white")
-                            .frame(width: 24, height: 24)
-                            .padding(.top, 20)
-                            .padding(.leading, 40)
-                    }
                 }
-                .background(Color.sponusBlack)
-            })
+            }.background(Color.sponusBlack)
         }
         .gesture(
             DragGesture().onEnded { value in

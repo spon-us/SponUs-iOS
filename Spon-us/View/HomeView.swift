@@ -236,9 +236,7 @@ struct HomeView: View {
                         .padding(.leading, 14)
                     }
                     
-                    Button(action: {
-                        
-                    }) {
+                    NavigationLink(destination: NewPostView(popup: .constant(false))){
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)

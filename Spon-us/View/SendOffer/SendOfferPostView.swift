@@ -86,8 +86,10 @@ struct SendOfferPostView: View {
                 
             }
             
+
             HStack(){
                 HStack(spacing: 16){
+
                     Button(action: {
                         isShowingActivityView = true
                     }) {

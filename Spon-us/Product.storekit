@@ -1,22 +1,22 @@
 {
-  "identifier" : "8169F5B6",
+  "identifier" : "3E5BD391",
   "nonRenewingSubscriptions" : [
 
   ],
   "products" : [
     {
-      "displayPrice" : "399.99",
+      "displayPrice" : "1.99",
       "familyShareable" : false,
-      "internalID" : "78DE88A9",
+      "internalID" : "E8A281A6",
       "localizations" : [
         {
-          "description" : "Purchase Apple Watch",
-          "displayName" : "Apple Watch",
+          "description" : "받은 제안 보기",
+          "displayName" : "받은제안 보기",
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.apple.watch",
-      "referenceName" : "Apple Watch",
+      "productID" : "com.sponussss.swift",
+      "referenceName" : "swift",
       "type" : "NonConsumable"
     }
   ],

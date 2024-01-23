@@ -13,139 +13,54 @@ struct ProfileView: View {
     var body: some View {
         VStack(spacing: 0) {
             
-//            Rectangle()
-//            .fill(Color(red: 0.18, green: 0.2, blue: 0.21).opacity(0.6))
-////              .foregroundColor(.clear)
-//              .frame(maxWidth: .infinity, maxHeight: 111)
-              
-            
             ScrollView {
-//                VStack{
+
                     Image("TestImage")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(maxWidth: .infinity, maxHeight: 540)
                         .padding(.bottom, 40)
-//                }
-                VStack(alignment: .leading, spacing: 0){
+
+                VStack(alignment: .leading, spacing: 16){
                     
-                    // Korean/Heading/Heading09
                     Text("기업 소개")
                         .font(.Heading09)
-                      .foregroundColor(Color.sponusBlack)
-                      .padding(.bottom, 16)
                     
                     SponUsDivider()
-                        .padding(.bottom, 24)
+                        .padding(.bottom, 8)
                     
-                    // Korean/Body/Body10
                     Text("무신사는 700만 회원을 보유한 국내 1위 온라인 패션 플랫폼입니다. 스트릿, 글로벌 명품, 디자이너 등 5천여 개 브랜드가 입점한 「무신사 스토어」와 국내·외 최신 패션 트렌드와 정보를 전달하는 패션 매거진 「무신사 매거진」을 운영하고 있습니다.")
                         .font(.Body10)
                       .foregroundColor(Color.sponusGrey800)
                       .padding(.trailing, 20)
-                      .padding(.bottom, 40)
-//                      .frame(width: 315, alignment: .topLeading)
+                      .padding(.bottom, 24)
                     
-                    // Korean/Heading/Heading09
                     Text("기업 정보")
                         .font(.Heading09)
-                      .foregroundColor(Color.sponusBlack)
-                      .padding(.bottom, 16)
                     
                     SponUsDivider()
-                        .padding(.bottom, 24)
+                        .padding(.bottom, 8)
                     
-                    // English/English08
-                    HStack(spacing: 13) {
-                        Text("Instagram")
-                            .font(.English08)
-                        .foregroundColor(Color.sponusGrey800)
-                        
-                        Image("ic_link")
-                    }
+                    ProfileSNSView()
                     .padding(.bottom, 24)
                     
-                    Button("Open Default App") {
-                                openDefaultApp()
-                            }
-                    
-                    HStack(spacing: 13) {
-                        Text("www.musinsa.com")
-                            .font(.English08)
-                        .foregroundColor(Color.sponusGrey800)
-                        
-                        Image("ic_link")
-                    }
-                    .padding(.bottom, 24)
-                    
-                    Button("Open External App") {
-                                openExternalApp()
-                            }
-                    
-                    
-                    
-                    
-                    HStack(spacing: 13) {
-                        Text("facebook")
-                            .font(.English08)
-                        .foregroundColor(Color.sponusGrey800)
-                        
-                        Image("ic_link")
-                    }
-                    .padding(.bottom, 42)
-                    
-                    // Korean/Heading/Heading09
                     Text("활동 기록")
                         .font(.Heading09)
-                      .foregroundColor(Color.sponusBlack)
-                      .padding(.bottom, 16)
                     
                     SponUsDivider()
-                        .padding(.bottom, 24)
+                        .padding(.bottom, 8)
                     
-                    HStack {
-                        Text("게시 중 공고")
-                            .font(.Body06)
-                        .foregroundColor(Color.sponusGrey800)
-                        
-                        Spacer()
-                        
-                        Text("1건")
-                            .font(.English07)
-                          .foregroundColor(Color.sponusPrimary)
-                    }
-                    .frame(width: 133)
-                    .padding(.bottom, 20)
+                    ProfileHistoryCell(stateMessage: "게시 중 공고")
+                    .padding(.bottom, 4)
                     
-                    HStack {
-                        Text("게시 중 공고")
-                            .font(.Body06)
-                        .foregroundColor(Color.sponusGrey800)
-                        
-                        Spacer()
-                        
-                        Text("1건")
-                            .font(.English07)
-                          .foregroundColor(Color.sponusPrimary)
-                    }
-                    .frame(width: 133)
-                    .padding(.bottom, 20)
+                    ProfileHistoryCell(stateMessage: "진행 중 공고")
+                    .padding(.bottom, 4)
                     
-                    HStack {
-                        Text("게시 중 공고")
-                            .font(.Body06)
-                        .foregroundColor(Color.sponusGrey800)
-                        
-                        Spacer()
-                        
-                        Text("1건")
-                            .font(.English07)
-                          .foregroundColor(Color.sponusPrimary)
-                    }
-                    .frame(width: 133)
+                    ProfileHistoryCell(stateMessage: "완료된 공고")
                     
                     
                 }
+                .foregroundColor(Color.sponusBlack)
                 .padding(.leading, 40)
             }
             
@@ -157,27 +72,105 @@ struct ProfileView: View {
         .navigationBarBackground()
     }
     
+    
+    
+}
+
+struct ProfileSNSView: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            
+            Button(action: {
+                openInstagram() //인스타주소 수정해야됨
+            }, label: {
+                HStack(spacing: 13) {
+                    Text("Instagram")
+                        .font(.English08)
+                    .foregroundColor(Color.sponusGrey800)
+                    
+                    Image("ic_link")
+                }
+            })
+
+          
+            Button(action: {
+                openDefaultApp()
+            }, label: {
+                HStack(spacing: 13) {
+                    Text("musinsa.com")
+                        .font(.English08)
+                    .foregroundColor(Color.sponusGrey800)
+                    
+                    Image("ic_link")
+                }
+            })
+            
+            
+            Button(action: {
+                openFacebook()
+            }, label: {
+                HStack(spacing: 13) {
+                    Text("facebook")
+                        .font(.English08)
+                    .foregroundColor(Color.sponusGrey800)
+                    
+                    Image("ic_link")
+                }
+            })
+        }
+    }
+    
+    
+    func openInstagram() {
+            let instagramUrl = URL(string: "instagram://user?username=inseong53")!
+            if UIApplication.shared.canOpenURL(instagramUrl) {
+                UIApplication.shared.open(instagramUrl, options: [:], completionHandler: nil)
+            } else {
+                // Instagram 앱이 설치되어 있지 않을 경우, 웹사이트를 열 수 있습니다.
+                let webUrl = URL(string: "https://www.instagram.com/inseong53/")!
+                UIApplication.shared.open(webUrl, options: [:], completionHandler: nil)
+            }
+        }
+    
     func openDefaultApp() {
-            guard let url = URL(string: "https://musinsa.com") else {
+            guard let url = URL(string: "http://www.musinsa.com") else {
                 return
             }
 
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     
-    func openExternalApp() {
-            // Replace "externalapp://" with the actual URL scheme or custom URL supported by the external app
-            guard let url = URL(string: "instagram://") else {
-                return
-            }
-
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    func openFacebook() {
+            let facebookUrl = URL(string: "facebook://")!
+            if UIApplication.shared.canOpenURL(facebookUrl) {
+                UIApplication.shared.open(facebookUrl, options: [:], completionHandler: nil)
             } else {
-                // Handle the case where the external app cannot be opened
-                print("External app not installed or supported.")
+                // Instagram 앱이 설치되어 있지 않을 경우, 웹사이트를 열 수 있습니다.
+                let webUrl = URL(string: "https://www.facebook.com/")!
+                UIApplication.shared.open(webUrl, options: [:], completionHandler: nil)
             }
         }
+}
+
+
+struct ProfileHistoryCell: View {
+    
+    var stateMessage: String
+    
+    var body: some View {
+        HStack {
+            Text(stateMessage)
+                .font(.Body06)
+            .foregroundColor(Color.sponusGrey800)
+            
+            Spacer()
+            
+            Text("1건")
+                .font(.English07)
+              .foregroundColor(Color.sponusPrimary)
+        }
+        .frame(width: 133)
+    }
 }
 
 #Preview {

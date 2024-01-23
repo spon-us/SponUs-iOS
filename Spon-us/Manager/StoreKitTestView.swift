@@ -1,15 +1,14 @@
 //
-//  StoreKit2TestView.swift
+//  StoreKitTestView.swift
 //  Spon-us
 //
-//  Created by 황인성 on 2024/01/17.
+//  Created by 황인성 on 1/23/24.
 //
 
 import SwiftUI
 import StoreKit
 
-
-struct StoreKit2TestView: View {
+struct StoreKitTestView: View {
     @StateObject var storeKit = StoreKitManager()
     
     var body: some View {
@@ -71,5 +70,5 @@ struct CourseItem: View {
 }
 
 #Preview {
-    StoreKit2TestView()
+    StoreKitTestView()
 }

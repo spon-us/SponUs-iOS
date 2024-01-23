@@ -8,12 +8,11 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.instagram</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>instagram</string>
-			</array>
+			<array/>
 		</dict>
+		<dict/>
 	</array>
 	<key>UIAppFonts</key>
 	<array>

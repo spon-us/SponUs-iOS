@@ -20,6 +20,12 @@ extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate 
     }
 }
 
+extension UIScreen{
+   static let screenWidth = UIScreen.main.bounds.size.width
+   static let screenHeight = UIScreen.main.bounds.size.height
+   static let screenSize = UIScreen.main.bounds.size
+}
+
 
 extension View {
   func navigationBarBackground(_ background: Color = Color(red: 0.18, green: 0.2, blue: 0.21).opacity(0.6)) -> some View {

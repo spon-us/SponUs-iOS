@@ -1,8 +1,8 @@
 //
 //  StoreKitManager.swift
-//  storekit2-youtube-demo
+//  Spon-us
 //
-//  Created by Paulo Orquillo on 22/10/22.
+//  Created by 황인성 on 1/23/24.
 //
 
 import Foundation

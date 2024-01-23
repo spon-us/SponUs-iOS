@@ -54,7 +54,7 @@
          referenceType = "1">
       </LocationScenarioReference>
       <StoreKitConfigurationFileReference
-         identifier = "../../Spon-us/Configuration.storekit">
+         identifier = "../../Spon-us/Product.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction

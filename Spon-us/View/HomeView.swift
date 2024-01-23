@@ -57,7 +57,7 @@ struct HomeView: View {
                 
                 HStack {
                     
-                    NavigationLink(destination: ProposalReceivedListView(), label: {
+                    NavigationLink(destination: MyNoticeListView(), label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)

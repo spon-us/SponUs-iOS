@@ -37,6 +37,7 @@ struct SponUsReportTextfieldStyle: TextFieldStyle {
 }
 
 struct Portfolio: View {
+    @Binding var rootIsActive: Bool
     @State var progressStatus: ProgressStatus
     
     @State var showingPublishingConfirmationDialog = false
@@ -509,7 +510,7 @@ struct Portfolio: View {
                             if (dummy.postProgressStatus == .completed) {
                                 NavigationLink(
                                     destination: MyNoticeView(),
-//                                    destination: DetailView(post: dummy),
+                                    //                                    destination: DetailView(post: dummy),
                                     label: {
                                         VStack(alignment:.leading, spacing: 0) {
                                             HStack(spacing: 0) {
@@ -597,10 +598,10 @@ struct Portfolio: View {
                 EditPostView(popup: .constant(false))
             }
             .navigationDestination(isPresented: $activeNavLinkToMakeReport) {
-                MakeReportView()
+                MakeReportView(rootIsActive: self.$rootIsActive)
             }
             .navigationDestination(isPresented: $activeNavLinkToReport) {
-                ReportView()
+                ReportView(popToRootView: self.$rootIsActive)
 //                if let index = dummyData.firstIndex(where: { $0.id == currentReportID }) {
 //                    ReportView()
 //                }
@@ -609,31 +610,9 @@ struct Portfolio: View {
     }
 }
 
-struct DetailView: View {
-    var post: Portfolio.Post?
-
-    var body: some View {
-        Text("Post Title: \(post?.postTitle ?? "nil")")
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: CustomBackButton())
-        .navigationTitle("Detail")
-    }
-}
-
-struct ModifyView: View {
-    var post: Portfolio.Post?
-
-    var body: some View {
-        Text("Post Title: \(post?.postTitle ?? "nil")")
-        .navigationTitle("Modify")
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
-    }
-}
-
 
 struct MakeReportView: View {
-    
+    @Binding var rootIsActive: Bool
     @State private var postTitle = ""
     @State private var selectedImages: [UIImage] = []
     @State private var postSelectedCategory = ""
@@ -935,7 +914,7 @@ struct MakeReportView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
             .navigationDestination(isPresented: $goToPreview) {
-                ReportPreviewView()
+                ReportPreviewView(popToRootView: self.$rootIsActive)
             }
             
         }.popup(isPresented: $showingPopup) {
@@ -961,7 +940,7 @@ struct MakeReportView: View {
 }
 
 struct ReportPreviewView: View {
-    
+    @Binding var popToRootView: Bool
     @State var popup = false
     
     var body: some View {
@@ -1081,7 +1060,11 @@ struct ReportPreviewView: View {
         }.navigationTitle("미리보기").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton(), trailing: CustomHomeButton())
+        .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.popToRootView = false}, label: {
+            Image(.icHome)
+                .renderingMode(.template)
+                .foregroundStyle(.black)
+        }))
         .toolbarBackground(Color.white, for: .navigationBar)
     }
 }
@@ -1089,7 +1072,7 @@ struct ReportPreviewView: View {
 struct ReportView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
+    @Binding var popToRootView: Bool
     @State var popup = false
     
     var body: some View {
@@ -1210,7 +1193,11 @@ struct ReportView: View {
         }.navigationTitle("보고서").font(.Body01)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: CustomBackButton(), trailing: CustomHomeButton())
+            .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.popToRootView = false}, label: {
+                Image(.icHome)
+                    .renderingMode(.template)
+                    .foregroundStyle(.black)
+            }))
             .toolbarBackground(Color.white, for: .navigationBar)
         
         ZStack {
@@ -1229,9 +1216,9 @@ struct ReportView: View {
 }
 
 
-//#Preview {
-//    Portfolio(progressStatus: Portfolio.ProgressStatus())
-//}
 #Preview {
-    ReportView()
+    Portfolio(rootIsActive: .constant(false), progressStatus: Portfolio.ProgressStatus())
 }
+//#Preview {
+//    ReportView()
+//}

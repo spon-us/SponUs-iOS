@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SendOfferPostView: View {
+    @Binding var rootIsActive: Bool
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingActivityView = false
     @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
@@ -119,7 +120,11 @@ struct SendOfferPostView: View {
         .navigationTitle("보낸 제안").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton(), trailing: Image("ic_home_black"))
+        .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.rootIsActive = false}, label: {
+            Image(.icHome)
+                .renderingMode(.template)
+                .foregroundStyle(.black)
+        }))
     }
 }
 
@@ -175,5 +180,5 @@ struct SendOfferPostCell: View {
 }
 
 #Preview {
-    SendOfferPostView()
+    SendOfferPostView(rootIsActive: .constant(true))
 }

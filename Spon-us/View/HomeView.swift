@@ -20,18 +20,6 @@ struct CustomBackButton: View {
     }
 }
 
-struct CustomHomeButton: View {
-    @Environment(\.presentationMode) var presentationMode
-
-    var body: some View {
-        Button {}
-        label: {
-            Image(.icHome)
-                .renderingMode(.template)
-                .foregroundStyle(.black)
-        }
-    }
-}
 
 func getAdText(forIndex index: Int) -> String {
     switch index {
@@ -61,7 +49,8 @@ func getAdPeriod(forIndex index: Int) -> String {
 
 struct HomeView: View {
     
-    @State var isPresented = false
+    @State var isActiveToPortfolio = false
+    @State var isActiveToSendOffer = false
     @State private var progressStatus  = Portfolio.ProgressStatus()
     
     let searchItem: some View = {
@@ -182,7 +171,9 @@ struct HomeView: View {
                         }
                     })
                     
-                    NavigationLink(destination: SendOfferView(), label: {
+                    Button {
+                        isActiveToSendOffer = true
+                    } label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
@@ -206,11 +197,12 @@ struct HomeView: View {
                                 .padding(.top, 8)
                         }
                         .padding(.leading, 14)
-                    })
+                    }.navigationDestination(isPresented: $isActiveToSendOffer, destination: { SendOfferView(rootIsActive: $isActiveToSendOffer) })
                     
-                    NavigationLink {
-                        Portfolio(progressStatus: progressStatus)
-                    } label: {
+                    Button {
+                        self.isActiveToPortfolio = true
+                    }
+                    label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
@@ -234,7 +226,7 @@ struct HomeView: View {
                                 .padding(.top, 8)
                         }
                         .padding(.leading, 14)
-                    }
+                    }.navigationDestination(isPresented: $isActiveToPortfolio, destination: {Portfolio(rootIsActive: self.$isActiveToPortfolio, progressStatus: progressStatus)})
                     
                     NavigationLink(destination: NewPostView(popup: .constant(false))){
                         VStack {
@@ -374,8 +366,4 @@ struct HomeView: View {
             .font(.English03)
         }
     }
-}
-
-#Preview {
-    CustomHomeButton()
 }

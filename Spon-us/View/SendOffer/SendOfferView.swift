@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SendOfferView: View {
+    @Binding var rootIsActive: Bool
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -26,7 +27,7 @@ struct SendOfferView: View {
                         .padding(.top, 8)
                     
                     ForEach(1 ..< 4) { item in
-                        SendOfferCell(status: getStatus(for: item))
+                        SendOfferCell(rootIsActive: $rootIsActive, status: getStatus(for: item))
                     }
                 }
                 .padding(.horizontal, 20)
@@ -75,6 +76,8 @@ struct SendOfferView: View {
 }
 
 struct SendOfferCell: View {
+    @Binding var rootIsActive: Bool
+    
     var status: String
     
     var body: some View {
@@ -101,7 +104,7 @@ struct SendOfferCell: View {
                     .foregroundColor(Color.sponusBlack)
                 
                 NavigationLink(destination:
-                                SendOfferPostView(),
+                                SendOfferPostView(rootIsActive: $rootIsActive),
                                label: {
                     HStack {
                         Text("보낸 제안서")
@@ -182,5 +185,5 @@ struct StatusBadge: View {
 }
 
 #Preview {
-    SendOfferView()
+    SendOfferView(rootIsActive: .constant(true))
 }

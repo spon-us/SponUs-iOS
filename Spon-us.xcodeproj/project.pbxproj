@@ -120,20 +120,13 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
-				3B81BCB02B622E950067E9CB /* Manager */,
-				DF3AD3DD2B61513D00DBFCCC /* Onboarding */,
-				3BFC8D192B54D43C000D6006 /* Helper */,
 				100D389F2B44833F00498977 /* Info.plist */,
+				3B81BCB02B622E950067E9CB /* Manager */,
+				3BFC8D192B54D43C000D6006 /* Helper */,
 				100D38942B44833500498977 /* Font */,
 				100D38B42B4EF18C00498977 /* View */,
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
 				100D38B02B44852700498977 /* ContentView.swift */,
-				3B81BCB72B622F080067E9CB /* MyNoticeListView.swift */,
-				3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */,
-				3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */,
-				3BFC8D142B54AA55000D6006 /* EditPostView.swift */,
-				3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */,
-				3B81BCBB2B622F750067E9CB /* PaymentView.swift */,
 				100D38AC2B44844F00498977 /* Assets.xcassets */,
 				100D38A12B44834700498977 /* Preview Content */,
 			);
@@ -164,16 +157,16 @@
 		100D38B42B4EF18C00498977 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DF91F4032B4864330021291A /* Portfolio.swift */,
-				100D38B22B4EF15600498977 /* HomeView.swift */,
-				807BF83E2B51BCD400A659B9 /* SearchView.swift */,
-				80FA316C2B5EBA6B0076453B /* SearchOfferView.swift */,
-				80FA31682B5EB9490076453B /* NewPostView.swift */,
+				DF3AD3DD2B61513D00DBFCCC /* Onboarding */,
+				3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */,
+				10C8AC802B623F1900B40547 /* Home */,
+				10C8AC812B623F8200B40547 /* ReceivedOffer */,
 				10C8AC5F2B5C33D900B40547 /* SendOffer */,
-				100D38B52B4EF51E00498977 /* SavedView.swift */,
-				100D38B72B4EF54100498977 /* CategoryView.swift */,
-				100D38B92B4EF54C00498977 /* MyView.swift */,
-				DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */,
+				10C8AC822B623FE900B40547 /* Portfolio */,
+				10C8AC832B62402200B40547 /* Post */,
+				10C8AC842B62407800B40547 /* Saved */,
+				10C8AC852B6240B600B40547 /* Category */,
+				10C8AC862B6240D500B40547 /* MyPage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,6 +180,69 @@
 				10C8AC642B5EA69B00B40547 /* ChargerInfoView.swift */,
 			);
 			path = SendOffer;
+			sourceTree = "<group>";
+		};
+		10C8AC802B623F1900B40547 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				100D38B22B4EF15600498977 /* HomeView.swift */,
+				807BF83E2B51BCD400A659B9 /* SearchView.swift */,
+				80FA316C2B5EBA6B0076453B /* SearchOfferView.swift */,
+				DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		10C8AC812B623F8200B40547 /* ReceivedOffer */ = {
+			isa = PBXGroup;
+			children = (
+				3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */,
+				3B81BCB72B622F080067E9CB /* MyNoticeListView.swift */,
+				3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */,
+				3BFC8D142B54AA55000D6006 /* EditPostView.swift */,
+				3B81BCBB2B622F750067E9CB /* PaymentView.swift */,
+			);
+			path = ReceivedOffer;
+			sourceTree = "<group>";
+		};
+		10C8AC822B623FE900B40547 /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				DF91F4032B4864330021291A /* Portfolio.swift */,
+			);
+			path = Portfolio;
+			sourceTree = "<group>";
+		};
+		10C8AC832B62402200B40547 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				80FA31682B5EB9490076453B /* NewPostView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		10C8AC842B62407800B40547 /* Saved */ = {
+			isa = PBXGroup;
+			children = (
+				100D38B52B4EF51E00498977 /* SavedView.swift */,
+			);
+			path = Saved;
+			sourceTree = "<group>";
+		};
+		10C8AC852B6240B600B40547 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				100D38B72B4EF54100498977 /* CategoryView.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		10C8AC862B6240D500B40547 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				100D38B92B4EF54C00498977 /* MyView.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		3B81BCB02B622E950067E9CB /* Manager */ = {
@@ -464,7 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = 9R3T6AUA7X;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -479,7 +535,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sponussss.Spon-us";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sponus.Spon-us";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -495,7 +551,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = 9R3T6AUA7X;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -510,7 +566,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sponussss.Spon-us";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sponus.Spon-us";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

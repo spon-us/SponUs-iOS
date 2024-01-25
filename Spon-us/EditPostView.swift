@@ -133,6 +133,7 @@ struct EditPostView: View {
         .onDisappear{
             print("disappear")
         }
+        //        }
     }
 }
 
@@ -155,6 +156,7 @@ struct SponUsTextfieldStyle: TextFieldStyle {
         }
     }
 }
+
 
 struct SponUsPostCell: View {
     
@@ -204,6 +206,41 @@ struct SponUsPostImageCell: View {
     }
 }
 
+//struct SponUsDivider: View {
+//    var body: some View {
+//        Rectangle()
+//            .fill(Color.sponusBlack)
+//            .frame(maxWidth: .infinity, maxHeight: 1)
+//    }
+//}
+
+struct PostRectangleCell: View {
+    
+    var item: String
+    @Binding var selectedString: String
+    
+    var body: some View {
+        
+        Button(action: {
+            selectedString = item
+            print(selectedString)
+        }, label: {
+            Text(item)
+                .font(.Body06)
+                .foregroundColor(item == selectedString ? Color.sponusBlack : Color.sponusGrey600)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .lineLimit(1)
+                .overlay(
+                    Rectangle()
+                        .stroke(item == selectedString ? Color.sponusBlack : Color.sponusGrey600, lineWidth: 1)
+                        .frame(maxWidth: .infinity)
+                )
+        })
+    }
+}
+
+
 struct SponUsPostFileCell: View {
     
     var text: String
@@ -238,31 +275,7 @@ struct SponUsPostFileCell: View {
 //    }
 //}
 
-struct PostRectangleCell: View {
-    
-    var item: String
-    @Binding var selectedString: String
-    
-    var body: some View {
-        
-        Button(action: {
-            selectedString = item
-            print(selectedString)
-        }, label: {
-            Text(item)
-                .font(.Body06)
-                .foregroundColor(item == selectedString ? Color.sponusBlack : Color.sponusGrey600)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .lineLimit(1)
-                .overlay(
-                    Rectangle()
-                        .stroke(item == selectedString ? Color.sponusBlack : Color.sponusGrey100, lineWidth: 1)
-                        .frame(maxWidth: .infinity)
-                )
-        })
-    }
-}
+
 
 
 

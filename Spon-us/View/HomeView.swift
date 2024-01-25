@@ -147,7 +147,7 @@ struct HomeView: View {
                 .padding(.top, 20)
                 
                 HStack {
-                    NavigationLink(destination: ProposalReceivedListView(), label: {
+                    NavigationLink(destination: MyNoticeListView(), label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)

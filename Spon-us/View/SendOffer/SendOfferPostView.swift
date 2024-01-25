@@ -40,7 +40,7 @@ struct SendOfferPostView: View {
                     
                     LazyVStack(alignment: .leading, spacing: 0) {
                         NavigationLink {
-                            
+                            ProfileView()
                         } label: {
                             HStack {
                                 Text("스포대학교 총학생회")
@@ -101,7 +101,7 @@ struct SendOfferPostView: View {
                         ActivityView(activityItems: activityItems)
                     }
                 }.padding(.leading, 36)
-                NavigationLink(destination: EmptyView()){
+                NavigationLink(destination: ChargerInfoView()){
                     Text("담당자 정보 확인하기")
                         .font(.Body01)
                         .foregroundColor(Color.sponusPrimaryDarkmode)

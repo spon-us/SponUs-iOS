@@ -50,7 +50,7 @@ struct CompanyPostView: View {
                         .padding(.top, 15)
                         
                         NavigationLink {
-                            
+                            ProfileView()
                         } label: {
                             HStack {
                                 Text("무신사")

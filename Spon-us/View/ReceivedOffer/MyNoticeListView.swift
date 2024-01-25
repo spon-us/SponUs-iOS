@@ -79,7 +79,7 @@ struct MyNoticeListCell: View {
                     ProposalReceivedListView()
                 }, label: {
                     HStack {
-                        Text("보낸 제안서")
+                        Text("받은 제안서")
                             .padding(.leading, 5)
                         
                         Image("ic_go_blue")

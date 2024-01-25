@@ -22,7 +22,7 @@ struct ChargerInfoView: View {
                             .clipped()
                         
                         VStack(spacing: 0) {
-                            NavigationLink(destination: EmptyView(), label: {
+                            NavigationLink(destination: ProfileView(), label: {
                                 HStack {
                                     Text("Profile")
                                         .font(.English15)

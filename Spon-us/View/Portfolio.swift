@@ -265,7 +265,7 @@ struct Portfolio: View {
                         ForEach(dummyData, id: \.id) { dummy in
                             if (dummy.postProgressStatus == .publishing && dummy.displayInPublishing == true) {
                                 NavigationLink(
-                                    destination: MyNoticeView(),
+                                    destination: MyNoticeDetailView(),
                                     // destination: DetailView(post: dummy),
                                     label: {
                                         VStack(spacing: 0) {
@@ -392,7 +392,7 @@ struct Portfolio: View {
                             ForEach(dummyData) { dummy in
                                 if (dummy.postProgressStatus == .progressing) {
                                     NavigationLink(
-                                        destination: MyNoticeView(),
+                                        destination: MyNoticeDetailView(),
 //                                        destination: DetailView(post: dummy),
                                         label: {
                                             VStack(alignment:.leading, spacing: 0) {
@@ -509,7 +509,7 @@ struct Portfolio: View {
                         ForEach(dummyData) { dummy in
                             if (dummy.postProgressStatus == .completed) {
                                 NavigationLink(
-                                    destination: MyNoticeView(),
+                                    destination: MyNoticeDetailView(),
                                     //                                    destination: DetailView(post: dummy),
                                     label: {
                                         VStack(alignment:.leading, spacing: 0) {
@@ -997,7 +997,7 @@ struct ReportPreviewView: View {
                                     .font(.Body10)
                                     .foregroundColor(Color.sponusPrimary)
                                 
-                                Image("ic_go")
+                                Image("ic_go_blue")
                                     .frame(width: 16, height: 16)
                                     .foregroundStyle(.sponusPrimary)
                             }
@@ -1130,7 +1130,7 @@ struct ReportView: View {
                                     .font(.Body10)
                                     .foregroundColor(Color.sponusPrimary)
                                 
-                                Image("ic_go")
+                                Image("ic_go_blue")
                                     .frame(width: 16, height: 16)
                                     .foregroundStyle(.sponusPrimary)
                             }

@@ -108,13 +108,13 @@ struct SendOfferCell: View {
                                label: {
                     HStack {
                         Text("보낸 제안서")
-                            .font(.Body10)
                             .padding(.leading, 5)
                         
                         Image("ic_go_blue")
                             .frame(width: 16, height: 16)
                             .padding(.leading, -3)
                     }
+                    .font(.Body10)
                     .foregroundStyle(Color.sponusPrimary)
                     .padding(.vertical, 11)
                     .padding(.horizontal, 10)

@@ -31,6 +31,8 @@
 		80FA31692B5EB9490076453B /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA31682B5EB9490076453B /* NewPostView.swift */; };
 		80FA316D2B5EBA6B0076453B /* SearchOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA316C2B5EBA6B0076453B /* SearchOfferView.swift */; };
 		DF3AD3E32B621FFA00DBFCCC /* SearchPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */; };
+		DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3AD3DE2B61626300DBFCCC /* OnBoardingView.swift */; };
+		DF3AD3E12B61696000DBFCCC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3AD3E02B61696000DBFCCC /* LoginView.swift */; };
 		DF91F4042B4864330021291A /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91F4032B4864330021291A /* Portfolio.swift */; };
 		DFCD247C2B54D08100B00515 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = DFCD247B2B54D08100B00515 /* PopupView */; };
 		DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCD24812B5A67FC00B00515 /* DocumentPicker.swift */; };
@@ -64,6 +66,8 @@
 		80FA31682B5EB9490076453B /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
 		80FA316C2B5EBA6B0076453B /* SearchOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOfferView.swift; sourceTree = "<group>"; };
 		DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostView.swift; sourceTree = "<group>"; };
+		DF3AD3DE2B61626300DBFCCC /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		DF3AD3E02B61696000DBFCCC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DF91F4032B4864330021291A /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 		DFCD24812B5A67FC00B00515 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +103,7 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
+				DF3AD3DD2B61513D00DBFCCC /* Onboarding */,
 				3BFC8D192B54D43C000D6006 /* Helper */,
 				100D389F2B44833F00498977 /* Info.plist */,
 				100D38942B44833500498977 /* Font */,
@@ -170,6 +175,15 @@
 				DFCD24812B5A67FC00B00515 /* DocumentPicker.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		DF3AD3DD2B61513D00DBFCCC /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				DF3AD3DE2B61626300DBFCCC /* OnBoardingView.swift */,
+				DF3AD3E02B61696000DBFCCC /* LoginView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +278,7 @@
 				3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */,
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */,
+				DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */,
 				3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
 				106720022B5835FA00493354 /* SendOfferView.swift in Sources */,
@@ -272,6 +287,7 @@
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,
 				DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */,
 				80FA316D2B5EBA6B0076453B /* SearchOfferView.swift in Sources */,
+				DF3AD3E12B61696000DBFCCC /* LoginView.swift in Sources */,
 				3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

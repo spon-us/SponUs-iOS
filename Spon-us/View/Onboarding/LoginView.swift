@@ -20,6 +20,8 @@ struct LoginView: View {
                     Text("이메일 주소").font(.Caption04)
                     Spacer()
                 }.padding(.bottom, 8)
+                TextField("", text: $userID, prompt: Text("Placeholder").font(.custom("font-name", size: 22)))
+
                 TextField("ex) sponus@sponus.co.kr", text: $userID).padding(.bottom, 6)
                 Divider().background(.sponusGrey200)
             }.padding(.horizontal, 20)

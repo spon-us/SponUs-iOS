@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MyNoticeListView: View {
+    @Binding var rootIsActive: Bool
+    
     var body: some View {
         
 //        NavigationView {
@@ -42,7 +44,7 @@ struct MyNoticeListView: View {
                         .padding(.top, 8)
                     
                     ForEach(1 ..< 5) { item in
-                        MyNoticeListCell()
+                        MyNoticeListCell(rootIsActive: $rootIsActive)
                     }
                 }
                 .foregroundColor(Color.sponusBlack)
@@ -58,6 +60,8 @@ struct MyNoticeListView: View {
 }
 
 struct MyNoticeListCell: View {
+    @Binding var rootIsActive: Bool
+    
     var body: some View {
         HStack(spacing: 0){
             Image("post_list_dummy_image")
@@ -76,7 +80,7 @@ struct MyNoticeListCell: View {
                     .foregroundColor(Color.sponusBlack)
                 
                 NavigationLink(destination: {
-                    ProposalReceivedListView()
+                    ProposalReceivedListView(rootIsActive: $rootIsActive)
                 }, label: {
                     HStack {
                         Text("받은 제안서")
@@ -103,6 +107,6 @@ struct MyNoticeListCell: View {
 }
 
 #Preview {
-    MyNoticeListView()
+    MyNoticeListView(rootIsActive: .constant(false))
     
 }

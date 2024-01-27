@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChargerInfoView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var rootIsActive: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -22,7 +23,7 @@ struct ChargerInfoView: View {
                             .clipped()
                         
                         VStack(spacing: 0) {
-                            NavigationLink(destination: ProfileView(), label: {
+                            NavigationLink(destination: ProfileView(rootIsActive: $rootIsActive), label: {
                                 HStack {
                                     Text("Profile")
                                         .font(.English15)
@@ -208,5 +209,5 @@ struct ChargerInfoView: View {
 }
 
 #Preview {
-    ChargerInfoView()
+    ChargerInfoView(rootIsActive: .constant(false))
 }

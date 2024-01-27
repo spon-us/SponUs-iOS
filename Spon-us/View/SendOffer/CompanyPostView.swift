@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CompanyPostView: View {
+    @Binding var rootIsActive: Bool
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -50,7 +51,7 @@ struct CompanyPostView: View {
                         .padding(.top, 15)
                         
                         NavigationLink {
-                            ProfileView()
+                            ProfileView(rootIsActive: $rootIsActive)
                         } label: {
                             HStack {
                                 Text("무신사")
@@ -187,5 +188,5 @@ struct CompanyPostView: View {
 }
 
 #Preview {
-    CompanyPostView()
+    CompanyPostView(rootIsActive: .constant(false))
 }

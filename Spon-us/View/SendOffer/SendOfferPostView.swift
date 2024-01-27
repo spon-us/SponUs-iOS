@@ -40,7 +40,7 @@ struct SendOfferPostView: View {
                     
                     LazyVStack(alignment: .leading, spacing: 0) {
                         NavigationLink {
-                            ProfileView()
+                            ProfileView(rootIsActive: $rootIsActive)
                         } label: {
                             HStack {
                                 Text("스포대학교 총학생회")
@@ -77,7 +77,7 @@ struct SendOfferPostView: View {
                             .frame(maxWidth: .infinity, maxHeight: 1)
                             .padding(.top, 24)
                         
-                        SendOfferPostCell(status: "수락")
+                        SendOfferPostCell(rootIsActive: $rootIsActive, status: "수락")
                             .padding(.vertical, 16)
                         
                     }
@@ -101,7 +101,7 @@ struct SendOfferPostView: View {
                         ActivityView(activityItems: activityItems)
                     }
                 }.padding(.leading, 36)
-                NavigationLink(destination: ChargerInfoView()){
+                NavigationLink(destination: ChargerInfoView(rootIsActive: $rootIsActive)){
                     Text("담당자 정보 확인하기")
                         .font(.Body01)
                         .foregroundColor(Color.sponusPrimaryDarkmode)
@@ -129,6 +129,7 @@ struct SendOfferPostView: View {
 }
 
 struct SendOfferPostCell: View {
+    @Binding var rootIsActive: Bool
     var status: String
     
     var body: some View {
@@ -154,7 +155,7 @@ struct SendOfferPostCell: View {
                     .font(.Body07)
                     .foregroundColor(Color.sponusBlack)
                 
-                NavigationLink(destination: CompanyPostView(), label: {
+                NavigationLink(destination: CompanyPostView(rootIsActive: $rootIsActive), label: {
                     HStack {
                         Text("공고 보기")
                             .font(.Body10)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    
+    @Binding var rootIsActive: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -68,8 +68,12 @@ struct ProfileView: View {
         .navigationTitle("프로필").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
         .navigationBarBackground()
+        .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.rootIsActive = false}, label: {
+            Image(.icHome)
+                .renderingMode(.template)
+                .foregroundStyle(.black)
+        }))
     }
     
     
@@ -174,5 +178,5 @@ struct ProfileHistoryCell: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(rootIsActive: .constant(false))
 }

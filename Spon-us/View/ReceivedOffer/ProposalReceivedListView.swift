@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ProposalReceivedListView: View {
+    @Binding var rootIsActive: Bool
+    @State var goToNoticeDetail = false
+    
     var body: some View {
         ScrollView{
             
@@ -28,8 +31,8 @@ struct ProposalReceivedListView: View {
                         Text("2024 스포대학교\n대동제 협찬")
                             .font(.Body07)
                         
-                        NavigationLink(destination: {
-                            MyNoticeDetailView()
+                        Button(action: {
+                            goToNoticeDetail = true
                         }, label: {
                             HStack{
                                 Text("내 공고 보기")
@@ -48,7 +51,7 @@ struct ProposalReceivedListView: View {
                                     .stroke(Color.sponusPrimary, lineWidth: 1)
                             )
                         })
-                    }.padding(.trailing, 20)
+                    }.padding(.trailing, 20).navigationDestination(isPresented: $goToNoticeDetail, destination: {MyNoticeDetailView(rootIsActive: $rootIsActive)})
                 }
                 .padding(.trailing, 20)
                 .padding(.top, 16)
@@ -61,7 +64,7 @@ struct ProposalReceivedListView: View {
                 SponUsDivider()
                     .padding(.top, 8)
                 
-                NavigationLink(destination: ChargerInfoView(), label: {
+                NavigationLink(destination: ChargerInfoView(rootIsActive: $rootIsActive), label: {
                     HStack(spacing: 0) {
                         Image("Rectangle 1232")
                             .frame(width: 79, height: 79)
@@ -87,7 +90,11 @@ struct ProposalReceivedListView: View {
             .foregroundColor(Color.sponusBlack)
             .padding(.horizontal, 20)
         }
-        .navigationBarItems(leading: CustomBackButton())
+        .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.rootIsActive = false}, label: {
+            Image(.icHome)
+                .renderingMode(.template)
+                .foregroundStyle(.black)
+        }))
         .navigationTitle("받은 제안").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
@@ -96,5 +103,5 @@ struct ProposalReceivedListView: View {
 }
 
 #Preview {
-    ProposalReceivedListView()
+    ProposalReceivedListView(rootIsActive: .constant(false))
 }

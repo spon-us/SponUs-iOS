@@ -52,6 +52,9 @@ struct Portfolio: View {
     @State var activeNavLinkToEdit = false
     @State var activeNavLinkToMakeReport = false
     @State var activeNavLinkToReport = false
+    @State var activeToPublishingDetail = false
+    @State var activeToProgressingDetail = false
+    @State var activeToCompletedDetail = false
     
     @State private var currentConfirmationDialogID: UUID?
     @State private var currentToTopID: UUID?
@@ -265,7 +268,7 @@ struct Portfolio: View {
                         ForEach(dummyData, id: \.id) { dummy in
                             if (dummy.postProgressStatus == .publishing && dummy.displayInPublishing == true) {
                                 NavigationLink(
-                                    destination: MyNoticeDetailView(),
+                                    destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
                                     // destination: DetailView(post: dummy),
                                     label: {
                                         VStack(spacing: 0) {
@@ -392,7 +395,7 @@ struct Portfolio: View {
                             ForEach(dummyData) { dummy in
                                 if (dummy.postProgressStatus == .progressing) {
                                     NavigationLink(
-                                        destination: MyNoticeDetailView(),
+                                        destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
 //                                        destination: DetailView(post: dummy),
                                         label: {
                                             VStack(alignment:.leading, spacing: 0) {
@@ -509,7 +512,7 @@ struct Portfolio: View {
                         ForEach(dummyData) { dummy in
                             if (dummy.postProgressStatus == .completed) {
                                 NavigationLink(
-                                    destination: MyNoticeDetailView(),
+                                    destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
                                     //                                    destination: DetailView(post: dummy),
                                     label: {
                                         VStack(alignment:.leading, spacing: 0) {
@@ -990,7 +993,7 @@ struct ReportPreviewView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         
                         NavigationLink {
-                            ProfileView()
+                            ProfileView(rootIsActive: $popToRootView)
                         } label: {
                             HStack{
                                 Text("스포대학교 총학생회")
@@ -1070,7 +1073,8 @@ struct ReportPreviewView: View {
 }
 
 struct ReportView: View {
-    
+    @State private var isShowingActivityView = false
+    @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
     @Environment(\.presentationMode) var presentationMode
     @Binding var popToRootView: Bool
     @State var popup = false
@@ -1123,7 +1127,7 @@ struct ReportView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         
                         NavigationLink {
-                            ProfileView()
+                            ProfileView(rootIsActive: $popToRootView)
                         } label: {
                             HStack{
                                 Text("스포대학교 총학생회")
@@ -1204,10 +1208,12 @@ struct ReportView: View {
             Button(action: {presentationMode.wrappedValue.dismiss()}, label: {
                 Text("확인").font(.Body01).foregroundColor(Color.sponusPrimaryDarkmode)})
             HStack {
-                Button(action: {}, label: {Image(.icShareWhite).resizable().frame(width: 24, height: 24).padding(.leading, 28)})
+                Button(action: {isShowingActivityView = true}, label: {Image(.icShareWhite).resizable().frame(width: 24, height: 24).padding(.leading, 28)})
+                    .sheet(isPresented: $isShowingActivityView) {
+                        ActivityView(activityItems: activityItems)
+                    }
                 Spacer()
             }
-            
         }
         .frame(maxWidth: .infinity)
             .padding(.top, 20)

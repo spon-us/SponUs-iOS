@@ -51,6 +51,7 @@ struct HomeView: View {
     
     @State var isActiveToPortfolio = false
     @State var isActiveToSendOffer = false
+    @State var isActiveToRecievedOffer = false
     @State private var progressStatus  = Portfolio.ProgressStatus()
     
     let searchItem: some View = {
@@ -147,7 +148,7 @@ struct HomeView: View {
                 .padding(.top, 20)
                 
                 HStack {
-                    NavigationLink(destination: MyNoticeListView(), label: {
+                    Button(action: { isActiveToRecievedOffer = true }, label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
@@ -169,7 +170,7 @@ struct HomeView: View {
                                 .foregroundColor(Color("sponus_grey800")).fixedSize(horizontal: true, vertical: false)
                                 .padding(.top, 8)
                         }
-                    })
+                    }).navigationDestination(isPresented: $isActiveToRecievedOffer, destination: {MyNoticeListView(rootIsActive: $isActiveToRecievedOffer)})
                     
                     Button {
                         isActiveToSendOffer = true

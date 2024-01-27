@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyNoticeDetailView: View {
-    
+    @Binding var rootIsActive: Bool
     @State var popup = false
     
     var body: some View {
@@ -36,7 +36,7 @@ struct MyNoticeDetailView: View {
                         .foregroundColor(Color.sponusGrey700)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         
-                        NavigationLink(destination: ProfileView(), label: {
+                        NavigationLink(destination: ProfileView(rootIsActive: $rootIsActive), label: {
                             HStack{
                                 Text("스포대학교 총학생회")
                                     .font(.Body10)
@@ -94,7 +94,11 @@ struct MyNoticeDetailView: View {
         .navigationTitle("내 공고").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
+        .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.rootIsActive = false}, label: {
+            Image(.icHome)
+                .renderingMode(.template)
+                .foregroundStyle(.black)
+        }))
         //        }
     }
 }
@@ -178,5 +182,5 @@ struct CategoryCell: View {
 
 
 #Preview {
-    MyNoticeDetailView()
+    MyNoticeDetailView(rootIsActive: .constant(false))
 }

@@ -29,9 +29,9 @@ struct MyNoticeListView: View {
                         )
                         .font(.Body06)
                     
-//                    NavigationLink(destination: StoreKitTestView(), label: {
-//                        Text("결제페이지 테스트")
-//                    })
+                    NavigationLink(destination: PaymentView(), label: {
+                        Text("결제페이지 테스트")
+                    })
 
                     Text("12.24 SUN")
                         .font(.English01)

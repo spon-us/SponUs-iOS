@@ -120,7 +120,7 @@ struct LoginView: View {
                         .font(.Caption04).foregroundStyle(.sponusGrey900)
                         .frame(width: 111, height: 38)
                         .padding(.horizontal, 20)
-                }.fullScreenCover(isPresented: $goToTermsView, content: {
+                }.navigationDestination(isPresented: $goToTermsView, destination: {
                     TermsView()
                 })
                 Spacer()

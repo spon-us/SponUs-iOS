@@ -36,14 +36,19 @@ struct SponUsReportTextfieldStyle: TextFieldStyle {
     }
 }
 
+enum ActiveAlert {
+    case hide, remove
+}
+
 struct Portfolio: View {
     @Binding var rootIsActive: Bool
     @State var progressStatus: ProgressStatus
     
+    @State var alertcase: ActiveAlert = .hide
+    
     @State var showingPublishingConfirmationDialog = false
     @State var showingPublishingToTopAlert = false
-    @State var showingPublishingStopOfferAlert = false
-    @State var showingPublishingRemoveAlert = false
+    @State var showingPublishingAlert = false
     @State var showingStopCoworkPopup = false
     @State var showingCoworkCompletedPopup = false
     @State var showingStopCoworkCancelPopup = false
@@ -321,30 +326,48 @@ struct Portfolio: View {
                                                                 return Alert(title: Text("Default Title"), message: Text("Default Message"))
                                                             }
                                                         }
-                                                       
+                                                        
                                                         Button() {
                                                             showingPublishingConfirmationDialog = true
                                                             currentConfirmationDialogID = dummy.id
                                                         } label: {
                                                             Image(.icMore).resizable().frame(width: 40, height: 40).border(.sponusGrey100)
-                                                        }.confirmationDialog("ic_more", isPresented: $showingPublishingConfirmationDialog, titleVisibility: .hidden, actions: {
+                                                        }
+                                                        .confirmationDialog("ic_more", isPresented: $showingPublishingConfirmationDialog, titleVisibility: .hidden, actions: {
                                                             Button("수정하기") {
                                                                 activeNavLinkToEdit = true
                                                                 showingPublishingConfirmationDialog = false
                                                                 
                                                             }
                                                             Button("제안 그만 받기") {
-                                                                showingPublishingStopOfferAlert = true
+                                                                alertcase = .hide
+                                                                showingPublishingAlert = true
                                                                 showingPublishingConfirmationDialog = false
                                                             }
                                                             Button("삭제", role: .destructive) {
-                                                                showingPublishingRemoveAlert = true
+                                                                alertcase = .remove
+                                                                showingPublishingAlert = true
                                                                 showingPublishingConfirmationDialog = false
                                                             }
                                                             Button("닫기", role: .cancel) {}
-                                                        }).alert(isPresented: $showingPublishingRemoveAlert) {
-                                                            if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
+                                                        })
+                                                        .alert(isPresented: $showingPublishingAlert) {
+                                                            switch alertcase {
+                                                            case .hide:
                                                                 return Alert(
+                                                                    title: Text("해당 공고를 내립니다"),
+                                                                    message: Text("내린 공고는 되돌리기 어렵습니다."),
+                                                                    primaryButton: .destructive(
+                                                                        Text("내리기"),
+                                                                        action: {hidePublishingPost()}
+                                                                    ),
+                                                                    secondaryButton: .cancel(
+                                                                        Text("취소")
+                                                                    )
+                                                                )
+                                                            case .remove:
+                                                                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
+                                                                    return Alert(
                                                                         title: Text("삭제하시겠습니까?"),
                                                                         message: Text("\(dummyData[index].postTitle ?? "nil")\n공고가 삭제됩니다."),
                                                                         primaryButton: .destructive(
@@ -355,23 +378,12 @@ struct Portfolio: View {
                                                                             Text("아니오")
                                                                         )
                                                                     )
+                                                                }
+                                                                return Alert(title: Text("nil"))
                                                             }
-                                                            return Alert(title: Text("nil"))
-                                                        }
-                                                        .alert(isPresented: $showingPublishingStopOfferAlert) {
-                                                            Alert(
-                                                                    title: Text("해당 공고를 내립니다"),
-                                                                    message: Text("내린 공고는 되돌리기 어렵습니다."),
-                                                                    primaryButton: .destructive(
-                                                                        Text("내리기"),
-                                                                        action: {hidePublishingPost()}
-                                                                    ),
-                                                                    secondaryButton: .cancel(
-                                                                        Text("취소")
-                                                                    )
-                                                            )
                                                         }
                                                     }
+                                                    
                                                 }.padding(.leading, 20)
                                             }.padding(.top, 32)
                                             Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
@@ -383,10 +395,10 @@ struct Portfolio: View {
                         }
                     }
                 }.scrollIndicators(.hidden)
-
+                
             }
-
-
+            
+            
             // 진행 중
             if ($progressStatus.isProgressing.wrappedValue == true) {
                 ZStack {
@@ -396,7 +408,7 @@ struct Portfolio: View {
                                 if (dummy.postProgressStatus == .progressing) {
                                     NavigationLink(
                                         destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-//                                        destination: DetailView(post: dummy),
+                                        //                                        destination: DetailView(post: dummy),
                                         label: {
                                             VStack(alignment:.leading, spacing: 0) {
                                                 HStack(spacing: 0) {
@@ -465,41 +477,41 @@ struct Portfolio: View {
                     createStopCoworkToastMessage()
                 } customize: {
                     $0.type(.floater(verticalPadding: 16))
-                      .position(.bottom)
-                      .animation(.spring)
-                      .closeOnTap(false)
-                      .closeOnTapOutside(true)
-                      .autohideIn(3)
+                        .position(.bottom)
+                        .animation(.spring)
+                        .closeOnTap(false)
+                        .closeOnTapOutside(true)
+                        .autohideIn(3)
                 }
                 .popup(isPresented: $showingCoworkCompletedPopup) {
                     createCoworkCompletedToastMessage()
                 } customize: {
                     $0.type(.floater(verticalPadding: 16))
-                      .position(.bottom)
-                      .animation(.spring)
-                      .closeOnTap(false)
-                      .closeOnTapOutside(true)
-                      .autohideIn(3)
+                        .position(.bottom)
+                        .animation(.spring)
+                        .closeOnTap(false)
+                        .closeOnTapOutside(true)
+                        .autohideIn(3)
                 }
                 .popup(isPresented: $showingStopCoworkCancelPopup) {
                     createStopCoworkCancelToastMessage()
                 } customize: {
                     $0.type(.floater(verticalPadding: 16))
-                      .position(.bottom)
-                      .animation(.spring)
-                      .closeOnTap(true)
-                      .closeOnTapOutside(true)
-                      .autohideIn(2)
+                        .position(.bottom)
+                        .animation(.spring)
+                        .closeOnTap(true)
+                        .closeOnTapOutside(true)
+                        .autohideIn(2)
                 }
                 .popup(isPresented: $showingCoworkCompletedCancelPopup) {
                     createCoworkCompletedCancelToastMessage()
                 } customize: {
                     $0.type(.floater(verticalPadding: 16))
-                      .position(.bottom)
-                      .animation(.spring)
-                      .closeOnTap(true)
-                      .closeOnTapOutside(true)
-                      .autohideIn(2)
+                        .position(.bottom)
+                        .animation(.spring)
+                        .closeOnTap(true)
+                        .closeOnTapOutside(true)
+                        .autohideIn(2)
                 }
                 
             }
@@ -595,9 +607,9 @@ struct Portfolio: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
             .navigationDestination(isPresented: $activeNavLinkToEdit) {
-//                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
-//                    ModifyView(post: dummyData[index])
-//                }
+                //                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
+                //                    ModifyView(post: dummyData[index])
+                //                }
                 EditPostView(popup: .constant(false))
             }
             .navigationDestination(isPresented: $activeNavLinkToMakeReport) {
@@ -605,9 +617,9 @@ struct Portfolio: View {
             }
             .navigationDestination(isPresented: $activeNavLinkToReport) {
                 ReportView(popToRootView: self.$rootIsActive)
-//                if let index = dummyData.firstIndex(where: { $0.id == currentReportID }) {
-//                    ReportView()
-//                }
+                //                if let index = dummyData.firstIndex(where: { $0.id == currentReportID }) {
+                //                    ReportView()
+                //                }
             }
             .toolbar(.hidden, for: .tabBar)
     }
@@ -641,7 +653,7 @@ struct MakeReportView: View {
     
     
     @Environment(\.presentationMode) var presentationMode
-
+    
     func createPopup() -> some View {
         HStack {
             Text("작성이 완료되었습니다").font(.Body03).foregroundStyle(.sponusPrimary)
@@ -650,13 +662,13 @@ struct MakeReportView: View {
     
     var body: some View {
         let postTitleTextEditor = TextEditor(text: $postTitle)
-                                    .font(.Body06)
-                                    .frame(height: 24)
-                                    
+            .font(.Body06)
+            .frame(height: 24)
+        
         
         let postContentsTextEditor = TextEditor(text: $postDetail)
-                                        .frame(minHeight: 130)
-                                        .font(.Caption02)
+            .frame(minHeight: 130)
+            .font(.Caption02)
         
         let compleBtnInActive = postTitle.isEmpty || selectedImages.isEmpty || postDetail.isEmpty || (selectedURLsFile1.isEmpty && selectedURLsFile2.isEmpty && selectedURLsFile3.isEmpty)
         
@@ -695,7 +707,7 @@ struct MakeReportView: View {
                             }
                             
                         }.border(.sponusGrey100)
-                    
+                        
                         SponUsPostCell(text: "보고서 내용", isComplete: $postDetail)
                         
                         ZStack (alignment: .leading) {
@@ -728,23 +740,23 @@ struct MakeReportView: View {
                             }
                             
                             
-//                            postContentsTextEditor.focused($focusContentsTextEditor, equals: true)
-//                            if postDetail.isEmpty {
-//                                Button(action: {
-//                                    focusContentsTextEditor = true
-//                                    print("focus")
-//                                }) {
-//                                    VStack {
-//                                        Text("보고서에 대한 자세한 내용을 적어주세요.\nex. 진행 배경, 진행 내용, 기대 효과, 희망 사항")
-//                                            .font(.Caption02)
-//                                            .foregroundStyle(.sponusGrey600)
-//                                            .padding(.leading)
-//                                            .padding(.top)
-//                                        Spacer()
-//                                    }
-//                                }.buttonStyle(CustomButtonStyle())
-//
-//                            }
+                            //                            postContentsTextEditor.focused($focusContentsTextEditor, equals: true)
+                            //                            if postDetail.isEmpty {
+                            //                                Button(action: {
+                            //                                    focusContentsTextEditor = true
+                            //                                    print("focus")
+                            //                                }) {
+                            //                                    VStack {
+                            //                                        Text("보고서에 대한 자세한 내용을 적어주세요.\nex. 진행 배경, 진행 내용, 기대 효과, 희망 사항")
+                            //                                            .font(.Caption02)
+                            //                                            .foregroundStyle(.sponusGrey600)
+                            //                                            .padding(.leading)
+                            //                                            .padding(.top)
+                            //                                        Spacer()
+                            //                                    }
+                            //                                }.buttonStyle(CustomButtonStyle())
+                            //
+                            //                            }
                         }.border(.sponusGrey100)
                         
                         SponUsPostImageCell(text: "이미지 첨부", selectedImages: $selectedImages)
@@ -757,7 +769,7 @@ struct MakeReportView: View {
                             .padding(.bottom, 16)
                         
                         SponUsPostFileCell(text: "파일 첨부", selectedURLsFile1: $selectedURLsFile1, selectedURLsFile2: $selectedURLsFile2, selectedURLsFile3: $selectedURLsFile3)
-                     
+                        
                         HStack {
                             Text(fileButton1Text).font(.Body10).foregroundStyle(fileButton1Text == "파일 선택" ? .sponusGrey700 : .sponusBlack).padding(.leading, 20)
                             Spacer()
@@ -770,28 +782,28 @@ struct MakeReportView: View {
                                 }
                                 selectedURLsFile1 = []
                             }
-                            label: {
-                                Image(fileButton1Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
-                            }.fileImporter(
-                                isPresented: $isDocumentPicker1Presented,
-                                allowedContentTypes: [UTType.pdf,
-                                                      UTType.doc,
-                                                      UTType.docx,
-                                                      UTType.hwp,
-                                                      UTType.hwpx,
-                                                      UTType.ppt,
-                                                      UTType.pptx],
-                                allowsMultipleSelection: false,
-                                onCompletion: { result in
-                                    do {
-                                        selectedURLsFile1 = try result.get()
-                                        fileButton1Text = selectedURLsFile1[0].lastPathComponent
-                                    } catch {
-                                        print(error.localizedDescription)
-                                    }
+                        label: {
+                            Image(fileButton1Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
+                        }.fileImporter(
+                            isPresented: $isDocumentPicker1Presented,
+                            allowedContentTypes: [UTType.pdf,
+                                                  UTType.doc,
+                                                  UTType.docx,
+                                                  UTType.hwp,
+                                                  UTType.hwpx,
+                                                  UTType.ppt,
+                                                  UTType.pptx],
+                            allowsMultipleSelection: false,
+                            onCompletion: { result in
+                                do {
+                                    selectedURLsFile1 = try result.get()
+                                    fileButton1Text = selectedURLsFile1[0].lastPathComponent
+                                } catch {
+                                    print(error.localizedDescription)
                                 }
-                            )
-                            .padding(.trailing, 20)
+                            }
+                        )
+                        .padding(.trailing, 20)
                         }.padding(.vertical, 16).border(.sponusGrey100)
                         HStack {
                             Text(fileButton2Text).font(.Body10).foregroundStyle(fileButton2Text == "파일 선택" ? .sponusGrey700 : .sponusBlack).padding(.leading, 20)
@@ -805,27 +817,27 @@ struct MakeReportView: View {
                                 }
                                 selectedURLsFile2 = []
                             }
-                            label: {
-                                Image(fileButton2Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
-                            }.fileImporter(
-                                isPresented: $isDocumentPicker2Presented,
-                                allowedContentTypes: [UTType.pdf,
-                                                      UTType.doc,
-                                                      UTType.docx,
-                                                      UTType.hwp,
-                                                      UTType.hwpx,
-                                                      UTType.ppt,
-                                                      UTType.pptx],
-                                allowsMultipleSelection: false,
-                                onCompletion: { result in
-                                    do {
-                                        selectedURLsFile2 = try result.get()
-                                        fileButton2Text = selectedURLsFile2[0].lastPathComponent
-                                    } catch {
-                                        print(error.localizedDescription)
-                                    }
+                        label: {
+                            Image(fileButton2Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
+                        }.fileImporter(
+                            isPresented: $isDocumentPicker2Presented,
+                            allowedContentTypes: [UTType.pdf,
+                                                  UTType.doc,
+                                                  UTType.docx,
+                                                  UTType.hwp,
+                                                  UTType.hwpx,
+                                                  UTType.ppt,
+                                                  UTType.pptx],
+                            allowsMultipleSelection: false,
+                            onCompletion: { result in
+                                do {
+                                    selectedURLsFile2 = try result.get()
+                                    fileButton2Text = selectedURLsFile2[0].lastPathComponent
+                                } catch {
+                                    print(error.localizedDescription)
                                 }
-                            ).padding(.trailing, 20)
+                            }
+                        ).padding(.trailing, 20)
                         }.padding(.vertical, 16).border(.sponusGrey100)
                         HStack {
                             Text(fileButton3Text).font(.Body10).foregroundStyle(fileButton3Text == "파일 선택" ? .sponusGrey700 : .sponusBlack).padding(.leading, 20)
@@ -839,29 +851,29 @@ struct MakeReportView: View {
                                 }
                                 selectedURLsFile3 = []
                             }
-                            label: {
-                                Image(fileButton3Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
-                            }.fileImporter(
-                                isPresented: $isDocumentPicker3Presented,
-                                allowedContentTypes: [UTType.pdf,
-                                                      UTType.doc,
-                                                      UTType.docx,
-                                                      UTType.hwp,
-                                                      UTType.hwpx,
-                                                      UTType.ppt,
-                                                      UTType.pptx],
-                                allowsMultipleSelection: false,
-                                onCompletion: { result in
-                                    do {
-                                        selectedURLsFile3 = try result.get()
-                                        fileButton3Text = selectedURLsFile3[0].lastPathComponent
-                                    } catch {
-                                        print(error.localizedDescription)
-                                    }
+                        label: {
+                            Image(fileButton3Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
+                        }.fileImporter(
+                            isPresented: $isDocumentPicker3Presented,
+                            allowedContentTypes: [UTType.pdf,
+                                                  UTType.doc,
+                                                  UTType.docx,
+                                                  UTType.hwp,
+                                                  UTType.hwpx,
+                                                  UTType.ppt,
+                                                  UTType.pptx],
+                            allowsMultipleSelection: false,
+                            onCompletion: { result in
+                                do {
+                                    selectedURLsFile3 = try result.get()
+                                    fileButton3Text = selectedURLsFile3[0].lastPathComponent
+                                } catch {
+                                    print(error.localizedDescription)
                                 }
-                            ).padding(.trailing, 20)
+                            }
+                        ).padding(.trailing, 20)
                         }.padding(.vertical, 16).border(.sponusGrey100)
-
+                        
                         Text("상세 내용이 적힌 파일을 첨부해 주세요\n(MS Word, MS PowerPoint, HWP, PDF)")
                             .font(.Caption02)
                             .foregroundStyle(.sponusGrey600)
@@ -876,9 +888,9 @@ struct MakeReportView: View {
                                     goToPreview = true
                                 }
                             }
-                            label: {
-                                Text("미리보기").font(.Body10).foregroundStyle(.sponusGrey700).frame(width: 73, height: 37)
-                            }.border(.sponusGrey700)
+                        label: {
+                            Text("미리보기").font(.Body10).foregroundStyle(.sponusGrey700).frame(width: 73, height: 37)
+                        }.border(.sponusGrey700)
                             Spacer()
                         }.padding(.bottom, 55)
                     }
@@ -926,11 +938,11 @@ struct MakeReportView: View {
             }
         } customize: {
             $0.type(.floater(verticalPadding: 16))
-              .position(.bottom)
-              .animation(.spring)
-              .closeOnTap(true)
-              .closeOnTapOutside(true)
-              .autohideIn(2)
+                .position(.bottom)
+                .animation(.spring)
+                .closeOnTap(true)
+                .closeOnTapOutside(true)
+                .autohideIn(2)
         }
         .alert(isPresented: $showingPreviewAlert) {
             Alert(
@@ -947,140 +959,6 @@ struct ReportPreviewView: View {
     @State var popup = false
     
     var body: some View {
-        VStack(spacing: 0) {
-//                if popup == true{
-//                    Text("popup = true")
-//                }
-            ScrollView {
-                LazyVStack(spacing: 0){
-                    ScrollView(.horizontal) {
-                        LazyHStack(spacing: 10) {
-                            ForEach(0 ..< 5) { trip in
-                                
-                                Image("TestPhoto")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(height: 380)
-                                //                                .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                                //                                .padding(.horizontal, 20)
-                                    .containerRelativeFrame(.horizontal)
-                                //                                .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 10)
-                                    .scrollTransition(.animated, axis: .horizontal) { content, phase in
-                                        content
-                                            .opacity(phase.isIdentity ? 1.0 : 0.8)
-                                            .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
-                                    }
-                                
-                            }
-                        }
-                        .scrollTargetLayout()
-                        
-                    }
-                    //                .scrollIndicators(.)
-                    .scrollTargetBehavior(.viewAligned)
-                    .safeAreaPadding(.horizontal, 45.0) //se일때는 40
-                    
-                    LazyVStack(alignment: .leading, spacing: 0) {
-                        
-                        HStack{
-                            Image("ic_eye_small")
-                            Text("989")
-                            Image("ic_saved_small")
-                            Text("34")
-                        }
-                        .font(.English16)
-                        .foregroundColor(Color.sponusGrey700)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        
-                        NavigationLink {
-                            ProfileView(rootIsActive: $popToRootView)
-                        } label: {
-                            HStack{
-                                Text("스포대학교 총학생회")
-                                    .font(.Body10)
-                                    .foregroundColor(Color.sponusPrimary)
-                                
-                                Image("ic_go_blue")
-                                    .frame(width: 16, height: 16)
-                                    .foregroundStyle(.sponusPrimary)
-                            }
-                        }.padding(.top, 23)
-                        // Korean/Heading/Heading05
-                        Text("스포대학교 축제 협찬 보고서")
-                            .font(.Heading05)
-                            .foregroundColor(Color.sponusBlack)
-                            .padding(.top, 16)
-                        
-                        Rectangle()
-                            .fill(Color.sponusGrey200)
-                            .frame(maxWidth: .infinity, maxHeight: 1)
-                            .padding(.top, 16)
-                        
-                        
-                        // Korean/Body/Body10
-                        Text("보고서 상세")
-                            .font(.Body10)
-                            .foregroundColor(Color.sponusGrey700)
-                            .padding(.top, 24)
-                        
-                        // Korean/Body/Body10
-                        Text("안녕하세요 스포대학교 제 21대 학생회 스포너스입니다.\n귀사의 도움을 받아 이번에 진행한 행사에 대해 보고 드립니다.  활동 내용: 카드뉴스 제작, 배너 제작,\n기업 인스타그램 태그 이벤트 \n그 외의 내용은 첨부한 pdf 파일에 상세 기재해 두었습니다.\n 다시 한번 저희와 협업해 주셔서 감사합니다.")
-                            .font(.Body10)
-                            .foregroundColor(.black)
-                            .padding(.top, 24)
-                        
-                        Rectangle()
-                            .fill(Color.sponusGrey200)
-                            .frame(maxWidth: .infinity, maxHeight: 1)
-                            .padding(.top, 24)
-                            .padding(.bottom, 32)
-                        
-                        Text("첨부파일 다운로드")
-                            .padding(.bottom, 16)
-                        
-                        SponUsDivider().padding(.bottom, 16)
-                        
-                        HStack {
-                            Text("스포대학교_보고서.pdf").font(.Body10).padding(.leading, 20)
-                            Spacer()
-                            Button {
-                                
-                            }
-                            label: {
-                                Image(.icDownload).resizable().frame(width: 24, height: 24)
-                            }.padding(.trailing, 20)
-                        }.padding(.vertical, 16).border(.sponusGrey100)
-
-                        
-                    }
-                    .padding(.horizontal, 20)
-                }
-                            .padding(.bottom, 20)
-                
-            }
-            
-            
-        }.navigationTitle("미리보기").font(.Body01)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.popToRootView = false}, label: {
-            Image(.icHome)
-                .renderingMode(.template)
-                .foregroundStyle(.black)
-        }))
-        .toolbarBackground(Color.white, for: .navigationBar)
-    }
-}
-
-struct ReportView: View {
-    @State private var isShowingActivityView = false
-    @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
-    @Environment(\.presentationMode) var presentationMode
-    @Binding var popToRootView: Bool
-    @State var popup = false
-    
-    var body: some View {
-        
         VStack(spacing: 0) {
             //                if popup == true{
             //                    Text("popup = true")
@@ -1194,6 +1072,141 @@ struct ReportView: View {
             }
             
             
+        }.navigationTitle("미리보기").font(.Body01)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.popToRootView = false}, label: {
+                Image(.icHome)
+                    .renderingMode(.template)
+                    .foregroundStyle(.black)
+            }))
+            .toolbarBackground(Color.white, for: .navigationBar)
+    }
+}
+
+struct ReportView: View {
+    @State private var isShowingActivityView = false
+    @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var popToRootView: Bool
+    @State var popup = false
+    
+    var body: some View {
+        
+        VStack(spacing: 0) {
+            //                if popup == true{
+            //                    Text("popup = true")
+            //                }
+            ScrollView {
+                LazyVStack(spacing: 0){
+                    ScrollView(.horizontal) {
+                        LazyHStack(spacing: 10) {
+                            ForEach(0 ..< 5) { trip in
+                                
+                                Image("TestPhoto")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(height: 380)
+                                //                                .clipShape(RoundedRectangle(cornerRadius: 25.0))
+                                //                                .padding(.horizontal, 20)
+                                    .containerRelativeFrame(.horizontal)
+                                //                                .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 10)
+                                    .scrollTransition(.animated, axis: .horizontal) { content, phase in
+                                        content
+                                            .opacity(phase.isIdentity ? 1.0 : 0.8)
+                                            .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
+                                    }
+                                
+                            }
+                        }
+                        .scrollTargetLayout()
+                        
+                    }
+                    //                .scrollIndicators(.)
+                    .scrollTargetBehavior(.viewAligned)
+                    .safeAreaPadding(.horizontal, 45.0) //se일때는 40
+                    
+                    LazyVStack(alignment: .leading, spacing: 0) {
+                        
+                        HStack{
+                            Image("ic_eye_small")
+                            Text("989")
+                            Image("ic_saved_small")
+                            Text("34")
+                        }
+                        .font(.English16)
+                        .foregroundColor(Color.sponusGrey700)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        
+                        NavigationLink {
+                            ProfileView(rootIsActive: $popToRootView)
+                        }
+                    label: {
+                        HStack{
+                            Text("스포대학교 총학생회")
+                                .font(.Body10)
+                                .foregroundColor(Color.sponusPrimary)
+                            
+                            Image("ic_go_blue")
+                                .frame(width: 16, height: 16)
+                                .foregroundStyle(.sponusPrimary)
+                        }
+                    }.padding(.top, 23)
+                        // Korean/Heading/Heading05
+                        Text("스포대학교 축제 협찬 보고서")
+                            .font(.Heading05)
+                            .foregroundColor(Color.sponusBlack)
+                            .padding(.top, 16)
+                        
+                        Rectangle()
+                            .fill(Color.sponusGrey200)
+                            .frame(maxWidth: .infinity, maxHeight: 1)
+                            .padding(.top, 16)
+                        
+                        
+                        // Korean/Body/Body10
+                        Text("보고서 상세")
+                            .font(.Body10)
+                            .foregroundColor(Color.sponusGrey700)
+                            .padding(.top, 24)
+                        
+                        // Korean/Body/Body10
+                        Text("안녕하세요 스포대학교 제 21대 학생회 스포너스입니다.\n귀사의 도움을 받아 이번에 진행한 행사에 대해 보고 드립니다.  활동 내용: 카드뉴스 제작, 배너 제작,\n기업 인스타그램 태그 이벤트 \n그 외의 내용은 첨부한 pdf 파일에 상세 기재해 두었습니다.\n 다시 한번 저희와 협업해 주셔서 감사합니다.")
+                            .font(.Body10)
+                            .foregroundColor(.black)
+                            .padding(.top, 24)
+                        
+                        Rectangle()
+                            .fill(Color.sponusGrey200)
+                            .frame(maxWidth: .infinity, maxHeight: 1)
+                            .padding(.top, 24)
+                            .padding(.bottom, 32)
+                        
+                        Text("첨부파일 다운로드")
+                            .padding(.bottom, 16)
+                        
+                        SponUsDivider().padding(.bottom, 16)
+                        
+                        HStack {
+                            Text("스포대학교_보고서.pdf").font(.Body10).padding(.leading, 20)
+                            Spacer()
+                            Button {
+                                
+                            }
+                        label: {
+                            Image(.icDownload).resizable().frame(width: 24, height: 24)
+                        }.padding(.trailing, 20)
+                        }.padding(.vertical, 16).border(.sponusGrey100)
+                        
+                        
+                    }
+                    .padding(.horizontal, 20)
+                }
+                .padding(.bottom, 20)
+                
+            }
+            
+            
         }.navigationTitle("보고서").font(.Body01)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
@@ -1216,8 +1229,8 @@ struct ReportView: View {
             }
         }
         .frame(maxWidth: .infinity)
-            .padding(.top, 20)
-            .background(Color.sponusBlack)
+        .padding(.top, 20)
+        .background(Color.sponusBlack)
     }
 }
 

@@ -148,7 +148,9 @@ struct HomeView: View {
                 .padding(.top, 20)
                 
                 HStack {
-                    Button(action: { isActiveToRecievedOffer = true }, label: {
+                    Button {
+                        isActiveToRecievedOffer = true
+                    } label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
@@ -170,7 +172,7 @@ struct HomeView: View {
                                 .foregroundColor(Color("sponus_grey800")).fixedSize(horizontal: true, vertical: false)
                                 .padding(.top, 8)
                         }
-                    }).navigationDestination(isPresented: $isActiveToRecievedOffer, destination: {MyNoticeListView(rootIsActive: $isActiveToRecievedOffer)})
+                    }.navigationDestination(isPresented: $isActiveToRecievedOffer, destination: {MyNoticeListView(rootIsActive: $isActiveToRecievedOffer)})
                     
                     Button {
                         isActiveToSendOffer = true
@@ -198,12 +200,11 @@ struct HomeView: View {
                                 .padding(.top, 8)
                         }
                         .padding(.leading, 14)
-                    }.navigationDestination(isPresented: $isActiveToSendOffer, destination: { SendOfferView(rootIsActive: $isActiveToSendOffer) })
+                    }.navigationDestination(isPresented: $isActiveToSendOffer, destination: {SendOfferView(rootIsActive: $isActiveToSendOffer)})
                     
                     Button {
-                        self.isActiveToPortfolio = true
-                    }
-                    label: {
+                        isActiveToPortfolio = true
+                    } label: {
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
@@ -258,101 +259,109 @@ struct HomeView: View {
                 
                 ScrollView(.horizontal) {
                     HStack(spacing: 8) {
-                        VStack(alignment:.leading) {
-                            HStack {
-                                Image("ic_sponus_blue")
+                        NavigationLink(destination: AnnouncementView(sectionTitle: "RECOMMEND", listStatus: AnnouncementView.ListStatus(recommend: true, best: false, recent: false))) {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Image("ic_sponus_blue")
+                                        .padding(.leading, 20)
+                                    Spacer()
+                                    Image("btn_move")
+                                        .padding(.trailing, 20)
+                                }
+                                
+                                Text("RECOMMEND")
+                                    .font(.English11)
+                                    .foregroundColor(Color("sponus_primary"))
+                                    .padding(.top, 50)
                                     .padding(.leading, 20)
-                                Spacer()
-                                Image("btn_move")
-                                    .padding(.trailing, 20)
+                                
+                                Text("스포너스\n추천 공고")
+                                    .font(.Heading09)
+                                    .foregroundColor(Color("sponus_black"))
+                                    .padding(.top, 1)
+                                    .padding(.leading, 20)
                             }
-                            
-                            Text("RECOMMEND")
-                                .font(.English11)
-                                .foregroundColor(Color("sponus_primary"))
-                                .padding(.top, 50)
-                                .padding(.leading, 20)
-                            
-                            Text("스포너스\n추천 공고")
-                                .font(.Heading09)
-                                .foregroundColor(Color("sponus_black"))
-                                .padding(.top, 1)
-                                .padding(.leading, 20)
+                            .frame(width: 158, height: 210)
+                            .background(
+                                Rectangle()
+                                    .foregroundColor(Color.white)
+                                    .overlay(
+                                        Rectangle()
+                                            .inset(by: 0.5)
+                                            .stroke(Color("sponus_grey200"), lineWidth: 1)
+                                    )
+                            )
                         }
-                        .frame(width: 158, height: 210)
-                        .background(
-                            Rectangle()
-                                .foregroundColor(Color.white)
-                                .overlay(
-                                    Rectangle()
-                                        .inset(by: 0.5)
-                                        .stroke(Color("sponus_grey200"), lineWidth: 1)
-                                )
-                        )
                         
-                        VStack(alignment:.leading) {
-                            HStack {
-                                Image("ic_graph_blue")
+                        NavigationLink(destination: AnnouncementView(sectionTitle: "BEST", listStatus: AnnouncementView.ListStatus(recommend: false, best: true, recent: false))) {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Image("ic_graph_blue")
+                                        .padding(.leading, 20)
+                                    Spacer()
+                                    Image("btn_move")
+                                        .padding(.trailing, 20)
+                                }
+                                
+                                Text("BEST")
+                                    .font(.English11)
+                                    .foregroundColor(Color("sponus_primary"))
+                                    .padding(.top, 50)
                                     .padding(.leading, 20)
-                                Spacer()
-                                Image("btn_move")
-                                    .padding(.trailing, 20)
+                                
+                                Text("실시간\n인기 공고")
+                                    .font(.Heading09)
+                                    .foregroundColor(Color("sponus_black"))
+                                    .padding(.top, 1)
+                                    .padding(.leading, 20)
+                                    .multilineTextAlignment(.leading)
                             }
-                            
-                            Text("BEST")
-                                .font(.English11)
-                                .foregroundColor(Color("sponus_primary"))
-                                .padding(.top, 50)
-                                .padding(.leading, 20)
-                            
-                            Text("실시간\n인기 공고")
-                                .font(.Heading09)
-                                .foregroundColor(Color("sponus_black"))
-                                .padding(.top, 1)
-                                .padding(.leading, 20)
+                            .frame(width: 158, height: 210)
+                            .background(
+                                Rectangle()
+                                    .foregroundColor(Color.white)
+                                    .overlay(
+                                        Rectangle()
+                                            .inset(by: 0.5)
+                                            .stroke(Color("sponus_grey200"), lineWidth: 1)
+                                    )
+                            )
                         }
-                        .frame(width: 158, height: 210)
-                        .background(
-                            Rectangle()
-                                .foregroundColor(Color.white)
-                                .overlay(
-                                    Rectangle()
-                                        .inset(by: 0.5)
-                                        .stroke(Color("sponus_grey200"), lineWidth: 1)
-                                )
-                        )
                         
-                        VStack(alignment:.leading) {
-                            HStack {
-                                Image("ic_eye_blue")
+                        NavigationLink(destination: AnnouncementView(sectionTitle: "RECENT", listStatus: AnnouncementView.ListStatus(recommend: false, best: false, recent: true))) {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Image("ic_eye_blue")
+                                        .padding(.leading, 20)
+                                    Spacer()
+                                    Image("btn_move")
+                                        .padding(.trailing, 20)
+                                }
+                                
+                                Text("RECENT")
+                                    .font(.English11)
+                                    .foregroundColor(Color("sponus_primary"))
+                                    .padding(.top, 50)
                                     .padding(.leading, 20)
-                                Spacer()
-                                Image("btn_move")
-                                    .padding(.trailing, 20)
+                                
+                                Text("최근에\n본 공고")
+                                    .font(.Heading09)
+                                    .foregroundColor(Color("sponus_black"))
+                                    .padding(.top, 1)
+                                    .padding(.leading, 20)
+                                    .multilineTextAlignment(.leading)
                             }
-                            
-                            Text("RECENT")
-                                .font(.English11)
-                                .foregroundColor(Color("sponus_primary"))
-                                .padding(.top, 50)
-                                .padding(.leading, 20)
-                            
-                            Text("최근에\n본 공고")
-                                .font(.Heading09)
-                                .foregroundColor(Color("sponus_black"))
-                                .padding(.top, 1)
-                                .padding(.leading, 20)
+                            .frame(width: 158, height: 210)
+                            .background(
+                                Rectangle()
+                                    .foregroundColor(Color.white)
+                                    .overlay(
+                                        Rectangle()
+                                            .inset(by: 0.5)
+                                            .stroke(Color("sponus_grey200"), lineWidth: 1)
+                                    )
+                            )
                         }
-                        .frame(width: 158, height: 210)
-                        .background(
-                            Rectangle()
-                                .foregroundColor(Color.white)
-                                .overlay(
-                                    Rectangle()
-                                        .inset(by: 0.5)
-                                        .stroke(Color("sponus_grey200"), lineWidth: 1)
-                                )
-                        )
                     }
                     .padding(.top, 40)
                 }

@@ -29,6 +29,7 @@
 		100D38B62B4EF51E00498977 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B52B4EF51E00498977 /* SavedView.swift */; };
 		100D38B82B4EF54100498977 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B72B4EF54100498977 /* CategoryView.swift */; };
 		100D38BA2B4EF54C00498977 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B92B4EF54C00498977 /* MyView.swift */; };
+		1031EC7C2B68B9F20016655B /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031EC7B2B68B9F20016655B /* AnnouncementView.swift */; };
 		106720022B5835FA00493354 /* SendOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106720012B5835FA00493354 /* SendOfferView.swift */; };
 		109F9E282B6E692B006B7D63 /* MyTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F9E272B6E692B006B7D63 /* MyTermsView.swift */; };
 		109F9E2A2B6E7536006B7D63 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F9E292B6E7536006B7D63 /* CouponView.swift */; };
@@ -96,6 +97,7 @@
 		100D38B52B4EF51E00498977 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		100D38B72B4EF54100498977 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		100D38B92B4EF54C00498977 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
+		1031EC7B2B68B9F20016655B /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 		106720012B5835FA00493354 /* SendOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferView.swift; sourceTree = "<group>"; };
 		109F9E272B6E692B006B7D63 /* MyTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTermsView.swift; sourceTree = "<group>"; };
 		109F9E292B6E7536006B7D63 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				807BF83E2B51BCD400A659B9 /* SearchView.swift */,
 				80FA316C2B5EBA6B0076453B /* SearchOfferView.swift */,
 				DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */,
+				1031EC7B2B68B9F20016655B /* AnnouncementView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */,
 				10EBD80D2B6F783F0082CD8E /* HonorInfoEditView.swift in Sources */,
 				100A1E3A2B734DDE00AAC1E8 /* EmailViewModel.swift in Sources */,
+				1031EC7C2B68B9F20016655B /* AnnouncementView.swift in Sources */,
 				106720022B5835FA00493354 /* SendOfferView.swift in Sources */,
 				3B81BCB22B622EBF0067E9CB /* StoreKitManager.swift in Sources */,
 				10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */,

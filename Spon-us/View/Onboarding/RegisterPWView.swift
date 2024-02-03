@@ -103,6 +103,9 @@ struct RegisterPWView: View {
                 Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(!isValidPW ? .sponusGrey600 : .sponusPrimary).padding(.bottom, 16)
             }.disabled(!isValidPW)
         }.padding(.horizontal, 20)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomBackButton())
     }
 }
 

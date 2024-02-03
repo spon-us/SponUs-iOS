@@ -165,7 +165,7 @@ struct RegisterIDView: View {
                     Spacer()
                     
                     NavigationLink {
-                        ThirdPartyView()
+                        RegisterPWView()
                     } label: {
                         Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(!isAuthenticated ? .sponusGrey600 : .sponusPrimary).padding(.bottom, 16)
                     }.disabled(!isAuthenticated)

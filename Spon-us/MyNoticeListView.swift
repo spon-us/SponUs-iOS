@@ -29,7 +29,7 @@ struct MyNoticeListView: View {
                         )
                         .font(.Body06)
                     
-                    NavigationLink(destination: PaymentView(), label: {
+                    NavigationLink(destination: EmptyView(), label: {
                         Text("결제페이지 테스트")
                     })
 

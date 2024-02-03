@@ -2,214 +2,136 @@
 //  PaymentView.swift
 //  Spon-us
 //
-//  Created by 황인성 on 1/25/24.
+//  Created by 황인성 on 2/2/24.
 //
 
+import Foundation
 import SwiftUI
+import UIKit
+import WebKit
+import iamport_ios
 
-struct PaymentView: View {
-    
-    var paymentBtnInActive = true
-    
-    var body: some View {
-        VStack {
-            ScrollView{
-                LazyVStack(alignment: .leading, spacing: 0){
-                    HStack(spacing: 0){
-                        Rectangle()
-                            .frame(width: 79, height: 79)
-                            .padding(.trailing, 28)
-                        
-                        // Korean/Body/Body07
-                        Text("무신사 담당자 정보")
-                            .font(.Body07)
-                            .foregroundColor(Color.sponusBlack)
-                        
-                        
-                    }
-                    .padding(.bottom, 37)
-                    
-                    // Korean/Heading/Heading09
-                    Text("결제 항목")
-                        .font(.Heading09)
-                        .foregroundColor(.black)
-                        .padding(.bottom, 16)
-                    
-                    SponUsDivider()
-                        .padding(.bottom, 16)
-                    
-                    VStack(alignment: .leading, spacing: 0) {
-                        HStack {
-                            Rectangle()
-                                .fill(Color.sponusGrey50)
-                                .stroke(Color.sponusGrey100, lineWidth: 1)
-                                .frame(width: 158, height: 56)
-                                .overlay(
-                                    Text("담당자 정보")
-                                        .font(.Body10)
-                                        .foregroundColor(Color.sponusBlack)
-                                )
-                            
-                            Spacer()
-                            
-                            Rectangle()
-                                .fill(Color.sponusGrey50)
-                                .stroke(Color.sponusGrey100, lineWidth: 1)
-                                .frame(width: 158, height: 56)
-                                .overlay(
-                                    Text("연락 가능 시간")
-                                        .font(.Body10)
-                                        .foregroundColor(Color.sponusBlack)
-                                )
-                        }
-                        .padding(.bottom, 16)
-                        
-                        Rectangle()
-                            .fill(Color.sponusGrey50)
-                            .stroke(Color.sponusGrey100, lineWidth: 1)
-                            .frame(width: 158, height: 56)
-                            .overlay(
-                                Text("선호 연락 방법")
-                                    .font(.Body10)
-                                    .foregroundColor(Color.sponusBlack)
-                            )
-                    }
-                    .padding(.bottom, 32)
-                    
-                    Text("쿠폰 사용하기")
-                        .font(.Heading09)
-                        .foregroundColor(Color.sponusBlack)
-                        .padding(.bottom, 16)
-                    
-                    SponUsDivider()
-                        .padding(.bottom, 24)
-                    
-                    
-                    Rectangle()
-                        .fill(Color.sponusGrey50)
-                        .stroke(Color.sponusGrey100, lineWidth: 1)
-                        .frame(maxWidth: .infinity, minHeight: 56)
-                        .overlay(
-                            Text("사용 가능한 쿠폰이 없습니다")
-                                .font(.Body10)
-                                .foregroundColor(Color.sponusBlack)
-                        )
-                        .padding(.bottom, 32)
-                    
-                    Text("결제하기")
-                        .font(.Heading09)
-                        .foregroundColor(Color.sponusBlack)
-                        .padding(.bottom, 16)
-                    
-                    SponUsDivider()
-                        .padding(.bottom, 24)
-                    
-                    Rectangle()
-                        .fill(Color.yellow)
-                        .frame(maxWidth: .infinity, minHeight: 56)
-                        .overlay(
-                            Text("카카오페이")
-                                .font(.Body06)
-                                .foregroundColor(Color.sponusBlack)
-                        )
-                        .padding(.bottom, 64)
-                    
-                    SponUsDivider()
-                        .padding(.bottom, 16)
-                    
-                    HStack{
-                        
-                        Text("결제금액")
-                            .font(.Heading09)
-                            .foregroundColor(Color.sponusBlack)
-                        
-                        Spacer()
-                        
-                        Text("1,400 원")
-                            .font(
-                                Font.custom("SUIT", size: 26)
-                                    .weight(.bold)
-                            )
-                            .foregroundColor(Color.sponusBlack)
-                    }
-                    .padding(.bottom, 12)
-                    
-                    SponUsDivider()
-                        .padding(.bottom, 24)
-                    
-                    HStack {
-                        Text("서비스 이용료")
-                            .font(.Body10)
-                            .foregroundColor(Color.sponusGrey700)
-                        
-                        Spacer()
-                        
-                        Text("1400원")
-                            .font(.Body10)
-                            .foregroundColor(Color.sponusGrey700)
-                    }
-                    .padding(.bottom, 8)
-                    
-                    HStack {
-                        Text("할인 금액")
-                            .font(.Body10)
-                            .foregroundColor(Color.sponusGrey700)
-                        
-                        Spacer()
-                        
-                        Text("0원")
-                            .font(.Body10)
-                            .foregroundColor(Color.sponusGrey700)
-                    }
-                    .padding(.bottom, 24)
-                    
-                    
-                    Rectangle()
-                        .fill(.clear)
-                        .stroke(Color.sponusGrey100, lineWidth: 1)
-                        .frame(maxWidth: .infinity, minHeight: 56)
-                        .overlay(
-                            
-                            HStack(spacing: 0){
-                                
-                                Button(action: {
-                                    
-                                }, label: {
-                                    Image("ic_check1")
-                                })
-                                .padding(.trailing, 12)
-                                
-                                
-                                Text("결제 내용을 확인했으며 서비스 처리 방침에 동의합니다.")
-                                    .font(.Caption04)
-                                    .foregroundColor(Color.sponusBlack)
-                            }
-                        )
-                        .padding(.bottom, 60)
-                }
-                .padding(.horizontal, 20)
-            }
-            
-            Button(action: {
-//                self.presentationMode.wrappedValue.dismiss()
-//                popup = true
-            }, label: {
-                Text("수정완료")
-                    .font(.Body01)
-                    .foregroundColor(paymentBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 20)
-                    .background(paymentBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
-            })
-            .disabled(paymentBtnInActive)
-        }
-        .navigationBarItems(leading: CustomBackButton())
-        .navigationTitle("결제하기").font(.Body01)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
+
+struct PaymentView: UIViewControllerRepresentable {
+//    @EnvironmentObject var viewModel: PortOneViewModel
+    @ObservedObject var viewModel: PortOneViewModel
+//    @StateObject var viewModel: PortOneViewModel = PortOneViewModel()
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let view = PaymentViewController()
+        view.viewModel = viewModel
+        return view
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
     }
 }
 
-#Preview {
-    PaymentView()
+class PaymentViewController: UIViewController, WKNavigationDelegate {
+    var viewModel: PortOneViewModel? = nil
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("PaymentView viewDidLoad")
+
+        view.backgroundColor = UIColor.white
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("PaymentView viewWillAppear")
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("PaymentView viewDidAppear")
+        requestPayment()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("PaymentView viewWillDisappear")
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("PaymentView viewDidDisappear")
+    }
+
+
+    // 아임포트 SDK 결제 요청
+    func requestPayment() {
+        guard let viewModel = viewModel else {
+            print("viewModel 이 존재하지 않습니다.")
+            return
+        }
+
+        let userCode = viewModel.order.userCode // iamport 에서 부여받은 가맹점 식별코드
+        if let payment = viewModel.createPaymentData() {
+            dump(payment)
+
+//          #case1 use for UIViewController
+//          WebViewController 용 닫기버튼 생성(PG "uplus(토스페이먼츠 구모듈)"는 자체취소 버튼이 없는 것으로 보임)
+            Iamport.shared.useNavigationButton(enable: true)
+
+            Iamport.shared.payment(viewController: self,
+                userCode: userCode.value, payment: payment) { response in
+                viewModel.iamportCallback(response)
+            }
+
+//          #case2 use for navigationController
+//          guard let navController = navigationController else {
+//              print("navigationController 를 찾을 수 없습니다")
+//              return
+//          }
+//
+//          Iamport.shared.payment(navController: navController,
+//              userCode: userCode.value, iamportRequest: request) { iamportResponse in
+//              viewModel.iamportCallback(iamportResponse)
+//          }
+        }
+    }
+    
+    // 아임포트 kakao SDK 결제 요청
+    func requestKakaoPayment() {
+        guard let viewModel = viewModel else {
+            print("viewModel 이 존재하지 않습니다.")
+            return
+        }
+
+        let userCode = viewModel.order.userCode // iamport 에서 부여받은 가맹점 식별코드
+//        if let payment = viewModel.createPaymentData() {
+        if let payment = viewModel.createKakaoPaymentData() {
+            dump(payment)
+
+//          #case1 use for UIViewController
+//          WebViewController 용 닫기버튼 생성(PG "uplus(토스페이먼츠 구모듈)"는 자체취소 버튼이 없는 것으로 보임)
+            Iamport.shared.useNavigationButton(enable: true)
+
+            Iamport.shared.payment(viewController: self,
+                userCode: userCode.value, payment: payment) { response in
+                viewModel.iamportCallback(response)
+            }
+
+//          #case2 use for navigationController
+//          guard let navController = navigationController else {
+//              print("navigationController 를 찾을 수 없습니다")
+//              return
+//          }
+//
+//          Iamport.shared.payment(navController: navController,
+//              userCode: userCode.value, iamportRequest: request) { iamportResponse in
+//              viewModel.iamportCallback(iamportResponse)
+//          }
+        }
+    }
+
 }
+
+//struct PaymentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            PaymentView()
+//        }
+//    }
+//}

@@ -12,7 +12,12 @@ struct Spon_usApp: App {
     var body: some Scene {
         WindowGroup {
 //            OnBoardingView()
-            ContentView()
+//            ContentView()
+//            CategoryView()
+            
+//        PortOneView().environmentObject(PortOneViewModel())
+//            PaymentView2().environmentObject(PortOneViewModel())
+            ChargerInfoViewTest()
         }
     }
 }

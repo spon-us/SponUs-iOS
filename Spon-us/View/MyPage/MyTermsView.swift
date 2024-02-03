@@ -26,7 +26,7 @@ struct PrivacyPolicyView: View {
                 Text("확인").font(.Body01).foregroundStyle(.sponusPrimaryDarkmode).frame(maxWidth: .infinity).padding(.top, 20)
             }.background(.sponusBlack)
         }
-        .navigationTitle("개인정보처리방침")
+        .navigationTitle("개인정보처리방침").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
@@ -53,7 +53,7 @@ struct TermsConditionsView: View {
                 Text("확인").font(.Body01).foregroundStyle(.sponusPrimaryDarkmode).frame(maxWidth: .infinity).padding(.top, 20)
             }.background(.sponusBlack)
         }
-        .navigationTitle("이용약관")
+        .navigationTitle("이용약관").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())

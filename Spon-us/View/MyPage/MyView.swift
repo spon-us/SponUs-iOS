@@ -112,7 +112,7 @@ struct MyView: View {
                     
                     Divider()
                     
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: PrivacyPolicyView()) {
                         HStack {
                             Text("개인정보처리방침")
                                 .font(.Body05)
@@ -125,7 +125,7 @@ struct MyView: View {
                     
                     Divider()
                     
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: TermsConditionsView()) {
                         HStack {
                             Text("이용약관")
                                 .font(.Body05)

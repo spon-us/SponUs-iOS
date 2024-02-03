@@ -8,7 +8,17 @@
 import SwiftUI
 
 struct TermsView: View {
+    
+    @State var processingPolicyTapped = false
+    @State var gatherUsageTapped = false
+    @State var termsConditionsTapped = false
+    @State var thirdPartyTapped = false
+    
     var body: some View {
+        
+        @State var acceptAll = processingPolicyTapped && gatherUsageTapped && termsConditionsTapped && thirdPartyTapped
+        @State var nextButtonDisabled = !(processingPolicyTapped && gatherUsageTapped && termsConditionsTapped)
+        
         VStack(spacing: 0) {
             ZStack {
                 Rectangle().frame(height: 1).foregroundStyle(.sponusGrey100)
@@ -24,20 +34,37 @@ struct TermsView: View {
                     .padding(.top, 27)
                 Spacer()
             }
-            HStack(spacing: 0) {
-                Spacer()
-                Image(.icTermsCheckCircle).resizable().frame(width: 24, height: 24).padding(.trailing, 14)
-                Text("이용약관 전체 동의").font(.Body06).foregroundStyle(.sponusGrey600)
-                Spacer()
-            }.frame(maxWidth: .infinity)
-                .frame(height: 56)
-                .border(.sponusGrey100)
-                .padding(.top, 32).padding(.bottom, 41)
+            Button {
+                switch acceptAll {
+                case true:
+                    processingPolicyTapped = false
+                    gatherUsageTapped = false
+                    termsConditionsTapped = false
+                    thirdPartyTapped = false
+                case false:
+                    processingPolicyTapped = true
+                    gatherUsageTapped = true
+                    termsConditionsTapped = true
+                    thirdPartyTapped = true
+                }
+            } label: {
+                HStack(spacing: 0) {
+                    Spacer()
+                    Image(acceptAll ? .icCheckFilled : .icTermsCheckCircle).resizable().frame(width: 24, height: 24).padding(.trailing, 14)
+                    Text("이용약관 전체 동의").font(.Body06).foregroundStyle(acceptAll ? .sponusBlack : .sponusGrey600)
+                    Spacer()
+                }.frame(maxWidth: .infinity)
+                    .frame(height: 56)
+                    .border(acceptAll ? .sponusPrimary : .sponusGrey100)
+            }.padding(.top, 32).padding(.bottom, 41)
+            
             VStack(spacing: 8) {
                 HStack(spacing: 0) {
-                    Button {}
+                    Button {
+                        processingPolicyTapped.toggle()
+                    }
                     label: {
-                        Image(.icTermsCheck).resizable().frame(width: 20, height: 20)
+                        Image(processingPolicyTapped ? .icCheckPrimary : .icTermsCheck).resizable().frame(width: 20, height: 20)
                     }
                     Text("(필수) 개인정보처리방침을 읽고 숙지하였습니다").font(.Body10).foregroundStyle(.sponusGrey600).padding(.leading, 6)
                     Spacer()
@@ -48,9 +75,11 @@ struct TermsView: View {
                     }
                 }.padding(.bottom, 8)
                 HStack(spacing: 0) {
-                    Button {}
+                    Button {
+                        gatherUsageTapped.toggle()
+                    }
                     label: {
-                        Image(.icTermsCheck).resizable().frame(width: 20, height: 20)
+                        Image(gatherUsageTapped ? .icCheckPrimary : .icTermsCheck).resizable().frame(width: 20, height: 20)
                     }
                     Text("(필수) 개인정보 수집 및 이용 동의").font(.Body10).foregroundStyle(.sponusGrey600).padding(.leading, 6)
                     Spacer()
@@ -61,9 +90,11 @@ struct TermsView: View {
                     }
                 }.padding(.bottom, 8)
                 HStack(spacing: 0) {
-                    Button {}
+                    Button {
+                        termsConditionsTapped.toggle()
+                    }
                     label: {
-                        Image(.icTermsCheck).resizable().frame(width: 20, height: 20)
+                        Image(termsConditionsTapped ? .icCheckPrimary : .icTermsCheck).resizable().frame(width: 20, height: 20)
                     }
                     Text("(필수) 이용약관 동의").font(.Body10).foregroundStyle(.sponusGrey600).padding(.leading, 6)
                     Spacer()
@@ -74,9 +105,11 @@ struct TermsView: View {
                     }
                 }.padding(.bottom, 8)
                 HStack(spacing: 0) {
-                    Button {}
+                    Button {
+                        thirdPartyTapped.toggle()
+                    }
                     label: {
-                        Image(.icTermsCheck).resizable().frame(width: 20, height: 20)
+                        Image(thirdPartyTapped ? .icCheckPrimary : .icTermsCheck).resizable().frame(width: 20, height: 20)
                     }
                     Text("(선택) 개인정보 제 3자 제공 동의").font(.Body10).foregroundStyle(.sponusGrey600).padding(.leading, 6)
                     Spacer()
@@ -88,11 +121,11 @@ struct TermsView: View {
                 }.padding(.bottom, 8)
             }
             Spacer()
-            Button {
-                
+            NavigationLink {
+                RegisterIDView()
             } label: {
-                Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(.sponusPrimary).padding(.bottom, 16)
-            }
+                Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(nextButtonDisabled ? .sponusGrey600 : .sponusPrimary).padding(.bottom, 16)
+            }.disabled(nextButtonDisabled)
 
         }.padding(.horizontal, 20)
             .navigationBarTitleDisplayMode(.inline)

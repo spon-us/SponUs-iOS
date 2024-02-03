@@ -23,7 +23,7 @@ struct ProcessingPolicyView: View {
             } label: {
                 Text("확인").font(.Body01).foregroundStyle(.sponusPrimaryDarkmode).frame(maxWidth: .infinity).padding(.top, 20)
             }.background(.sponusBlack)
-        }.navigationTitle("이용약관 동의")
+        }.navigationTitle("개인정보처리방침")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())

@@ -54,7 +54,7 @@ struct MyNoticeDetailView: View {
                             .padding(.top, 16)
                         
                         
-                        CategoryCell()
+                        DivisionCell()
                         
                         
                         // Korean/Body/Body10
@@ -133,7 +133,7 @@ struct ImageScrollView: View {
     }
 }
 
-struct CategoryCell: View {
+struct DivisionCell: View {
     var body: some View {
         
         VStack(spacing: 0){

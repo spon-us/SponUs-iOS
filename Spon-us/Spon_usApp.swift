@@ -9,10 +9,14 @@ import SwiftUI
 
 @main
 struct Spon_usApp: App {
+    
+    @State var rootIsActive = true
+    
     var body: some Scene {
         WindowGroup {
             OnBoardingView()
 //            ContentView()
+//            ChargerInfoViewTest(rootIsActive: $rootIsActive)
         }
     }
 }

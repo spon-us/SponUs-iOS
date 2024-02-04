@@ -2,46 +2,136 @@
 //  PaymentView.swift
 //  Spon-us
 //
-//  Created by 황인성 on 1/25/24.
+//  Created by 황인성 on 2/5/24.
 //
 
+import Foundation
 import SwiftUI
+import UIKit
+import WebKit
+import iamport_ios
 
-struct PaymentView: View {
-    var body: some View {
-        ScrollView{
-            LazyVStack(alignment: .leading, spacing: 0){
-                HStack(spacing: 0){
-                    Rectangle()
-                        .frame(width: 79, height: 79)
-                        .padding(.trailing, 28)
-                    
-                    // Korean/Body/Body07
-                    Text("무신사 담당자 정보")
-                        .font(.Body07)
-                      .foregroundColor(Color.sponusBlack)
-                    
-                    
-                }
-                .padding(.bottom, 37)
-                
-                // Korean/Heading/Heading09
-                Text("결제 항목")
-                    .font(.Heading09)
-                  .foregroundColor(.black)
-                  .padding(.bottom, 16)
-                
-                SponUsDivider()
-                    .padding(.bottom, 16)
-                
-                Rectangle()
-                    .frame(width: 158, height: 56)
-            }
-            .padding(.horizontal, 20)
-        }
+
+struct PaymentView: UIViewControllerRepresentable {
+//    @EnvironmentObject var viewModel: PortOneViewModel
+    @ObservedObject var viewModel: PortOneViewModel
+//    @StateObject var viewModel: PortOneViewModel = PortOneViewModel()
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let view = PaymentViewController()
+        view.viewModel = viewModel
+        return view
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
     }
 }
 
-#Preview {
-    PaymentView()
+class PaymentViewController: UIViewController, WKNavigationDelegate {
+    var viewModel: PortOneViewModel? = nil
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("PaymentView viewDidLoad")
+
+        view.backgroundColor = UIColor.white
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("PaymentView viewWillAppear")
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("PaymentView viewDidAppear")
+        requestPayment()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("PaymentView viewWillDisappear")
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("PaymentView viewDidDisappear")
+    }
+
+
+    // 아임포트 SDK 결제 요청
+    func requestPayment() {
+        guard let viewModel = viewModel else {
+            print("viewModel 이 존재하지 않습니다.")
+            return
+        }
+
+        let userCode = viewModel.order.userCode // iamport 에서 부여받은 가맹점 식별코드
+        if let payment = viewModel.createPaymentData() {
+            dump(payment)
+
+//          #case1 use for UIViewController
+//          WebViewController 용 닫기버튼 생성(PG "uplus(토스페이먼츠 구모듈)"는 자체취소 버튼이 없는 것으로 보임)
+            Iamport.shared.useNavigationButton(enable: true)
+
+            Iamport.shared.payment(viewController: self,
+                userCode: userCode.value, payment: payment) { response in
+                viewModel.iamportCallback(response)
+            }
+
+//          #case2 use for navigationController
+//          guard let navController = navigationController else {
+//              print("navigationController 를 찾을 수 없습니다")
+//              return
+//          }
+//
+//          Iamport.shared.payment(navController: navController,
+//              userCode: userCode.value, iamportRequest: request) { iamportResponse in
+//              viewModel.iamportCallback(iamportResponse)
+//          }
+        }
+    }
+    
+    // 아임포트 kakao SDK 결제 요청
+    func requestKakaoPayment() {
+        guard let viewModel = viewModel else {
+            print("viewModel 이 존재하지 않습니다.")
+            return
+        }
+
+        let userCode = viewModel.order.userCode // iamport 에서 부여받은 가맹점 식별코드
+//        if let payment = viewModel.createPaymentData() {
+        if let payment = viewModel.createKakaoPaymentData() {
+            dump(payment)
+
+//          #case1 use for UIViewController
+//          WebViewController 용 닫기버튼 생성(PG "uplus(토스페이먼츠 구모듈)"는 자체취소 버튼이 없는 것으로 보임)
+            Iamport.shared.useNavigationButton(enable: true)
+
+            Iamport.shared.payment(viewController: self,
+                userCode: userCode.value, payment: payment) { response in
+                viewModel.iamportCallback(response)
+            }
+
+//          #case2 use for navigationController
+//          guard let navController = navigationController else {
+//              print("navigationController 를 찾을 수 없습니다")
+//              return
+//          }
+//
+//          Iamport.shared.payment(navController: navController,
+//              userCode: userCode.value, iamportRequest: request) { iamportResponse in
+//              viewModel.iamportCallback(iamportResponse)
+//          }
+        }
+    }
+
 }
+
+//struct PaymentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            PaymentView()
+//        }
+//    }
+//}

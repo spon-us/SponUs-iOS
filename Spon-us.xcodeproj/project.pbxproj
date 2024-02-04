@@ -27,12 +27,19 @@
 		10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC622B5C34C400B40547 /* CompanyPostView.swift */; };
 		10EBD80D2B6F783F0082CD8E /* HonorInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EBD80C2B6F783F0082CD8E /* HonorInfoEditView.swift */; };
 		3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */; };
+		3B36F09A2B6FEB800000ACFB /* PaymentSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F0992B6FEB800000ACFB /* PaymentSettingView.swift */; };
+		3B36F09C2B6FEBA00000ACFB /* ChargerInfoViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F09B2B6FEBA00000ACFB /* ChargerInfoViewTest.swift */; };
+		3B36F09E2B6FEBBC0000ACFB /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F09D2B6FEBBC0000ACFB /* PaymentView.swift */; };
+		3B36F0A12B6FEBF60000ACFB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F0A02B6FEBF60000ACFB /* Utils.swift */; };
+		3B36F0A32B6FEC0B0000ACFB /* PortOneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F0A22B6FEC0B0000ACFB /* PortOneViewModel.swift */; };
+		3B36F0A62B6FEC2F0000ACFB /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F0A52B6FEC2F0000ACFB /* Order.swift */; };
+		3B36F0A82B6FEC3C0000ACFB /* PubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F0A72B6FEC3C0000ACFB /* PubData.swift */; };
+		3B36F0AB2B6FEC4E0000ACFB /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = 3B36F0AA2B6FEC4E0000ACFB /* iamport-ios */; };
 		3B81BCB22B622EBF0067E9CB /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B81BCB12B622EBF0067E9CB /* StoreKitManager.swift */; };
 		3B81BCB42B622ED00067E9CB /* StoreKitTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B81BCB32B622ED00067E9CB /* StoreKitTestView.swift */; };
 		3B81BCB62B622EEA0067E9CB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B81BCB52B622EEA0067E9CB /* Extension.swift */; };
 		3B81BCB82B622F080067E9CB /* MyNoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B81BCB72B622F080067E9CB /* MyNoticeListView.swift */; };
 		3B81BCBA2B622F280067E9CB /* MyNoticeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */; };
-		3B81BCBC2B622F750067E9CB /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B81BCBB2B622F750067E9CB /* PaymentView.swift */; };
 		3B81BCBE2B62312C0067E9CB /* Product.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3B81BCBD2B62312C0067E9CB /* Product.storekit */; };
 		3B81BCC02B6231680067E9CB /* ProductList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B81BCBF2B6231680067E9CB /* ProductList.plist */; };
 		3BD26D062B62342C0035FE80 /* ChargerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC642B5EA69B00B40547 /* ChargerInfoView.swift */; };
@@ -82,12 +89,18 @@
 		10C8AC642B5EA69B00B40547 /* ChargerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerInfoView.swift; sourceTree = "<group>"; };
 		10EBD80C2B6F783F0082CD8E /* HonorInfoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HonorInfoEditView.swift; sourceTree = "<group>"; };
 		3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalReceivedListView.swift; sourceTree = "<group>"; };
+		3B36F0992B6FEB800000ACFB /* PaymentSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSettingView.swift; sourceTree = "<group>"; };
+		3B36F09B2B6FEBA00000ACFB /* ChargerInfoViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerInfoViewTest.swift; sourceTree = "<group>"; };
+		3B36F09D2B6FEBBC0000ACFB /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		3B36F0A02B6FEBF60000ACFB /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		3B36F0A22B6FEC0B0000ACFB /* PortOneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortOneViewModel.swift; sourceTree = "<group>"; };
+		3B36F0A52B6FEC2F0000ACFB /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		3B36F0A72B6FEC3C0000ACFB /* PubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubData.swift; sourceTree = "<group>"; };
 		3B81BCB12B622EBF0067E9CB /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		3B81BCB32B622ED00067E9CB /* StoreKitTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitTestView.swift; sourceTree = "<group>"; };
 		3B81BCB52B622EEA0067E9CB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		3B81BCB72B622F080067E9CB /* MyNoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoticeListView.swift; sourceTree = "<group>"; };
 		3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoticeDetailView.swift; sourceTree = "<group>"; };
-		3B81BCBB2B622F750067E9CB /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		3B81BCBD2B62312C0067E9CB /* Product.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Product.storekit; sourceTree = "<group>"; };
 		3B81BCBF2B6231680067E9CB /* ProductList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductList.plist; sourceTree = "<group>"; };
 		3BFC8D142B54AA55000D6006 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
@@ -117,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFCD247C2B54D08100B00515 /* PopupView in Frameworks */,
+				3B36F0AB2B6FEC4E0000ACFB /* iamport-ios in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				100D389F2B44833F00498977 /* Info.plist */,
+				3B36F09F2B6FEBCB0000ACFB /* PortOne */,
 				3B81BCB02B622E950067E9CB /* Manager */,
 				3BFC8D192B54D43C000D6006 /* Helper */,
 				100D38942B44833500498977 /* Font */,
@@ -222,7 +237,9 @@
 				3B81BCB72B622F080067E9CB /* MyNoticeListView.swift */,
 				3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */,
 				3BFC8D142B54AA55000D6006 /* EditPostView.swift */,
-				3B81BCBB2B622F750067E9CB /* PaymentView.swift */,
+				3B36F0992B6FEB800000ACFB /* PaymentSettingView.swift */,
+				3B36F09B2B6FEBA00000ACFB /* ChargerInfoViewTest.swift */,
+				3B36F09D2B6FEBBC0000ACFB /* PaymentView.swift */,
 			);
 			path = ReceivedOffer;
 			sourceTree = "<group>";
@@ -268,6 +285,25 @@
 				10EBD80C2B6F783F0082CD8E /* HonorInfoEditView.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		3B36F09F2B6FEBCB0000ACFB /* PortOne */ = {
+			isa = PBXGroup;
+			children = (
+				3B36F0A02B6FEBF60000ACFB /* Utils.swift */,
+				3B36F0A22B6FEC0B0000ACFB /* PortOneViewModel.swift */,
+				3B36F0A42B6FEC1A0000ACFB /* Model */,
+			);
+			path = PortOne;
+			sourceTree = "<group>";
+		};
+		3B36F0A42B6FEC1A0000ACFB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3B36F0A52B6FEC2F0000ACFB /* Order.swift */,
+				3B36F0A72B6FEC3C0000ACFB /* PubData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		3B81BCB02B622E950067E9CB /* Manager */ = {
@@ -326,6 +362,7 @@
 			name = "Spon-us";
 			packageProductDependencies = (
 				DFCD247B2B54D08100B00515 /* PopupView */,
+				3B36F0AA2B6FEC4E0000ACFB /* iamport-ios */,
 			);
 			productName = "Spon-us";
 			productReference = 100D387D2B44826500498977 /* Spon-us.app */;
@@ -358,6 +395,7 @@
 			packageReferences = (
 				3BFC8D162B54B016000D6006 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 				DFCD247A2B54D08100B00515 /* XCRemoteSwiftPackageReference "PopupView" */,
+				3B36F0A92B6FEC4E0000ACFB /* XCRemoteSwiftPackageReference "iamport-ios" */,
 			);
 			productRefGroup = 100D387E2B44826500498977 /* Products */;
 			projectDirPath = "";
@@ -403,24 +441,30 @@
 				100D38B82B4EF54100498977 /* CategoryView.swift in Sources */,
 				3BD26D062B62342C0035FE80 /* ChargerInfoView.swift in Sources */,
 				3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */,
+				3B36F0A62B6FEC2F0000ACFB /* Order.swift in Sources */,
 				3B81BCB62B622EEA0067E9CB /* Extension.swift in Sources */,
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */,
 				DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */,
 				3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */,
+				3B36F09C2B6FEBA00000ACFB /* ChargerInfoViewTest.swift in Sources */,
 				DF90A5BE2B6E39A600BC54D0 /* RegisterPWView.swift in Sources */,
 				DF90A5B62B6B7CF900BC54D0 /* RegisterIDView.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
 				DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */,
 				10EBD80D2B6F783F0082CD8E /* HonorInfoEditView.swift in Sources */,
 				106720022B5835FA00493354 /* SendOfferView.swift in Sources */,
-				3B81BCBC2B622F750067E9CB /* PaymentView.swift in Sources */,
 				3B81BCB22B622EBF0067E9CB /* StoreKitManager.swift in Sources */,
 				10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */,
 				807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */,
 				DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */,
+				3B36F0A12B6FEBF60000ACFB /* Utils.swift in Sources */,
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,
+				3B36F0A82B6FEC3C0000ACFB /* PubData.swift in Sources */,
+				3B36F09A2B6FEB800000ACFB /* PaymentSettingView.swift in Sources */,
 				DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */,
+				3B36F0A32B6FEC0B0000ACFB /* PortOneViewModel.swift in Sources */,
+				3B36F09E2B6FEBBC0000ACFB /* PaymentView.swift in Sources */,
 				80FA316D2B5EBA6B0076453B /* SearchOfferView.swift in Sources */,
 				DF3AD3E12B61696000DBFCCC /* LoginView.swift in Sources */,
 				3B81BCB82B622F080067E9CB /* MyNoticeListView.swift in Sources */,
@@ -564,7 +608,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = R62RZ89ZRU;
+				DEVELOPMENT_TEAM = 9R3T6AUA7X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -580,7 +624,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-us";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-uss";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -596,7 +640,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = R62RZ89ZRU;
+				DEVELOPMENT_TEAM = 9R3T6AUA7X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -612,7 +656,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-us";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-uss";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -644,6 +688,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3B36F0A92B6FEC4E0000ACFB /* XCRemoteSwiftPackageReference "iamport-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iamport/iamport-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 		3BFC8D162B54B016000D6006 /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mikaoj/BSImagePicker.git";
@@ -663,6 +715,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3B36F0AA2B6FEC4E0000ACFB /* iamport-ios */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B36F0A92B6FEC4E0000ACFB /* XCRemoteSwiftPackageReference "iamport-ios" */;
+			productName = "iamport-ios";
+		};
 		DFCD247B2B54D08100B00515 /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DFCD247A2B54D08100B00515 /* XCRemoteSwiftPackageReference "PopupView" */;

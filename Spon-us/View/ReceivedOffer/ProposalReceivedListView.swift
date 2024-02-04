@@ -64,7 +64,7 @@ struct ProposalReceivedListView: View {
                 SponUsDivider()
                     .padding(.top, 8)
                 
-                NavigationLink(destination: ChargerInfoView(rootIsActive: $rootIsActive), label: {
+                NavigationLink(destination: ChargerInfoViewTest(rootIsActive: $rootIsActive), label: {
                     HStack(spacing: 0) {
                         Image("Rectangle 1232")
                             .frame(width: 79, height: 79)

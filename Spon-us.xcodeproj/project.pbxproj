@@ -22,6 +22,7 @@
 		100D38BA2B4EF54C00498977 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B92B4EF54C00498977 /* MyView.swift */; };
 		106720022B5835FA00493354 /* SendOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106720012B5835FA00493354 /* SendOfferView.swift */; };
 		109F9E282B6E692B006B7D63 /* MyTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F9E272B6E692B006B7D63 /* MyTermsView.swift */; };
+		109F9E2A2B6E7536006B7D63 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F9E292B6E7536006B7D63 /* CouponView.swift */; };
 		10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC602B5C340D00B40547 /* SendOfferPostView.swift */; };
 		10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC622B5C34C400B40547 /* CompanyPostView.swift */; };
 		3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */; };
@@ -74,6 +75,7 @@
 		100D38B92B4EF54C00498977 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		106720012B5835FA00493354 /* SendOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferView.swift; sourceTree = "<group>"; };
 		109F9E272B6E692B006B7D63 /* MyTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTermsView.swift; sourceTree = "<group>"; };
+		109F9E292B6E7536006B7D63 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
 		10C8AC602B5C340D00B40547 /* SendOfferPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferPostView.swift; sourceTree = "<group>"; };
 		10C8AC622B5C34C400B40547 /* CompanyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyPostView.swift; sourceTree = "<group>"; };
 		10C8AC642B5EA69B00B40547 /* ChargerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerInfoView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				100D38B92B4EF54C00498977 /* MyView.swift */,
 				109F9E272B6E692B006B7D63 /* MyTermsView.swift */,
+				109F9E292B6E7536006B7D63 /* CouponView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				3B81BCB82B622F080067E9CB /* MyNoticeListView.swift in Sources */,
 				3B81BCBA2B622F280067E9CB /* MyNoticeDetailView.swift in Sources */,
 				DF90A5B42B664EE700BC54D0 /* ThirdPartyView.swift in Sources */,
+				109F9E2A2B6E7536006B7D63 /* CouponView.swift in Sources */,
 				DF90A5C02B6E534500BC54D0 /* SelectUserTypeView.swift in Sources */,
 				3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */,
 				109F9E282B6E692B006B7D63 /* MyTermsView.swift in Sources */,
@@ -556,7 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R62RZ89ZRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -572,7 +576,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sponus.Spon-us";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-us";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -588,7 +592,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R62RZ89ZRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -604,7 +608,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sponus.Spon-us";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-us";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -86,7 +86,7 @@ struct MyView: View {
                     
                     Divider()
                     
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: CouponView()) {
                         HStack {
                             Text("쿠폰함")
                                 .font(.Body05)
@@ -199,12 +199,12 @@ struct MyView: View {
                             )
                         )
                     }
+                    .padding(.bottom, 34)
                 }
                 .padding(.top, 35)
                 .padding([.leading, .trailing], 20)
                 
             }
-            .padding(.bottom, 34)
             .navigationBarItems(trailing: searchItem)
             .mynavigationBarBackground()
         }

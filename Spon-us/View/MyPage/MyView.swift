@@ -73,7 +73,7 @@ struct MyView: View {
             
             ScrollView {
                 VStack(spacing: 20) {
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: HonorInfoEditView()) {
                         HStack {
                             Text("담당자 정보 수정하기")
                                 .font(.Body05)

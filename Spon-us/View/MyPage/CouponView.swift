@@ -81,7 +81,6 @@ struct CouponView: View {
         Text("쿠폰이 등록 되었습니다")
             .font(.Body03)
             .foregroundStyle(.sponusPrimary)
-            .padding(.leading, 20)
             .frame(height: 56)
             .frame(maxWidth: .infinity)
             .background(Color.sponusSecondary)

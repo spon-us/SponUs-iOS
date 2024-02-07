@@ -20,7 +20,7 @@ extension SponusAPI: TargetType {
     
     var path: String {
         switch self {
-        case .postEmail:
+        case .postEmail(let email):
             return "/api/v1/organizations/email"
         }
     }
@@ -43,7 +43,7 @@ extension SponusAPI: TargetType {
         switch self {
         case .postEmail(let email):
             let parameters: [String: Any] = ["email": email]
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }
     

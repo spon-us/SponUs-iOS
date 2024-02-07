@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		100A1E302B71637A00AAC1E8 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */; };
+		100A1E322B73485800AAC1E8 /* SponusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E312B73485800AAC1E8 /* SponusAPI.swift */; };
+		100A1E382B734DB300AAC1E8 /* EmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E372B734DB200AAC1E8 /* EmailModel.swift */; };
+		100A1E3A2B734DDE00AAC1E8 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E392B734DDE00AAC1E8 /* EmailViewModel.swift */; };
+		100A1E3D2B73596600AAC1E8 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 100A1E3C2B73596600AAC1E8 /* CombineMoya */; };
+		100A1E3F2B73596600AAC1E8 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 100A1E3E2B73596600AAC1E8 /* Moya */; };
+		100A1E412B73596600AAC1E8 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 100A1E402B73596600AAC1E8 /* ReactiveMoya */; };
+		100A1E432B73596600AAC1E8 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 100A1E422B73596600AAC1E8 /* RxMoya */; };
+		100A1E462B7359DC00AAC1E8 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 100A1E452B7359DC00AAC1E8 /* KeychainSwift */; };
 		100D389A2B44833500498977 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38952B44833500498977 /* FontManager.swift */; };
 		100D389B2B44833500498977 /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 100D38962B44833500498977 /* SUIT-Bold.otf */; };
 		100D389C2B44833500498977 /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 100D38972B44833500498977 /* SUIT-Medium.otf */; };
@@ -70,6 +78,9 @@
 
 /* Begin PBXFileReference section */
 		100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		100A1E312B73485800AAC1E8 /* SponusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SponusAPI.swift; sourceTree = "<group>"; };
+		100A1E372B734DB200AAC1E8 /* EmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
+		100A1E392B734DDE00AAC1E8 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		100D387D2B44826500498977 /* Spon-us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spon-us.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		100D38952B44833500498977 /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		100D38962B44833500498977 /* SUIT-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
@@ -135,14 +146,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				100A1E432B73596600AAC1E8 /* RxMoya in Frameworks */,
 				DFCD247C2B54D08100B00515 /* PopupView in Frameworks */,
 				3B36F0AB2B6FEC4E0000ACFB /* iamport-ios in Frameworks */,
+				100A1E462B7359DC00AAC1E8 /* KeychainSwift in Frameworks */,
+				100A1E3F2B73596600AAC1E8 /* Moya in Frameworks */,
+				100A1E412B73596600AAC1E8 /* ReactiveMoya in Frameworks */,
+				100A1E3D2B73596600AAC1E8 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		100A1E352B7348DB00AAC1E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				100A1E362B734DA500AAC1E8 /* Onboarding */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		100A1E362B734DA500AAC1E8 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				100A1E372B734DB200AAC1E8 /* EmailModel.swift */,
+				100A1E392B734DDE00AAC1E8 /* EmailViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		100D38742B44826500498977 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +200,8 @@
 				3B81BCB02B622E950067E9CB /* Manager */,
 				3BFC8D192B54D43C000D6006 /* Helper */,
 				100D38942B44833500498977 /* Font */,
+				100A1E312B73485800AAC1E8 /* SponusAPI.swift */,
+				100A1E352B7348DB00AAC1E8 /* Model */,
 				100D38B42B4EF18C00498977 /* View */,
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
 				100D38B02B44852700498977 /* ContentView.swift */,
@@ -372,6 +407,11 @@
 			packageProductDependencies = (
 				DFCD247B2B54D08100B00515 /* PopupView */,
 				3B36F0AA2B6FEC4E0000ACFB /* iamport-ios */,
+				100A1E3C2B73596600AAC1E8 /* CombineMoya */,
+				100A1E3E2B73596600AAC1E8 /* Moya */,
+				100A1E402B73596600AAC1E8 /* ReactiveMoya */,
+				100A1E422B73596600AAC1E8 /* RxMoya */,
+				100A1E452B7359DC00AAC1E8 /* KeychainSwift */,
 			);
 			productName = "Spon-us";
 			productReference = 100D387D2B44826500498977 /* Spon-us.app */;
@@ -405,6 +445,8 @@
 				3BFC8D162B54B016000D6006 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 				DFCD247A2B54D08100B00515 /* XCRemoteSwiftPackageReference "PopupView" */,
 				3B36F0A92B6FEC4E0000ACFB /* XCRemoteSwiftPackageReference "iamport-ios" */,
+				100A1E3B2B73596600AAC1E8 /* XCRemoteSwiftPackageReference "Moya" */,
+				100A1E442B7359DC00AAC1E8 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 100D387E2B44826500498977 /* Products */;
 			projectDirPath = "";
@@ -465,13 +507,16 @@
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
 				DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */,
 				10EBD80D2B6F783F0082CD8E /* HonorInfoEditView.swift in Sources */,
+				100A1E3A2B734DDE00AAC1E8 /* EmailViewModel.swift in Sources */,
 				106720022B5835FA00493354 /* SendOfferView.swift in Sources */,
 				3B81BCB22B622EBF0067E9CB /* StoreKitManager.swift in Sources */,
 				10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */,
+				100A1E322B73485800AAC1E8 /* SponusAPI.swift in Sources */,
 				807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */,
 				DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */,
 				3B36F0A12B6FEBF60000ACFB /* Utils.swift in Sources */,
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,
+				100A1E382B734DB300AAC1E8 /* EmailModel.swift in Sources */,
 				3B36F0A82B6FEC3C0000ACFB /* PubData.swift in Sources */,
 				3B36F09A2B6FEB800000ACFB /* PaymentSettingView.swift in Sources */,
 				DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */,
@@ -617,10 +662,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = 9R3T6AUA7X;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -638,6 +684,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-uss";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -649,10 +696,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = 9R3T6AUA7X;
+				DEVELOPMENT_TEAM = 6RUVHQW43D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -670,6 +718,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-uss";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -700,6 +749,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		100A1E3B2B73596600AAC1E8 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		100A1E442B7359DC00AAC1E8 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 21.0.0;
+			};
+		};
 		3B36F0A92B6FEC4E0000ACFB /* XCRemoteSwiftPackageReference "iamport-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/iamport/iamport-ios";
@@ -727,6 +792,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		100A1E3C2B73596600AAC1E8 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 100A1E3B2B73596600AAC1E8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		100A1E3E2B73596600AAC1E8 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 100A1E3B2B73596600AAC1E8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		100A1E402B73596600AAC1E8 /* ReactiveMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 100A1E3B2B73596600AAC1E8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = ReactiveMoya;
+		};
+		100A1E422B73596600AAC1E8 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 100A1E3B2B73596600AAC1E8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		100A1E452B7359DC00AAC1E8 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 100A1E442B7359DC00AAC1E8 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
 		3B36F0AA2B6FEC4E0000ACFB /* iamport-ios */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3B36F0A92B6FEC4E0000ACFB /* XCRemoteSwiftPackageReference "iamport-ios" */;

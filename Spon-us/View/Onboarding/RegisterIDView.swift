@@ -9,6 +9,8 @@ import SwiftUI
 import PopupView
 
 struct RegisterIDView: View {
+    @ObservedObject var emailViewModel = EmailViewModel()
+    
     @State private var isEmailValidated = false
     @State var isAuthenticated = false
     
@@ -105,6 +107,7 @@ struct RegisterIDView: View {
                         if !isAuthenticated {
                             if !sentAuthCode {
                                 Button {
+                                    emailViewModel.postEmail(email: userID)
                                     sentAuthCode = true
                                     showingSentPopup = true
                                     startTimer()

@@ -16,9 +16,9 @@ struct CouponView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .firstTextBaseline) {
-                TextField("등록할 쿠폰번호를 입력해주세요", text: $couponNumber)
+                TextField("등록할 쿠폰번호를 입력해 주세요", text: $couponNumber)
                     .font(.Body06)
-                    .padding(.leading, 20)
+                    .padding(.horizontal, 20)
                     .foregroundColor(Color.sponusBlack)
                     .frame(maxWidth: .infinity)
                     .frame(height: 56)

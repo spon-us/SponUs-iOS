@@ -19,7 +19,7 @@ class EmailViewModel: ObservableObject {
             case let .success(response):
                 do {
                     let emailResponse = try response.map(EmailModel.self)
-                    self.email = emailResponse
+                    self.email = emailResponse 
                 } catch {
                     print("Error parsing response: \(error)")
                 }

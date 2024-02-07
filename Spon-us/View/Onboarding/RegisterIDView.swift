@@ -16,6 +16,7 @@ struct RegisterIDView: View {
     
     @State private var userID = ""
     @State private var authCode = ""
+    @State private var correctAuthCode = ""
     @State private var sentAuthCode = false
     @State private var authCodeExpired = false
     @State private var authCodeSubmitted = false
@@ -33,7 +34,7 @@ struct RegisterIDView: View {
     
     let emailRegexPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$/
     
-    let dummyAuthCode = "123456"
+    let dummyAuthCode = ""
     
     private func startTimer() {
         if !isTimerRunning {
@@ -121,7 +122,7 @@ struct RegisterIDView: View {
                                     sentAuthCode = false
                                     stopTimer()
                                     isAuthCodeTextFieldFocused = false
-                                    if (authCode == dummyAuthCode && authCodeSubmitted) {
+                                    if ((authCode == emailViewModel.email?.content) && authCodeSubmitted) {
                                         isAuthenticated = true
                                         showingCompletedPopup = true
                                     }
@@ -134,7 +135,7 @@ struct RegisterIDView: View {
                                 
                             }
                         }
-                    }.border(isAuthCodeTextFieldFocused ? .sponusPrimary : ((authCode != dummyAuthCode && authCodeSubmitted) ? .sponusRed : .sponusGrey100))
+                    }.border(isAuthCodeTextFieldFocused ? .sponusPrimary : (((authCode != emailViewModel.email?.content) && authCodeSubmitted) ? .sponusRed : .sponusGrey100))
                         .padding(.top, 16)
                     if isTimerRunning {
                         if timeRemaining == 0 {
@@ -158,7 +159,7 @@ struct RegisterIDView: View {
                             }.padding(.top, 12)
                         }
                     }
-                    else if (authCodeSubmitted && (authCode != dummyAuthCode)) {
+                    else if (authCodeSubmitted && (authCode != emailViewModel.email?.content)) {
                         HStack(spacing: 0) {
                             Image(.icWarning).resizable().frame(width: 16, height: 16).padding(.trailing, 4)
                             Text("인증번호를 다시 입력해주세요").font(.system(size: 12)).foregroundStyle(.sponusRed)

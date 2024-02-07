@@ -18,7 +18,7 @@ struct HonorInfoEditView: View {
     @State var showingInfoPopup = false
     
     let daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"]
-    let contact = ["이메일", "전화", "zoom", "대면 미팅"]
+    let contact = ["이메일", "전화", "화상 미팅", "대면 미팅"]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -38,9 +38,7 @@ struct HonorInfoEditView: View {
                         .font(.Heading09)
                         .foregroundColor(Color.sponusBlack)
                     
-                    Rectangle()
-                        .fill(Color.sponusBlack)
-                        .frame(maxWidth: .infinity, maxHeight: 1)
+                    SponUsDivider()
                         .padding(.top, 16)
                     
                     HStack {
@@ -49,10 +47,9 @@ struct HonorInfoEditView: View {
                             .foregroundColor(Color.sponusGrey800)
                             .padding(.trailing, 17)
                         
-                        
                         TextField("", text: $email, prompt: Text(verbatim: "ex.sponus@gmail.com"))
                             .font(.English08)
-                            .padding(.leading, 20)
+                            .padding(.horizontal, 20)
                             .foregroundColor(Color.sponusBlack)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
@@ -70,10 +67,9 @@ struct HonorInfoEditView: View {
                             .foregroundColor(Color.sponusGrey800)
                             .padding(.trailing, 20)
                         
-                        
-                        TextField("", text: $phone, prompt: Text(verbatim: "ex.010-1234-5671"))
+                        TextField("", text: $phone, prompt: Text(verbatim: "ex.010-1234-5678"))
                             .font(.English08)
-                            .padding(.leading, 20)
+                            .padding(.horizontal, 20)
                             .foregroundColor(Color.sponusBlack)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
@@ -84,17 +80,13 @@ struct HonorInfoEditView: View {
                             )
                     }
                     .padding(.top, 16)
-                }
-                
-                VStack(alignment: .leading, spacing: 0) {
+                    
                     Text("연락 가능 시간")
                         .font(.Heading09)
                         .foregroundColor(Color.sponusBlack)
                         .padding(.top, 32)
                     
-                    Rectangle()
-                        .fill(Color.sponusBlack)
-                        .frame(maxWidth: .infinity, maxHeight: 1)
+                    SponUsDivider()
                         .padding(.top, 16)
                     
                     HStack {
@@ -127,10 +119,9 @@ struct HonorInfoEditView: View {
                             .foregroundColor(Color.sponusGrey800)
                             .padding(.trailing, 33)
                         
-                        
                         TextField("", text: $time, prompt: Text(verbatim: "ex.14:00 - 18:00"))
                             .font(.English08)
-                            .padding(.leading, 20)
+                            .padding(.horizontal, 20)
                             .foregroundColor(Color.sponusBlack)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
@@ -141,17 +132,13 @@ struct HonorInfoEditView: View {
                             )
                     }
                     .padding(.top, 24)
-                }
-                
-                VStack(alignment: .leading, spacing: 0) {
+                    
                     Text("선호 연락 방법")
                         .font(.Heading09)
                         .foregroundColor(Color.sponusBlack)
                         .padding(.top, 32)
                     
-                    Rectangle()
-                        .fill(Color.sponusBlack)
-                        .frame(maxWidth: .infinity, maxHeight: 1)
+                    SponUsDivider()
                         .padding(.top, 16)
                     
                     HStack {
@@ -177,10 +164,11 @@ struct HonorInfoEditView: View {
                         }
                     }
                     .padding(.top, 24)
+                    .padding(.bottom, 52)
                 }
-                .padding(.bottom, 52)
             }
             .padding(.horizontal, 20)
+            
             Button {
                 showingInfoPopup = true
             } label: {

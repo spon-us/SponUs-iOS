@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		100A1E302B71637A00AAC1E8 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */; };
 		100D389A2B44833500498977 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38952B44833500498977 /* FontManager.swift */; };
 		100D389B2B44833500498977 /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 100D38962B44833500498977 /* SUIT-Bold.otf */; };
 		100D389C2B44833500498977 /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 100D38972B44833500498977 /* SUIT-Medium.otf */; };
@@ -26,6 +27,8 @@
 		10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC602B5C340D00B40547 /* SendOfferPostView.swift */; };
 		10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC622B5C34C400B40547 /* CompanyPostView.swift */; };
 		10EBD80D2B6F783F0082CD8E /* HonorInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EBD80C2B6F783F0082CD8E /* HonorInfoEditView.swift */; };
+		10EBD8112B6FD6D60082CD8E /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EBD8102B6FD6D60082CD8E /* ProfileEditView.swift */; };
+		10EBD8132B6FF2350082CD8E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EBD8122B6FF2350082CD8E /* ImagePicker.swift */; };
 		3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */; };
 		3B36F09A2B6FEB800000ACFB /* PaymentSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F0992B6FEB800000ACFB /* PaymentSettingView.swift */; };
 		3B36F09C2B6FEBA00000ACFB /* ChargerInfoViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36F09B2B6FEBA00000ACFB /* ChargerInfoViewTest.swift */; };
@@ -66,6 +69,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		100D387D2B44826500498977 /* Spon-us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spon-us.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		100D38952B44833500498977 /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		100D38962B44833500498977 /* SUIT-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		10C8AC622B5C34C400B40547 /* CompanyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyPostView.swift; sourceTree = "<group>"; };
 		10C8AC642B5EA69B00B40547 /* ChargerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerInfoView.swift; sourceTree = "<group>"; };
 		10EBD80C2B6F783F0082CD8E /* HonorInfoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HonorInfoEditView.swift; sourceTree = "<group>"; };
+		10EBD8102B6FD6D60082CD8E /* ProfileEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		10EBD8122B6FF2350082CD8E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalReceivedListView.swift; sourceTree = "<group>"; };
 		3B36F0992B6FEB800000ACFB /* PaymentSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSettingView.swift; sourceTree = "<group>"; };
 		3B36F09B2B6FEBA00000ACFB /* ChargerInfoViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerInfoViewTest.swift; sourceTree = "<group>"; };
@@ -283,6 +289,8 @@
 				109F9E272B6E692B006B7D63 /* MyTermsView.swift */,
 				109F9E292B6E7536006B7D63 /* CouponView.swift */,
 				10EBD80C2B6F783F0082CD8E /* HonorInfoEditView.swift */,
+				100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */,
+				10EBD8102B6FD6D60082CD8E /* ProfileEditView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -323,6 +331,7 @@
 				3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */,
 				DFCD24812B5A67FC00B00515 /* DocumentPicker.swift */,
 				3B81BCB52B622EEA0067E9CB /* Extension.swift */,
+				10EBD8122B6FF2350082CD8E /* ImagePicker.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -432,6 +441,7 @@
 				100D38BA2B4EF54C00498977 /* MyView.swift in Sources */,
 				3B81BCB42B622ED00067E9CB /* StoreKitTestView.swift in Sources */,
 				DF90A5B22B664EBF00BC54D0 /* TermsAndConditionsView.swift in Sources */,
+				10EBD8132B6FF2350082CD8E /* ImagePicker.swift in Sources */,
 				DF91F4042B4864330021291A /* Portfolio.swift in Sources */,
 				DF3AD3E32B621FFA00DBFCCC /* SearchPostView.swift in Sources */,
 				3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */,
@@ -442,10 +452,12 @@
 				3BD26D062B62342C0035FE80 /* ChargerInfoView.swift in Sources */,
 				3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */,
 				3B36F0A62B6FEC2F0000ACFB /* Order.swift in Sources */,
+				10EBD8112B6FD6D60082CD8E /* ProfileEditView.swift in Sources */,
 				3B81BCB62B622EEA0067E9CB /* Extension.swift in Sources */,
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */,
 				DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */,
+				100A1E302B71637A00AAC1E8 /* MyProfileView.swift in Sources */,
 				3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */,
 				3B36F09C2B6FEBA00000ACFB /* ChargerInfoViewTest.swift in Sources */,
 				DF90A5BE2B6E39A600BC54D0 /* RegisterPWView.swift in Sources */,

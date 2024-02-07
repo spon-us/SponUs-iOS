@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MyView: View {
+    @Binding var rootIsActive: Bool
+    
     @State private var showLogoutAlert = false
     @State private var showAlert = false
     
@@ -37,7 +39,7 @@ struct MyView: View {
                         .clipped()
                     
                     VStack(alignment: .leading, spacing: 0) {
-                        NavigationLink(destination: EmptyView(), label: {
+                        NavigationLink(destination: MyProfileView(rootIsActive: .constant(false)), label: {
                             HStack {
                                 Text("Profile")
                                     .font(.English15)
@@ -212,5 +214,5 @@ struct MyView: View {
 }
 
 #Preview {
-    MyView()
+    MyView(rootIsActive: .constant(false))
 }

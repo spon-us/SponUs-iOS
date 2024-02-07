@@ -39,7 +39,7 @@ struct ContentView: View {
                 }
                 .tag(2)
 
-            MyView()
+            MyView(rootIsActive: .constant(false))
                 .tabItem {
                     Image(selectedTab == 3 ? "ic_mypage_check" : "ic_mypage")
                     Text("MY")

@@ -85,7 +85,7 @@ struct AnnouncementView: View {
     }()
     
     var body: some View {
-        VStack(spacing: 26) {
+        VStack(spacing: 0) {
             Text(sectionTitle)
                 .font(
                     Font.custom("SUIT", size: 30)
@@ -93,6 +93,7 @@ struct AnnouncementView: View {
                 )
                 .foregroundColor(Color.sponusBlack)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 26)
             
             ZStack {
                 Rectangle().frame(width: UIScreen.screenWidth - 50, height: 1).foregroundStyle(.sponusGrey500)
@@ -134,9 +135,13 @@ struct AnnouncementView: View {
                 }
             }
             
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack {
+                    Spacer().frame(height: 39)
                     
+                    ForEach(0..<10) { cell in
+                        AnnouncementCell()
+                    }
                 }
             }
         }
@@ -150,6 +155,75 @@ struct AnnouncementView: View {
     
     private func updateSectionTitle(_ title: String) {
         sectionTitle = title
+    }
+}
+
+struct AnnouncementCell: View {
+    @State private var selectedBookmarkButton: Bool = false
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack(alignment: .top, spacing: 0){
+                Rectangle()
+                    .frame(width: 95, height: 95)
+                    .padding(.trailing, 16)
+                
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("무신사")
+                        .font(.Caption04)
+                        .foregroundColor(Color.sponusGrey700)
+                        .padding(.top, 4)
+                    
+                    Text("무신사 글로벌 마케팅\n연계프로젝트")
+                        .font(.Body10)
+                        .foregroundColor(Color.sponusBlack)
+                        .padding(.top, 4)
+                    
+                    Spacer()
+                    
+                    HStack{
+                        Text("디자인")
+                            .font(
+                                Font.custom("Pretendard", size: 10)
+                                    .weight(.medium)
+                            )
+                            .foregroundColor(Color.sponusPrimary)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(
+                                Rectangle()
+                                    .fill(Color.sponusSecondary)
+                            )
+                        
+                        Text("제휴")
+                            .font(
+                                Font.custom("Pretendard", size: 10)
+                                    .weight(.medium)
+                            )
+                            .foregroundColor(Color.sponusPrimary)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(
+                                Rectangle()
+                                    .fill(Color.sponusSecondary)
+                            )
+                    }
+                }
+                Spacer()
+                
+                Button(action: {
+                    selectedBookmarkButton.toggle()
+                }) {
+                    Image(selectedBookmarkButton == true ? "ic_saved_check" : "ic_saved")
+                        .frame(width: 24, height: 24)
+                        .padding(.top, 4)
+                }
+            }
+            .padding(.bottom, 16)
+            
+            SponUsDivider()
+                .foregroundColor(Color.sponusGrey100)
+        }
     }
 }
 

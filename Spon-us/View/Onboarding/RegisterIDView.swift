@@ -169,10 +169,10 @@ struct RegisterIDView: View {
                     Spacer()
                     
                     NavigationLink {
-                        RegisterPWView()
+                        RegisterPWView(userID: userID)
                     } label: {
                         Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(!isAuthenticated ? .sponusGrey600 : .sponusPrimary).padding(.bottom, 16)
-                    }.disabled(!isAuthenticated)
+                    }//.disabled(!isAuthenticated)
                 }.navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: CustomBackButton())

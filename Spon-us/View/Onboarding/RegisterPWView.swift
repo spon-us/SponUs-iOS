@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RegisterPWView: View {
+    @State var userID: String
     @State private var userPW = ""
     @State private var userPWConfirm = ""
     @State private var isPWSecure = true
@@ -98,7 +99,7 @@ struct RegisterPWView: View {
             }
             Spacer()
             NavigationLink {
-                SelectUserTypeView()
+                SelectUserTypeView(userID: userID, userPW: userPW)
             } label: {
                 Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(!isValidPW ? .sponusGrey600 : .sponusPrimary).padding(.bottom, 16)
             }.disabled(!isValidPW)
@@ -110,5 +111,5 @@ struct RegisterPWView: View {
 }
 
 #Preview {
-    RegisterPWView()
+    RegisterPWView(userID: "temp")
 }

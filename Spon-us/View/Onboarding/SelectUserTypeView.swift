@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-enum GroupType {
-    case studentCouncil, studentClub, company
-}
-
 struct SelectUserTypeView: View {
+    @State var userID: String
+    @State var userPW: String
     @State var isStudent = false
     @State var isCompany = false
     
@@ -48,10 +46,10 @@ struct SelectUserTypeView: View {
             Spacer()
             NavigationLink {
                 if isStudent {
-                    StudentTypeView()
+                    StudentTypeView(userID: userID, userPW: userPW)
                 }
                 else {
-                    fillInGroupNameView(groupType: .company)
+                    fillInGroupNameView(userID: userID, userPW: userPW, orgType: .company, subOrgType: nil)
                 }
             } label: {
                 Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(!(isStudent || isCompany) ? .sponusGrey600 : .sponusPrimary).padding(.bottom, 16)
@@ -64,6 +62,8 @@ struct SelectUserTypeView: View {
 }
 
 struct StudentTypeView: View {
+    @State var userID: String
+    @State var userPW: String
     @State var isCouncil = false
     @State var isClub = false
     
@@ -100,10 +100,10 @@ struct StudentTypeView: View {
             Spacer()
             NavigationLink {
                 if isCouncil {
-                    fillInGroupNameView(groupType: .studentCouncil)
+                    fillInGroupNameView(userID: userID, userPW: userPW, orgType: .student, subOrgType: .studentCouncil)
                 }
                 else {
-                    fillInGroupNameView(groupType: .studentClub)
+                    fillInGroupNameView(userID: userID, userPW: userPW, orgType: .student, subOrgType: .studentClub)
                 }
             } label: {
                 Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(!(isCouncil || isClub) ? .sponusGrey600 : .sponusPrimary).padding(.bottom, 16)
@@ -117,7 +117,10 @@ struct StudentTypeView: View {
 
 
 struct fillInGroupNameView: View {
-    @State var groupType: GroupType
+    @State var userID: String
+    @State var userPW: String
+    @State var orgType: OrgType
+    @State var subOrgType: SubOrgType?
     @State var groupName = ""
     @FocusState private var isTextFieldFocused: Bool
     var body: some View {
@@ -140,14 +143,7 @@ struct fillInGroupNameView: View {
                 
             Spacer()
             NavigationLink {
-                switch groupType {
-                case .company:
-                    OnboardingCompletedView(groupType: .company, groupName: groupName)
-                case .studentCouncil:
-                    OnboardingCompletedView(groupType: .studentCouncil, groupName: groupName)
-                case .studentClub:
-                    OnboardingCompletedView(groupType: .studentClub, groupName: groupName)
-                }
+                OnboardingCompletedView(userID: userID, userPW: userPW, orgType: orgType, subOrgType: subOrgType, groupName: groupName)
             } label: {
                 Text("다음").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(groupName.isEmpty ? .sponusGrey600 : .sponusPrimary).padding(.bottom, 16)
             }.disabled(groupName.isEmpty)
@@ -159,9 +155,15 @@ struct fillInGroupNameView: View {
 }
 
 struct OnboardingCompletedView: View {
-    @State var groupType: GroupType
+    @StateObject var joinViewModel = JoinViewModel()
+    
+    @State var userID: String
+    @State var userPW: String
+    @State var orgType: OrgType
+    @State var subOrgType: SubOrgType?
     @State var groupName: String
     @State var goToContentView = false
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -181,15 +183,18 @@ struct OnboardingCompletedView: View {
             Button {
                 goToContentView = true
             } label: {
-                Text("시작하기").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background( .sponusPrimary).padding(.bottom, 16)
-            }.fullScreenCover(isPresented: $goToContentView, content: {
+                Text("시작하기").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(joinViewModel.isButtonEnabled ? .sponusPrimary : .sponusGrey600).padding(.bottom, 16)
+            }.disabled(!joinViewModel.isButtonEnabled).fullScreenCover(isPresented: $goToContentView, content: {
                 ContentView()
             })
         }.padding(.horizontal, 20)
             .toolbar(.hidden, for: .navigationBar)
+            .onAppear() {
+                joinViewModel.postJoin(name: groupName, email: userID, password: userPW, orgType: orgType, subOrgType: subOrgType)
+            }
     }
 }
 
-#Preview {
-    OnboardingCompletedView(groupType: .company, groupName: "")
-}
+//#Preview {
+//    OnboardingCompletedView(userID: "temp", userPW: "temp", orgType: .student, subOrgType: nil, groupName: "temp")
+//}

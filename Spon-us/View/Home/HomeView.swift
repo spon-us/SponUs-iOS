@@ -63,9 +63,9 @@ struct HomeView: View {
     }()
     
     let notificationItem: some View = {
-        Button(action: {
-            
-        }) {
+        NavigationLink {
+            NotificationView()
+        } label: {
             Image("ic_notification")
         }
     }()

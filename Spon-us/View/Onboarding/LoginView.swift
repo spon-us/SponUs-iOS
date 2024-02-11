@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LoginView: View {
     @State var userID = ""
@@ -92,17 +93,25 @@ struct LoginView: View {
                         Divider()
                             .background(.sponusPrimary)
                     }
-    //                else if (((userID.wholeMatch(of: emailRegexPattern)?.output) != nil) || userID.isEmpty) {
-    //                    Divider()
-    //                        .background(.sponusGrey200)
-    //                }
+                    //                else if (((userID.wholeMatch(of: emailRegexPattern)?.output) != nil) || userID.isEmpty) {
+                    //                    Divider()
+                    //                        .background(.sponusGrey200)
+                    //                }
                     else {
                         Divider().background(.sponusGrey200)
                     }
                 }.padding(.horizontal, 20)
                     .padding(.bottom, 48)
                 Button {
-                    goToContentView = true
+                    Messaging.messaging().token { token, error in
+                        if let error = error {
+                            print("Error fetching FCM registration token: \(error)")
+                        } else if let token = token {
+                            print("FCM registration token: \(token)")
+                            // 여기서 토큰을 사용하거나 저장합니다.
+                        }
+                    }
+                    //goToContentView = true
                 } label: {
                     Text("로그인")
                         .font(.Body04).foregroundStyle(.sponusWhite)
@@ -125,7 +134,7 @@ struct LoginView: View {
                 })
                 Spacer()
             }
-        }   
+        }
     }
 }
 

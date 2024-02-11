@@ -7,6 +7,22 @@
 
 import Foundation
 
+enum OrgType {
+    case student, company
+}
+
+enum SubOrgType {
+    case studentCouncil, studentClub
+}
+
+struct JoinRequestBody: Codable {
+    let name: String
+    let email: String
+    let password: String
+    let organizationType: String
+    let suborganizationType: String?
+}
+
 struct JoinContent: Codable {
     let id: Int
     let email, name: String

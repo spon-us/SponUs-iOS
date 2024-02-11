@@ -9,25 +9,10 @@ import Foundation
 import Moya
 import KeychainSwift
 
-enum OrgType {
-    case student, company
-}
-
-enum SubOrgType {
-    case studentCouncil, studentClub
-}
-
-struct JoinRequestBody: Codable {
-    let name: String
-    let email: String
-    let password: String
-    let organizationType: String
-    let suborganizationType: String?
-}
-
 enum SponusAPI {
     case postEmail(email: String)
     case postJoin(name: String, email: String, password: String, orgType: OrgType, subOrgType: SubOrgType?)
+    case postLogin(email: String, password: String, fcmToken: String)
 }
 
 extension SponusAPI: TargetType {
@@ -41,6 +26,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations/email"
         case .postJoin:
             return "/api/v1/organizations/join"
+        case .postLogin:
+            return "/api/v1/organizations/login"
         }
     }
     
@@ -49,6 +36,8 @@ extension SponusAPI: TargetType {
         case .postEmail:
             return .post
         case .postJoin:
+            return .post
+        case .postLogin:
             return .post
         }
     }
@@ -66,6 +55,16 @@ extension SponusAPI: TargetType {
                             "email": "test@test.com",
                             "name": "test"
                         ]
+            ]
+            return try! JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
+        case .postLogin:
+            let response: [String : Any] = [
+                "statusCode": "200",
+                "message": "OK",
+                "content": [
+                    "accessToken": "sfiulghsdkh",
+                    "refreshToken": "alskdjfhaslkjgh"
+                ]
             ]
             return try! JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
         }
@@ -91,6 +90,9 @@ extension SponusAPI: TargetType {
                 let requestBody = JoinRequestBody(name: name, email: email, password: password, organizationType: "STUDENT", suborganizationType: nil)
                 return .requestJSONEncodable(requestBody)
             }
+        case .postLogin(let email, let password, let fcmToken):
+            let requestBody = LoginRequestBody(email: email, password: password, fcmToken: fcmToken)
+            return .requestJSONEncodable(requestBody)
         }
     }
     
@@ -99,6 +101,8 @@ extension SponusAPI: TargetType {
         case .postEmail:
             return nil
         case .postJoin:
+            return nil
+        case .postLogin:
             return nil
         /*
         case .postLike:

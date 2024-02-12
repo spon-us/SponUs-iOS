@@ -119,8 +119,14 @@ struct LoginView: View {
                             print("FCM registration token: \(token)")
                             loginViewModel.postLogin(email: userID, password: userPW, fcmToken: token) { success in
                                 if success {
-                                    print("access token : \n\(String(describing: loginViewModel.login201?.content.accessToken))")
-                                    print("refresh token : \n\(String(describing: loginViewModel.login201?.content.refreshToken))")
+                                    // 로그인한 유저의 이메일 정보 -> UserDefaults Key "loginAccount"로 저장
+                                    UserDefaults.standard.set(userID, forKey: "loginAccount")
+                                    // 액세스토큰 / 리프레시토큰 -> 키체인에 [userID]_accessToken / [userID]_refreshToken account로 저장
+                                    saveAccessToken(userID: userID, accessToken: loginViewModel.login201?.content.accessToken ?? "AccessToken Saving Error")
+                                    saveRefreshToken(userID: userID, refreshToken: loginViewModel.login201?.content.refreshToken ?? "RefreshToken Saving Error")
+                                    // 액세스토큰, 리프레시토큰 필요시 아래 메소드 호출
+                                    // loadAccessToken(userID: userID)
+                                    // loadRefreshToken(userID: userID)
                                     goToContentView = true
                                 }
                                 else {

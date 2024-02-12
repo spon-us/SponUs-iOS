@@ -76,7 +76,7 @@ class KeychainManager {
     
     // MARK: - Load
     
-    static func load(account: String) throws -> String {
+    static func loadString(account: String) throws -> String {
         try String(decoding: load(account: account), as: UTF8.self)
     }
     
@@ -121,4 +121,27 @@ class KeychainManager {
             throw KeychainError.unknown(status)
         }
     }
+}
+
+
+func saveAccessToken(userID: String, accessToken: String) {
+    let account = "\(userID)_accessToken"
+    try? KeychainManager.save(account: account, value: accessToken, isForce: true)
+}
+
+func saveRefreshToken(userID: String, refreshToken: String) {
+    let account = "\(userID)_refreshToken"
+    try? KeychainManager.save(account: account, value: refreshToken, isForce: true)
+}
+
+func loadAccessToken(userID: String) -> String {
+    let account = "\(userID)_accessToken"
+    let accessToken = (try? KeychainManager.loadString(account: account)) ?? "Access Token Loading Error"
+    return accessToken
+}
+
+func loadRefreshToken(userID: String) -> String {
+    let account = "\(userID)_refreshToken"
+    let accessToken = (try? KeychainManager.loadString(account: account)) ?? "Refresh Token Loading Error"
+    return accessToken
 }

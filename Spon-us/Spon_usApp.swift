@@ -74,7 +74,12 @@ struct Spon_usApp: App {
     @State var rootIsActive = true
     var body: some Scene {
         WindowGroup {
-            OnBoardingView()
+            if let userID = UserDefaults.standard.string(forKey: "loginAccount") {
+                ContentView()
+            }
+            else {
+                OnBoardingView()
+            }
             //            ContentView()
             //            ChargerInfoViewTest(rootIsActive: $rootIsActive)
         }

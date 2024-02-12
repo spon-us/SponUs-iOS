@@ -176,7 +176,9 @@ struct MyView: View {
                             ),
                             secondaryButton: .default(
                                 Text("로그아웃"),
-                                action: {}
+                                action: {
+                                    UserDefaults.standard.removeObject(forKey: "loginAccount")
+                                }
                             )
                         )
                     }

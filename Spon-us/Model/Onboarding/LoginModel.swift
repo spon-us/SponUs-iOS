@@ -7,21 +7,20 @@
 
 import Foundation
 
-struct LoginModelContent200: Codable {
+struct LoginModelContent201: Codable {
     let accessToken: String
     let refreshToken: String
 }
 
-struct LoginModel200: Codable {
+struct LoginModel201: Codable {
     let statusCode: String
     let message: String
-    let content: LoginModelContent200
+    let content: LoginModelContent201
 }
 
 struct LoginModel401: Codable {
     let statusCode: String
     let message: String
-    let content: String
 }
 
 struct LoginRequestBody: Codable {

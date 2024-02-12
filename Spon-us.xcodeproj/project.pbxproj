@@ -100,6 +100,7 @@
 		DF498F212B790BD000ADE078 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF498F202B790BCF00ADE078 /* GoogleService-Info.plist */; };
 		DF498F232B791EA800ADE078 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F222B791EA800ADE078 /* LoginModel.swift */; };
 		DF498F252B791EB400ADE078 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F242B791EB400ADE078 /* LoginViewModel.swift */; };
+		DF498F272B79B45D00ADE078 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F262B79B45D00ADE078 /* KeyChainManager.swift */; };
 		DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */; };
 		DF90A5AD2B664E5A00BC54D0 /* ProcessingPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */; };
 		DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */; };
@@ -174,6 +175,7 @@
 		DF498F202B790BCF00ADE078 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF498F222B791EA800ADE078 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		DF498F242B791EB400ADE078 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		DF498F262B79B45D00ADE078 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingPolicyView.swift; sourceTree = "<group>"; };
 		DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherAndUsageView.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				3B81BCB32B622ED00067E9CB /* StoreKitTestView.swift */,
 				3B81BCBD2B62312C0067E9CB /* Product.storekit */,
 				3B81BCBF2B6231680067E9CB /* ProductList.plist */,
+				DF498F262B79B45D00ADE078 /* KeyChainManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				100A1E322B73485800AAC1E8 /* SponusAPI.swift in Sources */,
 				807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */,
 				DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */,
+				DF498F272B79B45D00ADE078 /* KeyChainManager.swift in Sources */,
 				3B36F0A12B6FEBF60000ACFB /* Utils.swift in Sources */,
 				100D38A72B44836800498977 /* Spon_usApp.swift in Sources */,
 				100A1E382B734DB300AAC1E8 /* EmailModel.swift in Sources */,

@@ -10,7 +10,7 @@ import Combine
 import Moya
 
 class SentViewModel: ObservableObject {
-    @Published var proposalSent: [SentResponse] = []
+    @Published var proposalSent: [ProposalResponse] = []
     
     private let provider = MoyaProvider<SponusAPI>()
     
@@ -19,7 +19,7 @@ class SentViewModel: ObservableObject {
             switch result {
             case let .success(response):
                 do {
-                    let sentResponse = try response.map(SentModel.self)
+                    let sentResponse = try response.map(ProposalModel.self)
                     self.proposalSent = sentResponse.content
                     print("보낸 제안 \(self.proposalSent.count)")
                 } catch {

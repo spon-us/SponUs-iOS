@@ -1,5 +1,5 @@
 //
-//  SentModel.swift
+//  ProposalModel.swift
 //  Spon-us
 //
 //  Created by yubin on 2/13/24.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct SentModel: Codable {
+struct ProposalModel: Codable {
     let statusCode: String
     let message: String
-    let content: [SentResponse]
+    let content: [ProposalResponse]
 }
 
-struct SentResponse: Codable {
+struct ProposalResponse: Codable {
     let proposeId: Int
     let title: String
     let status: String

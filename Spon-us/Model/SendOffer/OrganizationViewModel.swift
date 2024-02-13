@@ -2,7 +2,7 @@
 //  OrganizationViewModel.swift
 //  Spon-us
 //
-//  Created by yubin on 2/13/24.
+//  Created by yubin on 2/14/24.
 //
 
 import Foundation
@@ -11,23 +11,23 @@ import Moya
 
 class OrganizationViewModel: ObservableObject {
     @Published var organization: OrganizationResponse?
-    @Published var errorMessage: String?
 
     private let provider = MoyaProvider<SponusAPI>()
 
-    func fetchMyOrganization() {
-        provider.request(.getMe) { result in
+    func fetchOrganization(organizationId : Int) {
+        provider.request(.getOrganization(organizationId: organizationId)) { result in
             switch result {
             case let .success(response):
                 do {
                     let organizationResponse = try response.map(OrganizationModel.self)
                     self.organization = organizationResponse.content
+                    //print("담당자 정보 \(self.organization)")
                 } catch {
-                    self.errorMessage = "Error parsing response: \(error)"
+                    print("Error parsing response: \(error)")
                 }
 
             case let .failure(error):
-                self.errorMessage = "Network request failed: \(error)"
+                print("Network request failed: \(error)")
             }
         }
     }

@@ -11,6 +11,8 @@ struct ChargerInfoView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var rootIsActive: Bool
     
+    @ObservedObject var organizationViewModel = OrganizationViewModel()
+    
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -193,6 +195,9 @@ struct ChargerInfoView: View {
                     .padding(.top, 20)
                     .background(Color.sponusBlack)
             }
+        }
+        .onAppear() {
+            organizationViewModel.fetchOrganization(organizationId: 2)
         }
         .gesture(
             DragGesture().onEnded { value in

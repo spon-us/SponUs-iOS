@@ -13,11 +13,13 @@ struct MyView: View {
     @State private var showLogoutAlert = false
     @State private var showAlert = false
     
+    @ObservedObject var organizationViewModel = OrganizationViewModel()
+    
     let searchItem: some View = {
         NavigationLink {
             SearchView()
         } label: {
-            Image("ic_search_white")
+            Image(.icSearchWhite)
         }
     }()
     
@@ -32,7 +34,7 @@ struct MyView: View {
                     .foregroundColor(Color.sponusWhite)
                 
                 HStack(spacing: 0) {
-                    Image("profile_test")
+                    Image(organizationViewModel.organization?.imageUrl ?? "profile_test")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 100, height: 100)
@@ -45,7 +47,7 @@ struct MyView: View {
                                     .font(.English15)
                                     .foregroundColor(Color.sponusPrimary)
                                 
-                                Image("ic_go_12px")
+                                Image(.icGo12Px)
                                     .frame(width: 12, height: 12)
                                     .padding(.leading, -6)
                             }
@@ -57,7 +59,7 @@ struct MyView: View {
                         .background(Color.sponusSecondary)
                         .cornerRadius(99)
                         
-                        Text("스포대학교 총학생회")
+                        Text(organizationViewModel.organization?.name ?? "스포대학교 총학생회")
                             .font(.Heading09)
                             .foregroundColor(Color.sponusWhite)
                             .padding(.top, 11)
@@ -82,7 +84,7 @@ struct MyView: View {
                                 .foregroundColor(Color.sponusBlack)
                             Spacer()
                             
-                            Image("ic_move_grey").frame(width: 28, height: 28)
+                            Image(.icMoveGrey).frame(width: 28, height: 28)
                         }
                     }.frame(height: 28)
                     
@@ -95,7 +97,7 @@ struct MyView: View {
                                 .foregroundColor(Color.sponusBlack)
                             Spacer()
                             
-                            Image("ic_move_grey").frame(width: 28, height: 28)
+                            Image(.icMoveGrey).frame(width: 28, height: 28)
                         }
                     }.frame(height: 28)
                     
@@ -108,7 +110,7 @@ struct MyView: View {
                                 .foregroundColor(Color.sponusBlack)
                             Spacer()
                             
-                            Image("ic_move_grey").frame(width: 28, height: 28)
+                            Image(.icMoveGrey).frame(width: 28, height: 28)
                         }
                     }.frame(height: 28)
                     
@@ -121,7 +123,7 @@ struct MyView: View {
                                 .foregroundColor(Color.sponusBlack)
                             Spacer()
                             
-                            Image("ic_move_grey").frame(width: 28, height: 28)
+                            Image(.icMoveGrey).frame(width: 28, height: 28)
                         }
                     }.frame(height: 28)
                     
@@ -134,7 +136,7 @@ struct MyView: View {
                                 .foregroundColor(Color.sponusBlack)
                             Spacer()
                             
-                            Image("ic_move_grey").frame(width: 28, height: 28)
+                            Image(.icMoveGrey).frame(width: 28, height: 28)
                         }
                     }.frame(height: 28)
                     
@@ -211,6 +213,9 @@ struct MyView: View {
             }
             .navigationBarItems(trailing: searchItem)
             .mynavigationBarBackground()
+        }
+        .onAppear {
+            organizationViewModel.fetchMyOrganization()
         }
     }
 }

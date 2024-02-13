@@ -13,6 +13,7 @@ enum SponusAPI {
     case postEmail(email: String)
     case postJoin(name: String, email: String, password: String, orgType: OrgType, subOrgType: SubOrgType?)
     case postLogin(email: String, password: String, fcmToken: String)
+    case getMe
 }
 
 extension SponusAPI: TargetType {
@@ -28,6 +29,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations/join"
         case .postLogin:
             return "/api/v1/organizations/login"
+        case .getMe:
+            return "/api/v1/organizations/me"
         }
     }
     
@@ -39,6 +42,8 @@ extension SponusAPI: TargetType {
             return .post
         case .postLogin:
             return .post
+        case .getMe:
+            return .get
         }
     }
     
@@ -48,13 +53,13 @@ extension SponusAPI: TargetType {
             return Data()
         case .postJoin:
             let response: [String : Any] = [
-                        "statusCode": "OK",
-                        "message": "OK",
-                        "content": [
-                            "id": 0,
-                            "email": "test@test.com",
-                            "name": "test"
-                        ]
+                "statusCode": "OK",
+                "message": "OK",
+                "content": [
+                    "id": 0,
+                    "email": "test@test.com",
+                    "name": "test"
+                ]
             ]
             return try! JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
         case .postLogin:
@@ -67,6 +72,8 @@ extension SponusAPI: TargetType {
                 ]
             ]
             return try! JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
+        case .getMe:
+            return Data()
         }
     }
     
@@ -93,6 +100,8 @@ extension SponusAPI: TargetType {
         case .postLogin(let email, let password, let fcmToken):
             let requestBody = LoginRequestBody(email: email, password: password, fcmToken: fcmToken)
             return .requestJSONEncodable(requestBody)
+        case .getMe:
+            return .requestPlain
         }
     }
     
@@ -104,6 +113,9 @@ extension SponusAPI: TargetType {
             return nil
         case .postLogin:
             return nil
+        case .getMe:
+            return ["Authorization": KeychainSwift().get("accessToken") ?? "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJzcG9udXNAZ21haWwuY29tIiwiYXV0aCI6IkNPTVBBTlkiLCJpYXQiOjE3MDc4MTYxMjQsImV4cCI6MTcwNzgyMzMyNH0.xLvGR6VwNVFNPjt3u3PLJNhs1BU5yrz9nitBFgPjyrM"]
+            
         /*
         case .postLike:
             return ["Content-Type": "application/json",

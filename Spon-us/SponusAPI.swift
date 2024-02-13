@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 import KeychainSwift
+import SwiftUI
 
 enum OrgType {
     case student, company
@@ -28,6 +29,8 @@ struct JoinRequestBody: Codable {
 enum SponusAPI {
     case postEmail(email: String)
     case postJoin(name: String, email: String, password: String, orgType: OrgType, subOrgType: SubOrgType?)
+    case postAnnouncement(title: String, type: String, category: String, content: String, images: [UIImage])
+    case getCategory(category: String?, type: String?)
 }
 
 extension SponusAPI: TargetType {
@@ -41,6 +44,11 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations/email"
         case .postJoin:
             return "/api/v1/organizations/join"
+        case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
+            return "/api/v1/announcements"
+        
+        case .getCategory(category: let category, type: let type):
+            return "/api/v1/announcements/category"
         }
     }
     
@@ -50,6 +58,10 @@ extension SponusAPI: TargetType {
             return .post
         case .postJoin:
             return .post
+        case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
+            return .post
+        case .getCategory(category: let category, type: let type):
+            return .get
         }
     }
     
@@ -68,6 +80,25 @@ extension SponusAPI: TargetType {
                         ]
             ]
             return try! JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
+        case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
+                let sampleResponse: [String: Any] = [
+                    "statusCode": "string",
+                    "message": "string",
+                    "content": [
+                        "id": 0,
+                        "writerId": 0,
+                        "title": "string",
+                        "type": "SPONSORSHIP",
+                        "category": "IDEA",
+                        "content": "string",
+                        "status": "OPENED",
+                        "viewCount": 0
+                    ]
+                ]
+                return try! JSONSerialization.data(withJSONObject: sampleResponse, options: .prettyPrinted)
+        case .getCategory(category: let category, type: let type):
+            return Data()
+            
         }
     }
     
@@ -91,6 +122,35 @@ extension SponusAPI: TargetType {
                 let requestBody = JoinRequestBody(name: name, email: email, password: password, organizationType: "STUDENT", suborganizationType: nil)
                 return .requestJSONEncodable(requestBody)
             }
+        case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
+            let requestParams = [
+               "title": title,
+               "type": type,
+               "category": category,
+               "content": content
+           ]
+           let requestJSON = try? JSONEncoder().encode(requestParams)
+
+           let imageMultipartData = images.enumerated().map { (index, image) -> MultipartFormData in
+               let imageData = image.jpegData(compressionQuality: 0.7) ?? Data()
+               return MultipartFormData(provider: .data(imageData), name: "images", fileName: "image\(index).jpg", mimeType: "image/jpeg")
+           }
+           var multipartData = [MultipartFormData]()
+           if let requestData = requestJSON {
+               multipartData.append(MultipartFormData(provider: .data(requestData), name: "request"))
+           }
+           multipartData.append(contentsOf: imageMultipartData)
+           
+           return .uploadMultipart(multipartData)
+        case .getCategory(category: let category, type: let type):
+            var parameters: [String: Any] = [:]
+            if let category = category {
+                parameters["category"] = category
+            }
+            if let type = type {
+                parameters["type"] = type
+            }
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }
     
@@ -105,6 +165,14 @@ extension SponusAPI: TargetType {
             return ["Content-Type": "application/json",
                     "Accept": "application/json",
                     "atk": KeychainSwift().get("accessToken") ?? ""] */
+        case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
+            return [
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJzcG9udXNAZ21haWwuY29tIiwiYXV0aCI6IkNPTVBBTlkiLCJpYXQiOjE3MDc3NDcwMzMsImV4cCI6MTcwODM1MTgzM30.fuPOq7cbQys7PwM0td9AEd6kVGfAPpcn1lQWOvlDTDU"
+            ]
+        case .getCategory(category: let category, type: let type):
+            return [
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJzcG9udXNAZ21haWwuY29tIiwiYXV0aCI6IkNPTVBBTlkiLCJpYXQiOjE3MDc3NDcwMzMsImV4cCI6MTcwODM1MTgzM30.fuPOq7cbQys7PwM0td9AEd6kVGfAPpcn1lQWOvlDTDU"
+            ]
         }
     }
     

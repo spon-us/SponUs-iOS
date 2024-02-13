@@ -11,6 +11,8 @@ struct ProposalReceivedListView: View {
     @Binding var rootIsActive: Bool
     @State var goToNoticeDetail = false
     
+    @ObservedObject var receivedViewModel = ReceivedViewModel()
+    
     var body: some View {
         ScrollView{
             
@@ -65,30 +67,39 @@ struct ProposalReceivedListView: View {
                     .padding(.top, 8)
                 
                 NavigationLink(destination: ChargerInfoViewTest(rootIsActive: $rootIsActive), label: {
-                    HStack(spacing: 0) {
-                        Image("Rectangle 1232")
-                            .frame(width: 79, height: 79)
-                            .padding(.trailing, 17)
-                        
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("무신사 담당자")
-                                .font(.Body07)
-                            
-                            Text("안녕하세요 무신사입니다")
-                                .font(.Body10)
-                              .foregroundColor(Color.sponusGrey800)
+                    //test
+                    VStack {
+                        ForEach(receivedViewModel.proposalReceived.indices, id: \.self) { index in
+                            HStack(spacing: 0) {
+                                Image("Rectangle 1232")
+                                    .frame(width: 79, height: 79)
+                                    .padding(.trailing, 17)
+                                
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text(receivedViewModel.proposalReceived[index].proposingOrganizationName)
+                                        .font(.Body07)
+                                    
+                                    Text(receivedViewModel.proposalReceived[index].title)
+                                        .font(.Body10)
+                                        .foregroundColor(Color.sponusGrey800)
+                                }
+                                
+                                Spacer()
+                                
+                                Image("ic_go")
+                            }
                         }
-                        
-                        Spacer()
-                        
-                        Image("ic_go")
                     }
+                    
                 })
                 .padding(.top, 16)
                 
             }
             .foregroundColor(Color.sponusBlack)
             .padding(.horizontal, 20)
+        }
+        .onAppear() {
+            receivedViewModel.fetchProposalReceived(announcementId: 1)
         }
         .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.rootIsActive = false}, label: {
             Image(.icHome)

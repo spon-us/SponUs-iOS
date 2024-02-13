@@ -22,6 +22,7 @@ enum SponusAPI {
     case getSent
     case getProposalDetail(proposeId: Int)
     case getOrganization(organizationId: Int)
+    case getReceived(announcementId: Int)
 }
 
 extension SponusAPI: TargetType {
@@ -49,10 +50,12 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations/me"
         case .getSent:
             return "/api/v1/proposes/sent"
-        case let .getProposalDetail(proposeId):
+        case .getProposalDetail(let proposeId):
             return "/api/v1/proposes/\(proposeId)"
-        case let .getOrganization(organizationId):
+        case .getOrganization(let organizationId):
             return "/api/v1/organizations/\(organizationId)"
+        case .getReceived:
+            return "/api/v1/proposes/received"
         }
     }
     
@@ -79,6 +82,8 @@ extension SponusAPI: TargetType {
         case .getProposalDetail:
             return .get
         case .getOrganization:
+            return .get
+        case .getReceived:
             return .get
         }
     }
@@ -137,6 +142,8 @@ extension SponusAPI: TargetType {
         case .getProposalDetail:
             return Data()
         case .getOrganization:
+            return Data()
+        case .getReceived:
             return Data()
         }
     }
@@ -224,6 +231,9 @@ extension SponusAPI: TargetType {
             return .requestPlain
         case .getOrganization:
             return .requestPlain
+        case .getReceived(let announcementId):
+            let parameters: [String: Any] = ["announcementId": announcementId]
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }
     
@@ -264,6 +274,8 @@ extension SponusAPI: TargetType {
             return [
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJzcG9udXNfc3R1ZGVudEBnbWFpbC5jb20iLCJhdXRoIjoiU1RVREVOVCIsImlhdCI6MTcwNzgxNzkwNCwiZXhwIjoxNzA4NDIyNzA0fQ.r1QRU91tLjvDbiPco3RBnapB4j4DsXmbn-D7c0yfU6E"
             ]
+        case .getReceived:
+            return ["Authorization": KeychainSwift().get("accessToken") ?? "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJzcG9udXNfc3R1ZGVudEBnbWFpbC5jb20iLCJhdXRoIjoiU1RVREVOVCIsImlhdCI6MTcwNzgxNzkwNCwiZXhwIjoxNzA4NDIyNzA0fQ.r1QRU91tLjvDbiPco3RBnapB4j4DsXmbn-D7c0yfU6E"]
         }
     }
 }

@@ -22,14 +22,14 @@ struct MyCustomBackButton: View {
 struct MyProfileView: View {
     @Binding var rootIsActive: Bool
     
-    @ObservedObject var organizationViewModel = OrganizationViewModel()
+    @ObservedObject var myOrganizationViewModel = MyOrganizationViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
                 ZStack(alignment: .topTrailing) {
                     ZStack(alignment: .bottomLeading) {
-                        Image(organizationViewModel.organization?.imageUrl ?? "profile_test")
+                        Image(.profileTest)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: .infinity, maxHeight: 540)
@@ -50,9 +50,9 @@ struct MyProfileView: View {
                             )
                         
                         VStack(alignment:.leading, spacing: 8) {
-                            Text(organizationViewModel.organization?.suborganizationType == "STUDENT_COUNCIL" ?
+                            Text(myOrganizationViewModel.myOrganization?.suborganizationType == "STUDENT_COUNCIL" ?
                                  "Student Council" :
-                                    (organizationViewModel.organization?.suborganizationType == "STUDENT_CLUB" ?
+                                    (myOrganizationViewModel.myOrganization?.suborganizationType == "STUDENT_CLUB" ?
                                      "Student Club" :
                                         "Company"))
                             .font(.English15)
@@ -63,7 +63,7 @@ struct MyProfileView: View {
                                 RoundedRectangle(cornerRadius: 99)
                                     .foregroundColor(Color.sponusSecondary)
                             )
-                            Text(organizationViewModel.organization?.name ?? "스포대학교 총학생회")
+                            Text(myOrganizationViewModel.myOrganization?.name ?? "스포대학교 총학생회")
                                 .font(.Heading01)
                                 .foregroundColor(Color.sponusWhite)
                                 .padding(.bottom, 25)
@@ -97,7 +97,7 @@ struct MyProfileView: View {
                     SponUsDivider()
                         .padding(.bottom, 8)
                     
-                    Text(organizationViewModel.organization?.description ?? "안녕하세요 스포대학교 제 21대 총학생회 스포너스입니다. 저희는 학생과 세상 사이의 장벽을 뛰어넘겠다는 각오로 스포대학교 학생들의 복지를 위해 힘쓰고 있습니다. \n연락 주시는 모든 일에 적극적으로 임하겠습니다.")
+                    Text(myOrganizationViewModel.myOrganization?.description ?? "안녕하세요 스포대학교 제 21대 총학생회 스포너스입니다. 저희는 학생과 세상 사이의 장벽을 뛰어넘겠다는 각오로 스포대학교 학생들의 복지를 위해 힘쓰고 있습니다. \n연락 주시는 모든 일에 적극적으로 임하겠습니다.")
                         .font(.Body10)
                         .frame(alignment: .topLeading)
                         .foregroundColor(Color.sponusGrey800)
@@ -135,7 +135,7 @@ struct MyProfileView: View {
             
         }
         .onAppear {
-            organizationViewModel.fetchMyOrganization()
+            myOrganizationViewModel.fetchMyOrganization()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)

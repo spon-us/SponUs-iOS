@@ -31,6 +31,11 @@ struct OrganizationResponse: Codable {
     let managerAvailableHour: String?
     let managerContactPreference: String?
     let organizationStatus: String
-    let tags: [String]
-    let links: [String]
+    let tags: [Tag]
+    let links: [Links]
+}
+
+struct Links: Codable {
+    let organizationLinkId, organizationId: Int
+    let name, url: String
 }

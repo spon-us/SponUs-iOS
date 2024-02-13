@@ -14,6 +14,9 @@ enum SponusAPI {
     case postJoin(name: String, email: String, password: String, orgType: OrgType, subOrgType: SubOrgType?)
     case postLogin(email: String, password: String, fcmToken: String)
     case getMe
+    case getSent
+    case getProposalDetail(proposeId: Int)
+    case getOrganization(organizationId: Int)
 }
 
 extension SponusAPI: TargetType {
@@ -31,6 +34,12 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations/login"
         case .getMe:
             return "/api/v1/organizations/me"
+        case .getSent:
+            return "/api/v1/proposes/sent"
+        case let .getProposalDetail(proposeId):
+            return "/api/v1/proposes/\(proposeId)"
+        case let .getOrganization(organizationId):
+            return "/api/v1/organizations/\(organizationId)"
         }
     }
     
@@ -43,6 +52,12 @@ extension SponusAPI: TargetType {
         case .postLogin:
             return .post
         case .getMe:
+            return .get
+        case .getSent:
+            return .get
+        case .getProposalDetail:
+            return .get
+        case .getOrganization:
             return .get
         }
     }
@@ -74,6 +89,12 @@ extension SponusAPI: TargetType {
             return try! JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
         case .getMe:
             return Data()
+        case .getSent:
+            return Data()
+        case .getProposalDetail:
+            return Data()
+        case .getOrganization:
+            return Data()
         }
     }
     
@@ -102,6 +123,12 @@ extension SponusAPI: TargetType {
             return .requestJSONEncodable(requestBody)
         case .getMe:
             return .requestPlain
+        case .getSent:
+            return .requestPlain
+        case .getProposalDetail:
+            return .requestPlain
+        case .getOrganization:
+            return .requestPlain
         }
     }
     
@@ -114,8 +141,13 @@ extension SponusAPI: TargetType {
         case .postLogin:
             return nil
         case .getMe:
-            return ["Authorization": KeychainSwift().get("accessToken") ?? "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJzcG9udXNAZ21haWwuY29tIiwiYXV0aCI6IkNPTVBBTlkiLCJpYXQiOjE3MDc4MTYxMjQsImV4cCI6MTcwNzgyMzMyNH0.xLvGR6VwNVFNPjt3u3PLJNhs1BU5yrz9nitBFgPjyrM"]
-            
+            return ["Authorization": KeychainSwift().get("accessToken") ?? "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJzcG9udXNfc3R1ZGVudEBnbWFpbC5jb20iLCJhdXRoIjoiU1RVREVOVCIsImlhdCI6MTcwNzgxNzkwNCwiZXhwIjoxNzA4NDIyNzA0fQ.r1QRU91tLjvDbiPco3RBnapB4j4DsXmbn-D7c0yfU6E"]
+        case .getSent:
+            return ["Authorization": KeychainSwift().get("accessToken") ?? "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJzcG9udXNfc3R1ZGVudEBnbWFpbC5jb20iLCJhdXRoIjoiU1RVREVOVCIsImlhdCI6MTcwNzgxNzkwNCwiZXhwIjoxNzA4NDIyNzA0fQ.r1QRU91tLjvDbiPco3RBnapB4j4DsXmbn-D7c0yfU6E"]
+        case .getProposalDetail:
+            return ["Authorization": KeychainSwift().get("accessToken") ?? "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJzcG9udXNfc3R1ZGVudEBnbWFpbC5jb20iLCJhdXRoIjoiU1RVREVOVCIsImlhdCI6MTcwNzgxNzkwNCwiZXhwIjoxNzA4NDIyNzA0fQ.r1QRU91tLjvDbiPco3RBnapB4j4DsXmbn-D7c0yfU6E"]
+        case .getOrganization:
+            return ["Authorization": KeychainSwift().get("accessToken") ?? "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJzcG9udXNfc3R1ZGVudEBnbWFpbC5jb20iLCJhdXRoIjoiU1RVREVOVCIsImlhdCI6MTcwNzgxNzkwNCwiZXhwIjoxNzA4NDIyNzA0fQ.r1QRU91tLjvDbiPco3RBnapB4j4DsXmbn-D7c0yfU6E"]
         /*
         case .postLike:
             return ["Content-Type": "application/json",

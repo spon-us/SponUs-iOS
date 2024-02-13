@@ -1,5 +1,5 @@
 //
-//  SentViewModel.swift
+//  OrganizationViewModel.swift
 //  Spon-us
 //
 //  Created by yubin on 2/13/24.
@@ -9,23 +9,22 @@ import Foundation
 import Combine
 import Moya
 
-class SentViewModel: ObservableObject {
-    @Published var proposalSent: [SentResponse] = []
-    
+class MyOrganizationViewModel: ObservableObject {
+    @Published var myOrganization: OrganizationResponse?
+
     private let provider = MoyaProvider<SponusAPI>()
-    
-    func fetchProposalSent() {
-        provider.request(.getSent) { result in
+
+    func fetchMyOrganization() {
+        provider.request(.getMe) { result in
             switch result {
             case let .success(response):
                 do {
-                    let sentResponse = try response.map(SentModel.self)
-                    self.proposalSent = sentResponse.content
-                    print("보낸 제안 \(self.proposalSent.count)")
+                    let myOrganizationResponse = try response.map(OrganizationModel.self)
+                    self.myOrganization = myOrganizationResponse.content
                 } catch {
                     print("Error parsing response: \(error)")
                 }
-                
+
             case let .failure(error):
                 print("Network request failed: \(error)")
             }

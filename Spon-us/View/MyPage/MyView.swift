@@ -13,7 +13,7 @@ struct MyView: View {
     @State private var showLogoutAlert = false
     @State private var showAlert = false
     
-    @ObservedObject var organizationViewModel = OrganizationViewModel()
+    @ObservedObject var myOrganizationViewModel = MyOrganizationViewModel()
     
     let searchItem: some View = {
         NavigationLink {
@@ -34,7 +34,7 @@ struct MyView: View {
                     .foregroundColor(Color.sponusWhite)
                 
                 HStack(spacing: 0) {
-                    Image(organizationViewModel.organization?.imageUrl ?? "profile_test")
+                    Image(.profileTest)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 100, height: 100)
@@ -59,7 +59,7 @@ struct MyView: View {
                         .background(Color.sponusSecondary)
                         .cornerRadius(99)
                         
-                        Text(organizationViewModel.organization?.name ?? "스포대학교 총학생회")
+                        Text(myOrganizationViewModel.myOrganization?.name ?? "스포대학교 총학생회")
                             .font(.Heading09)
                             .foregroundColor(Color.sponusWhite)
                             .padding(.top, 11)
@@ -215,7 +215,7 @@ struct MyView: View {
             .mynavigationBarBackground()
         }
         .onAppear {
-            organizationViewModel.fetchMyOrganization()
+            myOrganizationViewModel.fetchMyOrganization()
         }
     }
 }

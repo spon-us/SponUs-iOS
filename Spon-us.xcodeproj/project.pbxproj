@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10025B372B7B802F00DCCC5A /* SentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10025B362B7B802F00DCCC5A /* SentModel.swift */; };
+		10025B392B7B804400DCCC5A /* SentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10025B382B7B804400DCCC5A /* SentViewModel.swift */; };
+		10025B3B2B7BA13D00DCCC5A /* ProposalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10025B3A2B7BA13D00DCCC5A /* ProposalDetailModel.swift */; };
+		10025B3D2B7BA14900DCCC5A /* ProposalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10025B3C2B7BA14900DCCC5A /* ProposalDetailViewModel.swift */; };
+		10025B412B7C024200DCCC5A /* OrganizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10025B402B7C024200DCCC5A /* OrganizationViewModel.swift */; };
 		100A1E302B71637A00AAC1E8 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */; };
 		100A1E322B73485800AAC1E8 /* SponusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E312B73485800AAC1E8 /* SponusAPI.swift */; };
 		100A1E382B734DB300AAC1E8 /* EmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E372B734DB200AAC1E8 /* EmailModel.swift */; };
@@ -32,7 +37,7 @@
 		1031EC7C2B68B9F20016655B /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031EC7B2B68B9F20016655B /* AnnouncementView.swift */; };
 		106720022B5835FA00493354 /* SendOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106720012B5835FA00493354 /* SendOfferView.swift */; };
 		107D6E692B7A8273005B6261 /* OrganizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107D6E682B7A8273005B6261 /* OrganizationModel.swift */; };
-		107D6E6B2B7A83AB005B6261 /* OrganizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107D6E6A2B7A83AB005B6261 /* OrganizationViewModel.swift */; };
+		107D6E6B2B7A83AB005B6261 /* MyOrganizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107D6E6A2B7A83AB005B6261 /* MyOrganizationViewModel.swift */; };
 		109F9E282B6E692B006B7D63 /* MyTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F9E272B6E692B006B7D63 /* MyTermsView.swift */; };
 		109F9E2A2B6E7536006B7D63 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F9E292B6E7536006B7D63 /* CouponView.swift */; };
 		10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC602B5C340D00B40547 /* SendOfferPostView.swift */; };
@@ -119,6 +124,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10025B362B7B802F00DCCC5A /* SentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentModel.swift; sourceTree = "<group>"; };
+		10025B382B7B804400DCCC5A /* SentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentViewModel.swift; sourceTree = "<group>"; };
+		10025B3A2B7BA13D00DCCC5A /* ProposalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalDetailModel.swift; sourceTree = "<group>"; };
+		10025B3C2B7BA14900DCCC5A /* ProposalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalDetailViewModel.swift; sourceTree = "<group>"; };
+		10025B402B7C024200DCCC5A /* OrganizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationViewModel.swift; sourceTree = "<group>"; };
 		100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		100A1E312B73485800AAC1E8 /* SponusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SponusAPI.swift; sourceTree = "<group>"; };
 		100A1E372B734DB200AAC1E8 /* EmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
@@ -141,7 +151,7 @@
 		1031EC7B2B68B9F20016655B /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 		106720012B5835FA00493354 /* SendOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferView.swift; sourceTree = "<group>"; };
 		107D6E682B7A8273005B6261 /* OrganizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationModel.swift; sourceTree = "<group>"; };
-		107D6E6A2B7A83AB005B6261 /* OrganizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationViewModel.swift; sourceTree = "<group>"; };
+		107D6E6A2B7A83AB005B6261 /* MyOrganizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrganizationViewModel.swift; sourceTree = "<group>"; };
 		109F9E272B6E692B006B7D63 /* MyTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTermsView.swift; sourceTree = "<group>"; };
 		109F9E292B6E7536006B7D63 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
 		10C8AC602B5C340D00B40547 /* SendOfferPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferPostView.swift; sourceTree = "<group>"; };
@@ -244,10 +254,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10025B352B7B7B8700DCCC5A /* SendOffer */ = {
+			isa = PBXGroup;
+			children = (
+				10025B362B7B802F00DCCC5A /* SentModel.swift */,
+				10025B382B7B804400DCCC5A /* SentViewModel.swift */,
+				10025B3A2B7BA13D00DCCC5A /* ProposalDetailModel.swift */,
+				10025B3C2B7BA14900DCCC5A /* ProposalDetailViewModel.swift */,
+				10025B402B7C024200DCCC5A /* OrganizationViewModel.swift */,
+			);
+			path = SendOffer;
+			sourceTree = "<group>";
+		};
 		100A1E352B7348DB00AAC1E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				100A1E362B734DA500AAC1E8 /* Onboarding */,
+				10025B352B7B7B8700DCCC5A /* SendOffer */,
 				107D6E672B7A821D005B6261 /* MyPage */,
 			);
 			path = Model;
@@ -346,7 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				107D6E682B7A8273005B6261 /* OrganizationModel.swift */,
-				107D6E6A2B7A83AB005B6261 /* OrganizationViewModel.swift */,
+				107D6E6A2B7A83AB005B6261 /* MyOrganizationViewModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -626,15 +649,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				107D6E6B2B7A83AB005B6261 /* OrganizationViewModel.swift in Sources */,
+				107D6E6B2B7A83AB005B6261 /* MyOrganizationViewModel.swift in Sources */,
 				100D38BA2B4EF54C00498977 /* MyView.swift in Sources */,
 				3B81BCB42B622ED00067E9CB /* StoreKitTestView.swift in Sources */,
 				DF90A5B22B664EBF00BC54D0 /* TermsAndConditionsView.swift in Sources */,
 				10EBD8132B6FF2350082CD8E /* ImagePicker.swift in Sources */,
 				DF91F4042B4864330021291A /* Portfolio.swift in Sources */,
 				DF3AD3E32B621FFA00DBFCCC /* SearchPostView.swift in Sources */,
+				10025B3D2B7BA14900DCCC5A /* ProposalDetailViewModel.swift in Sources */,
 				3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */,
+				10025B3B2B7BA13D00DCCC5A /* ProposalDetailModel.swift in Sources */,
 				100D389A2B44833500498977 /* FontManager.swift in Sources */,
+				10025B392B7B804400DCCC5A /* SentViewModel.swift in Sources */,
 				100D38B62B4EF51E00498977 /* SavedView.swift in Sources */,
 				80FA31692B5EB9490076453B /* NewPostView.swift in Sources */,
 				100D38B82B4EF54100498977 /* CategoryView.swift in Sources */,
@@ -651,6 +677,7 @@
 				DFB22ED92B767003007903DF /* JoinViewModel.swift in Sources */,
 				100A1E302B71637A00AAC1E8 /* MyProfileView.swift in Sources */,
 				3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */,
+				10025B372B7B802F00DCCC5A /* SentModel.swift in Sources */,
 				3B36F09C2B6FEBA00000ACFB /* ChargerInfoViewTest.swift in Sources */,
 				DF90A5BE2B6E39A600BC54D0 /* RegisterPWView.swift in Sources */,
 				DF90A5B62B6B7CF900BC54D0 /* RegisterIDView.swift in Sources */,
@@ -671,6 +698,7 @@
 				100A1E382B734DB300AAC1E8 /* EmailModel.swift in Sources */,
 				3B36F0A82B6FEC3C0000ACFB /* PubData.swift in Sources */,
 				3B36F09A2B6FEB800000ACFB /* PaymentSettingView.swift in Sources */,
+				10025B412B7C024200DCCC5A /* OrganizationViewModel.swift in Sources */,
 				DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */,
 				DFB22ED72B766FF3007903DF /* JoinModel.swift in Sources */,
 				3B36F0A32B6FEC0B0000ACFB /* PortOneViewModel.swift in Sources */,

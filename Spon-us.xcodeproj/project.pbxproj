@@ -60,6 +60,8 @@
 		3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */; };
 		806AF86A2B79DBD0008F7F62 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806AF8692B79DBD0008F7F62 /* CategoryModel.swift */; };
 		806AF86C2B79EB3F008F7F62 /* CategoryModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806AF86B2B79EB3F008F7F62 /* CategoryModelData.swift */; };
+		806AF8732B7B8504008F7F62 /* AnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806AF8722B7B8504008F7F62 /* AnnouncementViewModel.swift */; };
+		806AF8752B7B8595008F7F62 /* AnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806AF8742B7B8595008F7F62 /* AnnouncementModel.swift */; };
 		807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807BF83E2B51BCD400A659B9 /* SearchView.swift */; };
 		80B41FFE2B77CCA40021DD90 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B41FFD2B77CCA40021DD90 /* NotificationView.swift */; };
 		80B420022B77F2030021DD90 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 80B420012B77F2030021DD90 /* FirebaseAnalytics */; };
@@ -165,6 +167,8 @@
 		3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		806AF8692B79DBD0008F7F62 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		806AF86B2B79EB3F008F7F62 /* CategoryModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModelData.swift; sourceTree = "<group>"; };
+		806AF8722B7B8504008F7F62 /* AnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewModel.swift; sourceTree = "<group>"; };
+		806AF8742B7B8595008F7F62 /* AnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementModel.swift; sourceTree = "<group>"; };
 		807BF83E2B51BCD400A659B9 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		80B41FFD2B77CCA40021DD90 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		80B41FFF2B77F0DF0021DD90 /* Spon-us.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Spon-us.entitlements"; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 		100A1E352B7348DB00AAC1E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				806AF8712B7B84F2008F7F62 /* Announcement */,
 				806AF8682B79D985008F7F62 /* Category */,
 				100A1E362B734DA500AAC1E8 /* Onboarding */,
 			);
@@ -466,6 +471,15 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		806AF8712B7B84F2008F7F62 /* Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				806AF8722B7B8504008F7F62 /* AnnouncementViewModel.swift */,
+				806AF8742B7B8595008F7F62 /* AnnouncementModel.swift */,
+			);
+			path = Announcement;
+			sourceTree = "<group>";
+		};
 		80B41FFC2B77CC910021DD90 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,7 +657,9 @@
 				DF90A5BE2B6E39A600BC54D0 /* RegisterPWView.swift in Sources */,
 				DF90A5B62B6B7CF900BC54D0 /* RegisterIDView.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
+				806AF8752B7B8595008F7F62 /* AnnouncementModel.swift in Sources */,
 				DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */,
+				806AF8732B7B8504008F7F62 /* AnnouncementViewModel.swift in Sources */,
 				10EBD80D2B6F783F0082CD8E /* HonorInfoEditView.swift in Sources */,
 				100A1E3A2B734DDE00AAC1E8 /* EmailViewModel.swift in Sources */,
 				1031EC7C2B68B9F20016655B /* AnnouncementView.swift in Sources */,

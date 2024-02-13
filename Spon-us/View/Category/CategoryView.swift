@@ -19,12 +19,13 @@ struct CategoryView: View {
     @StateObject private var categoryModelData = CategoryModelData()
     
     private func updateCategoryModelData() {
-            let category = changeToEnglish(category: selectedCategoryList)
-            let type = changeToEnglish(type: selectedCategoryDetailList)
-            categoryModelData.setAPIValue(category: category, type: type)
-        }
+        let category = changeToEnglish(category: selectedCategoryList)
+        let type = changeToEnglish(type: selectedCategoryDetailList)
+        categoryModelData.setAPIValue(category: category, type: type)
+    }
+    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("CATEGORY")
@@ -76,12 +77,9 @@ struct CategoryView: View {
                     ScrollView{
                         VStack{
                             Spacer().frame(height: 30)
-                            
                             ForEach(categoryModelData.categoryModelDatas, id: \.id) { categoryContent in
                                 CategoryCell(categoryContent: categoryContent)
                             }
-                            
-                            
                         }
                         .padding(.horizontal, 20)
                     }
@@ -104,7 +102,6 @@ struct CategoryView: View {
 }
 
 struct CategoryListCell: View {
-    
     var categoryList: String
     @Binding var selectedCategoryList: String
     @Binding var selectedCategoryDetailList: String
@@ -136,7 +133,7 @@ struct CategoryListCell: View {
 }
 
 struct CategoryListDetailCell: View {
-    
+
     var categoryDetailList: String
     @Binding var selectedCategoryList: String
     @Binding var selectedCategoryDetailList: String
@@ -164,10 +161,12 @@ struct CategoryListDetailCell: View {
 }
 
 struct CategoryCell: View {
+    
     var categoryContent: CategoryContent
     @State private var isBookmarked = false
+    
     var body: some View {
-        Button(action: {}){
+        NavigationLink{SearchPostView(announcementId: categoryContent.id, selectedSaveButton: $isBookmarked)} label: {
             VStack(spacing: 0){
                 HStack(alignment: .top, spacing: 0){
                     Image("musinsa").resizable().frame(width: 95, height: 95).padding(.trailing, 16)
@@ -215,11 +214,11 @@ struct CategoryCell: View {
     }
     func toggleBookmark(){
         isBookmarked.toggle()
-            if isBookmarked {
-                print("추가") //api
-            } else {
-                print("해제") //api
-            }
+        if isBookmarked {
+            print("추가") //api
+        } else {
+            print("해제") //api
+        }
     }
 }
 

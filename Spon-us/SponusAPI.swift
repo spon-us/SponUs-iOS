@@ -31,6 +31,8 @@ enum SponusAPI {
     case postJoin(name: String, email: String, password: String, orgType: OrgType, subOrgType: SubOrgType?)
     case postAnnouncement(title: String, type: String, category: String, content: String, images: [UIImage])
     case getCategory(category: String?, type: String?)
+    case getAnnouncement(announcementId: Int)
+    case propose(title: String, content: String, announcementId: Int, attachments: [URL])
 }
 
 extension SponusAPI: TargetType {
@@ -46,9 +48,12 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations/join"
         case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
             return "/api/v1/announcements"
-        
         case .getCategory(category: let category, type: let type):
             return "/api/v1/announcements/category"
+        case .getAnnouncement(announcementId: let announcementId):
+            return "/api/v1/announcements/\(announcementId)"
+        case .propose(title: let title, content: let content, announcementId: let announcementId, attachments: let attachments):
+            return "/api/v1/proposes"
         }
     }
     
@@ -62,6 +67,10 @@ extension SponusAPI: TargetType {
             return .post
         case .getCategory(category: let category, type: let type):
             return .get
+        case .getAnnouncement(announcementId: let announcementId):
+            return .get
+        case .propose(title: let title, content: let content, announcementId: let announcementId, attachments: let attachments):
+                return .post
         }
     }
     
@@ -98,7 +107,10 @@ extension SponusAPI: TargetType {
                 return try! JSONSerialization.data(withJSONObject: sampleResponse, options: .prettyPrinted)
         case .getCategory(category: let category, type: let type):
             return Data()
-            
+        case .getAnnouncement(announcementId: let announcementId):
+            return Data()
+        case .propose(title: let title, content: let content, announcementId: let announcementId, attachments: let attachments):
+            return Data()
         }
     }
     
@@ -151,6 +163,29 @@ extension SponusAPI: TargetType {
                 parameters["type"] = type
             }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .getAnnouncement(announcementId: let announcementId):
+            return .requestPlain
+        case .propose(let title, let content, let announcementId, let attachments):
+            var multipartData: [MultipartFormData] = []
+            let requestParameters = [
+                "title": title,
+                "content": content,
+                "announcementId": announcementId
+            ] as [String : Any]
+            if let requestData = try? JSONSerialization.data(withJSONObject: requestParameters, options: []) {
+                multipartData.append(MultipartFormData(provider: .data(requestData), name: "request"))
+            }
+            attachments.forEach { url in
+                if let data = try? Data(contentsOf: url) {
+                    let formData = MultipartFormData(provider: .data(data), name: "attachments", fileName: url.lastPathComponent, mimeType: "application/octet-stream") //MimeType 실제로 바꾸기, 아직 구현 x
+                    multipartData.append(formData)
+                }
+            }
+            if attachments.isEmpty {
+                let formData = MultipartFormData(provider: .data("string".data(using: .utf8)!), name: "attachments")
+                multipartData.append(formData)
+            }
+            return .uploadMultipart(multipartData)
         }
     }
     
@@ -173,7 +208,14 @@ extension SponusAPI: TargetType {
             return [
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJzcG9udXNAZ21haWwuY29tIiwiYXV0aCI6IkNPTVBBTlkiLCJpYXQiOjE3MDc3NDcwMzMsImV4cCI6MTcwODM1MTgzM30.fuPOq7cbQys7PwM0td9AEd6kVGfAPpcn1lQWOvlDTDU"
             ]
+        case .getAnnouncement(announcementId: let announcementId):
+            return [
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJzcG9udXNAZ21haWwuY29tIiwiYXV0aCI6IkNPTVBBTlkiLCJpYXQiOjE3MDc3NDcwMzMsImV4cCI6MTcwODM1MTgzM30.fuPOq7cbQys7PwM0td9AEd6kVGfAPpcn1lQWOvlDTDU"
+            ]
+        case .propose(title: let title, content: let content, announcementId: let announcementId, attachments: let attachments):
+            return [
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJzcG9udXNfc3R1ZGVudEBnbWFpbC5jb20iLCJhdXRoIjoiU1RVREVOVCIsImlhdCI6MTcwNzgxNzkwNCwiZXhwIjoxNzA4NDIyNzA0fQ.r1QRU91tLjvDbiPco3RBnapB4j4DsXmbn-D7c0yfU6E"
+            ]
         }
     }
-    
 }

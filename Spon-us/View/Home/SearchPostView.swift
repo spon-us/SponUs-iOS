@@ -5,11 +5,17 @@
 // Created by 김수민 on 1/21/24.
 //
 import SwiftUI
+import Moya
 struct SearchPostView: View {
-  @State private var selectedSaveButton: Bool = false
-  @State private var isShowingActivityView = false
-  @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
-  var body: some View {
+    
+    var announcementId: Int
+    let provider = MoyaProvider<SponusAPI>()
+    @Binding var selectedSaveButton: Bool
+    @State private var announcement: AnnouncementModel?
+    @State private var isShowingActivityView = false
+    @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
+    
+    var body: some View {
     VStack(spacing: 0) {
       ScrollView {
         LazyVStack(spacing: 0) {
@@ -47,14 +53,14 @@ struct SearchPostView: View {
             NavigationLink {
             } label: {
               HStack {
-                Text("무신사")
+                  Text(announcement?.content.writer.name ?? "")
                   .font(.Body10)
                   .foregroundColor(Color.sponusPrimary)
                 Image("ic_go_blue")
                   .frame(width: 16, height: 16)
               }
             }.padding(.top, 23)
-            Text("무신사 글로벌 마케팅\n연계 프로젝트")
+              Text(announcement?.content.title ?? "")
               .font(.Heading05)
               .foregroundColor(Color.sponusBlack)
               .padding(.top, 16)
@@ -66,7 +72,7 @@ struct SearchPostView: View {
               HStack(){
                 Text("유형").font(.Body10).foregroundColor(.sponusGrey700)
                 Spacer()
-                Text("연계프로젝트").font(.Body10).foregroundColor(.sponusBlack)
+                  Text(changeToKorean(type: announcement?.content.type ?? "") ?? "").font(.Body10).foregroundColor(.sponusBlack)
               }
               Rectangle()
                 .fill(Color.sponusGrey200)
@@ -74,7 +80,7 @@ struct SearchPostView: View {
               HStack(){
                 Text("분야").font(.Body10).foregroundColor(.sponusGrey700)
                 Spacer()
-                Text("기획/아이디어").font(.Body10).foregroundColor(.sponusBlack)
+                  Text(changeToKorean(category: announcement?.content.category ?? "") ?? "").font(.Body10).foregroundColor(.sponusBlack)
               }
             }.padding(0)
             Rectangle()
@@ -93,15 +99,11 @@ struct SearchPostView: View {
               .font(.Body10)
               .foregroundColor(Color.sponusGrey700)
               .padding(.top, 24)
-            Text("""
-               안녕하세요. 무신사입니다. 글로벌 마케팅 전략 수립을 위해 대학생과의 협업을 진행하려고 합니다. \n \n
-               활동기간: 2023년 12월 29일 ~ 2024년 12월 29일
-               활동 내용: 카드뉴스 제작, 홍보 영상 제작 등
-               자세한 내용은 협의 후에 결정하려고 합니다. 관심 있는 대학생 분들은 제안 부탁드립니다.
-               """)
-              .font(.Body10)
-              .foregroundColor(.sponusBlack)
-              .padding(.top, 14)
+              
+            Text(announcement?.content.content ?? "")
+            .font(.Body10)
+            .foregroundColor(.sponusBlack)
+            .padding(.top, 14)
             SponUsDivider().foregroundColor(.sponusGrey200)
               .padding(.top, 24)
             Spacer().frame(height: 82)
@@ -112,24 +114,24 @@ struct SearchPostView: View {
       }
       HStack(){
         HStack(spacing: 16){
-          Button(action: {
+            Button(action: {
             isShowingActivityView = true
-          }) {
+            }) {
             Image("ic_share_white")
               .frame(width: 24, height: 24)
               .padding(.top, 20)
-          }.sheet(isPresented: $isShowingActivityView) {
+            }.sheet(isPresented: $isShowingActivityView) {
             ActivityView(activityItems: activityItems)
-          }
-          Button(action: {
+            }
+            Button(action: {
             selectedSaveButton.toggle()
-          }) {
+            }) {
             Image(selectedSaveButton == true ? "ic_saved_check" : "ic_saved_white")
               .frame(width: 24, height: 24)
               .padding(.top, 20)
-          }
+            }
         }.padding(.leading, 36)
-        NavigationLink(destination: SearchOfferView()){
+          NavigationLink(destination: SearchOfferView(announcementId: announcementId)){
           Text("제안하기")
             .font(.Body01)
             .foregroundColor(Color.sponusPrimaryDarkmode)
@@ -138,22 +140,41 @@ struct SearchPostView: View {
         }
       }.background(Color.sponusBlack)
     }
+    .toolbar(.hidden, for: .tabBar)
     .navigationTitle("기업 공고").font(.Body01)
     .navigationBarTitleDisplayMode(.inline)
     .navigationBarBackButtonHidden(true)
     .navigationBarItems(leading: CustomBackButton(), trailing: Image("ic_home_black"))
+    .onAppear(){
+        fetchAnnouncement()
+    }
   }
 }
 struct ActivityView: UIViewControllerRepresentable {
-  var activityItems: [Any]
-  var applicationActivities: [UIActivity]? = nil
-  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
+    var activityItems: [Any]
+    var applicationActivities: [UIActivity]? = nil
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
     let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
-    return controller
-  }
-  func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityView>) {
-  }
+        return controller
+    }
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityView>) {}
 }
-#Preview {
-  SearchPostView()
+
+
+extension SearchPostView {
+    func fetchAnnouncement() {
+        provider.request(.getAnnouncement(announcementId: announcementId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let fetchedAnnouncement = try JSONDecoder().decode(AnnouncementModel.self, from: response.data)
+                    self.announcement = fetchedAnnouncement
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

@@ -9,11 +9,13 @@ import SwiftUI
 import PopupView
 import UniformTypeIdentifiers
 import MobileCoreServices
+import Moya
 
 struct SearchOfferView: View {
+    let announcementId: Int
+    
     @State private var postTitle = ""
     @State private var postDetail = ""
-    
     @State private var selectedURLsFile1: [URL] = []
     @State private var selectedURLsFile2: [URL] = []
     @State private var selectedURLsFile3: [URL] = []
@@ -44,13 +46,10 @@ struct SearchOfferView: View {
         let postTitleTextEditor = TextEditor(text: $postTitle)
                                     .font(.Body06)
                                     .frame(height: 24)
-                                    
-        
         let postContentsTextEditor = TextEditor(text: $postDetail)
                                         .frame(minHeight: 130)
                                         .font(.Caption02)
-        
-        let compleBtnInActive = postTitle.isEmpty || postDetail.isEmpty || (selectedURLsFile1.isEmpty && selectedURLsFile2.isEmpty && selectedURLsFile3.isEmpty)
+        let compleBtnInActive = postTitle.isEmpty || postDetail.isEmpty
         
         ZStack {
             VStack(spacing: 0) {
@@ -255,6 +254,7 @@ struct SearchOfferView: View {
                 }
                 Button(action: {
                     showingPopup = true
+                    sendAPI()
                 }, label: {
                     Text("작성완료")
                         .font(.Body01)
@@ -293,6 +293,17 @@ struct SearchOfferView: View {
     }
 }
 
-#Preview {
-    SearchOfferView()
+extension SearchOfferView {
+    func sendAPI() {
+        let provider = MoyaProvider<SponusAPI>()
+        provider.request(.propose(title: postTitle, content: postDetail, announcementId: announcementId, attachments: selectedURLsFile1 + selectedURLsFile2 + selectedURLsFile3)) { result in
+            print(announcementId)
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
 }

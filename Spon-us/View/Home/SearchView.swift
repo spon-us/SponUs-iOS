@@ -67,7 +67,7 @@ struct SearchView: View {
                             Spacer()
                         }
                         ForEach(0..<3, id: \.self){ index in
-                            NavigationLink(destination: SearchPostView()){
+                            NavigationLink(destination: /*SearchPostView()*/Text("")){
                                 HStack(spacing: 0) {
                                     ForEach(splitText(dummyData1[index], with: searchData), id: \.self) { text in
                                             Text(text)

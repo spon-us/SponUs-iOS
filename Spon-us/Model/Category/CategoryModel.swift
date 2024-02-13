@@ -28,8 +28,3 @@ struct CategoryContent: Codable {
     var updatedAt: String
 }
 
-struct MainImage: Codable {
-    var id: Int
-    var name: String
-    var url: String
-}

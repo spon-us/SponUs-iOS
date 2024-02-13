@@ -11,12 +11,6 @@ struct Tags: Decodable {
     let id: Int
     let name: String
 }
-struct Writer: Decodable {
-    let id: Int
-    let name: String
-    let image: String?
-    let tags: [Tags]
-}
 
 struct AnnouncementImages: Decodable {
     let id: Int

@@ -119,6 +119,7 @@ extension SponusAPI: TargetType {
         case .getAnnouncement(announcementId: let announcementId):
             return Data()
         case .propose(title: let title, content: let content, announcementId: let announcementId, attachments: let attachments):
+            return Data()
         case .postLogin:
             let response: [String : Any] = [
                 "statusCode": "200",

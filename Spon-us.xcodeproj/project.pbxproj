@@ -31,6 +31,8 @@
 		100D38BA2B4EF54C00498977 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B92B4EF54C00498977 /* MyView.swift */; };
 		1031EC7C2B68B9F20016655B /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031EC7B2B68B9F20016655B /* AnnouncementView.swift */; };
 		106720022B5835FA00493354 /* SendOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106720012B5835FA00493354 /* SendOfferView.swift */; };
+		107D6E692B7A8273005B6261 /* OrganizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107D6E682B7A8273005B6261 /* OrganizationModel.swift */; };
+		107D6E6B2B7A83AB005B6261 /* OrganizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107D6E6A2B7A83AB005B6261 /* OrganizationViewModel.swift */; };
 		109F9E282B6E692B006B7D63 /* MyTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F9E272B6E692B006B7D63 /* MyTermsView.swift */; };
 		109F9E2A2B6E7536006B7D63 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F9E292B6E7536006B7D63 /* CouponView.swift */; };
 		10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC602B5C340D00B40547 /* SendOfferPostView.swift */; };
@@ -138,6 +140,8 @@
 		100D38B92B4EF54C00498977 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		1031EC7B2B68B9F20016655B /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 		106720012B5835FA00493354 /* SendOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferView.swift; sourceTree = "<group>"; };
+		107D6E682B7A8273005B6261 /* OrganizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationModel.swift; sourceTree = "<group>"; };
+		107D6E6A2B7A83AB005B6261 /* OrganizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationViewModel.swift; sourceTree = "<group>"; };
 		109F9E272B6E692B006B7D63 /* MyTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTermsView.swift; sourceTree = "<group>"; };
 		109F9E292B6E7536006B7D63 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
 		10C8AC602B5C340D00B40547 /* SendOfferPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferPostView.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				100A1E362B734DA500AAC1E8 /* Onboarding */,
+				107D6E672B7A821D005B6261 /* MyPage */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,6 +340,15 @@
 				10C8AC862B6240D500B40547 /* MyPage */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		107D6E672B7A821D005B6261 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				107D6E682B7A8273005B6261 /* OrganizationModel.swift */,
+				107D6E6A2B7A83AB005B6261 /* OrganizationViewModel.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		10C8AC5F2B5C33D900B40547 /* SendOffer */ = {
@@ -612,6 +626,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				107D6E6B2B7A83AB005B6261 /* OrganizationViewModel.swift in Sources */,
 				100D38BA2B4EF54C00498977 /* MyView.swift in Sources */,
 				3B81BCB42B622ED00067E9CB /* StoreKitTestView.swift in Sources */,
 				DF90A5B22B664EBF00BC54D0 /* TermsAndConditionsView.swift in Sources */,
@@ -628,6 +643,7 @@
 				3B36F0A62B6FEC2F0000ACFB /* Order.swift in Sources */,
 				10EBD8112B6FD6D60082CD8E /* ProfileEditView.swift in Sources */,
 				3B81BCB62B622EEA0067E9CB /* Extension.swift in Sources */,
+				107D6E692B7A8273005B6261 /* OrganizationModel.swift in Sources */,
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */,
 				DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */,

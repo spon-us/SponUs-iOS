@@ -11,11 +11,13 @@ struct SendOfferView: View {
     @Binding var rootIsActive: Bool
     @Environment(\.presentationMode) var presentationMode
     
+    @ObservedObject var sentViewModel = SentViewModel()
+    
     var body: some View {
-        if hasData() {
-            ScrollView {
+        ScrollView {
+            if hasData() {
                 VStack(spacing: 0) {
-                    Text("12.20 WED")
+                    Text("02.14 WED")
                         .font(.English01)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(Color.sponusBlack)
@@ -26,52 +28,64 @@ struct SendOfferView: View {
                         .frame(maxWidth: .infinity, maxHeight: 1)
                         .padding(.top, 8)
                     
-                    ForEach(1 ..< 4) { item in
-                        SendOfferCell(rootIsActive: $rootIsActive, status: getStatus(for: item))
+                    ForEach(sentViewModel.proposalSent.indices, id: \.self) { index in
+                        SendOfferCell(rootIsActive: $rootIsActive, status: getStatus(for: index))
                     }
                 }
                 .padding(.horizontal, 20)
+            } else {
+                Text("현재 보낸 제안이 없습니다")
+                    .font(.Body06)
+                    .foregroundColor(Color.sponusGrey900)
+                    .padding(.top, 300)
             }
-            .gesture(
-                DragGesture().onEnded { value in
-                    if value.translation.width > 100 {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
-            )
-            .navigationTitle("보낸 제안").font(.Body01)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: CustomBackButton())
-            .toolbar(.hidden, for: .tabBar)
-        } else {
-            Text("현재 보낸 제안이 없습니다")
-                .font(.Body06)
-                .multilineTextAlignment(.center)
-                .foregroundColor(Color.sponusGrey900)
-                .navigationTitle("보낸 제안").font(.Body01)
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: CustomBackButton())
-                .toolbar(.hidden, for: .tabBar)
         }
+        .onAppear {
+            sentViewModel.fetchProposalSent()
+        }
+        .gesture(
+            DragGesture().onEnded { value in
+                if value.translation.width > 100 {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        )
+        .navigationTitle("보낸 제안").font(.Body01)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: CustomBackButton())
+        .toolbar(.hidden, for: .tabBar)
     }
     
     func getStatus(for index: Int) -> String {
-        switch index {
-        case 1:
+        guard index < sentViewModel.proposalSent.count else {
+            return "DefaultStatus"
+        }
+        
+        let status = sentViewModel.proposalSent[index].status
+        
+        switch status {
+        case "ACCEPTED":
             return "수락"
-        case 2:
+        case "REJECTED":
             return "거절"
-        case 3:
+        case "VIEWED":
             return "열람"
+        case "PENDING":
+            return "제안중"
+        case "SUSPENDED":
+            return "협업중지"
         default:
             return "DefaultStatus"
         }
     }
     
     func hasData() -> Bool {
-        return true
+        if sentViewModel.proposalSent.count != 0 {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
@@ -183,6 +197,7 @@ struct StatusBadge: View {
         }
     }
 }
+
 
 #Preview {
     SendOfferView(rootIsActive: .constant(true))

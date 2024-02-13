@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import Moya
 
 struct SendOfferPostView: View {
+    var proposeId: Int
+    let provider = MoyaProvider<SponusAPI>()
+    
     @Binding var rootIsActive: Bool
     @Environment(\.presentationMode) var presentationMode
+    @State private var proposalDetail: ProposalDetailModel?
     @State private var isShowingActivityView = false
     @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
     
-    @ObservedObject var proposalDetailViewModel = ProposalDetailViewModel()
+//    @ObservedObject var proposalDetailViewModel = ProposalDetailViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -46,7 +51,7 @@ struct SendOfferPostView: View {
                             ProfileView(rootIsActive: $rootIsActive)
                         } label: {
                             HStack {
-                                Text("스포대학교 총학생회")
+                                Text(proposalDetail?.content.proposedOrganizationName ?? "")
                                     .font(.Body10)
                                     .foregroundColor(Color.sponusPrimary)
                                 
@@ -55,7 +60,7 @@ struct SendOfferPostView: View {
                             }
                         }.padding(.top, 23)
                         
-                        Text("스포대학교에서\n무신사와의 협업을 제안합니다")
+                        Text(proposalDetail?.content.title ?? "")
                             .font(.Heading05)
                             .foregroundColor(Color.sponusBlack)
                             .padding(.top, 16)
@@ -70,7 +75,8 @@ struct SendOfferPostView: View {
                             .foregroundColor(Color.sponusGrey700)
                             .padding(.top, 24)
                         
-                        Text("안녕하세요 스포대학교 제 21대 학생회 스포너스입니다. 저희 스포대학교는 학생수 2000명의 종합대학으로, 대학생에게 알리고 싶은 제품이나 기업을 홍보하기에 적합할 것이라 생각합니다. 이에 협력을 제안합니다.  활동 내용: 카드뉴스 제작, 배너 제작, 기업 인스타그램 태그 이벤트  그 외의 내용은 상세 협의 후 정하고 싶습니다.")
+                        Text(proposalDetail?.content.content ?? "")
+                            .multilineTextAlignment(.leading)
                             .font(.Body10)
                             .foregroundColor(.black)
                             .padding(.top, 14)
@@ -80,7 +86,7 @@ struct SendOfferPostView: View {
                             .frame(maxWidth: .infinity, maxHeight: 1)
                             .padding(.top, 24)
                         
-                        SendOfferPostCell(rootIsActive: $rootIsActive, status: "수락")
+                        SendOfferPostCell(rootIsActive: $rootIsActive, status: statusChangeToKorean(english: proposalDetail?.content.announcementDetails.status ?? ""))
                             .padding(.vertical, 16)
                         
                     }
@@ -128,6 +134,30 @@ struct SendOfferPostView: View {
                 .renderingMode(.template)
                 .foregroundStyle(.black)
         }))
+        .onAppear(){
+            fetchProposal()
+        }
+    }
+}
+
+extension SendOfferPostView {
+    func fetchProposal(){
+        provider.request(.getProposalDetail(proposeId: proposeId)) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    print(proposeId)
+                    let proposalDetailResponse = try JSONDecoder().decode(ProposalDetailModel.self, from: response.data)
+                    self.proposalDetail = proposalDetailResponse
+                    //print("제안 상세 조회 \(self.proposalDetail)")
+                } catch {
+                    print("여기!!!!!")
+                    print("Error parsing response: \(error)")
+                }
+            case let .failure(error):
+                print("Network request failed: \(error)")
+            }
+        }
     }
 }
 
@@ -181,8 +211,4 @@ struct SendOfferPostCell: View {
         }
         .padding(.top, 16)
     }
-}
-
-#Preview {
-    SendOfferPostView(rootIsActive: .constant(true))
 }

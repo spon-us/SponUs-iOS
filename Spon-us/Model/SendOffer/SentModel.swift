@@ -13,7 +13,7 @@ struct SentModel: Codable {
     let content: [SentResponse]
 }
 
-struct SentResponse: Codable {
+struct SentResponse: Codable, Hashable {
     let proposeId: Int
     let title: String
     let status: String
@@ -24,6 +24,12 @@ struct SentResponse: Codable {
     let announcementSummary: AnnouncementSummary
     let createdDate: String
     let createdDay: String
+    static func == (lhs: SentResponse, rhs: SentResponse) -> Bool {
+            return lhs.proposeId == rhs.proposeId
+        }
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(proposeId)
+        }
 }
 
 struct AnnouncementSummary: Codable {

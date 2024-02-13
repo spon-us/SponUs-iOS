@@ -14,7 +14,7 @@ struct MyCustomBackButton: View {
         Button {
             self.presentationMode.wrappedValue.dismiss()
         } label: {
-            Image("ic_back_white")
+            Image(.icBack)
         }
     }
 }
@@ -22,23 +22,60 @@ struct MyCustomBackButton: View {
 struct MyProfileView: View {
     @Binding var rootIsActive: Bool
     
+    @ObservedObject var myOrganizationViewModel = MyOrganizationViewModel()
+    
     var body: some View {
         VStack(spacing: 0) {
-            
             ScrollView {
-                
                 ZStack(alignment: .topTrailing) {
-                    Image("profile_test")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .infinity, maxHeight: 540)
-                        .padding(.bottom, 43)
+                    ZStack(alignment: .bottomLeading) {
+                        Image(.profileTest)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: .infinity, maxHeight: 540)
+                        
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: .infinity, height: 178)
+                            .background(
+                                LinearGradient(
+                                    stops: [
+                                        Gradient.Stop(color: Color(red: 0.13, green: 0.13, blue: 0.13).opacity(0), location: 0.00),
+                                        Gradient.Stop(color: Color(red: 0.13, green: 0.13, blue: 0.13).opacity(0.45), location: 0.55),
+                                        Gradient.Stop(color: Color(red: 0.13, green: 0.13, blue: 0.13).opacity(0.9), location: 1.00),
+                                    ],
+                                    startPoint: UnitPoint(x: 0.5, y: 0),
+                                    endPoint: UnitPoint(x: 0.5, y: 1)
+                                )
+                            )
+                        
+                        VStack(alignment:.leading, spacing: 8) {
+                            Text(myOrganizationViewModel.myOrganization?.suborganizationType == "STUDENT_COUNCIL" ?
+                                 "Student Council" :
+                                    (myOrganizationViewModel.myOrganization?.suborganizationType == "STUDENT_CLUB" ?
+                                     "Student Club" :
+                                        "Company"))
+                            .font(.English15)
+                            .foregroundColor(Color.sponusPrimary)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(
+                                RoundedRectangle(cornerRadius: 99)
+                                    .foregroundColor(Color.sponusSecondary)
+                            )
+                            Text(myOrganizationViewModel.myOrganization?.name ?? "스포대학교 총학생회")
+                                .font(.Heading01)
+                                .foregroundColor(Color.sponusWhite)
+                                .padding(.bottom, 25)
+                        }
+                        .padding(.leading, 40)
+                    }
                     
                     NavigationLink {
                         ProfileEditView()
                     } label: {
                         HStack {
-                            Image("ic_edit")
+                            Image(.icEdit)
                             
                             Text("프로필 수정")
                                 .font(.Body10)
@@ -60,7 +97,7 @@ struct MyProfileView: View {
                     SponUsDivider()
                         .padding(.bottom, 8)
                     
-                    Text("안녕하세요 스포대학교 제 21대 총학생회 스포너스입니다. 저희는 학생과 세상 사이의 장벽을 뛰어넘겠다는 각오로 스포대학교 학생들의 복지를 위해 힘쓰고 있습니다. \n연락 주시는 모든 일에 적극적으로 임하겠습니다.")
+                    Text(myOrganizationViewModel.myOrganization?.description ?? "안녕하세요 스포대학교 제 21대 총학생회 스포너스입니다. 저희는 학생과 세상 사이의 장벽을 뛰어넘겠다는 각오로 스포대학교 학생들의 복지를 위해 힘쓰고 있습니다. \n연락 주시는 모든 일에 적극적으로 임하겠습니다.")
                         .font(.Body10)
                         .frame(alignment: .topLeading)
                         .foregroundColor(Color.sponusGrey800)
@@ -91,21 +128,20 @@ struct MyProfileView: View {
                     MyProfileHistoryCell(stateMessage: "완료된 공고")
                 }
                 .foregroundColor(Color.sponusBlack)
+                .padding(.top, 43)
                 .padding(.leading, 40)
             }
             .navigationTitle("프로필").font(.Body01)
-            .foregroundStyle(.white)
             
+        }
+        .onAppear {
+            myOrganizationViewModel.fetchMyOrganization()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarBackground()
         .toolbar(.hidden, for: .tabBar)
-        .navigationBarItems(leading: MyCustomBackButton(), trailing: Button(action: {self.rootIsActive = false}, label: {
-            Image(.icHome)
-                .renderingMode(.template)
-                .foregroundStyle(.white)
-        }))
+        .navigationBarItems(leading: MyCustomBackButton())
     }
 }
 
@@ -121,7 +157,7 @@ struct MyProfileSNSView: View {
                         .font(.English08)
                         .foregroundColor(Color.sponusGrey800)
                     
-                    Image("ic_link")
+                    Image(.icLink)
                 }
             })
             
@@ -133,7 +169,7 @@ struct MyProfileSNSView: View {
                         .font(.English08)
                         .foregroundColor(Color.sponusGrey800)
                     
-                    Image("ic_link")
+                    Image(.icLink)
                 }
             })
             
@@ -145,7 +181,7 @@ struct MyProfileSNSView: View {
                         .font(.English08)
                         .foregroundColor(Color.sponusGrey800)
                     
-                    Image("ic_link")
+                    Image(.icLink)
                 }
             })
         }

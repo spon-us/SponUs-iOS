@@ -181,6 +181,7 @@ struct OnboardingCompletedView: View {
             }.padding(.top, 12)
             Spacer()
             Button {
+                UserDefaults.standard.set(userID, forKey: "loginAccount")
                 goToContentView = true
             } label: {
                 Text("시작하기").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(joinViewModel.isButtonEnabled ? .sponusPrimary : .sponusGrey600).padding(.bottom, 16)

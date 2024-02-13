@@ -12,6 +12,9 @@ struct SendOfferPostView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingActivityView = false
     @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
+    
+    @ObservedObject var proposalDetailViewModel = ProposalDetailViewModel()
+    
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {

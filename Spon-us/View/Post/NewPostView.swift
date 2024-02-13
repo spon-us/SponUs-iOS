@@ -9,7 +9,7 @@ import SwiftUI
 import PopupView
 import UniformTypeIdentifiers
 import MobileCoreServices
-
+import Moya
 
 struct NewPostView: View {
     
@@ -18,7 +18,6 @@ struct NewPostView: View {
     @State private var postSelectedCategory = ""
     @State private var postSelectedField = ""
     @State private var postDetail = ""
-    
     @State var showingPopup = false
     @State var showingPreviewAlert = false
     @State var goToPreview = false
@@ -51,8 +50,6 @@ struct NewPostView: View {
                         .padding(.bottom, 16)
                     
                     SponUsPostImageCell(text: "공고 이미지", selectedImages: $selectedImages)
-                    
-                    //                SponUsDivider()
                     
                     MultipleImagePicker(selectedImages: $selectedImages)
                         .padding(.bottom, 16)
@@ -133,7 +130,6 @@ struct NewPostView: View {
             }
             
             Button(action: {
-//                self.presentationMode.wrappedValue.dismiss()
                 showingPopup = true
             }, label: {
                 Text("작성 완료")
@@ -164,6 +160,38 @@ struct NewPostView: View {
         .navigationBarItems(leading: CustomBackButton())
         .toolbar(.hidden, for: .tabBar)
         .onDisappear{
+            let provider = MoyaProvider<SponusAPI>()
+            provider.request(.postAnnouncement(title: postTitle, type: changeToEnglish(type: postSelectedCategory) ?? "ㄹㄹ"  , category: changeToEnglish(category: postSelectedField) ?? "ㄹㅇ" , content: postDetail, images: [UIImage()])) { result
+                in
+                switch result {
+                case .success(let response):
+                    do {
+                        // 서버로부터의 응답을 문자열로  변환하여 로깅
+                        let responseString = String(data: response.data, encoding: .utf8)
+                        print("Response: \(responseString ?? "Invalid response")")
+                        
+                        // JSON 데이터를 디코딩합니다.
+                        let jsonResponse = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any]
+                        print("dd")  // 이제 이 부분이 호출되어야 합니다.
+
+                        // 'content' 내부의 'id' 값을 추출합니다.
+                        if let content = jsonResponse?["content"] as? [String: Any], let id = content["id"] as? Int {
+                            // id 값을 출력합니다.
+                            print("Success with ID: \(id)")
+                        } else {
+                            // 'id' 값을 찾을 수 없는 경우
+                            print("ID not found in the response")
+                        }
+                    } catch {
+                        // JSON 파싱에 실패한 경우
+                        print("JSON parsing error: \(error)")
+                    }
+                    
+                case .failure(let error):
+                    // 요청 실패 시 처리
+                    print("Error: \(error)")
+                }
+            }
             print("disappear")
         }
     }

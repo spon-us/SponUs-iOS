@@ -113,6 +113,8 @@
 		DF498F232B791EA800ADE078 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F222B791EA800ADE078 /* LoginModel.swift */; };
 		DF498F252B791EB400ADE078 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F242B791EB400ADE078 /* LoginViewModel.swift */; };
 		DF498F272B79B45D00ADE078 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F262B79B45D00ADE078 /* KeyChainManager.swift */; };
+		DF498F2A2B7CDDA200ADE078 /* MyAnnouncementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F292B7CDDA200ADE078 /* MyAnnouncementsModel.swift */; };
+		DF498F2C2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */; };
 		DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */; };
 		DF90A5AD2B664E5A00BC54D0 /* ProcessingPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */; };
 		DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */; };
@@ -200,6 +202,8 @@
 		DF498F222B791EA800ADE078 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		DF498F242B791EB400ADE078 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DF498F262B79B45D00ADE078 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		DF498F292B7CDDA200ADE078 /* MyAnnouncementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncementsModel.swift; sourceTree = "<group>"; };
+		DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncementsViewModel.swift; sourceTree = "<group>"; };
 		DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingPolicyView.swift; sourceTree = "<group>"; };
 		DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherAndUsageView.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 		100A1E352B7348DB00AAC1E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DF498F282B7CDD8200ADE078 /* Portfolio */,
 				806AF8712B7B84F2008F7F62 /* Announcement */,
 				806AF8682B79D985008F7F62 /* Category */,
 				100A1E362B734DA500AAC1E8 /* Onboarding */,
@@ -562,6 +567,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		DF498F282B7CDD8200ADE078 /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				DF498F292B7CDDA200ADE078 /* MyAnnouncementsModel.swift */,
+				DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */,
+			);
+			path = Portfolio;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -722,6 +736,7 @@
 				DF90A5B62B6B7CF900BC54D0 /* RegisterIDView.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
 				806AF8752B7B8595008F7F62 /* AnnouncementModel.swift in Sources */,
+				DF498F2A2B7CDDA200ADE078 /* MyAnnouncementsModel.swift in Sources */,
 				DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */,
 				806AF8732B7B8504008F7F62 /* AnnouncementViewModel.swift in Sources */,
 				10EBD80D2B6F783F0082CD8E /* HonorInfoEditView.swift in Sources */,
@@ -740,6 +755,7 @@
 				100A1E382B734DB300AAC1E8 /* EmailModel.swift in Sources */,
 				3B36F0A82B6FEC3C0000ACFB /* PubData.swift in Sources */,
 				3B36F09A2B6FEB800000ACFB /* PaymentSettingView.swift in Sources */,
+				DF498F2C2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift in Sources */,
 				10025B412B7C024200DCCC5A /* OrganizationViewModel.swift in Sources */,
 				DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */,
 				DFB22ED72B766FF3007903DF /* JoinModel.swift in Sources */,

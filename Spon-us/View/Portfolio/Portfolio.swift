@@ -41,8 +41,9 @@ enum ActiveAlert {
 }
 
 struct Portfolio: View {
+    @StateObject var myAnnouncementsViewModel = MyAnnouncementsViewModel()
     @Binding var rootIsActive: Bool
-    @State var progressStatus: ProgressStatus
+    @State var progressStatus: ProgressStatus = ProgressStatus()
     
     @State var alertcase: ActiveAlert = .hide
     
@@ -267,19 +268,160 @@ struct Portfolio: View {
                 }
             }
             // 게시 중
+            //            if ($progressStatus.isPublishing.wrappedValue == true) {
+            //                ScrollView {
+            //                    VStack(alignment: .leading, spacing: 0) {
+            //                        ForEach(dummyData, id: \.id) { dummy in
+            //                            if (dummy.postProgressStatus == .publishing && dummy.displayInPublishing == true) {
+            //                                NavigationLink(
+            //                                    destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
+            //                                    // destination: DetailView(post: dummy),
+            //                                    label: {
+            //                                        VStack(spacing: 0) {
+            //                                            HStack(spacing: 0) {
+            //                                                (dummy.thumbNail ?? Image(.icCancel))
+            //                                                    .resizable().frame(width: 158, height: 158)
+            //                                                    .border(.sponusGrey100)
+            //
+            //                                                VStack(alignment: .leading, spacing: 5) {
+            //
+            //                                                    HStack(spacing: 2) {
+            //                                                        Spacer()
+            //                                                        Image(.icSaved).resizable().frame(width: 20, height: 20)
+            //                                                        Text(String(dummy.savedNumber ?? 0))
+            //                                                            .font(.English12).foregroundStyle(.sponusGrey700)
+            //                                                    }
+            //                                                    switch dummy.postCategory {
+            //                                                    case .sponsorship:
+            //                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+            //                                                    case .linkedproject:
+            //                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+            //                                                    case nil:
+            //                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+            //                                                    }
+            //                                                    Text(dummy.postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading)
+            //                                                    Spacer()
+            //
+            //                                                    HStack(spacing: 4) {
+            //                                                        withAnimation {
+            //                                                            Button() {
+            //                                                                showingPublishingToTopAlert = true
+            //                                                                currentToTopID = dummy.id
+            //                                                            } label: {
+            //                                                                Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
+            //                                                                    .frame(height: 40).frame(maxWidth: .infinity).border(.sponusGrey100)
+            //                                                            }.alert(isPresented: $showingPublishingToTopAlert) {
+            //                                                                if let index = dummyData.firstIndex(where: { $0.id == currentToTopID }) {
+            //                                                                    return Alert(
+            //                                                                        title: Text("끌어올리시겠습니까?"),
+            //                                                                        message: Text("공고가 상단으로 끌어올려집니다."),
+            //                                                                        primaryButton: .destructive(
+            //                                                                            Text("아니오").foregroundStyle(Color.red)
+            //                                                                        ),
+            //                                                                        secondaryButton: .default(
+            //                                                                            Text("끌어올리기"),
+            //                                                                            action: withAnimation{{ movePostToTop(index: index) }}
+            //                                                                        )
+            //                                                                    )
+            //                                                                }
+            //                                                                return Alert(title: Text("Default Title"), message: Text("Default Message"))
+            //                                                            }
+            //                                                        }
+            //
+            //                                                        Button() {
+            //                                                            showingPublishingConfirmationDialog = true
+            //                                                            currentConfirmationDialogID = dummy.id
+            //                                                        } label: {
+            //                                                            Image(.icMore).resizable().frame(width: 40, height: 40).border(.sponusGrey100)
+            //                                                        }
+            //                                                        .confirmationDialog("ic_more", isPresented: $showingPublishingConfirmationDialog, titleVisibility: .hidden, actions: {
+            //                                                            Button("수정하기") {
+            //                                                                activeNavLinkToEdit = true
+            //                                                                showingPublishingConfirmationDialog = false
+            //
+            //                                                            }
+            //                                                            Button("제안 그만 받기") {
+            //                                                                alertcase = .hide
+            //                                                                showingPublishingAlert = true
+            //                                                                showingPublishingConfirmationDialog = false
+            //                                                            }
+            //                                                            Button("삭제", role: .destructive) {
+            //                                                                alertcase = .remove
+            //                                                                showingPublishingAlert = true
+            //                                                                showingPublishingConfirmationDialog = false
+            //                                                            }
+            //                                                            Button("닫기", role: .cancel) {}
+            //                                                        })
+            //                                                        .alert(isPresented: $showingPublishingAlert) {
+            //                                                            switch alertcase {
+            //                                                            case .hide:
+            //                                                                return Alert(
+            //                                                                    title: Text("해당 공고를 내립니다"),
+            //                                                                    message: Text("내린 공고는 되돌리기 어렵습니다."),
+            //                                                                    primaryButton: .destructive(
+            //                                                                        Text("내리기"),
+            //                                                                        action: {hidePublishingPost()}
+            //                                                                    ),
+            //                                                                    secondaryButton: .cancel(
+            //                                                                        Text("취소")
+            //                                                                    )
+            //                                                                )
+            //                                                            case .remove:
+            //                                                                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
+            //                                                                    return Alert(
+            //                                                                        title: Text("삭제하시겠습니까?"),
+            //                                                                        message: Text("\(dummyData[index].postTitle ?? "nil")\n공고가 삭제됩니다."),
+            //                                                                        primaryButton: .destructive(
+            //                                                                            Text("삭제"),
+            //                                                                            action: {removePublishingPost()}
+            //                                                                        ),
+            //                                                                        secondaryButton: .cancel(
+            //                                                                            Text("아니오")
+            //                                                                        )
+            //                                                                    )
+            //                                                                }
+            //                                                                return Alert(title: Text("nil"))
+            //                                                            }
+            //                                                        }
+            //                                                    }
+            //
+            //                                                }.padding(.leading, 20)
+            //                                            }.padding(.top, 32)
+            //                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+            //                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            //                                    }
+            //                                )
+            //                            }
+            //
+            //                        }
+            //                    }
+            //                }.scrollIndicators(.hidden)
+            //                    .onAppear() {
+            //
+            //                    }
+            //
+            //            }
             if ($progressStatus.isPublishing.wrappedValue == true) {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(dummyData, id: \.id) { dummy in
-                            if (dummy.postProgressStatus == .publishing && dummy.displayInPublishing == true) {
+                if myAnnouncementsViewModel.isLoading == true {
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                }
+                else {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(myAnnouncementsViewModel.myAnnouncementsContents, id: \.id) { cell in
+                                
                                 NavigationLink(
                                     destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
                                     // destination: DetailView(post: dummy),
                                     label: {
                                         VStack(spacing: 0) {
                                             HStack(spacing: 0) {
-                                                (dummy.thumbNail ?? Image(.icCancel))
-                                                    .resizable().frame(width: 158, height: 158)
+                                                AsyncImage(url: URL(string: cell.mainImage.url))
+                                                    .frame(width: 158, height: 158)
                                                     .border(.sponusGrey100)
                                                 
                                                 VStack(alignment: .leading, spacing: 5) {
@@ -287,25 +429,27 @@ struct Portfolio: View {
                                                     HStack(spacing: 2) {
                                                         Spacer()
                                                         Image(.icSaved).resizable().frame(width: 20, height: 20)
-                                                        Text(String(dummy.savedNumber ?? 0))
+                                                        Text(String(10))
                                                             .font(.English12).foregroundStyle(.sponusGrey700)
                                                     }
-                                                    switch dummy.postCategory {
-                                                    case .sponsorship:
+                                                    switch cell.type {
+                                                    case "SPONSORSHIP":
                                                         Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case .linkedproject:
+                                                    case "PARTERSHIP":
+                                                        Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    case "COLLABORATION":
                                                         Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case nil:
+                                                    default:
                                                         Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
                                                     }
-                                                    Text(dummy.postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading)
+                                                    Text(cell.title ).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading)
                                                     Spacer()
                                                     
                                                     HStack(spacing: 4) {
                                                         withAnimation {
                                                             Button() {
-                                                                showingPublishingToTopAlert = true
-                                                                currentToTopID = dummy.id
+//                                                                showingPublishingToTopAlert = true
+//                                                                currentToTopID = dummy.id
                                                             } label: {
                                                                 Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
                                                                     .frame(height: 40).frame(maxWidth: .infinity).border(.sponusGrey100)
@@ -329,7 +473,7 @@ struct Portfolio: View {
                                                         
                                                         Button() {
                                                             showingPublishingConfirmationDialog = true
-                                                            currentConfirmationDialogID = dummy.id
+//                                                            currentConfirmationDialogID = dummy.id
                                                         } label: {
                                                             Image(.icMore).resizable().frame(width: 40, height: 40).border(.sponusGrey100)
                                                         }
@@ -390,14 +534,13 @@ struct Portfolio: View {
                                         }.frame(maxWidth: .infinity, maxHeight: .infinity)
                                     }
                                 )
+                                
+                                
                             }
-                            
                         }
-                    }
-                }.scrollIndicators(.hidden)
-                
+                    }.scrollIndicators(.hidden)
+                }
             }
-            
             
             // 진행 중
             if ($progressStatus.isProgressing.wrappedValue == true) {
@@ -622,6 +765,9 @@ struct Portfolio: View {
                 //                }
             }
             .toolbar(.hidden, for: .tabBar)
+            .onAppear() {
+                myAnnouncementsViewModel.getMyAnnouncements()
+            }
     }
 }
 
@@ -1236,7 +1382,7 @@ struct ReportView: View {
 
 
 #Preview {
-    Portfolio(rootIsActive: .constant(false), progressStatus: Portfolio.ProgressStatus())
+    Portfolio(rootIsActive: .constant(false))
 }
 //#Preview {
 //    ReportView()

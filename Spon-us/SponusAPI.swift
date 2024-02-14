@@ -23,6 +23,7 @@ enum SponusAPI {
     case getProposalDetail(proposeId: Int)
     case getOrganization(organizationId: Int)
     case getReceived(announcementId: Int)
+    case getMyAnnouncements
 }
 
 extension SponusAPI: TargetType {
@@ -56,6 +57,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations/\(organizationId)"
         case .getReceived:
             return "/api/v1/proposes/received"
+        case .getMyAnnouncements:
+            return "/api/v1/announcements/me/opened"
         }
     }
     
@@ -84,6 +87,8 @@ extension SponusAPI: TargetType {
         case .getOrganization:
             return .get
         case .getReceived:
+            return .get
+        case .getMyAnnouncements:
             return .get
         }
     }
@@ -144,6 +149,8 @@ extension SponusAPI: TargetType {
         case .getOrganization:
             return Data()
         case .getReceived:
+            return Data()
+        case .getMyAnnouncements:
             return Data()
         }
     }
@@ -234,6 +241,8 @@ extension SponusAPI: TargetType {
         case .getReceived(let announcementId):
             let parameters: [String: Any] = ["announcementId": announcementId]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .getMyAnnouncements:
+            return .requestPlain
         }
     }
     
@@ -267,6 +276,8 @@ extension SponusAPI: TargetType {
         case .propose(title: let title, content: let content, announcementId: let announcementId, attachments: let attachments):
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getReceived:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .getMyAnnouncements:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

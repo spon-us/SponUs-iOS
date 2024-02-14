@@ -20,14 +20,20 @@ struct ProposalDetailResponse: Codable {
     let proposedOrganizationName: String
     let proposingOrganizationId: Int
     let proposingOrganizationName: String
-    let proposeAttachmentUrl: [String]
+    let proposeAttachmentUrl: [ProposeAttachmentUrl]
     let announcementDetails: AnnouncementDetails
     let createdDate, createdDay: String
 }
 
+struct ProposeAttachmentUrl: Codable {
+    let id: Int
+    let name: String
+    let url: String
+}
+
 struct AnnouncementDetails: Codable {
     let id: Int
-    let writer: Writer
+    let writerId: Int? //!!!!!!!!!!
     let title, type, category, content: String
     let announcementImages: [AnnouncementImage]
     let status: String

@@ -13,7 +13,7 @@ struct ProposalModel: Codable {
     let content: [ProposalResponse]
 }
 
-struct ProposalResponse: Codable {
+struct ProposalResponse: Codable, Hashable {
     let proposeId: Int
     let title: String
     let status: String
@@ -24,6 +24,12 @@ struct ProposalResponse: Codable {
     let announcementSummary: AnnouncementSummary
     let createdDate: String
     let createdDay: String
+    static func == (lhs: ProposalResponse, rhs: ProposalResponse) -> Bool {
+            return lhs.proposeId == rhs.proposeId
+        }
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(proposeId)
+        }
 }
 
 struct AnnouncementSummary: Codable {

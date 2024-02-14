@@ -28,8 +28,8 @@ struct SendOfferView: View {
                         .frame(maxWidth: .infinity, maxHeight: 1)
                         .padding(.top, 8)
                     
-                    ForEach(sentViewModel.proposalSent.indices, id: \.self) { index in
-                        SendOfferCell(rootIsActive: $rootIsActive, status: getStatus(for: index))
+                    ForEach(sentViewModel.proposalSent, id: \.self) {sentResponse in
+                        SendOfferCell(rootIsActive: $rootIsActive, sentResponse: sentResponse)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -88,11 +88,30 @@ struct SendOfferView: View {
         }
     }
 }
-
+func statusChangeToKorean(english: String) -> String{
+    switch english {
+    case "ACCEPTED":
+        return "수락"
+    case "OPENED":
+        return "수락"
+    case "REJECTED":
+        return "거절"
+    case "VIEWED":
+        return "열람"
+    case "PENDING":
+        return "제안중"
+    case "SUSPENDED":
+        return "협업중지"
+    case "CLOSED":
+        return "모집마감"
+    default:
+        return "DefaultStatus"
+    }
+}
 struct SendOfferCell: View {
     @Binding var rootIsActive: Bool
     
-    var status: String
+    var sentResponse: SentResponse
     
     var body: some View {
         HStack(spacing: 0) {
@@ -103,22 +122,22 @@ struct SendOfferCell: View {
                     .frame(width: 158, height: 158)
                     .padding(.trailing, 20)
                 
-                StatusBadge(status: status)
+                StatusBadge(status: statusChangeToKorean(english: sentResponse.status))
                     .offset(x: 50.5, y: -66.5)
             }
             
             LazyVStack(alignment: .leading, spacing: 12) {
-                Text("연계 프로젝트")
+                Text("\(changeToKorean(type: sentResponse.announcementSummary.type) ?? "전체")")
                     .font(.Caption02)
                     .foregroundColor(Color.sponusGrey700)
                 
-                
-                Text("무신사 글로벌 마케팅\n연계 프로젝트")
+                Text("\(sentResponse.title)")
+                    .multilineTextAlignment(.leading)
                     .font(.Body07)
                     .foregroundColor(Color.sponusBlack)
                 
                 NavigationLink(destination:
-                                SendOfferPostView(rootIsActive: $rootIsActive),
+                                SendOfferPostView(proposeId: sentResponse.proposeId,rootIsActive: $rootIsActive),
                                label: {
                     HStack {
                         Text("보낸 제안서")

@@ -4,8 +4,10 @@
 //
 // Created by 김수민 on 1/21/24.
 //
+
 import SwiftUI
 import Moya
+
 struct SearchPostView: View {
     
     var announcementId: Int

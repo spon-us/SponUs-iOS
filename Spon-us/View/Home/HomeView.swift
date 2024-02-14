@@ -52,7 +52,6 @@ struct HomeView: View {
     @State var isActiveToPortfolio = false
     @State var isActiveToSendOffer = false
     @State var isActiveToRecievedOffer = false
-    @State private var progressStatus  = Portfolio.ProgressStatus()
     
     let searchItem: some View = {
         NavigationLink {
@@ -228,7 +227,7 @@ struct HomeView: View {
                                 .padding(.top, 8)
                         }
                         .padding(.leading, 14)
-                    }.navigationDestination(isPresented: $isActiveToPortfolio, destination: {Portfolio(rootIsActive: self.$isActiveToPortfolio, progressStatus: progressStatus)})
+                    }.navigationDestination(isPresented: $isActiveToPortfolio, destination: {Portfolio(rootIsActive: self.$isActiveToPortfolio)})
                     
                     NavigationLink(destination: NewPostView(popup: .constant(false))){
                         VStack {

@@ -24,7 +24,7 @@ class LoginViewModel: ObservableObject {
                         let loginResponse = try response.map(LoginModel201.self)
                         self.login201 = loginResponse
                         self.isBadRequest = false
-                        print(self.login201)
+                        print(loginResponse)
                         completion(true)
                     }
                     else {

@@ -111,7 +111,7 @@ func statusChangeToKorean(english: String) -> String{
 struct SendOfferCell: View {
     @Binding var rootIsActive: Bool
     
-    var sentResponse: SentResponse
+    var sentResponse: ProposalResponse
     
     var body: some View {
         HStack(spacing: 0) {

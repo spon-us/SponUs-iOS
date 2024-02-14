@@ -15,7 +15,7 @@ class CategoryModelData: ObservableObject {
     @Published var isLoading = false
     @Published var categoryModelDatas: [CategoryContent] = []
     
-    let provider = MoyaProvider<SponusAPI>()
+    let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
     
     func setAPIValue(category: String?, type: String?) {
         self.isLoading = true

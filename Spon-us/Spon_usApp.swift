@@ -74,7 +74,7 @@ struct Spon_usApp: App {
     @State var rootIsActive = true
     var body: some Scene {
         WindowGroup {
-            if let userID = UserDefaults.standard.string(forKey: "loginAccount") {
+            if UserDefaults.standard.string(forKey: "loginAccount") != nil {
                 ContentView()
             }
             else {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SelectUserTypeView: View {
     @State var userID: String
@@ -156,6 +157,7 @@ struct fillInGroupNameView: View {
 
 struct OnboardingCompletedView: View {
     @StateObject var joinViewModel = JoinViewModel()
+    @StateObject var loginViewModel = LoginViewModel()
     
     @State var userID: String
     @State var userPW: String
@@ -182,7 +184,29 @@ struct OnboardingCompletedView: View {
             Spacer()
             Button {
                 UserDefaults.standard.set(userID, forKey: "loginAccount")
-                goToContentView = true
+                Messaging.messaging().token { token, error in
+                    if let error = error {
+                        print("Error fetching FCM registration token: \(error)")
+                    } else if let token = token {
+                        print("FCM registration token: \(token)")
+                        loginViewModel.postLogin(email: userID, password: userPW, fcmToken: token) { success in
+                            if success {
+                                // 로그인한 유저의 이메일 정보 -> UserDefaults Key "loginAccount"로 저장
+                                UserDefaults.standard.set(userID, forKey: "loginAccount")
+                                // 액세스토큰 / 리프레시토큰 -> 키체인에 [userID]_accessToken / [userID]_refreshToken account로 저장
+                                saveAccessToken(userID: userID, accessToken: loginViewModel.login201?.content.accessToken ?? "AccessToken Saving Error")
+                                saveRefreshToken(userID: userID, refreshToken: loginViewModel.login201?.content.refreshToken ?? "RefreshToken Saving Error")
+                                // 액세스토큰, 리프레시토큰 필요시 아래 메소드 호출
+                                // loadAccessToken(userID: userID)
+                                // loadRefreshToken(userID: userID)
+                                goToContentView = true
+                            }
+                            else {
+                                print("401\n\(String(describing: loginViewModel.login401?.message))")
+                            }
+                        }
+                    }
+                }
             } label: {
                 Text("시작하기").font(.Body04).frame(maxWidth: .infinity).frame(height: 56).foregroundStyle(.sponusWhite).background(joinViewModel.isButtonEnabled ? .sponusPrimary : .sponusGrey600).padding(.bottom, 16)
             }.disabled(!joinViewModel.isButtonEnabled).fullScreenCover(isPresented: $goToContentView, content: {

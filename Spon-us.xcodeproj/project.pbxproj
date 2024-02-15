@@ -115,6 +115,8 @@
 		DF498F272B79B45D00ADE078 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F262B79B45D00ADE078 /* KeyChainManager.swift */; };
 		DF498F2A2B7CDDA200ADE078 /* MyAnnouncementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F292B7CDDA200ADE078 /* MyAnnouncementsModel.swift */; };
 		DF498F2C2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */; };
+		DF498F2E2B7DF4F600ADE078 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */; };
+		DF498F302B7DF50200ADE078 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */; };
 		DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */; };
 		DF90A5AD2B664E5A00BC54D0 /* ProcessingPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */; };
 		DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */; };
@@ -204,6 +206,8 @@
 		DF498F262B79B45D00ADE078 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		DF498F292B7CDDA200ADE078 /* MyAnnouncementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncementsModel.swift; sourceTree = "<group>"; };
 		DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncementsViewModel.swift; sourceTree = "<group>"; };
+		DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
+		DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
 		DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingPolicyView.swift; sourceTree = "<group>"; };
 		DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherAndUsageView.swift; sourceTree = "<group>"; };
@@ -291,10 +295,10 @@
 		100A1E352B7348DB00AAC1E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				100A1E362B734DA500AAC1E8 /* Onboarding */,
 				DF498F282B7CDD8200ADE078 /* Portfolio */,
 				806AF8712B7B84F2008F7F62 /* Announcement */,
 				806AF8682B79D985008F7F62 /* Category */,
-				100A1E362B734DA500AAC1E8 /* Onboarding */,
 				10025B422B7C139300DCCC5A /* ReceivedOffer */,
 				10025B352B7B7B8700DCCC5A /* SendOffer */,
 				107D6E672B7A821D005B6261 /* MyPage */,
@@ -311,6 +315,8 @@
 				DFB22ED82B767003007903DF /* JoinViewModel.swift */,
 				DF498F222B791EA800ADE078 /* LoginModel.swift */,
 				DF498F242B791EB400ADE078 /* LoginViewModel.swift */,
+				DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */,
+				DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -723,6 +729,7 @@
 				10EBD8112B6FD6D60082CD8E /* ProfileEditView.swift in Sources */,
 				3B81BCB62B622EEA0067E9CB /* Extension.swift in Sources */,
 				107D6E692B7A8273005B6261 /* OrganizationModel.swift in Sources */,
+				DF498F302B7DF50200ADE078 /* LogoutViewModel.swift in Sources */,
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */,
 				DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */,
@@ -739,6 +746,7 @@
 				DF498F2A2B7CDDA200ADE078 /* MyAnnouncementsModel.swift in Sources */,
 				DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */,
 				806AF8732B7B8504008F7F62 /* AnnouncementViewModel.swift in Sources */,
+				DF498F2E2B7DF4F600ADE078 /* LogoutModel.swift in Sources */,
 				10EBD80D2B6F783F0082CD8E /* HonorInfoEditView.swift in Sources */,
 				100A1E3A2B734DDE00AAC1E8 /* EmailViewModel.swift in Sources */,
 				1031EC7C2B68B9F20016655B /* AnnouncementView.swift in Sources */,

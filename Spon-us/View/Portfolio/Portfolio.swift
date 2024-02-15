@@ -413,127 +413,129 @@ struct Portfolio: View {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 0) {
                             ForEach(myAnnouncementsViewModel.myAnnouncementsContents, id: \.id) { cell in
-                                
-                                NavigationLink(
-                                    destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-                                    // destination: DetailView(post: dummy),
-                                    label: {
-                                        VStack(spacing: 0) {
-                                            HStack(spacing: 0) {
-                                                AsyncImage(url: URL(string: cell.mainImage.url))
-                                                    .frame(width: 158, height: 158)
-                                                    .border(.sponusGrey100)
-                                                
-                                                VStack(alignment: .leading, spacing: 5) {
+                                if cell.status == "OPENED" {
+                                    NavigationLink(
+                                        destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
+                                        // destination: DetailView(post: dummy),
+                                        label: {
+                                            VStack(spacing: 0) {
+                                                HStack(spacing: 0) {
+                                                    AsyncImage(url: URL(string: cell.mainImage.url))
+                                                        .frame(width: 158, height: 158)
+                                                        .border(.sponusGrey100)
                                                     
-                                                    HStack(spacing: 2) {
+                                                    VStack(alignment: .leading, spacing: 5) {
+                                                        
+                                                        HStack(spacing: 2) {
+                                                            Spacer()
+                                                            Image(.icSaved).resizable().frame(width: 20, height: 20)
+                                                            Text(String(10))
+                                                                .font(.English12).foregroundStyle(.sponusGrey700)
+                                                        }
+                                                        switch cell.type {
+                                                        case "SPONSORSHIP":
+                                                            Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        case "PARTERSHIP":
+                                                            Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        case "COLLABORATION":
+                                                            Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        default:
+                                                            Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        }
+                                                        Text(cell.title ).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading)
                                                         Spacer()
-                                                        Image(.icSaved).resizable().frame(width: 20, height: 20)
-                                                        Text(String(10))
-                                                            .font(.English12).foregroundStyle(.sponusGrey700)
-                                                    }
-                                                    switch cell.type {
-                                                    case "SPONSORSHIP":
-                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case "PARTERSHIP":
-                                                        Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case "COLLABORATION":
-                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    default:
-                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    }
-                                                    Text(cell.title ).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading)
-                                                    Spacer()
-                                                    
-                                                    HStack(spacing: 4) {
-                                                        withAnimation {
+                                                        
+                                                        HStack(spacing: 4) {
+                                                            withAnimation {
+                                                                Button() {
+                                                                    //                                                                showingPublishingToTopAlert = true
+                                                                    //                                                                currentToTopID = dummy.id
+                                                                } label: {
+                                                                    Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
+                                                                        .frame(height: 40).frame(maxWidth: .infinity).border(.sponusGrey100)
+                                                                }.alert(isPresented: $showingPublishingToTopAlert) {
+                                                                    if let index = dummyData.firstIndex(where: { $0.id == currentToTopID }) {
+                                                                        return Alert(
+                                                                            title: Text("끌어올리시겠습니까?"),
+                                                                            message: Text("공고가 상단으로 끌어올려집니다."),
+                                                                            primaryButton: .destructive(
+                                                                                Text("아니오").foregroundStyle(Color.red)
+                                                                            ),
+                                                                            secondaryButton: .default(
+                                                                                Text("끌어올리기"),
+                                                                                action: withAnimation{{ movePostToTop(index: index) }}
+                                                                            )
+                                                                        )
+                                                                    }
+                                                                    return Alert(title: Text("Default Title"), message: Text("Default Message"))
+                                                                }
+                                                            }
+                                                            
                                                             Button() {
-//                                                                showingPublishingToTopAlert = true
-//                                                                currentToTopID = dummy.id
+                                                                showingPublishingConfirmationDialog = true
+                                                                //                                                            currentConfirmationDialogID = dummy.id
                                                             } label: {
-                                                                Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
-                                                                    .frame(height: 40).frame(maxWidth: .infinity).border(.sponusGrey100)
-                                                            }.alert(isPresented: $showingPublishingToTopAlert) {
-                                                                if let index = dummyData.firstIndex(where: { $0.id == currentToTopID }) {
+                                                                Image(.icMore).resizable().frame(width: 40, height: 40).border(.sponusGrey100)
+                                                            }
+                                                            .confirmationDialog("ic_more", isPresented: $showingPublishingConfirmationDialog, titleVisibility: .hidden, actions: {
+                                                                Button("수정하기") {
+                                                                    activeNavLinkToEdit = true
+                                                                    showingPublishingConfirmationDialog = false
+                                                                    
+                                                                }
+                                                                Button("제안 그만 받기") {
+                                                                    alertcase = .hide
+                                                                    showingPublishingAlert = true
+                                                                    showingPublishingConfirmationDialog = false
+                                                                }
+                                                                Button("삭제", role: .destructive) {
+                                                                    alertcase = .remove
+                                                                    showingPublishingAlert = true
+                                                                    showingPublishingConfirmationDialog = false
+                                                                }
+                                                                Button("닫기", role: .cancel) {}
+                                                            })
+                                                            .alert(isPresented: $showingPublishingAlert) {
+                                                                switch alertcase {
+                                                                case .hide:
                                                                     return Alert(
-                                                                        title: Text("끌어올리시겠습니까?"),
-                                                                        message: Text("공고가 상단으로 끌어올려집니다."),
+                                                                        title: Text("해당 공고를 내립니다"),
+                                                                        message: Text("내린 공고는 되돌리기 어렵습니다."),
                                                                         primaryButton: .destructive(
-                                                                            Text("아니오").foregroundStyle(Color.red)
+                                                                            Text("내리기"),
+                                                                            action: {hidePublishingPost()}
                                                                         ),
-                                                                        secondaryButton: .default(
-                                                                            Text("끌어올리기"),
-                                                                            action: withAnimation{{ movePostToTop(index: index) }}
+                                                                        secondaryButton: .cancel(
+                                                                            Text("취소")
                                                                         )
                                                                     )
+                                                                case .remove:
+                                                                    if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
+                                                                        return Alert(
+                                                                            title: Text("삭제하시겠습니까?"),
+                                                                            message: Text("\(dummyData[index].postTitle ?? "nil")\n공고가 삭제됩니다."),
+                                                                            primaryButton: .destructive(
+                                                                                Text("삭제"),
+                                                                                action: {removePublishingPost()}
+                                                                            ),
+                                                                            secondaryButton: .cancel(
+                                                                                Text("아니오")
+                                                                            )
+                                                                        )
+                                                                    }
+                                                                    return Alert(title: Text("nil"))
                                                                 }
-                                                                return Alert(title: Text("Default Title"), message: Text("Default Message"))
                                                             }
                                                         }
                                                         
-                                                        Button() {
-                                                            showingPublishingConfirmationDialog = true
-//                                                            currentConfirmationDialogID = dummy.id
-                                                        } label: {
-                                                            Image(.icMore).resizable().frame(width: 40, height: 40).border(.sponusGrey100)
-                                                        }
-                                                        .confirmationDialog("ic_more", isPresented: $showingPublishingConfirmationDialog, titleVisibility: .hidden, actions: {
-                                                            Button("수정하기") {
-                                                                activeNavLinkToEdit = true
-                                                                showingPublishingConfirmationDialog = false
-                                                                
-                                                            }
-                                                            Button("제안 그만 받기") {
-                                                                alertcase = .hide
-                                                                showingPublishingAlert = true
-                                                                showingPublishingConfirmationDialog = false
-                                                            }
-                                                            Button("삭제", role: .destructive) {
-                                                                alertcase = .remove
-                                                                showingPublishingAlert = true
-                                                                showingPublishingConfirmationDialog = false
-                                                            }
-                                                            Button("닫기", role: .cancel) {}
-                                                        })
-                                                        .alert(isPresented: $showingPublishingAlert) {
-                                                            switch alertcase {
-                                                            case .hide:
-                                                                return Alert(
-                                                                    title: Text("해당 공고를 내립니다"),
-                                                                    message: Text("내린 공고는 되돌리기 어렵습니다."),
-                                                                    primaryButton: .destructive(
-                                                                        Text("내리기"),
-                                                                        action: {hidePublishingPost()}
-                                                                    ),
-                                                                    secondaryButton: .cancel(
-                                                                        Text("취소")
-                                                                    )
-                                                                )
-                                                            case .remove:
-                                                                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
-                                                                    return Alert(
-                                                                        title: Text("삭제하시겠습니까?"),
-                                                                        message: Text("\(dummyData[index].postTitle ?? "nil")\n공고가 삭제됩니다."),
-                                                                        primaryButton: .destructive(
-                                                                            Text("삭제"),
-                                                                            action: {removePublishingPost()}
-                                                                        ),
-                                                                        secondaryButton: .cancel(
-                                                                            Text("아니오")
-                                                                        )
-                                                                    )
-                                                                }
-                                                                return Alert(title: Text("nil"))
-                                                            }
-                                                        }
-                                                    }
-                                                    
-                                                }.padding(.leading, 20)
-                                            }.padding(.top, 32)
-                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    }
-                                )
+                                                    }.padding(.leading, 20)
+                                                }.padding(.top, 32)
+                                                Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+                                            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        }
+                                    )
+                                }
+                                
                                 
                                 
                             }
@@ -662,88 +664,181 @@ struct Portfolio: View {
             
             // 완료
             if ($progressStatus.isCompleted.wrappedValue == true) {
-                ScrollView {
+                if (myAnnouncementsViewModel.isLoading == true) {
                     VStack {
-                        ForEach(dummyData) { dummy in
-                            if (dummy.postProgressStatus == .completed) {
-                                NavigationLink(
-                                    destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-                                    //                                    destination: DetailView(post: dummy),
-                                    label: {
-                                        VStack(alignment:.leading, spacing: 0) {
-                                            HStack(spacing: 0) {
-                                                (dummy.thumbNail ?? Image(.icCancel))
-                                                    .resizable().frame(width: 158, height: 158)
-                                                    .border(.sponusGrey100)
-                                                
-                                                VStack(alignment: .leading, spacing: 5) {
-                                                    switch dummy.postCategory {
-                                                    case .sponsorship:
-                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case .linkedproject:
-                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    case nil:
-                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                    }
-                                                    Text(dummy.postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                }
+                else {
+                    ScrollView {
+                        VStack {
+                            ForEach(dummyData) { dummy in
+                                if (dummy.postProgressStatus == .completed) {
+                                    NavigationLink(
+                                        destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
+                                        //                                    destination: DetailView(post: dummy),
+                                        label: {
+                                            VStack(alignment:.leading, spacing: 0) {
+                                                HStack(spacing: 0) {
+                                                    (dummy.thumbNail ?? Image(.icCancel))
+                                                        .resizable().frame(width: 158, height: 158)
+                                                        .border(.sponusGrey100)
                                                     
-                                                    HStack(spacing: 6) {
-                                                        (dummy.companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                        Text("with \(dummy.companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
-                                                    }.padding(.bottom)
-                                                    
-                                                }.padding(.leading, 20)
-                                            }.padding(.top, 32).padding(.bottom, 24)
-                                            VStack(spacing: 0) {
-                                                switch dummy.completedReportStatus {
-                                                case .reportNotSubmitted:
-                                                    Button {
-                                                        currentMakeReportID = dummy.id
-                                                        activeNavLinkToMakeReport = true
-                                                    } label: {
-                                                        Text("보고서 작성하기")
+                                                    VStack(alignment: .leading, spacing: 5) {
+                                                        switch dummy.postCategory {
+                                                        case .sponsorship:
+                                                            Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        case .linkedproject:
+                                                            Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        case nil:
+                                                            Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        }
+                                                        Text(dummy.postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                                                        
+                                                        HStack(spacing: 6) {
+                                                            (dummy.companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                            Text("with \(dummy.companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
+                                                        }.padding(.bottom)
+                                                        
+                                                    }.padding(.leading, 20)
+                                                }.padding(.top, 32).padding(.bottom, 24)
+                                                VStack(spacing: 0) {
+                                                    switch dummy.completedReportStatus {
+                                                    case .reportNotSubmitted:
+                                                        Button {
+                                                            currentMakeReportID = dummy.id
+                                                            activeNavLinkToMakeReport = true
+                                                        } label: {
+                                                            Text("보고서 작성하기")
+                                                                .font(.Caption01)
+                                                                .frame(height: 40)
+                                                                .frame(maxWidth: .infinity)
+                                                                .foregroundStyle(.sponusRed)
+                                                                .border(.sponusRed)
+                                                        }
+                                                    case .unsuccessfulTermination:
+                                                        Text("협업이 중단된 공고입니다")
                                                             .font(.Caption01)
                                                             .frame(height: 40)
                                                             .frame(maxWidth: .infinity)
+                                                            .foregroundStyle(.sponusGrey700)
+                                                            .border(.sponusGrey100)
+                                                    case .reportSubmitted:
+                                                        Button {
+                                                            currentReportID = dummy.id
+                                                            activeNavLinkToReport = true
+                                                        } label: {
+                                                            Text("보고서 보러가기")
+                                                                .font(.Caption01)
+                                                                .frame(height: 40)
+                                                                .frame(maxWidth: .infinity)
+                                                                .foregroundStyle(.sponusPrimary)
+                                                                .border(.sponusPrimary)
+                                                        }
+                                                    case nil:
+                                                        Text("nil")
+                                                            .font(.Caption01)
+                                                            .frame(height: 40)
                                                             .foregroundStyle(.sponusRed)
                                                             .border(.sponusRed)
                                                     }
-                                                case .unsuccessfulTermination:
-                                                    Text("협업이 중단된 공고입니다")
-                                                        .font(.Caption01)
-                                                        .frame(height: 40)
-                                                        .frame(maxWidth: .infinity)
-                                                        .foregroundStyle(.sponusGrey700)
-                                                        .border(.sponusGrey100)
-                                                case .reportSubmitted:
-                                                    Button {
-                                                        currentReportID = dummy.id
-                                                        activeNavLinkToReport = true
-                                                    } label: {
-                                                        Text("보고서 보러가기")
-                                                            .font(.Caption01)
-                                                            .frame(height: 40)
-                                                            .frame(maxWidth: .infinity)
-                                                            .foregroundStyle(.sponusPrimary)
-                                                            .border(.sponusPrimary)
-                                                    }
-                                                case nil:
-                                                    Text("nil")
-                                                        .font(.Caption01)
-                                                        .frame(height: 40)
-                                                        .foregroundStyle(.sponusRed)
-                                                        .border(.sponusRed)
                                                 }
-                                            }
-                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    }
-                                )
+                                                Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+                                            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        }
+                                    )
+                                }
                             }
                         }
-                    }
-                }.scrollIndicators(.hidden)
+                    }.scrollIndicators(.hidden)
+                }
+                
             }
+            //            if ($progressStatus.isCompleted.wrappedValue == true) {
+            //                ScrollView {
+            //                    VStack {
+            //                        ForEach(dummyData) { dummy in
+            //                            if (dummy.postProgressStatus == .completed) {
+            //                                NavigationLink(
+            //                                    destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
+            //                                    //                                    destination: DetailView(post: dummy),
+            //                                    label: {
+            //                                        VStack(alignment:.leading, spacing: 0) {
+            //                                            HStack(spacing: 0) {
+            //                                                (dummy.thumbNail ?? Image(.icCancel))
+            //                                                    .resizable().frame(width: 158, height: 158)
+            //                                                    .border(.sponusGrey100)
+            //
+            //                                                VStack(alignment: .leading, spacing: 5) {
+            //                                                    switch dummy.postCategory {
+            //                                                    case .sponsorship:
+            //                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+            //                                                    case .linkedproject:
+            //                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+            //                                                    case nil:
+            //                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+            //                                                    }
+            //                                                    Text(dummy.postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+            //
+            //                                                    HStack(spacing: 6) {
+            //                                                        (dummy.companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+            //                                                        Text("with \(dummy.companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
+            //                                                    }.padding(.bottom)
+            //
+            //                                                }.padding(.leading, 20)
+            //                                            }.padding(.top, 32).padding(.bottom, 24)
+            //                                            VStack(spacing: 0) {
+            //                                                switch dummy.completedReportStatus {
+            //                                                case .reportNotSubmitted:
+            //                                                    Button {
+            //                                                        currentMakeReportID = dummy.id
+            //                                                        activeNavLinkToMakeReport = true
+            //                                                    } label: {
+            //                                                        Text("보고서 작성하기")
+            //                                                            .font(.Caption01)
+            //                                                            .frame(height: 40)
+            //                                                            .frame(maxWidth: .infinity)
+            //                                                            .foregroundStyle(.sponusRed)
+            //                                                            .border(.sponusRed)
+            //                                                    }
+            //                                                case .unsuccessfulTermination:
+            //                                                    Text("협업이 중단된 공고입니다")
+            //                                                        .font(.Caption01)
+            //                                                        .frame(height: 40)
+            //                                                        .frame(maxWidth: .infinity)
+            //                                                        .foregroundStyle(.sponusGrey700)
+            //                                                        .border(.sponusGrey100)
+            //                                                case .reportSubmitted:
+            //                                                    Button {
+            //                                                        currentReportID = dummy.id
+            //                                                        activeNavLinkToReport = true
+            //                                                    } label: {
+            //                                                        Text("보고서 보러가기")
+            //                                                            .font(.Caption01)
+            //                                                            .frame(height: 40)
+            //                                                            .frame(maxWidth: .infinity)
+            //                                                            .foregroundStyle(.sponusPrimary)
+            //                                                            .border(.sponusPrimary)
+            //                                                    }
+            //                                                case nil:
+            //                                                    Text("nil")
+            //                                                        .font(.Caption01)
+            //                                                        .frame(height: 40)
+            //                                                        .foregroundStyle(.sponusRed)
+            //                                                        .border(.sponusRed)
+            //                                                }
+            //                                            }
+            //                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+            //                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            //                                    }
+            //                                )
+            //                            }
+            //                        }
+            //                    }
+            //                }.scrollIndicators(.hidden)
+            //            }
         }.padding()
             .navigationTitle("포트폴리오").font(.Body01)
             .navigationBarTitleDisplayMode(.inline)

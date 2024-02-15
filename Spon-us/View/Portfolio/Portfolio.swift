@@ -435,7 +435,7 @@ struct Portfolio: View {
                                                         switch cell.type {
                                                         case "SPONSORSHIP":
                                                             Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        case "PARTERSHIP":
+                                                        case "PARTNERSHIP":
                                                             Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
                                                         case "COLLABORATION":
                                                             Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)

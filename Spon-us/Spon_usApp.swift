@@ -72,14 +72,24 @@ extension AppDelegate: MessagingDelegate {
 struct Spon_usApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @State var rootIsActive = true
+    @AppStorage("loginAccount") var isLoggedIn: String?
     var body: some Scene {
         WindowGroup {
-            if UserDefaults.standard.string(forKey: "loginAccount") != nil {
-                ContentView()
+            ZStack {
+                if isLoggedIn != nil {
+                    ContentView()
+                }
+                else {
+                    OnBoardingView()
+                }
+                
             }
-            else {
-                OnBoardingView()
-            }
+//            if ((UserDefaults.standard.string(forKey: "loginAccount") != nil) && (rootIsActive == true)) {
+//                
+//            }
+//            else {
+//                OnBoardingView()
+//            }
             //            ContentView()
             //            ChargerInfoViewTest(rootIsActive: $rootIsActive)
         }

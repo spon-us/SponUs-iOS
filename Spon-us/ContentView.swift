@@ -11,6 +11,7 @@ import PhotosUI
 
 
 struct ContentView: View {
+    @AppStorage("loginAccount") var isLoggedIn: String?
     @State private var selectedTab: Int = 0
 
     var body: some View {
@@ -46,6 +47,8 @@ struct ContentView: View {
                         .font(.English18)
                 }
                 .tag(3)
+        }.onChange(of: isLoggedIn) {
+            selectedTab = 0
         }
     }
 }

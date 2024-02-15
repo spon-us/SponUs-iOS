@@ -76,10 +76,10 @@ struct ProposalReceivedListView: View {
                                     .padding(.trailing, 17)
                                 
                                 VStack(alignment: .leading, spacing: 6) {
-                                    Text(receivedViewModel.proposalReceived[index].proposingOrganizationName)
+                                    Text(receivedViewModel.proposalReceived[index].proposes[index].proposingOrganizationName)
                                         .font(.Body07)
                                     
-                                    Text(receivedViewModel.proposalReceived[index].title)
+                                    Text(receivedViewModel.proposalReceived[index].proposes[index].title)
                                         .font(.Body10)
                                         .foregroundColor(Color.sponusGrey800)
                                 }

@@ -14,6 +14,11 @@ struct ProposalModel: Codable {
 }
 
 struct ProposalResponse: Codable, Hashable {
+    let createdDate: String
+    let proposes: [Propose]
+}
+
+struct Propose: Codable, Hashable {
     let proposeId: Int
     let title: String
     let status: String
@@ -21,15 +26,17 @@ struct ProposalResponse: Codable, Hashable {
     let proposedOrganizationName: String
     let proposingOrganizationId: Int
     let proposingOrganizationName: String
+    let isReported: Bool
+    let reportId: Int?
     let announcementSummary: AnnouncementSummary
     let createdDate: String
     let createdDay: String
-    static func == (lhs: ProposalResponse, rhs: ProposalResponse) -> Bool {
-            return lhs.proposeId == rhs.proposeId
-        }
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(proposeId)
-        }
+    static func == (lhs: Propose, rhs: Propose) -> Bool {
+        return lhs.proposeId == rhs.proposeId
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(proposeId)
+    }
 }
 
 struct AnnouncementSummary: Codable {
@@ -44,6 +51,7 @@ struct AnnouncementSummary: Codable {
     let viewCount: Int
     let createdAt: String
     let updatedAt: String
+    let saveCount: Int
 }
 
 struct MainImage: Codable {

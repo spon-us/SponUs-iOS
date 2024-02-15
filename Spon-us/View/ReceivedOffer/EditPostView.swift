@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct EditPostView: View {
-    
+    @State var announcementID: Int?
     @State private var postTitle = ""
     @State private var selectedImages: [UIImage] = []
     @State private var postSelectedCategory = ""
@@ -31,7 +31,7 @@ struct EditPostView: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16){
-                    
+
                     SponUsPostCell(text: "공고 제목", isComplete: $postTitle)
                     
                     TextField("ex. 스포대학교 대학생 협찬", text: $postTitle)
@@ -132,6 +132,8 @@ struct EditPostView: View {
         .navigationBarItems(leading: CustomBackButton())
         .onDisappear{
             print("disappear")
+        }.onAppear() {
+            print(announcementID as Any)
         }
         //        }
     }

@@ -117,6 +117,8 @@
 		DF498F2C2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */; };
 		DF498F2E2B7DF4F600ADE078 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */; };
 		DF498F302B7DF50200ADE078 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */; };
+		DF692B162B7E39BD00BF9B75 /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */; };
+		DF692B182B7E3DA700BF9B75 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */; };
 		DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */; };
 		DF90A5AD2B664E5A00BC54D0 /* ProcessingPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */; };
 		DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */; };
@@ -208,6 +210,8 @@
 		DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncementsViewModel.swift; sourceTree = "<group>"; };
 		DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
 		DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
+		DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
+		DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
 		DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingPolicyView.swift; sourceTree = "<group>"; };
 		DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherAndUsageView.swift; sourceTree = "<group>"; };
@@ -302,6 +306,7 @@
 				10025B422B7C139300DCCC5A /* ReceivedOffer */,
 				10025B352B7B7B8700DCCC5A /* SendOffer */,
 				107D6E672B7A821D005B6261 /* MyPage */,
+				DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -515,6 +520,7 @@
 				3B81BCBD2B62312C0067E9CB /* Product.storekit */,
 				3B81BCBF2B6231680067E9CB /* ProductList.plist */,
 				DF498F262B79B45D00ADE078 /* KeyChainManager.swift */,
+				DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -723,6 +729,7 @@
 				100D38B62B4EF51E00498977 /* SavedView.swift in Sources */,
 				80FA31692B5EB9490076453B /* NewPostView.swift in Sources */,
 				100D38B82B4EF54100498977 /* CategoryView.swift in Sources */,
+				DF692B162B7E39BD00BF9B75 /* RefreshTokenManager.swift in Sources */,
 				3BD26D062B62342C0035FE80 /* ChargerInfoView.swift in Sources */,
 				3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */,
 				3B36F0A62B6FEC2F0000ACFB /* Order.swift in Sources */,
@@ -756,6 +763,7 @@
 				100A1E322B73485800AAC1E8 /* SponusAPI.swift in Sources */,
 				807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */,
 				806AF86A2B79DBD0008F7F62 /* CategoryModel.swift in Sources */,
+				DF692B182B7E3DA700BF9B75 /* RefreshTokenModel.swift in Sources */,
 				DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */,
 				DF498F272B79B45D00ADE078 /* KeyChainManager.swift in Sources */,
 				3B36F0A12B6FEBF60000ACFB /* Utils.swift in Sources */,

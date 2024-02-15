@@ -25,6 +25,7 @@ enum SponusAPI {
     case getOrganization(organizationId: Int)
     case getReceived(announcementId: Int)
     case getMyAnnouncements
+    case getRenewToken
 }
 
 extension SponusAPI: TargetType {
@@ -62,7 +63,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/proposes/received"
         case .getMyAnnouncements:
             return "/api/v1/announcements/me/opened"
-        
+        case .getRenewToken:
+            return "/api/v1/auth/reissue"
         }
     }
     
@@ -95,6 +97,8 @@ extension SponusAPI: TargetType {
         case .getReceived:
             return .get
         case .getMyAnnouncements:
+            return .get
+        case .getRenewToken:
             return .get
         }
     }
@@ -159,6 +163,8 @@ extension SponusAPI: TargetType {
         case .getReceived:
             return Data()
         case .getMyAnnouncements:
+            return Data()
+        case .getRenewToken:
             return Data()
         }
     }
@@ -253,6 +259,8 @@ extension SponusAPI: TargetType {
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         case .getMyAnnouncements:
             return .requestPlain
+        case .getRenewToken:
+            return .requestPlain
         }
     }
     
@@ -291,6 +299,15 @@ extension SponusAPI: TargetType {
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getMyAnnouncements:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .getRenewToken:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))",
+                    "RefreshToken": "\(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadRefreshToken Error"))"]
         }
     }
 }
+
+//extension SponusAPI {
+//  var validationType: ValidationType {
+//      return .successCodes
+//  }
+//}

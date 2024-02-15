@@ -62,6 +62,7 @@ struct Portfolio: View {
     @State var activeToProgressingDetail = false
     @State var activeToCompletedDetail = false
     
+    @State private var currentDialogID = 0
     @State private var currentConfirmationDialogID: UUID?
     @State private var currentToTopID: UUID?
     @State private var currentProgressingID: UUID?
@@ -473,12 +474,14 @@ struct Portfolio: View {
                                                             
                                                             Button() {
                                                                 showingPublishingConfirmationDialog = true
+                                                                currentDialogID = cell.id
                                                                 //                                                            currentConfirmationDialogID = dummy.id
                                                             } label: {
                                                                 Image(.icMore).resizable().frame(width: 40, height: 40).border(.sponusGrey100)
                                                             }
                                                             .confirmationDialog("ic_more", isPresented: $showingPublishingConfirmationDialog, titleVisibility: .hidden, actions: {
                                                                 Button("수정하기") {
+                                                                    
                                                                     activeNavLinkToEdit = true
                                                                     showingPublishingConfirmationDialog = false
                                                                     
@@ -535,9 +538,6 @@ struct Portfolio: View {
                                         }
                                     )
                                 }
-                                
-                                
-                                
                             }
                         }
                     }.scrollIndicators(.hidden)
@@ -848,7 +848,7 @@ struct Portfolio: View {
                 //                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
                 //                    ModifyView(post: dummyData[index])
                 //                }
-                EditPostView(popup: .constant(false))
+                EditPostView(announcementID: currentDialogID, popup: .constant(false))
             }
             .navigationDestination(isPresented: $activeNavLinkToMakeReport) {
                 MakeReportView(rootIsActive: self.$rootIsActive)

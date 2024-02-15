@@ -17,19 +17,21 @@ struct SendOfferView: View {
         ScrollView {
             if hasData() {
                 VStack(spacing: 0) {
-                    Text("02.14 WED")
-                        .font(.English01)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(Color.sponusBlack)
-                        .padding(.top, 16)
-                    
-                    Rectangle()
-                        .fill(Color.sponusBlack)
-                        .frame(maxWidth: .infinity, maxHeight: 1)
-                        .padding(.top, 8)
-                    
-                    ForEach(sentViewModel.proposalSent, id: \.self) {sentResponse in
-                        SendOfferCell(rootIsActive: $rootIsActive, sentResponse: sentResponse)
+                    ForEach(sentViewModel.sortedUniqueDates, id: \.self) { date in
+                        Section(header: Text(date.description)
+                            .font(.English01)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(Color.sponusBlack)
+                            .padding(.top, 16)) {
+                                Rectangle()
+                                    .fill(Color.sponusBlack)
+                                    .frame(maxWidth: .infinity, maxHeight: 1)
+                                    .padding(.top, 8)
+                                
+                                ForEach(sentViewModel.groupedProposalsByDate[date] ?? [], id: \.self) { propose in
+                                    SendOfferCell(rootIsActive: $rootIsActive, sentResponse: ProposalResponse(createdDate: propose.createdDate, proposes: [propose]))
+                                }
+                            }
                     }
                 }
                 .padding(.horizontal, 20)
@@ -62,7 +64,7 @@ struct SendOfferView: View {
             return "DefaultStatus"
         }
         
-        let status = sentViewModel.proposalSent[index].status
+        let status = sentViewModel.proposalSent[index].proposes[index].status
         
         switch status {
         case "ACCEPTED":
@@ -88,6 +90,7 @@ struct SendOfferView: View {
         }
     }
 }
+
 func statusChangeToKorean(english: String) -> String{
     switch english {
     case "ACCEPTED":
@@ -108,58 +111,69 @@ func statusChangeToKorean(english: String) -> String{
         return "DefaultStatus"
     }
 }
+
 struct SendOfferCell: View {
     @Binding var rootIsActive: Bool
     
     var sentResponse: ProposalResponse
     
     var body: some View {
-        HStack(spacing: 0) {
-            ZStack {
-                Image("musinsa")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 158, height: 158)
-                    .padding(.trailing, 20)
-                
-                StatusBadge(status: statusChangeToKorean(english: sentResponse.status))
-                    .offset(x: 50.5, y: -66.5)
-            }
-            
-            LazyVStack(alignment: .leading, spacing: 12) {
-                Text("\(changeToKorean(type: sentResponse.announcementSummary.type) ?? "전체")")
-                    .font(.Caption02)
-                    .foregroundColor(Color.sponusGrey700)
-                
-                Text("\(sentResponse.title)")
-                    .multilineTextAlignment(.leading)
-                    .font(.Body07)
-                    .foregroundColor(Color.sponusBlack)
-                
-                NavigationLink(destination:
-                                SendOfferPostView(proposeId: sentResponse.proposeId,rootIsActive: $rootIsActive),
-                               label: {
-                    HStack {
-                        Text("보낸 제안서")
-                            .padding(.leading, 5)
-                        
-                        Image("ic_go_blue")
-                            .frame(width: 16, height: 16)
-                            .padding(.leading, -3)
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                ZStack {
+                    Image("musinsa")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 158, height: 158)
+                        .padding(.trailing, 20)
+                    
+                    ForEach(sentResponse.proposes, id: \.self) { propose in
+                        StatusBadge(status: statusChangeToKorean(english: propose.status))
+                            .offset(x: 50.5, y: -66.5)
                     }
-                    .font(.Body10)
-                    .foregroundStyle(Color.sponusPrimary)
-                    .padding(.vertical, 11)
-                    .padding(.horizontal, 10)
-                    .overlay(
-                        Rectangle()
-                            .stroke(Color.sponusPrimary, lineWidth: 1)
-                    )
-                })
+                }
+                
+                LazyVStack(alignment: .leading, spacing: 12) {
+                    ForEach(sentResponse.proposes, id: \.self) { propose in
+                        Text("\(changeToKorean(type: propose.announcementSummary.type) ?? "전체")")
+                            .font(.Caption02)
+                            .foregroundColor(Color.sponusGrey700)
+                        
+                        Text("\(propose.title)")
+                            .multilineTextAlignment(.leading)
+                            .font(.Body07)
+                            .foregroundColor(Color.sponusBlack)
+                        
+                        Spacer()
+                        
+                        NavigationLink(
+                            destination: SendOfferPostView(proposeId:
+                                                            propose.proposeId, rootIsActive: $rootIsActive),
+                            label: {
+                                HStack {
+                                    Text("보낸 제안서")
+                                        .padding(.leading, 5)
+                                    
+                                    Image("ic_go_blue")
+                                        .frame(width: 16, height: 16)
+                                        .padding(.leading, -3)
+                                }
+                                .font(.Body10)
+                                .foregroundStyle(Color.sponusPrimary)
+                                .padding(.vertical, 11)
+                                .padding(.horizontal, 10)
+                                .overlay(
+                                    Rectangle()
+                                        .stroke(Color.sponusPrimary, lineWidth: 1)
+                                )
+                            }
+                        )
+                    }
+                }
+                .padding(.trailing, 15)
             }
-            .padding(.trailing, 15)
+            .padding(.vertical, 16)
         }
-        .padding(.top, 16)
     }
 }
 
@@ -216,7 +230,6 @@ struct StatusBadge: View {
         }
     }
 }
-
 
 #Preview {
     SendOfferView(rootIsActive: .constant(true))

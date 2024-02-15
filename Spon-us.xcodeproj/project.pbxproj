@@ -435,8 +435,8 @@
 				3B2021762B4C56000010CA02 /* ProposalReceivedListView.swift */,
 				3B81BCB72B622F080067E9CB /* MyNoticeListView.swift */,
 				3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */,
-				3BFC8D142B54AA55000D6006 /* EditPostView.swift */,
 				3B36F0992B6FEB800000ACFB /* PaymentSettingView.swift */,
+				3BFC8D142B54AA55000D6006 /* EditPostView.swift */,
 				3B36F09B2B6FEBA00000ACFB /* ChargerInfoViewTest.swift */,
 				3B36F09D2B6FEBBC0000ACFB /* PaymentView.swift */,
 			);

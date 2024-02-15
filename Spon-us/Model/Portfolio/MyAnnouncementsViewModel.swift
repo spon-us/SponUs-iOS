@@ -21,24 +21,28 @@ class MyAnnouncementsViewModel: ObservableObject {
         provider.request(.getMyAnnouncements) { result in
             switch result {
             case .success(let response):
-                    if let jsonString = String(data: response.data, encoding: .utf8) {
-                        print("서버 응답 JSON 데이터: \(jsonString)")
+                print(response.statusCode)
+                if response.data.isEmpty {
+                    renewToken()
+                }
+                print(response.data)
+                if let jsonString = String(data: response.data, encoding: .utf8) {
+                    print("서버 응답 JSON 데이터: \(jsonString)")
+                }
+                do {
+                    let myAnnouncements = try JSONDecoder().decode(MyAnnouncementsModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        self.myAnnouncementsContents = myAnnouncements.content
+                        self.isLoading = false
+                        print(self.myAnnouncementsContents)
                     }
-
-                    do {
-                        let myAnnouncements = try JSONDecoder().decode(MyAnnouncementsModel.self, from: response.data)
-                        DispatchQueue.main.async {
-                            self.myAnnouncementsContents = myAnnouncements.content
-                            self.isLoading = false
-                            print(self.myAnnouncementsContents)
-                        }
-                    } catch {
-                        print("JSON 디코딩 오류: \(error)")
-                    }
+                } catch {
+                    print("JSON 디코딩 오류: \(error)")
+                }
             case .failure(let error):
                 print(error)
             }
         }
     }
-
+    
 }

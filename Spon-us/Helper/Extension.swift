@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SwiftUI
+import Alamofire
+import Moya
 
 extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate {
     override open func viewDidLoad() {
@@ -126,3 +128,61 @@ func changeToKorean(category: String? = nil, type: String? = nil) -> String? {
     }
     return nil
 }
+
+//final class AuthInterceptor: RequestInterceptor {
+//
+//    static let shared = AuthInterceptor()
+//    let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
+//    private init() {}
+//
+//    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+////            guard urlRequest.url?.absoluteString.hasPrefix(Config.baseURL) == true,
+////                  let accessToken = UserManager.shared.accessToken,
+////                  let refreshToken = UserManager.shared.refreshToken
+////            else {
+////                completion(.success(urlRequest))
+////                return
+////            }
+////            
+////            var urlRequest = urlRequest
+////            urlRequest.setValue(accessToken, forHTTPHeaderField: "accessToken")
+////            urlRequest.setValue(refreshToken, forHTTPHeaderField: "refreshToken")
+////            print("adator 적용 \(urlRequest.headers)")
+//            print("adapt")
+//            completion(.success(urlRequest))
+//        }
+//    
+//    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+//        print("retry 진입")
+//        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401
+//        else {
+//            completion(.doNotRetryWithError(error))
+//            return
+//        }
+//        
+//        
+//        provider.request(.getRenewToken) { result in
+//            switch result {
+//            case let .success(response):
+//                switch response.statusCode {
+//                case 200:
+//                    print(response.statusCode)
+//                    print("success")
+//                    let renewResponse = try? response.map(RefreshTokenModel200.self)
+//                    saveAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "userID Error", accessToken: renewResponse?.content.accessToken ?? "renewAccessTokenError")
+//                    saveRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "userID Error", refreshToken: renewResponse?.content.refreshToken ?? "renewRefreshTokenError")
+//                    print(renewResponse as Any)
+//                    completion(.retry)
+//                default:
+//                    print("failed")
+//                    print("token renew error")
+//                    print(response.statusCode)
+//                    print(response.data)
+//                }
+//            case let .failure(response):
+//                completion(.doNotRetryWithError(error))
+//            }
+//        }
+//    }
+//}
+//

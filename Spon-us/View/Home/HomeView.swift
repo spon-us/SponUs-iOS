@@ -373,6 +373,10 @@ struct HomeView: View {
                 notificationItem
             })
             .font(.English03)
+            .onAppear() {
+                print("Access: \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? ""))")
+                print("Access: \(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? ""))")
+            }
         }
     }
 }

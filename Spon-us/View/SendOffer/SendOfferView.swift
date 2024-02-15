@@ -116,63 +116,66 @@ struct SendOfferCell: View {
     @Binding var rootIsActive: Bool
     
     var sentResponse: ProposalResponse
+    @State private var selectedProposeId: Int?
     
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                ZStack {
-                    Image("musinsa")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 158, height: 158)
-                        .padding(.trailing, 20)
+        NavigationStack {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    ZStack {
+                        Image("musinsa")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 158, height: 158)
+                            .padding(.trailing, 20)
+                        
+                        ForEach(sentResponse.proposes, id: \.self) { propose in
+                            StatusBadge(status: statusChangeToKorean(english: propose.status))
+                                .offset(x: 50.5, y: -66.5)
+                        }
+                    }
                     
-                    ForEach(sentResponse.proposes, id: \.self) { propose in
-                        StatusBadge(status: statusChangeToKorean(english: propose.status))
-                            .offset(x: 50.5, y: -66.5)
-                    }
-                }
-                
-                LazyVStack(alignment: .leading, spacing: 12) {
-                    ForEach(sentResponse.proposes, id: \.self) { propose in
-                        Text("\(changeToKorean(type: propose.announcementSummary.type) ?? "전체")")
-                            .font(.Caption02)
-                            .foregroundColor(Color.sponusGrey700)
-                        
-                        Text("\(propose.title)")
-                            .multilineTextAlignment(.leading)
-                            .font(.Body07)
-                            .foregroundColor(Color.sponusBlack)
-                        
-                        Spacer()
-                        
-                        NavigationLink(
-                            destination: SendOfferPostView(proposeId:
-                                                            propose.proposeId, rootIsActive: $rootIsActive),
-                            label: {
-                                HStack {
-                                    Text("보낸 제안서")
-                                        .padding(.leading, 5)
-                                    
-                                    Image("ic_go_blue")
-                                        .frame(width: 16, height: 16)
-                                        .padding(.leading, -3)
+                    LazyVStack(alignment: .leading, spacing: 12) {
+                        ForEach(sentResponse.proposes, id: \.self) { propose in
+                            Text("\(changeToKorean(type: propose.announcementSummary.type) ?? "전체")")
+                                .font(.Caption02)
+                                .foregroundColor(Color.sponusGrey700)
+                            
+                            Text("\(propose.title)")
+                                .multilineTextAlignment(.leading)
+                                .font(.Body07)
+                                .foregroundColor(Color.sponusBlack)
+                            
+                            Spacer()
+                            
+                            NavigationLink(
+                                destination: SendOfferPostView(proposeId: propose.proposeId, rootIsActive: $rootIsActive),
+                                isActive: .constant(selectedProposeId == propose.proposeId),
+                                label: {
+                                    HStack {
+                                        Text("보낸 제안서")
+                                            .padding(.leading, 5)
+                                        
+                                        Image("ic_go_blue")
+                                            .frame(width: 16, height: 16)
+                                            .padding(.leading, -3)
+                                    }
+                                    .font(.Body10)
+                                    .foregroundStyle(Color.sponusPrimary)
+                                    .padding(.vertical, 11)
+                                    .padding(.horizontal, 10)
+                                    .overlay(
+                                        Rectangle()
+                                            .stroke(Color.sponusPrimary, lineWidth: 1)
+                                    )
                                 }
-                                .font(.Body10)
-                                .foregroundStyle(Color.sponusPrimary)
-                                .padding(.vertical, 11)
-                                .padding(.horizontal, 10)
-                                .overlay(
-                                    Rectangle()
-                                        .stroke(Color.sponusPrimary, lineWidth: 1)
-                                )
-                            }
-                        )
+                            )
+                        }
                     }
+                    .padding(.trailing, 15)
                 }
-                .padding(.trailing, 15)
+                .padding(.vertical, 16)
             }
-            .padding(.vertical, 16)
         }
     }
 }

@@ -203,7 +203,8 @@ struct CategoryCell: View {
                             Spacer()
                         }
                     }.frame(width: 160, height: 95).padding(.trailing, 36)
-                    Button(action: {toggleBookmark()}){
+                    Button(action: {toggleBookmark()
+                        print(categoryContent.id)}){
                         Image(isBookmarked ? "ic_saved_check" : "ic_saved")
                                 .frame(width: 28, height: 28)
                     }

@@ -18,7 +18,7 @@ struct RegisterPWView: View {
     @FocusState var PWConfirmSecureFieldFocused: Bool
     @FocusState var PWConfirmTextFieldFocused: Bool
     
-    let PWRegex = /^(?=.*[a-z])(?=.*\d).{8,20}$/
+    let PWRegex = /^(?=.*[a-z])(?=.*\d).{10,20}$/
     
     var body: some View {
         @State var isValidPW = (userPW == userPWConfirm) && (userPW.wholeMatch(of: PWRegex)?.output != nil)
@@ -73,7 +73,7 @@ struct RegisterPWView: View {
                 }.padding(.trailing, 16)
             }.border((PWTextFieldFocused || PWSecureFieldFocused) ? .sponusPrimary : .sponusGrey100).padding(.top, 16).padding(.top, 32)
             HStack(spacing: 0) {
-                Text("*영문, 숫자 포함 8-20자 이내").font(.system(size: 12)).foregroundStyle(.sponusGrey900)
+                Text("*영문, 숫자 포함 10-20자 이내").font(.system(size: 12)).foregroundStyle(.sponusGrey900)
                 Spacer()
             }.padding(.top, 12)
             HStack(spacing: 0) {

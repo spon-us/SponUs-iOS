@@ -18,6 +18,7 @@ enum SponusAPI {
     case getAnnouncement(announcementId: Int)
     case propose(title: String, content: String, announcementId: Int, attachments: [URL])
     case postLogin(email: String, password: String, fcmToken: String)
+    case getLogout
     case getMe
     case getSent
     case getProposalDetail(proposeId: Int)
@@ -47,6 +48,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/proposes"
         case .postLogin:
             return "/api/v1/organizations/login"
+        case .getLogout:
+            return "/api/v1/organizations/logout"
         case .getMe:
             return "/api/v1/organizations/me"
         case .getSent:
@@ -59,6 +62,7 @@ extension SponusAPI: TargetType {
             return "/api/v1/proposes/received"
         case .getMyAnnouncements:
             return "/api/v1/announcements/me/opened"
+        
         }
     }
     
@@ -78,6 +82,8 @@ extension SponusAPI: TargetType {
                 return .post
         case .postLogin:
             return .post
+        case .getLogout:
+            return .get
         case .getMe:
             return .get
         case .getSent:
@@ -140,6 +146,8 @@ extension SponusAPI: TargetType {
                 ]
             ]
             return try! JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
+        case .getLogout:
+            return Data()
         case .getMe:
             return Data()
         case .getSent:
@@ -230,6 +238,8 @@ extension SponusAPI: TargetType {
         case .postLogin(let email, let password, let fcmToken):
             let requestBody = LoginRequestBody(email: email, password: password, fcmToken: fcmToken)
             return .requestJSONEncodable(requestBody)
+        case .getLogout:
+            return .requestPlain
         case .getMe:
             return .requestPlain
         case .getSent:
@@ -254,6 +264,8 @@ extension SponusAPI: TargetType {
             return nil
         case .postLogin:
             return nil
+        case .getLogout:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getMe:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getSent:

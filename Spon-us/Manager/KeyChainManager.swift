@@ -145,3 +145,13 @@ func loadRefreshToken(userID: String) -> String {
     let accessToken = (try? KeychainManager.loadString(account: account)) ?? "Refresh Token Loading Error"
     return accessToken
 }
+
+func deleteAccessToken(userID: String) {
+    let account = "\(userID)_accessToken"
+    try? KeychainManager.delete(account: account)
+}
+
+func deleteRefreshToken(userID: String) {
+    let account = "\(userID)_refreshToken"
+    try? KeychainManager.delete(account: account)
+}

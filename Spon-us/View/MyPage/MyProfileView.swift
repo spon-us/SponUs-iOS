@@ -36,7 +36,7 @@ struct MyProfileView: View {
                         
                         Rectangle()
                             .foregroundColor(.clear)
-                            .frame(width: .infinity, height: 178)
+                            .frame(maxWidth: .infinity).frame(height: 178)
                             .background(
                                 LinearGradient(
                                     stops: [

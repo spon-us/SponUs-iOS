@@ -10,15 +10,14 @@ import Moya
 
 struct SendOfferPostView: View {
     var proposeId: Int
-    let provider = MoyaProvider<SponusAPI>()
     
     @Binding var rootIsActive: Bool
     @Environment(\.presentationMode) var presentationMode
-    @State private var proposalDetail: ProposalDetailModel?
+    
     @State private var isShowingActivityView = false
     @State private var activityItems: [Any] = [URL(string: "https://example.com")!]
     
-//    @ObservedObject var proposalDetailViewModel = ProposalDetailViewModel()
+    @ObservedObject var proposalDetailViewModel = ProposalDetailViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -37,11 +36,9 @@ struct SendOfferPostView: View {
                                             .opacity(phase.isIdentity ? 1.0 : 0.8)
                                             .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
                                     }
-                                
                             }
                         }
                         .scrollTargetLayout()
-                        
                     }
                     .scrollTargetBehavior(.viewAligned)
                     .safeAreaPadding(.horizontal, 40.0)
@@ -51,7 +48,7 @@ struct SendOfferPostView: View {
                             ProfileView(rootIsActive: $rootIsActive)
                         } label: {
                             HStack {
-                                Text(proposalDetail?.content.proposedOrganizationName ?? "")
+                                Text(proposalDetailViewModel.proposalDetail?.proposedOrganizationName ?? "")
                                     .font(.Body10)
                                     .foregroundColor(Color.sponusPrimary)
                                 
@@ -60,7 +57,7 @@ struct SendOfferPostView: View {
                             }
                         }.padding(.top, 23)
                         
-                        Text(proposalDetail?.content.title ?? "")
+                        Text(proposalDetailViewModel.proposalDetail?.title ?? "")
                             .font(.Heading05)
                             .foregroundColor(Color.sponusBlack)
                             .padding(.top, 16)
@@ -75,7 +72,7 @@ struct SendOfferPostView: View {
                             .foregroundColor(Color.sponusGrey700)
                             .padding(.top, 24)
                         
-                        Text(proposalDetail?.content.content ?? "")
+                        Text(proposalDetailViewModel.proposalDetail?.content ?? "")
                             .multilineTextAlignment(.leading)
                             .font(.Body10)
                             .foregroundColor(.black)
@@ -86,20 +83,16 @@ struct SendOfferPostView: View {
                             .frame(maxWidth: .infinity, maxHeight: 1)
                             .padding(.top, 24)
                         
-                        SendOfferPostCell(rootIsActive: $rootIsActive, status: statusChangeToKorean(english: proposalDetail?.content.announcementDetails.status ?? ""))
+                        SendOfferPostCell(rootIsActive: $rootIsActive, status: statusChangeToKorean(english: proposalDetailViewModel.proposalDetail?.announcementDetails.status ?? ""))
                             .padding(.vertical, 16)
-                        
                     }
                     .padding(.horizontal, 20)
                 }
                 .padding(.bottom, 20)
-                
             }
             
-
             HStack(){
                 HStack(spacing: 16){
-
                     Button(action: {
                         isShowingActivityView = true
                     }) {
@@ -109,7 +102,9 @@ struct SendOfferPostView: View {
                     }.sheet(isPresented: $isShowingActivityView) {
                         ActivityView(activityItems: activityItems)
                     }
-                }.padding(.leading, 36)
+                }
+                .padding(.leading, 36)
+                
                 NavigationLink(destination: ChargerInfoView(rootIsActive: $rootIsActive)){
                     Text("담당자 정보 확인하기")
                         .font(.Body01)
@@ -117,7 +112,8 @@ struct SendOfferPostView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.top, 20)
                 }
-            }.background(Color.sponusBlack)
+            }
+            .background(Color.sponusBlack)
         }
         .gesture(
             DragGesture().onEnded { value in
@@ -135,28 +131,8 @@ struct SendOfferPostView: View {
                 .foregroundStyle(.black)
         }))
         .onAppear(){
-            fetchProposal()
-        }
-    }
-}
-
-extension SendOfferPostView {
-    func fetchProposal(){
-        provider.request(.getProposalDetail(proposeId: proposeId)) { result in
-            switch result {
-            case let .success(response):
-                do {
-                    print(proposeId)
-                    let proposalDetailResponse = try JSONDecoder().decode(ProposalDetailModel.self, from: response.data)
-                    self.proposalDetail = proposalDetailResponse
-                    //print("제안 상세 조회 \(self.proposalDetail)")
-                } catch {
-                    print("여기!!!!!")
-                    print("Error parsing response: \(error)")
-                }
-            case let .failure(error):
-                print("Network request failed: \(error)")
-            }
+            //print("보낸 Propose ID: \(proposeId)")
+            proposalDetailViewModel.fetchProposalDetail(proposeId : proposeId)
         }
     }
 }
@@ -182,7 +158,6 @@ struct SendOfferPostCell: View {
                 Text("연계 프로젝트")
                     .font(.Caption02)
                     .foregroundColor(Color.sponusGrey700)
-                
                 
                 Text("무신사 글로벌 마케팅\n연계 프로젝트")
                     .font(.Body07)

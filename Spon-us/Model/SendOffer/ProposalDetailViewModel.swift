@@ -21,6 +21,7 @@ class ProposalDetailViewModel: ObservableObject {
                 do {
                     let proposalDetailResponse = try response.map(ProposalDetailModel.self)
                     self.proposalDetail = proposalDetailResponse.content
+                    //print("넘어온 Propose ID: \(proposeId)")
                 } catch {
                     print("Error parsing response: \(error)")
                 }

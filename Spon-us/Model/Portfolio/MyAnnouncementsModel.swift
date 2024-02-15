@@ -25,4 +25,5 @@ struct MyAnnouncementsContent: Codable {
     var viewCount: Int
     var createdAt: String
     var updatedAt: String
+    var saveCount: Int
 }

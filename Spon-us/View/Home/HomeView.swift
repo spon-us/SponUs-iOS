@@ -374,9 +374,9 @@ struct HomeView: View {
             })
             .font(.English03)
 //            .onAppear() {
-//                print("Access: \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? ""))")
-//                print("Access: \(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? ""))")
-//                renewToken()
+//                deleteAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "deleteAccessToken Error")
+//                deleteRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "deleteRefreshTokenError")
+//                UserDefaults.standard.removeObject(forKey: "loginAccount")
 //            }
         }
     }

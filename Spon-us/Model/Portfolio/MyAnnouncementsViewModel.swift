@@ -50,9 +50,9 @@ class MyAnnouncementsViewModel: ObservableObject {
             switch result {
             case .success(let response):
                 print(response.statusCode)
-                if response.data.isEmpty {
-                    renewToken()
-                }
+//                if response.data.isEmpty {
+//                    renewToken()
+//                }
                 print(response.data)
                 if let jsonString = String(data: response.data, encoding: .utf8) {
                     print("서버 응답 JSON 데이터: \(jsonString)")

@@ -15,7 +15,7 @@ class PortfolioOfferViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var myProposes: [Propose] = []
     
-    let provider = MoyaProvider<SponusAPI>()
+    let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
     
     func getMyAnnouncements(completion: @escaping (Bool) -> Void) {
         self.isLoading = true
@@ -65,7 +65,7 @@ class PortfolioOfferViewModel: ObservableObject {
                         print("catcherrororororor")
                         completion(false)
                     }
-                case let .failure(response):
+                case .failure(_):
                     print("failureerrororororo")
                     completion(false)
                 }
@@ -79,6 +79,74 @@ class PortfolioOfferViewModel: ObservableObject {
                 myProposes.append(prop)
             }
         }
+        myProposes = Array(Set(myProposes))
         self.isLoading = false
+    }
+    
+    func stopOffer(proposeId: Int, completion: @escaping (Bool) -> Void) {
+        provider.request(.patchChangeOfferStatus(proposeID: proposeId, status: "SUSPENDED")) { result in
+            switch result {
+            case let .success(response):
+                if response.statusCode == 200 {
+                    do {
+                        let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
+                        print(responseBody)
+                        completion(true)
+                    }
+                    catch {
+                        print("200 successError")
+                        completion(false)
+                    }
+                }
+                else {
+                    do {
+                        print(response.statusCode)
+                        let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
+                        print(responseBody)
+                        completion(false)
+                    }
+                    catch {
+                        print("40x successError")
+                        completion(false)
+                    }
+                }
+            case .failure(_):
+                print("failureError")
+                completion(false)
+            }
+        }
+    }
+    
+    func cancelStopOffer(proposeId: Int, status: String, completion: @escaping (Bool) -> Void) {
+        provider.request(.patchChangeOfferStatus(proposeID: proposeId, status: status)) { result in
+            switch result {
+            case let .success(response):
+                if response.statusCode == 200 {
+                    do {
+                        let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
+                        print(responseBody)
+                        completion(true)
+                    }
+                    catch {
+                        print("200 successError")
+                        completion(false)
+                    }
+                }
+                else {
+                    do {
+                        let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
+                        print(responseBody)
+                        completion(false)
+                    }
+                    catch {
+                        print("40x successError")
+                        completion(false)
+                    }
+                }
+            case .failure(_):
+                print("failureError")
+                completion(false)
+            }
+        }
     }
 }

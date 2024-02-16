@@ -27,6 +27,7 @@ enum SponusAPI {
     case getMyAnnouncements
     case getRenewToken
     case patchChangeAnnouncementStatus(announcementID: Int, status: String)
+    case patchChangeOfferStatus(proposeID: Int, status: String)
 }
 
 extension SponusAPI: TargetType {
@@ -66,8 +67,10 @@ extension SponusAPI: TargetType {
             return "/api/v1/announcements/me/opened"
         case .getRenewToken:
             return "/api/v1/auth/reissue"
-        case .patchChangeAnnouncementStatus(let announcementID, let status):
+        case .patchChangeAnnouncementStatus(let announcementID, _):
             return "/api/v1/announcements/\(announcementID)/status"
+        case .patchChangeOfferStatus(let proposeID, let status):
+            return "/api/v1/propose/\(proposeID)"
         }
     }
     
@@ -104,6 +107,8 @@ extension SponusAPI: TargetType {
         case .getRenewToken:
             return .get
         case .patchChangeAnnouncementStatus:
+            return .patch
+        case .patchChangeOfferStatus:
             return .patch
         }
     }
@@ -172,6 +177,8 @@ extension SponusAPI: TargetType {
         case .getRenewToken:
             return Data()
         case .patchChangeAnnouncementStatus:
+            return Data()
+        case .patchChangeOfferStatus:
             return Data()
         }
     }
@@ -268,7 +275,10 @@ extension SponusAPI: TargetType {
             return .requestPlain
         case .getRenewToken:
             return .requestPlain
-        case .patchChangeAnnouncementStatus(let announcementID, let status):
+        case .patchChangeAnnouncementStatus(_, let status):
+            let requestBody = ["status" : status]
+            return .requestJSONEncodable(requestBody)
+        case .patchChangeOfferStatus(_, let status):
             let requestBody = ["status" : status]
             return .requestJSONEncodable(requestBody)
         }
@@ -314,12 +324,14 @@ extension SponusAPI: TargetType {
                     "RefreshToken": "\(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadRefreshToken Error"))"]
         case .patchChangeAnnouncementStatus:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .patchChangeOfferStatus:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }
 }
 
-//extension SponusAPI {
-//  var validationType: ValidationType {
-//      return .successCodes
-//  }
-//}
+extension SponusAPI {
+  var validationType: ValidationType {
+      return .successCodes
+  }
+}

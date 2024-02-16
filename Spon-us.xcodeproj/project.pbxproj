@@ -117,6 +117,7 @@
 		DF498F2C2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */; };
 		DF498F2E2B7DF4F600ADE078 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */; };
 		DF498F302B7DF50200ADE078 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */; };
+		DF5B7E922B7FA430001C009C /* PortfolioOfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */; };
 		DF692B162B7E39BD00BF9B75 /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */; };
 		DF692B182B7E3DA700BF9B75 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */; };
 		DF692B1A2B7E970F00BF9B75 /* EditAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */; };
@@ -212,6 +213,7 @@
 		DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncementsViewModel.swift; sourceTree = "<group>"; };
 		DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
 		DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
+		DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioOfferViewModel.swift; sourceTree = "<group>"; };
 		DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
 		DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
 		DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementView.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				DF498F292B7CDDA200ADE078 /* MyAnnouncementsModel.swift */,
 				DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */,
 				DF692B1B2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift */,
+				DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				100D38BA2B4EF54C00498977 /* MyView.swift in Sources */,
 				3B81BCB42B622ED00067E9CB /* StoreKitTestView.swift in Sources */,
 				DF90A5B22B664EBF00BC54D0 /* TermsAndConditionsView.swift in Sources */,
+				DF5B7E922B7FA430001C009C /* PortfolioOfferViewModel.swift in Sources */,
 				10EBD8132B6FF2350082CD8E /* ImagePicker.swift in Sources */,
 				DF91F4042B4864330021291A /* Portfolio.swift in Sources */,
 				DF3AD3E32B621FFA00DBFCCC /* SearchPostView.swift in Sources */,

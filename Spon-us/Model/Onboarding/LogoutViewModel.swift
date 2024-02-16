@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 class LogoutViewModel: ObservableObject {
-    @Published var logoutModel401: LogoutModel401?
+    @Published var logoutModel200: LogoutModel200?
     @Published var logoutModel400: LogoutModel400?
     @Published var isLogoutProgressing = false
     let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
@@ -19,10 +19,10 @@ class LogoutViewModel: ObservableObject {
             switch result {
             case let .success(response):
                 switch response.statusCode {
-                case 401:
+                case 200:
                     do {
-                        let logoutResponse = try response.map(LogoutModel401.self)
-                        self.logoutModel401 = logoutResponse
+                        let logoutResponse = try response.map(LogoutModel200.self)
+                        self.logoutModel200 = logoutResponse
                         completion(true)
                     }
                     catch {

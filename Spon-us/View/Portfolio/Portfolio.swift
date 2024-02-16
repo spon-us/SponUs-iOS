@@ -506,7 +506,13 @@ struct Portfolio: View {
                                                                         message: Text("내린 공고는 되돌리기 어렵습니다."),
                                                                         primaryButton: .destructive(
                                                                             Text("내리기"),
-                                                                            action: {hidePublishingPost()}
+                                                                            action: {
+                                                                                myAnnouncementsViewModel.ChangeAnnouncementStatus(announcementID: currentDialogID) { success in
+                                                                                    if success {
+                                                                                        myAnnouncementsViewModel.getMyAnnouncements()
+                                                                                    }
+                                                                                }
+                                                                            }
                                                                         ),
                                                                         secondaryButton: .cancel(
                                                                             Text("취소")
@@ -848,7 +854,7 @@ struct Portfolio: View {
                 //                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
                 //                    ModifyView(post: dummyData[index])
                 //                }
-                EditPostView(announcementID: currentDialogID, popup: .constant(false))
+                EditAnnouncementView(announcementID: currentDialogID, popup: .constant(false))
             }
             .navigationDestination(isPresented: $activeNavLinkToMakeReport) {
                 MakeReportView(rootIsActive: self.$rootIsActive)

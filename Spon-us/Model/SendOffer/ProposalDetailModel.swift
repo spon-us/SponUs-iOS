@@ -47,7 +47,8 @@ struct AnnouncementImage: Codable {
 
 struct Writer: Codable {
     let id: Int
-    let name, image: String
+    let name: String
+    let image: String? // 없을수도있음
     let tags: [Tag]
 }
 

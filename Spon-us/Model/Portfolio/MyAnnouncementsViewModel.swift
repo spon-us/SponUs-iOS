@@ -16,6 +16,34 @@ class MyAnnouncementsViewModel: ObservableObject {
     
     let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
     
+    func ChangeAnnouncementStatus(announcementID: Int, completion: @escaping (Bool) -> Void) {
+        provider.request(.patchChangeAnnouncementStatus(announcementID: announcementID, status: "CLOSED")) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    if response.statusCode == 200 {
+                        let responseModel = try response.map(ChangeAnnouncementStatusModel200.self)
+                        print(responseModel)
+                        completion(true)
+                    }
+                    else {
+                        let responseModel = try response.map(ChangeAnnouncementStatusModel400.self)
+                        print(responseModel)
+                        completion(false)
+                    }
+                } catch {
+                    print("Error parsing response: \(error)")
+                    completion(false)
+                }
+                
+            case let .failure(error):
+                print("Network request failed: \(error)")
+                completion(false)
+            }
+        }
+    }
+    
+    
     func getMyAnnouncements() {
         self.isLoading = true
         provider.request(.getMyAnnouncements) { result in

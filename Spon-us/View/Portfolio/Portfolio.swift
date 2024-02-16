@@ -42,6 +42,7 @@ enum ActiveAlert {
 
 struct Portfolio: View {
     @StateObject var myAnnouncementsViewModel = MyAnnouncementsViewModel()
+    @StateObject var portfolioOfferViewModel = PortfolioOfferViewModel()
     @Binding var rootIsActive: Bool
     @State var progressStatus: ProgressStatus = ProgressStatus()
     
@@ -551,35 +552,45 @@ struct Portfolio: View {
             }
             
             // 진행 중
+            
             if ($progressStatus.isProgressing.wrappedValue == true) {
-                ZStack {
-                    ScrollView {
-                        VStack {
-                            ForEach(dummyData) { dummy in
-                                if (dummy.postProgressStatus == .progressing) {
+                if portfolioOfferViewModel.isLoading == false {
+                    ZStack {
+                        ScrollView {
+                            Button {
+                                print(portfolioOfferViewModel.myProposes)
+                            } label: {
+                                Text("test")
+                            }
+
+                            VStack {
+                                ForEach(portfolioOfferViewModel.myProposes, id: \.proposeId) { cell in
+                                    
                                     NavigationLink(
                                         destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
                                         //                                        destination: DetailView(post: dummy),
                                         label: {
                                             VStack(alignment:.leading, spacing: 0) {
                                                 HStack(spacing: 0) {
-                                                    (dummy.thumbNail ?? Image(.icCancel))
-                                                        .resizable().frame(width: 158, height: 158)
+                                                    AsyncImage(url: URL(string: cell.announcementSummary.mainImage.url))
+                                                        .frame(width: 158, height: 158)
                                                         .border(.sponusGrey100)
                                                     
                                                     VStack(alignment: .leading, spacing: 5) {
-                                                        switch dummy.postCategory {
-                                                        case .sponsorship:
+                                                        switch cell.announcementSummary.type {
+                                                        case "SPONSORSHIP":
                                                             Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        case .linkedproject:
+                                                        case "COLLABORATION":
                                                             Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        case nil:
+                                                        case "PARTNERSHIP":
+                                                            Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        default:
                                                             Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
                                                         }
-                                                        Text(dummy.postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                                                        Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
                                                         HStack(spacing: 6) {
-                                                            (dummy.companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                            Text("with \(dummy.companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
+                                                            AsyncImage(url: URL(string: cell.announcementSummary.mainImage.url)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                            Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
                                                         }.padding(.bottom)
                                                         
                                                     }.padding(.leading, 20)
@@ -587,11 +598,11 @@ struct Portfolio: View {
                                                 HStack {
                                                     Button {
                                                         showingStopCoworkPopup = true
-                                                        currentProgressingID = dummy.id
-                                                        if let index = dummyData.firstIndex(where: { $0.id == currentProgressingID }) {
-                                                            dummyData[index].postProgressStatus = .completed
-                                                            dummyData[index].completedReportStatus = .unsuccessfulTermination
-                                                        }
+                                                        //                                                        currentProgressingID = dummy.id
+                                                        //                                                        if let index = dummyData.firstIndex(where: { $0.id == currentProgressingID }) {
+                                                        //                                                            dummyData[index].postProgressStatus = .completed
+                                                        //                                                            dummyData[index].completedReportStatus = .unsuccessfulTermination
+                                                        //                                                        }
                                                     } label: {
                                                         Text("협업 중단")
                                                             .font(.Caption01)
@@ -602,11 +613,11 @@ struct Portfolio: View {
                                                     Spacer()
                                                     Button {
                                                         showingCoworkCompletedPopup = true
-                                                        currentProgressingID = dummy.id
-                                                        if let index = dummyData.firstIndex(where: { $0.id == currentProgressingID }) {
-                                                            dummyData[index].postProgressStatus = .completed
-                                                            dummyData[index].completedReportStatus = .reportNotSubmitted
-                                                        }
+                                                        //                                                        currentProgressingID = dummy.id
+                                                        //                                                        if let index = dummyData.firstIndex(where: { $0.id == currentProgressingID }) {
+                                                        //                                                            dummyData[index].postProgressStatus = .completed
+                                                        //                                                            dummyData[index].completedReportStatus = .reportNotSubmitted
+                                                        //                                                        }
                                                     } label: {
                                                         Text("협업 완료")
                                                             .font(.Caption01)
@@ -619,50 +630,58 @@ struct Portfolio: View {
                                             }
                                         }
                                     )
-                                }
-                            }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                        }
-                    }.scrollIndicators(.hidden)
+                                    
+                                }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                            }
+                        }.scrollIndicators(.hidden)
+                    }
+                    .popup(isPresented: $showingStopCoworkPopup) {
+                        createStopCoworkToastMessage()
+                    } customize: {
+                        $0.type(.floater(verticalPadding: 16))
+                            .position(.bottom)
+                            .animation(.spring)
+                            .closeOnTap(false)
+                            .closeOnTapOutside(true)
+                            .autohideIn(3)
+                    }
+                    .popup(isPresented: $showingCoworkCompletedPopup) {
+                        createCoworkCompletedToastMessage()
+                    } customize: {
+                        $0.type(.floater(verticalPadding: 16))
+                            .position(.bottom)
+                            .animation(.spring)
+                            .closeOnTap(false)
+                            .closeOnTapOutside(true)
+                            .autohideIn(3)
+                    }
+                    .popup(isPresented: $showingStopCoworkCancelPopup) {
+                        createStopCoworkCancelToastMessage()
+                    } customize: {
+                        $0.type(.floater(verticalPadding: 16))
+                            .position(.bottom)
+                            .animation(.spring)
+                            .closeOnTap(true)
+                            .closeOnTapOutside(true)
+                            .autohideIn(2)
+                    }
+                    .popup(isPresented: $showingCoworkCompletedCancelPopup) {
+                        createCoworkCompletedCancelToastMessage()
+                    } customize: {
+                        $0.type(.floater(verticalPadding: 16))
+                            .position(.bottom)
+                            .animation(.spring)
+                            .closeOnTap(true)
+                            .closeOnTapOutside(true)
+                            .autohideIn(2)
+                    }
                 }
-                .popup(isPresented: $showingStopCoworkPopup) {
-                    createStopCoworkToastMessage()
-                } customize: {
-                    $0.type(.floater(verticalPadding: 16))
-                        .position(.bottom)
-                        .animation(.spring)
-                        .closeOnTap(false)
-                        .closeOnTapOutside(true)
-                        .autohideIn(3)
-                }
-                .popup(isPresented: $showingCoworkCompletedPopup) {
-                    createCoworkCompletedToastMessage()
-                } customize: {
-                    $0.type(.floater(verticalPadding: 16))
-                        .position(.bottom)
-                        .animation(.spring)
-                        .closeOnTap(false)
-                        .closeOnTapOutside(true)
-                        .autohideIn(3)
-                }
-                .popup(isPresented: $showingStopCoworkCancelPopup) {
-                    createStopCoworkCancelToastMessage()
-                } customize: {
-                    $0.type(.floater(verticalPadding: 16))
-                        .position(.bottom)
-                        .animation(.spring)
-                        .closeOnTap(true)
-                        .closeOnTapOutside(true)
-                        .autohideIn(2)
-                }
-                .popup(isPresented: $showingCoworkCompletedCancelPopup) {
-                    createCoworkCompletedCancelToastMessage()
-                } customize: {
-                    $0.type(.floater(verticalPadding: 16))
-                        .position(.bottom)
-                        .animation(.spring)
-                        .closeOnTap(true)
-                        .closeOnTapOutside(true)
-                        .autohideIn(2)
+                else {
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
                 }
                 
             }
@@ -868,6 +887,17 @@ struct Portfolio: View {
             .toolbar(.hidden, for: .tabBar)
             .onAppear() {
                 myAnnouncementsViewModel.getMyAnnouncements()
+                
+                portfolioOfferViewModel.getMyAnnouncements() { success in
+                    if success {
+                        portfolioOfferViewModel.appendIDs() { success in
+                            portfolioOfferViewModel.getOffers() { success in
+                                portfolioOfferViewModel.getProposes()
+                            }
+                        }
+                    }
+                }
+                
             }
     }
 }

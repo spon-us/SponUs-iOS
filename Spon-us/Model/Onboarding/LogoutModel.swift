@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LogoutModel401: Codable {
+struct LogoutModel200: Codable {
     let statusCode, message, content: String
 }
 

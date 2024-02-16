@@ -184,12 +184,14 @@ struct MyView: View {
                                         logoutViewModel.isLogoutProgressing = true
                                         logoutViewModel.getLogout { success in
                                             if success {
+                                                print("success")
                                                 deleteAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "deleteAccessToken Error")
                                                 deleteRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "deleteRefreshTokenError")
                                                 UserDefaults.standard.removeObject(forKey: "loginAccount")
                                                 logoutViewModel.isLogoutProgressing = false
                                             }
                                             else {
+                                                print("failure")
                                                 logoutViewModel.isLogoutProgressing = false
                                             }
                                         }

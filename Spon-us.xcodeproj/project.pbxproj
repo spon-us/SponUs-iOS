@@ -119,6 +119,8 @@
 		DF498F302B7DF50200ADE078 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */; };
 		DF692B162B7E39BD00BF9B75 /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */; };
 		DF692B182B7E3DA700BF9B75 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */; };
+		DF692B1A2B7E970F00BF9B75 /* EditAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */; };
+		DF692B1C2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B1B2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift */; };
 		DF90A5AB2B64EB5500BC54D0 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */; };
 		DF90A5AD2B664E5A00BC54D0 /* ProcessingPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */; };
 		DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */; };
@@ -212,6 +214,8 @@
 		DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
 		DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
 		DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
+		DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementView.swift; sourceTree = "<group>"; };
+		DF692B1B2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAnnouncementStatusModel.swift; sourceTree = "<group>"; };
 		DF90A5AA2B64EB5500BC54D0 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		DF90A5AC2B664E5A00BC54D0 /* ProcessingPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingPolicyView.swift; sourceTree = "<group>"; };
 		DF90A5AF2B664E9600BC54D0 /* GatherAndUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherAndUsageView.swift; sourceTree = "<group>"; };
@@ -452,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				DF91F4032B4864330021291A /* Portfolio.swift */,
+				DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -584,6 +589,7 @@
 			children = (
 				DF498F292B7CDDA200ADE078 /* MyAnnouncementsModel.swift */,
 				DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */,
+				DF692B1B2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -741,6 +747,7 @@
 				10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */,
 				DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */,
 				DF498F232B791EA800ADE078 /* LoginModel.swift in Sources */,
+				DF692B1C2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift in Sources */,
 				DFB22ED92B767003007903DF /* JoinViewModel.swift in Sources */,
 				100A1E302B71637A00AAC1E8 /* MyProfileView.swift in Sources */,
 				3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */,
@@ -785,6 +792,7 @@
 				DF90A5B42B664EE700BC54D0 /* ThirdPartyView.swift in Sources */,
 				109F9E2A2B6E7536006B7D63 /* CouponView.swift in Sources */,
 				10025B462B7C154800DCCC5A /* ReceivedViewModel.swift in Sources */,
+				DF692B1A2B7E970F00BF9B75 /* EditAnnouncementView.swift in Sources */,
 				80B41FFE2B77CCA40021DD90 /* NotificationView.swift in Sources */,
 				DF90A5C02B6E534500BC54D0 /* SelectUserTypeView.swift in Sources */,
 				3B2021772B4C56000010CA02 /* ProposalReceivedListView.swift in Sources */,

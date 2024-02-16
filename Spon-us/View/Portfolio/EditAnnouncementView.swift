@@ -1,14 +1,16 @@
 //
-//  EditPostView.swift
+//  EditAnnouncementView.swift
 //  Spon-us
 //
-//  Created by 황인성 on 2024/01/15.
+//  Created by 박현수 on 2/16/24.
 //
 
 import SwiftUI
 import PhotosUI
+import Moya
 
-struct EditPostView: View {
+struct EditAnnouncementView: View {
+    @State var announcementID: Int?
     @State private var postTitle = ""
     @State private var selectedImages: [UIImage] = []
     @State private var postSelectedCategory = ""
@@ -131,154 +133,30 @@ struct EditPostView: View {
         .navigationBarItems(leading: CustomBackButton())
         .onDisappear{
             print("disappear")
+        }.onAppear() {
+            let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
+            
+            provider.request(.getAnnouncement(announcementId: self.announcementID ?? 0)) { result in
+                switch result {
+                case let .success(response):
+                    do {
+                        let announcementModel = try response.map(AnnouncementModel.self)
+                        self.postTitle = announcementModel.content.title
+                        self.postSelectedCategory = changeToKorean(type: announcementModel.content.type) ?? "nil"
+                        self.postSelectedField = changeToKorean(category: announcementModel.content.category) ?? "nil"
+                        self.postDetail = announcementModel.content.content
+                    } catch {
+                        print(error)
+                        print("error")
+                        //self.errorMessage = "Error parsing response: \(error)"
+                    }
+
+                case let .failure(error):
+                    print("error")
+                }
+            }
+            
         }
         //        }
     }
 }
-
-
-struct SponUsTextfieldStyle: TextFieldStyle {
-    
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        
-        ZStack {
-            Rectangle()
-                .fill(Color.clear)
-                .stroke(Color.sponusGrey100, lineWidth: 1)
-                .frame(maxWidth: .infinity, maxHeight: 56)
-            
-            // 텍스트필드
-            configuration
-                .font(.Body06)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 8)
-        }
-    }
-}
-
-
-struct SponUsPostCell: View {
-    
-    var text: String
-    @Binding var isComplete: String
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text(text)
-                
-                if isComplete.isEmpty{
-                    Image("ic_check")
-                }
-                else{
-                    Text("")
-                }
-            }
-            
-            SponUsDivider()
-        }
-        
-    }
-}
-
-struct SponUsPostImageCell: View {
-    
-    var text: String
-    @Binding var selectedImages: [UIImage]
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text(text)
-                
-                if selectedImages.isEmpty{
-                    Image("ic_check")
-                }
-                else{
-                    Text("")
-                }
-            }
-            
-            SponUsDivider()
-        }
-        
-    }
-}
-
-//struct SponUsDivider: View {
-//    var body: some View {
-//        Rectangle()
-//            .fill(Color.sponusBlack)
-//            .frame(maxWidth: .infinity, maxHeight: 1)
-//    }
-//}
-
-struct PostRectangleCell: View {
-    
-    var item: String
-    @Binding var selectedString: String
-    
-    var body: some View {
-        
-        Button(action: {
-            selectedString = item
-            print(selectedString)
-        }, label: {
-            Text(item)
-                .font(.Body06)
-                .foregroundColor(item == selectedString ? Color.sponusBlack : Color.sponusGrey600)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .lineLimit(1)
-                .overlay(
-                    Rectangle()
-                        .stroke(item == selectedString ? Color.sponusBlack : Color.sponusGrey600, lineWidth: 1)
-                        .frame(maxWidth: .infinity)
-                )
-        })
-    }
-}
-
-
-struct SponUsPostFileCell: View {
-    
-    var text: String
-    @Binding var selectedURLsFile1: [URL]
-    @Binding var selectedURLsFile2: [URL]
-    @Binding var selectedURLsFile3: [URL]
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text(text)
-                
-                if (selectedURLsFile1.isEmpty && selectedURLsFile2.isEmpty && selectedURLsFile3.isEmpty) {
-                    Image("ic_check")
-                }
-                else{
-                    Text("")
-                }
-            }
-            
-            SponUsDivider()
-        }
-        
-    }
-}
-
-//struct SponUsDivider: View {
-//    var body: some View {
-//        Rectangle()
-//            .fill(Color.sponusBlack)
-//            .frame(maxWidth: .infinity, maxHeight: 1)
-//    }
-//}
-
-
-
-
-
-#Preview {
-    EditPostView(popup: .constant(false))
-}
-

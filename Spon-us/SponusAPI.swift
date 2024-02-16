@@ -26,6 +26,7 @@ enum SponusAPI {
     case getReceived(announcementId: Int)
     case getMyAnnouncements
     case getRenewToken
+    case patchChangeAnnouncementStatus(announcementID: Int, status: String)
 }
 
 extension SponusAPI: TargetType {
@@ -65,6 +66,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/announcements/me/opened"
         case .getRenewToken:
             return "/api/v1/auth/reissue"
+        case .patchChangeAnnouncementStatus(let announcementID, let status):
+            return "/api/v1/announcements/\(announcementID)/status"
         }
     }
     
@@ -100,6 +103,8 @@ extension SponusAPI: TargetType {
             return .get
         case .getRenewToken:
             return .get
+        case .patchChangeAnnouncementStatus:
+            return .patch
         }
     }
     
@@ -165,6 +170,8 @@ extension SponusAPI: TargetType {
         case .getMyAnnouncements:
             return Data()
         case .getRenewToken:
+            return Data()
+        case .patchChangeAnnouncementStatus:
             return Data()
         }
     }
@@ -261,6 +268,9 @@ extension SponusAPI: TargetType {
             return .requestPlain
         case .getRenewToken:
             return .requestPlain
+        case .patchChangeAnnouncementStatus(let announcementID, let status):
+            let requestBody = ["status" : status]
+            return .requestJSONEncodable(requestBody)
         }
     }
     
@@ -302,6 +312,8 @@ extension SponusAPI: TargetType {
         case .getRenewToken:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))",
                     "RefreshToken": "\(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadRefreshToken Error"))"]
+        case .patchChangeAnnouncementStatus:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }
 }

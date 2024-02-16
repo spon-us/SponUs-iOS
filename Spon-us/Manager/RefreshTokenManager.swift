@@ -18,6 +18,7 @@ func renewToken() {
             case 200:
                 print(response.statusCode)
                 print("success")
+                print(try? response.mapJSON())
                 let renewResponse = try? response.map(RefreshTokenModel200.self)
                 saveAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "userID Error", accessToken: renewResponse?.content.accessToken ?? "renewAccessTokenError")
                 saveRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "userID Error", refreshToken: renewResponse?.content.refreshToken ?? "renewRefreshTokenError")

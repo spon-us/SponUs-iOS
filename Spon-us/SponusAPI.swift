@@ -29,6 +29,7 @@ enum SponusAPI {
     case patchChangeAnnouncementStatus(announcementID: Int, status: String)
     case patchChangeOfferStatus(proposeID: Int, status: String)
     case deleteAnnouncement(announcementId: Int)
+    case modifyAnnouncement(announcementId: Int, title: String?, type: String?, category: String?, content: String?)
 }
 
 extension SponusAPI: TargetType {
@@ -74,7 +75,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/propose/\(proposeID)"
         case .deleteAnnouncement(let announcementId):
             return "/api/v1/announcements/\(announcementId)"
-        
+        case .modifyAnnouncement(let announcementId, _, _, _, _):
+            return "/api/v1/announcements/\(announcementId)/status"
         }
     }
     
@@ -116,6 +118,8 @@ extension SponusAPI: TargetType {
             return .patch
         case .deleteAnnouncement:
             return .delete
+        case .modifyAnnouncement:
+            return .patch
         }
     }
     
@@ -187,6 +191,8 @@ extension SponusAPI: TargetType {
         case .patchChangeOfferStatus:
             return Data()
         case .deleteAnnouncement:
+            return Data()
+        case .modifyAnnouncement:
             return Data()
         }
     }
@@ -292,6 +298,14 @@ extension SponusAPI: TargetType {
         case .deleteAnnouncement(let announcementId):
             let requestBody = ["announcementId" : announcementId]
             return .requestJSONEncodable(requestBody)
+        case .modifyAnnouncement(_, let title, let type, let category, let content):
+            let requestBody = [
+                "title" : title,
+                "type" : type,
+                "category" : category,
+                "content" : content
+            ]
+            return .requestJSONEncodable(requestBody)
         }
     }
     
@@ -331,13 +345,14 @@ extension SponusAPI: TargetType {
         case .getMyAnnouncements:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getRenewToken:
-            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))",
-                    "RefreshToken": "\(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadRefreshToken Error"))"]
+            return ["RefreshToken": "\(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadRefreshToken Error"))"]
         case .patchChangeAnnouncementStatus:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .patchChangeOfferStatus:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .deleteAnnouncement:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .modifyAnnouncement:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

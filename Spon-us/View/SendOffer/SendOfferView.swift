@@ -173,7 +173,7 @@ struct SendOfferCell: View {
                             )
                         }
                     }
-                    .padding(.trailing, 15)
+                    .padding(.vertical, 20)
                 }
                 .padding(.vertical, 16)
             }

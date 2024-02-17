@@ -10,7 +10,6 @@ import Moya
 
 struct SendOfferPostView: View {
     var proposeId: Int
-    
     @Binding var rootIsActive: Bool
     @Environment(\.presentationMode) var presentationMode
     
@@ -43,7 +42,7 @@ struct SendOfferPostView: View {
                     .scrollTargetBehavior(.viewAligned)
                     .safeAreaPadding(.horizontal, 40.0)
                     
-                    LazyVStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .leading, spacing: 0) {
                         NavigationLink {
                             ProfileView(rootIsActive: $rootIsActive)
                         } label: {
@@ -83,7 +82,7 @@ struct SendOfferPostView: View {
                             .frame(maxWidth: .infinity, maxHeight: 1)
                             .padding(.top, 24)
                         
-                        SendOfferPostCell(rootIsActive: $rootIsActive, status: statusChangeToKorean(english: proposalDetailViewModel.proposalDetail?.announcementDetails.status ?? ""))
+                        SendOfferPostCell(rootIsActive: $rootIsActive, status: statusChangeToKorean(english: proposalDetailViewModel.proposalDetail?.announcementDetails.status ?? ""), cellData: proposalDetailViewModel.proposalDetail?.announcementDetails ?? AnnouncementDetails())
                             .padding(.vertical, 16)
                     }
                     .padding(.horizontal, 20)
@@ -91,8 +90,8 @@ struct SendOfferPostView: View {
                 .padding(.bottom, 20)
             }
             
-            HStack(){
-                HStack(spacing: 16){
+            HStack() {
+                HStack(spacing: 16) {
                     Button(action: {
                         isShowingActivityView = true
                     }) {
@@ -105,7 +104,7 @@ struct SendOfferPostView: View {
                 }
                 .padding(.leading, 36)
                 
-                NavigationLink(destination: ChargerInfoView(rootIsActive: $rootIsActive)){
+                NavigationLink(destination: ChargerInfoView(rootIsActive: $rootIsActive)) {
                     Text("담당자 정보 확인하기")
                         .font(.Body01)
                         .foregroundColor(Color.sponusPrimaryDarkmode)
@@ -125,14 +124,13 @@ struct SendOfferPostView: View {
         .navigationTitle("보낸 제안").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: {self.rootIsActive = false}, label: {
+        .navigationBarItems(leading: CustomBackButton(), trailing: Button(action: { self.rootIsActive = false }, label: {
             Image(.icHome)
                 .renderingMode(.template)
                 .foregroundStyle(.black)
         }))
         .onAppear(){
-            //print("보낸 Propose ID: \(proposeId)")
-            proposalDetailViewModel.fetchProposalDetail(proposeId : proposeId)
+            proposalDetailViewModel.fetchProposalDetail(proposeId: proposeId)
         }
     }
 }
@@ -140,9 +138,11 @@ struct SendOfferPostView: View {
 struct SendOfferPostCell: View {
     @Binding var rootIsActive: Bool
     var status: String
+    var cellData: AnnouncementDetails
     
     var body: some View {
         HStack(spacing: 0) {
+            /*
             ZStack {
                 Image("musinsa")
                     .resizable()
@@ -150,20 +150,29 @@ struct SendOfferPostCell: View {
                     .frame(width: 158, height: 158)
                     .padding(.trailing, 20)
                 
-                StatusBadge(status: "수락")
+                StatusBadge(status: statusChangeToKorean(english: cellData.status))
                     .offset(x: 50.5, y: -66.5)
-            }
+            }*/
             
-            LazyVStack(alignment: .leading, spacing: 12) {
-                Text("연계 프로젝트")
+            Image("musinsa")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 158, height: 158)
+                .padding(.trailing, 20)
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Text("\(changeToKorean(type: cellData.type) ?? "전체")")
                     .font(.Caption02)
                     .foregroundColor(Color.sponusGrey700)
                 
-                Text("무신사 글로벌 마케팅\n연계 프로젝트")
+                Text(cellData.title)
+                    .multilineTextAlignment(.leading)
                     .font(.Body07)
                     .foregroundColor(Color.sponusBlack)
                 
-                NavigationLink(destination: CompanyPostView(rootIsActive: $rootIsActive), label: {
+                Spacer()
+                
+                NavigationLink(destination: CompanyPostView(rootIsActive: $rootIsActive)) {
                     HStack {
                         Text("공고 보기")
                             .font(.Body10)
@@ -180,9 +189,10 @@ struct SendOfferPostCell: View {
                         Rectangle()
                             .stroke(Color.sponusPrimary, lineWidth: 1)
                     )
-                })
+                }
+                .padding(.trailing, 15)
             }
-            .padding(.trailing, 15)
+            .padding(.vertical, 20)
         }
         .padding(.top, 16)
     }

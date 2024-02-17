@@ -67,6 +67,7 @@ struct Portfolio: View {
     @State private var currentConfirmationDialogID: UUID?
     @State private var currentToTopID: UUID?
     @State private var currentProgressingID = 0
+    @State private var currentProgressingStatus = ""
     @State private var currentMakeReportID = 0
     @State private var currentReportID = 0
     
@@ -199,7 +200,12 @@ struct Portfolio: View {
             Text("협업이 중단되었습니다").font(.Body03).foregroundStyle(.sponusRed).padding(.leading, 32)
             Spacer()
             Button {
-                showingStopCoworkPopup = false
+                portfolioOfferViewModel.cancelStopOffer(proposeId: currentProgressingID, status: currentProgressingStatus) { success in
+                    if success {
+                        showingStopCoworkPopup = false
+                        showingStopCoworkCancelPopup = true
+                    }
+                }
             } label: {
                 Text("취소").font(.Body04).foregroundStyle(.sponusGrey700).padding(.trailing, 32)
             }
@@ -595,6 +601,7 @@ struct Portfolio: View {
                                                     HStack {
                                                         Button {
                                                             currentProgressingID = cell.proposeId
+                                                            currentProgressingStatus = cell.status
                                                             portfolioOfferViewModel.stopOffer(proposeId: currentProgressingID) { success in
                                                                 if success {
                                                                     showingStopCoworkPopup = true
@@ -631,8 +638,7 @@ struct Portfolio: View {
                     }
                     .popup(isPresented: $showingStopCoworkPopup) {
                         createStopCoworkToastMessage().onDisappear() {
-                            myAnnouncementsViewModel.getMyAnnouncements()
-                            
+                            portfolioOfferViewModel.offerContents.removeAll()
                             portfolioOfferViewModel.getMyAnnouncements() { success in
                                 if success {
                                     portfolioOfferViewModel.appendIDs() { success in
@@ -642,7 +648,7 @@ struct Portfolio: View {
                                     }
                                 }
                             }
-                            showingStopCoworkCancelPopup = true
+            
                         }
                     } customize: {
                         $0.type(.floater(verticalPadding: 16))
@@ -745,7 +751,7 @@ struct Portfolio: View {
                                                         
                                                         HStack(spacing: 6) {
                                                             if cell.proposingOrganizationImageUrl != nil{
-                                                                AsyncImage(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                                AsyncImage(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fit).frame(width:24, height:24).clipShape(Circle())
                                                             }
                                                             else {
                                                                 Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())

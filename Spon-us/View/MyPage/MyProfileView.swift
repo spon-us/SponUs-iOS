@@ -22,7 +22,7 @@ struct MyCustomBackButton: View {
 struct MyProfileView: View {
     @Binding var rootIsActive: Bool
     
-    @ObservedObject var myOrganizationViewModel = MyOrganizationViewModel()
+    @ObservedObject var myOrganizationViewModel: MyOrganizationViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -72,7 +72,7 @@ struct MyProfileView: View {
                     }
                     
                     NavigationLink {
-                        ProfileEditView()
+                        ProfileEditView(myOrganizationViewModel: MyOrganizationViewModel())
                     } label: {
                         HStack {
                             Image(.icEdit)
@@ -235,6 +235,6 @@ struct MyProfileHistoryCell: View {
     }
 }
 
-#Preview {
-    MyProfileView(rootIsActive: .constant(false))
-}
+//#Preview {
+//    MyProfileView(rootIsActive: .constant(false))
+//}

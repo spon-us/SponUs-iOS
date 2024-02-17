@@ -10,8 +10,14 @@ import SwiftUI
 struct ProfileEditView: View {
     @Environment(\.presentationMode) var presentationMode
     
+    @ObservedObject var myOrganizationViewModel: MyOrganizationViewModel
+    
+    @State private var dictionary: [String: String] = [
+        :
+    ]
+    
     @State private var name: String = ""
-    @State private var introduction: String = ""
+    @State private var description: String = ""
     @State var showingEditPopup = false
     
     @State private var link: [Introduction] = []
@@ -83,7 +89,7 @@ struct ProfileEditView: View {
                     SponUsDivider()
                         .padding([.top, .bottom], 16)
                     
-                    TextField("단체 소개를 작성해 주세요.", text: $introduction, axis: .vertical)
+                    TextField("단체 소개를 작성해 주세요.", text: $description, axis: .vertical)
                         .font(.Caption02)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 20)
@@ -165,6 +171,22 @@ struct ProfileEditView: View {
             
             Button {
                 showingEditPopup = true
+                
+                
+                dictionary.removeAll()
+                if name != "" {
+                    dictionary["name"] = name
+                }
+                if description != "" {
+                    dictionary["description"] = description
+                }
+                
+                myOrganizationViewModel.dictionary = dictionary
+                
+                myOrganizationViewModel.fetchPatchMyOrganization()
+                
+//                print(myOrganizationViewModel.dictionary)
+                
             } label: {
                 Text("확인").font(.Body01)
                     .foregroundStyle(.sponusPrimaryDarkmode)
@@ -222,6 +244,6 @@ struct Introduction: Identifiable {
     var isVisible: Bool
 }
 
-#Preview {
-    ProfileEditView()
-}
+//#Preview {
+//    ProfileEditView()
+//}

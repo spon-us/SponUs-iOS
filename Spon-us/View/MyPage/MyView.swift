@@ -14,7 +14,7 @@ struct MyView: View {
     @State private var showLogoutAlert = false
     @State private var showAlert = false
     
-    @ObservedObject var myOrganizationViewModel = MyOrganizationViewModel()
+    @StateObject var myOrganizationViewModel = MyOrganizationViewModel()
     
     let searchItem: some View = {
         NavigationLink {
@@ -43,7 +43,7 @@ struct MyView: View {
                             .clipped()
                         
                         VStack(alignment: .leading, spacing: 0) {
-                            NavigationLink(destination: MyProfileView(rootIsActive: .constant(false)), label: {
+                            NavigationLink(destination: MyProfileView(rootIsActive: .constant(false), myOrganizationViewModel: MyOrganizationViewModel()), label: {
                                 HStack {
                                     Text("Profile")
                                         .font(.English15)
@@ -61,7 +61,7 @@ struct MyView: View {
                             .background(Color.sponusSecondary)
                             .cornerRadius(99)
                             
-                            Text(myOrganizationViewModel.myOrganization?.name ?? "스포대학교 총학생회")
+                            Text(myOrganizationViewModel.myOrganization?.name ?? "NULL")
                                 .font(.Heading09)
                                 .foregroundColor(Color.sponusWhite)
                                 .padding(.top, 11)

@@ -14,12 +14,11 @@ struct CustomBackButton: View {
         Button {
             self.presentationMode.wrappedValue.dismiss()
         }
-    label: {
-        Image(.icBack)
-    }
+        label: {
+            Image(.icBack)
+        }
     }
 }
-
 
 func getAdText(forIndex index: Int) -> String {
     switch index {
@@ -373,12 +372,12 @@ struct HomeView: View {
                 notificationItem
             })
             .font(.English03)
-//            .onAppear() {
-//                
-//                deleteAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "deleteAccessToken Error")
+            .onAppear() {
+                print(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "nil"))
+//                deleteAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "deleteAccessTokenError")
 //                deleteRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "deleteRefreshTokenError")
 //                UserDefaults.standard.removeObject(forKey: "loginAccount")
-//            }
+            }
         }
     }
 }

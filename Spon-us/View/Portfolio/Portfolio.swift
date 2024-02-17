@@ -581,7 +581,12 @@ struct Portfolio: View {
                                                             }
                                                             Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
                                                             HStack(spacing: 6) {
-                                                                AsyncImage(url: URL(string: cell.announcementSummary.mainImage.url)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                                if cell.proposingOrganizationImageUrl != nil{
+                                                                    AsyncImage(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                                }
+                                                                else {
+                                                                    Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                                }
                                                                 Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
                                                             }.padding(.bottom)
                                                             
@@ -736,10 +741,15 @@ struct Portfolio: View {
                                                         default:
                                                             Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
                                                         }
-                                                        Text(cell.title ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                                                        Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
                                                         
                                                         HStack(spacing: 6) {
-                                                            AsyncImage(url: URL(string: cell.announcementSummary.mainImage.url)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                            if cell.proposingOrganizationImageUrl != nil{
+                                                                AsyncImage(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                            }
+                                                            else {
+                                                                Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                            }
                                                             Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
                                                         }.padding(.bottom)
                                                         

@@ -29,7 +29,7 @@ enum SponusAPI {
     case patchChangeAnnouncementStatus(announcementID: Int, status: String)
     case patchChangeOfferStatus(proposeID: Int, status: String)
     case deleteAnnouncement(announcementId: Int)
-    case modifyAnnouncement(announcementId: Int, title: String?, type: String?, category: String?, content: String?)
+    case patchModifyAnnouncement(announcementId: Int, title: String?, type: String?, category: String?, content: String?)
 }
 
 extension SponusAPI: TargetType {
@@ -75,8 +75,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/propose/\(proposeID)"
         case .deleteAnnouncement(let announcementId):
             return "/api/v1/announcements/\(announcementId)"
-        case .modifyAnnouncement(let announcementId, _, _, _, _):
-            return "/api/v1/announcements/\(announcementId)/status"
+        case .patchModifyAnnouncement(let announcementId, _, _, _, _):
+            return "/api/v1/announcements/\(announcementId)"
         }
     }
     
@@ -118,7 +118,7 @@ extension SponusAPI: TargetType {
             return .patch
         case .deleteAnnouncement:
             return .delete
-        case .modifyAnnouncement:
+        case .patchModifyAnnouncement:
             return .patch
         }
     }
@@ -192,7 +192,7 @@ extension SponusAPI: TargetType {
             return Data()
         case .deleteAnnouncement:
             return Data()
-        case .modifyAnnouncement:
+        case .patchModifyAnnouncement:
             return Data()
         }
     }
@@ -298,7 +298,7 @@ extension SponusAPI: TargetType {
         case .deleteAnnouncement(let announcementId):
             let requestBody = ["announcementId" : announcementId]
             return .requestJSONEncodable(requestBody)
-        case .modifyAnnouncement(_, let title, let type, let category, let content):
+        case .patchModifyAnnouncement(_, let title, let type, let category, let content):
             let requestBody = [
                 "title" : title,
                 "type" : type,
@@ -352,7 +352,7 @@ extension SponusAPI: TargetType {
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .deleteAnnouncement:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
-        case .modifyAnnouncement:
+        case .patchModifyAnnouncement:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

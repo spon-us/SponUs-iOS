@@ -57,6 +57,7 @@ class PortfolioOfferViewModel: ObservableObject {
                 switch result {
                 case let .success(response):
                     do {
+                        print(try? response.mapJSON())
                         let myOffers = try JSONDecoder().decode(ProposalModel.self, from: response.data)
                         self.offerContents.append(contentsOf: myOffers.content)
                         completion(true)

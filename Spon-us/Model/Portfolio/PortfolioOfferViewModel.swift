@@ -81,6 +81,7 @@ class PortfolioOfferViewModel: ObservableObject {
             }
         }
         myProposes = Array(Set(myProposes))
+        myProposes.sort { $0.createdDate > $1.createdDate }
         self.isLoading = false
     }
     

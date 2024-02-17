@@ -28,6 +28,7 @@ enum SponusAPI {
     case getRenewToken
     case patchChangeAnnouncementStatus(announcementID: Int, status: String)
     case patchChangeOfferStatus(proposeID: Int, status: String)
+    case deleteAnnouncement(announcementId: Int)
 }
 
 extension SponusAPI: TargetType {
@@ -71,6 +72,9 @@ extension SponusAPI: TargetType {
             return "/api/v1/announcements/\(announcementID)/status"
         case .patchChangeOfferStatus(let proposeID, let status):
             return "/api/v1/propose/\(proposeID)"
+        case .deleteAnnouncement(let announcementId):
+            return "/api/v1/announcements/\(announcementId)"
+        
         }
     }
     
@@ -110,6 +114,8 @@ extension SponusAPI: TargetType {
             return .patch
         case .patchChangeOfferStatus:
             return .patch
+        case .deleteAnnouncement:
+            return .delete
         }
     }
     
@@ -179,6 +185,8 @@ extension SponusAPI: TargetType {
         case .patchChangeAnnouncementStatus:
             return Data()
         case .patchChangeOfferStatus:
+            return Data()
+        case .deleteAnnouncement:
             return Data()
         }
     }
@@ -281,6 +289,9 @@ extension SponusAPI: TargetType {
         case .patchChangeOfferStatus(_, let status):
             let requestBody = ["status" : status]
             return .requestJSONEncodable(requestBody)
+        case .deleteAnnouncement(let announcementId):
+            let requestBody = ["announcementId" : announcementId]
+            return .requestJSONEncodable(requestBody)
         }
     }
     
@@ -325,6 +336,8 @@ extension SponusAPI: TargetType {
         case .patchChangeAnnouncementStatus:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .patchChangeOfferStatus:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .deleteAnnouncement:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

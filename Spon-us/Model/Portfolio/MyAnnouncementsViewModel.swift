@@ -43,6 +43,26 @@ class MyAnnouncementsViewModel: ObservableObject {
         }
     }
     
+    func deleteAnnouncement(announcementID: Int, completion: @escaping (Bool) -> Void) {
+        provider.request(.deleteAnnouncement(announcementId: announcementID)) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    let responseModel = try response.map(ChangeAnnouncementStatusModel400.self)
+                    print(responseModel)
+                    completion(true)
+                }
+                catch {
+                    print("deleteAnnouncement parse error")
+                    completion(false)
+                }
+            case let .failure(response):
+                print(response.errorDescription)
+                print("deleteAnnouncement failure")
+                completion(false)
+            }
+        }
+    }
     
     func getMyAnnouncements() {
         self.isLoading = true

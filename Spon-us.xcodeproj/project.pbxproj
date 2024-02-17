@@ -65,6 +65,12 @@
 		3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D142B54AA55000D6006 /* EditPostView.swift */; };
 		3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */; };
 		3BFC8D1F2B5597C9000D6006 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */; };
+		8042C3812B7F5D47003DE096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8042C3802B7F5D47003DE096 /* GoogleService-Info.plist */; };
+		8042C38B2B807946003DE096 /* SearchOrganizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8042C38A2B807946003DE096 /* SearchOrganizationViewModel.swift */; };
+		8042C38D2B807957003DE096 /* SearchOrganizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8042C38C2B807957003DE096 /* SearchOrganizationModel.swift */; };
+		8042C38F2B809BA5003DE096 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8042C38E2B809BA5003DE096 /* AsyncImageView.swift */; };
+		8042C3912B80B9A5003DE096 /* SearchAnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8042C3902B80B9A5003DE096 /* SearchAnnouncementModel.swift */; };
+		8042C3932B80BDFC003DE096 /* SearchAnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8042C3922B80BDFC003DE096 /* SearchAnnouncementViewModel.swift */; };
 		806AF86A2B79DBD0008F7F62 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806AF8692B79DBD0008F7F62 /* CategoryModel.swift */; };
 		806AF86C2B79EB3F008F7F62 /* CategoryModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806AF86B2B79EB3F008F7F62 /* CategoryModelData.swift */; };
 		806AF8732B7B8504008F7F62 /* AnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806AF8722B7B8504008F7F62 /* AnnouncementViewModel.swift */; };
@@ -108,7 +114,6 @@
 		DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3AD3DE2B61626300DBFCCC /* OnBoardingView.swift */; };
 		DF3AD3E12B61696000DBFCCC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3AD3E02B61696000DBFCCC /* LoginView.swift */; };
 		DF3AD3E32B621FFA00DBFCCC /* SearchPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */; };
-		DF498F212B790BD000ADE078 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF498F202B790BCF00ADE078 /* GoogleService-Info.plist */; };
 		DF498F232B791EA800ADE078 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F222B791EA800ADE078 /* LoginModel.swift */; };
 		DF498F252B791EB400ADE078 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F242B791EB400ADE078 /* LoginViewModel.swift */; };
 		DF498F272B79B45D00ADE078 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F262B79B45D00ADE078 /* KeyChainManager.swift */; };
@@ -193,6 +198,12 @@
 		3BFC8D142B54AA55000D6006 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiImagePicker.swift; sourceTree = "<group>"; };
 		3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		8042C3802B7F5D47003DE096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8042C38A2B807946003DE096 /* SearchOrganizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOrganizationViewModel.swift; sourceTree = "<group>"; };
+		8042C38C2B807957003DE096 /* SearchOrganizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOrganizationModel.swift; sourceTree = "<group>"; };
+		8042C38E2B809BA5003DE096 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		8042C3902B80B9A5003DE096 /* SearchAnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAnnouncementModel.swift; sourceTree = "<group>"; };
+		8042C3922B80BDFC003DE096 /* SearchAnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAnnouncementViewModel.swift; sourceTree = "<group>"; };
 		806AF8692B79DBD0008F7F62 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		806AF86B2B79EB3F008F7F62 /* CategoryModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModelData.swift; sourceTree = "<group>"; };
 		806AF8722B7B8504008F7F62 /* AnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewModel.swift; sourceTree = "<group>"; };
@@ -205,7 +216,6 @@
 		DF3AD3DE2B61626300DBFCCC /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		DF3AD3E02B61696000DBFCCC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostView.swift; sourceTree = "<group>"; };
-		DF498F202B790BCF00ADE078 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF498F222B791EA800ADE078 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		DF498F242B791EB400ADE078 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DF498F262B79B45D00ADE078 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
@@ -307,6 +317,7 @@
 		100A1E352B7348DB00AAC1E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8042C3882B80784E003DE096 /* Search */,
 				100A1E362B734DA500AAC1E8 /* Onboarding */,
 				DF498F282B7CDD8200ADE078 /* Portfolio */,
 				806AF8712B7B84F2008F7F62 /* Announcement */,
@@ -353,7 +364,7 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
-				DF498F202B790BCF00ADE078 /* GoogleService-Info.plist */,
+				8042C3802B7F5D47003DE096 /* GoogleService-Info.plist */,
 				80B41FFF2B77F0DF0021DD90 /* Spon-us.entitlements */,
 				100D389F2B44833F00498977 /* Info.plist */,
 				3B36F09F2B6FEBCB0000ACFB /* PortOne */,
@@ -395,6 +406,7 @@
 		100D38B42B4EF18C00498977 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8042C3892B80785B003DE096 /* Search */,
 				80B41FFC2B77CC910021DD90 /* Notification */,
 				DF3AD3DD2B61513D00DBFCCC /* Onboarding */,
 				3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */,
@@ -434,9 +446,6 @@
 			isa = PBXGroup;
 			children = (
 				100D38B22B4EF15600498977 /* HomeView.swift */,
-				807BF83E2B51BCD400A659B9 /* SearchView.swift */,
-				80FA316C2B5EBA6B0076453B /* SearchOfferView.swift */,
-				DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */,
 				1031EC7B2B68B9F20016655B /* AnnouncementView.swift */,
 			);
 			path = Home;
@@ -540,8 +549,30 @@
 				DFCD24812B5A67FC00B00515 /* DocumentPicker.swift */,
 				3B81BCB52B622EEA0067E9CB /* Extension.swift */,
 				10EBD8122B6FF2350082CD8E /* ImagePicker.swift */,
+				8042C38E2B809BA5003DE096 /* AsyncImageView.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		8042C3882B80784E003DE096 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8042C38C2B807957003DE096 /* SearchOrganizationModel.swift */,
+				8042C38A2B807946003DE096 /* SearchOrganizationViewModel.swift */,
+				8042C3902B80B9A5003DE096 /* SearchAnnouncementModel.swift */,
+				8042C3922B80BDFC003DE096 /* SearchAnnouncementViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		8042C3892B80785B003DE096 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DF3AD3E22B621FFA00DBFCCC /* SearchPostView.swift */,
+				80FA316C2B5EBA6B0076453B /* SearchOfferView.swift */,
+				807BF83E2B51BCD400A659B9 /* SearchView.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		806AF8682B79D985008F7F62 /* Category */ = {
@@ -709,7 +740,7 @@
 			files = (
 				3B81BCC02B6231680067E9CB /* ProductList.plist in Resources */,
 				100D389C2B44833500498977 /* SUIT-Medium.otf in Resources */,
-				DF498F212B790BD000ADE078 /* GoogleService-Info.plist in Resources */,
+				8042C3812B7F5D47003DE096 /* GoogleService-Info.plist in Resources */,
 				3B81BCBE2B62312C0067E9CB /* Product.storekit in Resources */,
 				100D38A32B44834700498977 /* Preview Assets.xcassets in Resources */,
 				100D389E2B44833500498977 /* Pretendard-SemiBold.otf in Resources */,
@@ -737,6 +768,7 @@
 				10025B3D2B7BA14900DCCC5A /* ProposalDetailViewModel.swift in Sources */,
 				3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */,
 				10025B3B2B7BA13D00DCCC5A /* ProposalDetailModel.swift in Sources */,
+				8042C3912B80B9A5003DE096 /* SearchAnnouncementModel.swift in Sources */,
 				100D389A2B44833500498977 /* FontManager.swift in Sources */,
 				10025B392B7B804400DCCC5A /* SentViewModel.swift in Sources */,
 				100D38B62B4EF51E00498977 /* SavedView.swift in Sources */,
@@ -749,8 +781,10 @@
 				3B81BCB62B622EEA0067E9CB /* Extension.swift in Sources */,
 				107D6E692B7A8273005B6261 /* OrganizationModel.swift in Sources */,
 				DF498F302B7DF50200ADE078 /* LogoutViewModel.swift in Sources */,
+				8042C38D2B807957003DE096 /* SearchOrganizationModel.swift in Sources */,
 				100D38B32B4EF15600498977 /* HomeView.swift in Sources */,
 				10C8AC632B5C34C400B40547 /* CompanyPostView.swift in Sources */,
+				8042C38B2B807946003DE096 /* SearchOrganizationViewModel.swift in Sources */,
 				DF3AD3DF2B61626300DBFCCC /* OnBoardingView.swift in Sources */,
 				DF5B7E942B808DF1001C009C /* EditAnnouncementViewModel.swift in Sources */,
 				DF498F232B791EA800ADE078 /* LoginModel.swift in Sources */,
@@ -764,6 +798,7 @@
 				DF90A5B62B6B7CF900BC54D0 /* RegisterIDView.swift in Sources */,
 				100D38B12B44852700498977 /* ContentView.swift in Sources */,
 				806AF8752B7B8595008F7F62 /* AnnouncementModel.swift in Sources */,
+				8042C38F2B809BA5003DE096 /* AsyncImageView.swift in Sources */,
 				DF498F2A2B7CDDA200ADE078 /* MyAnnouncementsModel.swift in Sources */,
 				DF90A5B02B664E9600BC54D0 /* GatherAndUsageView.swift in Sources */,
 				806AF8732B7B8504008F7F62 /* AnnouncementViewModel.swift in Sources */,
@@ -787,6 +822,7 @@
 				3B36F0A82B6FEC3C0000ACFB /* PubData.swift in Sources */,
 				3B36F09A2B6FEB800000ACFB /* PaymentSettingView.swift in Sources */,
 				DF498F2C2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift in Sources */,
+				8042C3932B80BDFC003DE096 /* SearchAnnouncementViewModel.swift in Sources */,
 				10025B412B7C024200DCCC5A /* OrganizationViewModel.swift in Sources */,
 				DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */,
 				DFB22ED72B766FF3007903DF /* JoinModel.swift in Sources */,
@@ -942,7 +978,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spon-us/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QRPAUP59QL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Spon-us/Info.plist";
@@ -958,7 +994,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-us";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sponus.Spon-us";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -993,7 +1029,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ssponus.Spon-uss";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sponus.Spon-us";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State var searchData: String = ""
+    @ObservedObject var viewModel = SearchOrganizationViewModel()
+    @ObservedObject var viewModelAnnouncement = SearchAnnouncementViewModel()
+    @State private var searchData: String = ""
     var dummyData1: Array<String> = ["무신사 글로벌 마케팅 연계 프로젝트", "무신사 오프라인 스토어 홍보 방안", "무신사 앰버서더 선정 프로젝트"]
     var dummyData2: Array<String> = ["무신사", "패션/IT"]
     var dummyData3: Array<String> = ["무신사협업", "코카콜라", "해커스", "바른안과", "대학생제휴", "연계", "무신사", "노티드"]
     
     var body: some View {
         VStack(spacing: 0){
-            SearchBarView(searchData: $searchData)
+            SearchBarView(searchData: $searchData).onChange(of: searchData) { newValue in
+                // keyword 값이 바뀔 때마다 검색 실행
+                viewModel.getSearchOrganization(keyword: newValue)
+                viewModelAnnouncement.getSearchAnnouncement(keyword: newValue)
+            }
             SponUsDivider().frame(width: 335)
                 .foregroundColor(searchData=="" ? .sponusBlack : .sponusPrimary)
                 .padding(.bottom, 48)
@@ -66,10 +72,10 @@ struct SearchView: View {
                             Text("공고 정보").font(.Body06)
                             Spacer()
                         }
-                        ForEach(0..<3, id: \.self){ index in
+                        ForEach(viewModelAnnouncement.searchAnnouncementContents, id: \.self){ index in
                             NavigationLink(destination: /*SearchPostView()*/Text("")){
                                 HStack(spacing: 0) {
-                                    ForEach(splitText(dummyData1[index], with: searchData), id: \.self) { text in
+                                    ForEach(splitText(index.title, with: searchData), id: \.self) { text in
                                             Text(text)
                                             .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
                                     }
@@ -77,17 +83,30 @@ struct SearchView: View {
                             }
                             SponUsDivider().foregroundColor(.sponusGrey100)
                         }
+    
                         Text("기업 정보").font(.Body06)
-                        HStack(spacing: 12){
-                            Image("company_dummy").frame(width: 46, height: 46)
-                            VStack(spacing: 1){
-                                HStack(spacing: 0) {
-                                    ForEach(splitText(dummyData2[0], with: searchData), id: \.self) { text in
-                                        Text(text)
-                                            .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
+                        VStack(){
+                            ForEach(viewModel.searchOrganizationContents, id: \.self) {index in
+                                HStack(spacing: 12){
+                                    AsyncImageView(url: URL(string: index.image ?? ""))
+                                        .frame(width: 46, height: 46)
+//                                    Image("company_dummy").frame(width: 46, height: 46)
+                                    VStack(spacing: 1){
+                                        HStack(spacing: 0) {
+                                            ForEach(splitText(index.name, with: searchData), id: \.self) { text in
+                                                Text(text)
+                                                    .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
+                                            }
+                                            Spacer()
+                                        }
+                                        if (index.tags.count != 0){
+                                            HStack() {
+                                                Text("\(index.tags[0].name), \(index.tags[1].name)").foregroundColor(.sponusGrey700).font(.Body10)
+                                                Spacer()
+                                            }
+                                        }
                                     }
                                 }
-                                Text(dummyData2[1]).foregroundColor(.sponusGrey700).font(.Body10)
                             }
                         }
                         Spacer()

@@ -511,20 +511,28 @@ struct Portfolio: View {
                                                                         )
                                                                     )
                                                                 case .remove:
-                                                                    if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
+                                                                    if let toRemoveAnnouncement = myAnnouncementsViewModel.myAnnouncementsContents.first(where: { $0.id == currentDialogID }) {
                                                                         return Alert(
                                                                             title: Text("삭제하시겠습니까?"),
-                                                                            message: Text("\(dummyData[index].postTitle ?? "nil")\n공고가 삭제됩니다."),
+                                                                            message: Text("\(toRemoveAnnouncement.title)\n공고가 삭제됩니다."),
                                                                             primaryButton: .destructive(
                                                                                 Text("삭제"),
-                                                                                action: {removePublishingPost()}
+                                                                                action: {
+                                                                                    myAnnouncementsViewModel.deleteAnnouncement(announcementID: currentDialogID) { success in
+                                                                                        if success {
+                                                                                            myAnnouncementsViewModel.getMyAnnouncements()
+                                                                                        }
+                                                                                    }
+                                                                                }
                                                                             ),
                                                                             secondaryButton: .cancel(
                                                                                 Text("아니오")
                                                                             )
                                                                         )
+                                                                    } else {
+                                                                        return Alert(title: Text("공고를 찾을 수 없습니다."))
                                                                     }
-                                                                    return Alert(title: Text("nil"))
+                                                                    
                                                                 }
                                                             }
                                                         }

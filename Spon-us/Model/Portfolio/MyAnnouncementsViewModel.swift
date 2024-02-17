@@ -14,7 +14,7 @@ class MyAnnouncementsViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var myAnnouncementsContents: [MyAnnouncementsContent] = []
     
-    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared), plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func ChangeAnnouncementStatus(announcementID: Int, completion: @escaping (Bool) -> Void) {
         provider.request(.patchChangeAnnouncementStatus(announcementID: announcementID, status: "CLOSED")) { result in

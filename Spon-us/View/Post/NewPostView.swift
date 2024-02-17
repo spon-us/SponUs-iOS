@@ -160,7 +160,7 @@ struct NewPostView: View {
         .navigationBarItems(leading: CustomBackButton())
         .toolbar(.hidden, for: .tabBar)
         .onDisappear{
-            let provider = MoyaProvider<SponusAPI>()
+            let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
             provider.request(.postAnnouncement(title: postTitle, type: changeToEnglish(type: postSelectedCategory) ?? "ㄹㄹ"  , category: changeToEnglish(category: postSelectedField) ?? "ㄹㅇ" , content: postDetail, images: [UIImage()])) { result
                 in
                 switch result {

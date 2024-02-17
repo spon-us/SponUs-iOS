@@ -295,7 +295,7 @@ struct SearchOfferView: View {
 
 extension SearchOfferView {
     func sendAPI() {
-        let provider = MoyaProvider<SponusAPI>()
+        let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
         provider.request(.propose(title: postTitle, content: postDetail, announcementId: announcementId, attachments: selectedURLsFile1 + selectedURLsFile2 + selectedURLsFile3)) { result in
             print(announcementId)
             switch result {

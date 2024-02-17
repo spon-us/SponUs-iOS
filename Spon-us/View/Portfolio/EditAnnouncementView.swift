@@ -136,7 +136,7 @@ struct EditAnnouncementView: View {
             editAnnouncementViewModel.modifyAnnouncement(announcementId: announcementID ?? 0, title: postTitle, type: changeToEnglish(type: postSelectedCategory), category: changeToEnglish(category: postSelectedField), content: postDetail)
             print("disappear")
         }.onAppear() {
-            let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
+            let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
             
             provider.request(.getAnnouncement(announcementId: self.announcementID ?? 0)) { result in
                 switch result {

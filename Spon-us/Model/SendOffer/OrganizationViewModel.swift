@@ -12,7 +12,7 @@ import Moya
 class OrganizationViewModel: ObservableObject {
     @Published var organization: OrganizationResponse?
 
-    private let provider = MoyaProvider<SponusAPI>()
+    private let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
 
     func fetchOrganization(organizationId : Int) {
         provider.request(.getOrganization(organizationId: organizationId)) { result in

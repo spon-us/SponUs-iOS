@@ -38,6 +38,20 @@ struct AnnouncementDetails: Codable {
     let announcementImages: [AnnouncementImage]
     let status: String
     let viewCount: Int
+    
+    init(id: Int = 0, writerId: Int? = nil, title: String = "", type: String = "",
+         category: String = "", content: String = "",
+         announcementImages: [AnnouncementImage] = [], status: String = "", viewCount: Int = 0) {
+        self.id = id
+        self.writerId = writerId
+        self.title = title
+        self.type = type
+        self.category = category
+        self.content = content
+        self.announcementImages = announcementImages
+        self.status = status
+        self.viewCount = viewCount
+    }
 }
 
 struct AnnouncementImage: Codable {

@@ -30,6 +30,9 @@ enum SponusAPI {
     case patchChangeOfferStatus(proposeID: Int, status: String)
     case deleteAnnouncement(announcementId: Int)
     case patchModifyAnnouncement(announcementId: Int, title: String?, type: String?, category: String?, content: String?)
+    //MARK: 검색
+    case searchOrganization(keyword: String)
+    case searchAnnouncement(keyword: String)
 }
 
 extension SponusAPI: TargetType {
@@ -77,6 +80,11 @@ extension SponusAPI: TargetType {
             return "/api/v1/announcements/\(announcementId)"
         case .patchModifyAnnouncement(let announcementId, _, _, _, _):
             return "/api/v1/announcements/\(announcementId)"
+        //MARK: 검색
+        case .searchOrganization(keyword: let keyword):
+            return "/api/v1/organizations"
+        case .searchAnnouncement(keyword: let keyword):
+            return "/api/v1/announcements"
         }
     }
     
@@ -120,6 +128,11 @@ extension SponusAPI: TargetType {
             return .delete
         case .patchModifyAnnouncement:
             return .patch
+        //MARK: 검색
+        case .searchOrganization(keyword: let keyword):
+            return .get
+        case .searchAnnouncement(keyword: let keyword):
+            return .get
         }
     }
     
@@ -193,6 +206,10 @@ extension SponusAPI: TargetType {
         case .deleteAnnouncement:
             return Data()
         case .patchModifyAnnouncement:
+        //MARK: 검색
+        case .searchOrganization(keyword: let keyword):
+            return Data()
+        case .searchAnnouncement(keyword: let keyword):
             return Data()
         }
     }
@@ -306,6 +323,11 @@ extension SponusAPI: TargetType {
                 "content" : content
             ]
             return .requestJSONEncodable(requestBody)
+        //MARK: 검색
+        case .searchOrganization(keyword: let keyword):
+            return .requestParameters(parameters: ["search": keyword], encoding: URLEncoding.queryString)
+        case .searchAnnouncement(keyword: let keyword):
+            return .requestParameters(parameters: ["search": keyword], encoding: URLEncoding.queryString)
         }
     }
     
@@ -353,6 +375,10 @@ extension SponusAPI: TargetType {
         case .deleteAnnouncement:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .patchModifyAnnouncement:
+        //MARK: 검색
+        case .searchOrganization(keyword: let keyword):
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .searchAnnouncement(keyword: let keyword):
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

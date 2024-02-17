@@ -378,8 +378,8 @@ struct HomeView: View {
 //                deleteRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "deleteRefreshTokenError")
 //                UserDefaults.standard.removeObject(forKey: "loginAccount")
                 print("Access: \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? ""))")
-                print("Access: \(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? ""))")
-                renewToken()
+                print("Refresh: \(loadRefreshToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? ""))")
+                //renewToken()
             }
         }
     }

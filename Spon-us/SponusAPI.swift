@@ -75,7 +75,7 @@ extension SponusAPI: TargetType {
         case .patchChangeAnnouncementStatus(let announcementID, _):
             return "/api/v1/announcements/\(announcementID)/status"
         case .patchChangeOfferStatus(let proposeID, let status):
-            return "/api/v1/propose/\(proposeID)"
+            return "/api/v1/proposes/\(proposeID)/status"
         case .deleteAnnouncement(let announcementId):
             return "/api/v1/announcements/\(announcementId)"
         case .patchModifyAnnouncement(let announcementId, _, _, _, _):
@@ -206,7 +206,7 @@ extension SponusAPI: TargetType {
         case .deleteAnnouncement:
             return Data()
         case .patchModifyAnnouncement:
-        //MARK: 검색
+            return Data()
         case .searchOrganization(keyword: let keyword):
             return Data()
         case .searchAnnouncement(keyword: let keyword):
@@ -375,7 +375,7 @@ extension SponusAPI: TargetType {
         case .deleteAnnouncement:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .patchModifyAnnouncement:
-        //MARK: 검색
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .searchOrganization(keyword: let keyword):
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .searchAnnouncement(keyword: let keyword):

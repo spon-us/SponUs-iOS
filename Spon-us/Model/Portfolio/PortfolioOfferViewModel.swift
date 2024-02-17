@@ -114,6 +114,11 @@ class PortfolioOfferViewModel: ObservableObject {
                 }
             case let .failure(response):
                 print(response.errorDescription)
+                if let moyaError = response as? MoyaError, let response = moyaError.response {
+                    if let responseBody = String(data: response.data, encoding: .utf8) {
+                        print("실패 응답 본문: \(responseBody)")
+                    }
+                }
                 print("failureError")
                 completion(false)
             }

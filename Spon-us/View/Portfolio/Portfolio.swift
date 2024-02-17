@@ -558,9 +558,15 @@ struct Portfolio: View {
             
             // 진행 중
             if ($progressStatus.isProgressing.wrappedValue == true) {
-                if portfolioOfferViewModel.isLoading == false {
+                
                     ZStack {
                         ScrollView {
+//                            Button {
+//                                print(portfolioOfferViewModel.myProposes)
+//                            } label: {
+//                                Text("gg")
+//                            }
+
                             VStack {
                                 ForEach(portfolioOfferViewModel.myProposes, id: \.proposeId) { cell in
                                     if cell.status != "SUSPENDED" && cell.announcementSummary.status == "OPENED" {
@@ -700,14 +706,7 @@ struct Portfolio: View {
                             .closeOnTapOutside(true)
                             .autohideIn(2)
                     }
-                }
-                else {
-                    VStack {
-                        Spacer()
-                        ProgressView()
-                        Spacer()
-                    }
-                }
+               
                 
             }
             

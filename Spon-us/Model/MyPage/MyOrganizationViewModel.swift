@@ -48,7 +48,7 @@ class MyOrganizationViewModel: ObservableObject {
         :
     ]
     
-    private let provider = MoyaProvider<SponusAPI>()
+    private let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func fetchMyOrganization() {
         provider.request(.getMe) { result in

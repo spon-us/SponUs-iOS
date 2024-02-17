@@ -13,7 +13,7 @@ class AnnouncementViewModel{
     var announcementContent: AnnouncementContent?
     var errorMessage: String?
     var announcementId: Int
-    private let provider = MoyaProvider<SponusAPI>()
+    private let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     init(announcementId: Int){
         self.announcementId = announcementId
     }

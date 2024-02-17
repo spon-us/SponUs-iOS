@@ -12,7 +12,7 @@ class LogoutViewModel: ObservableObject {
     @Published var logoutModel200: LogoutModel200?
     @Published var logoutModel400: LogoutModel400?
     @Published var isLogoutProgressing = false
-    let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func getLogout(completion: @escaping (Bool) -> Void) {
         provider.request(.getLogout) { result in

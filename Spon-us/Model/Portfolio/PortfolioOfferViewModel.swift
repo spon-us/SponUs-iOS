@@ -15,7 +15,7 @@ class PortfolioOfferViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var myProposes: [Propose] = []
     
-    let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func getMyAnnouncements(completion: @escaping (Bool) -> Void) {
         self.isLoading = true
@@ -111,7 +111,8 @@ class PortfolioOfferViewModel: ObservableObject {
                         completion(false)
                     }
                 }
-            case .failure(_):
+            case let .failure(response):
+                print(response.errorDescription)
                 print("failureError")
                 completion(false)
             }

@@ -18,7 +18,7 @@ class SentViewModel: ObservableObject {
     @Published var groupedProposalsByDate: [ProposalDate: [Propose]] = [:]
     @Published var sortedUniqueDates: [ProposalDate] = []
     
-    private let provider = MoyaProvider<SponusAPI>()
+    private let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func fetchProposalSent() {
         provider.request(.getSent) { result in

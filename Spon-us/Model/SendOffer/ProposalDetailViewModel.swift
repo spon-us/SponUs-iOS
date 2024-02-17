@@ -12,7 +12,7 @@ import Moya
 class ProposalDetailViewModel: ObservableObject {
     @Published var proposalDetail: ProposalDetailResponse?
     
-    private let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
+    private let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func fetchProposalDetail(proposeId : Int) {
         provider.request(.getProposalDetail(proposeId: proposeId)) { result in

@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 class EditAnnouncementViewModel: ObservableObject {
-    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared), plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func modifyAnnouncement(announcementId: Int, title: String?, type: String?, category: String?, content: String?) {
         provider.request(.patchModifyAnnouncement(announcementId: announcementId, title: title, type: type, category: category, content: content)) { result in

@@ -11,7 +11,7 @@ import Moya
 struct SearchPostView: View {
     
     var announcementId: Int
-    let provider = MoyaProvider<SponusAPI>()
+    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     @Binding var selectedSaveButton: Bool
     @State private var announcement: AnnouncementModel?
     @State private var isShowingActivityView = false

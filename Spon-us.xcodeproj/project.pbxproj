@@ -120,7 +120,6 @@
 		DF5B7E942B808DF1001C009C /* EditAnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */; };
 		DF5B7E962B809257001C009C /* EditAnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */; };
 		DF5B7EA62B80A59C001C009C /* SponusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7EA52B80A59C001C009C /* SponusAPI.swift */; };
-		DF692B162B7E39BD00BF9B75 /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */; };
 		DF692B182B7E3DA700BF9B75 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */; };
 		DF692B1A2B7E970F00BF9B75 /* EditAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */; };
 		DF692B1C2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B1B2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift */; };
@@ -218,7 +217,6 @@
 		DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementViewModel.swift; sourceTree = "<group>"; };
 		DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementModel.swift; sourceTree = "<group>"; };
 		DF5B7EA52B80A59C001C009C /* SponusAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SponusAPI.swift; path = "../../test/Spon-us/SponusAPI.swift"; sourceTree = "<group>"; };
-		DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
 		DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
 		DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementView.swift; sourceTree = "<group>"; };
 		DF692B1B2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAnnouncementStatusModel.swift; sourceTree = "<group>"; };
@@ -531,7 +529,6 @@
 				3B81BCBD2B62312C0067E9CB /* Product.storekit */,
 				3B81BCBF2B6231680067E9CB /* ProductList.plist */,
 				DF498F262B79B45D00ADE078 /* KeyChainManager.swift */,
-				DF692B152B7E39BD00BF9B75 /* RefreshTokenManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -745,7 +742,6 @@
 				100D38B62B4EF51E00498977 /* SavedView.swift in Sources */,
 				80FA31692B5EB9490076453B /* NewPostView.swift in Sources */,
 				100D38B82B4EF54100498977 /* CategoryView.swift in Sources */,
-				DF692B162B7E39BD00BF9B75 /* RefreshTokenManager.swift in Sources */,
 				3BD26D062B62342C0035FE80 /* ChargerInfoView.swift in Sources */,
 				3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */,
 				3B36F0A62B6FEC2F0000ACFB /* Order.swift in Sources */,

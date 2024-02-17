@@ -127,11 +127,3 @@ class PaymentViewController: UIViewController, WKNavigationDelegate {
     }
 
 }
-
-//struct PaymentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            PaymentView()
-//        }
-//    }
-//}

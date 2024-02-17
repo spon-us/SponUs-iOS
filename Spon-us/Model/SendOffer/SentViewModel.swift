@@ -9,10 +9,6 @@ import Foundation
 import Combine
 import Moya
 
-import Foundation
-import Combine
-import Moya
-
 class SentViewModel: ObservableObject {
     @Published var proposalSent: [ProposalResponse] = []
     @Published var groupedProposalsByDate: [ProposalDate: [Propose]] = [:]

@@ -74,9 +74,9 @@ struct SendOfferView: View {
         case "VIEWED":
             return "열람"
         case "PENDING":
-            return "제안중"
+            return ""
         case "SUSPENDED":
-            return "협업중지"
+            return "중단"
         default:
             return "DefaultStatus"
         }
@@ -102,11 +102,9 @@ func statusChangeToKorean(english: String) -> String{
     case "VIEWED":
         return "열람"
     case "PENDING":
-        return "제안중"
+        return ""
     case "SUSPENDED":
-        return "협업중지"
-    case "CLOSED":
-        return "모집마감"
+        return "중단"
     default:
         return "DefaultStatus"
     }
@@ -141,7 +139,10 @@ struct SendOfferCell: View {
                                 .font(.Caption02)
                                 .foregroundColor(Color.sponusGrey700)
                             
-                            Text("\(propose.title)")
+                            let maxLength = 20
+                            let truncatedText = propose.announcementSummary.title.count > maxLength ? String(propose.announcementSummary.title.prefix(maxLength)) + "..." : propose.announcementSummary.title
+
+                            Text("\(truncatedText)")
                                 .multilineTextAlignment(.leading)
                                 .font(.Body07)
                                 .foregroundColor(Color.sponusBlack)
@@ -202,6 +203,8 @@ struct StatusBadge: View {
             return Color.sponusRedSecondary
         case "열람":
             return Color.sponusGrey100
+        case "중단":
+            return Color.sponusGrey100
         default:
             return Color.clear
         }
@@ -215,21 +218,10 @@ struct StatusBadge: View {
             return Color.sponusRed
         case "열람":
             return Color.sponusGrey700
+        case "중단":
+            return Color.sponusGrey700
         default:
             return Color.white
-        }
-    }
-    
-    private func borderColor(for status: String) -> Color {
-        switch status {
-        case "수락":
-            return Color.sponusPrimary
-        case "거절":
-            return Color.red
-        case "열람":
-            return Color.yellow
-        default:
-            return Color.clear
         }
     }
 }

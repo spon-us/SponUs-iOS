@@ -14,7 +14,6 @@
 		10025B412B7C024200DCCC5A /* OrganizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10025B402B7C024200DCCC5A /* OrganizationViewModel.swift */; };
 		10025B462B7C154800DCCC5A /* ReceivedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10025B452B7C154800DCCC5A /* ReceivedViewModel.swift */; };
 		100A1E302B71637A00AAC1E8 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */; };
-		100A1E322B73485800AAC1E8 /* SponusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E312B73485800AAC1E8 /* SponusAPI.swift */; };
 		100A1E382B734DB300AAC1E8 /* EmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E372B734DB200AAC1E8 /* EmailModel.swift */; };
 		100A1E3A2B734DDE00AAC1E8 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1E392B734DDE00AAC1E8 /* EmailViewModel.swift */; };
 		100A1E3D2B73596600AAC1E8 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 100A1E3C2B73596600AAC1E8 /* CombineMoya */; };
@@ -62,6 +61,7 @@
 		3B81BCBA2B622F280067E9CB /* MyNoticeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */; };
 		3B81BCBE2B62312C0067E9CB /* Product.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3B81BCBD2B62312C0067E9CB /* Product.storekit */; };
 		3B81BCC02B6231680067E9CB /* ProductList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B81BCBF2B6231680067E9CB /* ProductList.plist */; };
+		3BA7C07D2B8092F500654B62 /* SponusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA7C07C2B8092F500654B62 /* SponusAPI.swift */; };
 		3BD26D062B62342C0035FE80 /* ChargerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC642B5EA69B00B40547 /* ChargerInfoView.swift */; };
 		3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D142B54AA55000D6006 /* EditPostView.swift */; };
 		3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */; };
@@ -145,7 +145,6 @@
 		10025B402B7C024200DCCC5A /* OrganizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationViewModel.swift; sourceTree = "<group>"; };
 		10025B452B7C154800DCCC5A /* ReceivedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedViewModel.swift; sourceTree = "<group>"; };
 		100A1E2F2B71637A00AAC1E8 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
-		100A1E312B73485800AAC1E8 /* SponusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SponusAPI.swift; sourceTree = "<group>"; };
 		100A1E372B734DB200AAC1E8 /* EmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
 		100A1E392B734DDE00AAC1E8 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		100D387D2B44826500498977 /* Spon-us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spon-us.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +189,7 @@
 		3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoticeDetailView.swift; sourceTree = "<group>"; };
 		3B81BCBD2B62312C0067E9CB /* Product.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Product.storekit; sourceTree = "<group>"; };
 		3B81BCBF2B6231680067E9CB /* ProductList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductList.plist; sourceTree = "<group>"; };
+		3BA7C07C2B8092F500654B62 /* SponusAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SponusAPI.swift; path = ../../../../Desktop/SponusAPI.swift; sourceTree = "<group>"; };
 		3BFC8D142B54AA55000D6006 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiImagePicker.swift; sourceTree = "<group>"; };
 		3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -358,7 +358,7 @@
 				3B81BCB02B622E950067E9CB /* Manager */,
 				3BFC8D192B54D43C000D6006 /* Helper */,
 				100D38942B44833500498977 /* Font */,
-				100A1E312B73485800AAC1E8 /* SponusAPI.swift */,
+				3BA7C07C2B8092F500654B62 /* SponusAPI.swift */,
 				100A1E352B7348DB00AAC1E8 /* Model */,
 				100D38B42B4EF18C00498977 /* View */,
 				100D38A62B44836800498977 /* Spon_usApp.swift */,
@@ -771,7 +771,6 @@
 				106720022B5835FA00493354 /* SendOfferView.swift in Sources */,
 				3B81BCB22B622EBF0067E9CB /* StoreKitManager.swift in Sources */,
 				10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */,
-				100A1E322B73485800AAC1E8 /* SponusAPI.swift in Sources */,
 				807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */,
 				806AF86A2B79DBD0008F7F62 /* CategoryModel.swift in Sources */,
 				DF692B182B7E3DA700BF9B75 /* RefreshTokenModel.swift in Sources */,
@@ -803,6 +802,7 @@
 				109F9E282B6E692B006B7D63 /* MyTermsView.swift in Sources */,
 				DF90A5AD2B664E5A00BC54D0 /* ProcessingPolicyView.swift in Sources */,
 				806AF86C2B79EB3F008F7F62 /* CategoryModelData.swift in Sources */,
+				3BA7C07D2B8092F500654B62 /* SponusAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

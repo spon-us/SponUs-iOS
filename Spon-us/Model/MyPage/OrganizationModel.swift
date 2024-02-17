@@ -39,3 +39,8 @@ struct Links: Codable {
     let organizationLinkId, organizationId: Int
     let name, url: String
 }
+
+struct PatchOrganizationModel: Codable {
+    let statusCode: String
+    let message: String
+}

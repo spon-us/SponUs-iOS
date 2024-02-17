@@ -27,92 +27,97 @@ struct SearchView: View {
                 .padding(.bottom, 48)
                 .padding(.top, 0)
             NavigationView {
-                if (searchData == ""){
-                    VStack(alignment: .leading, spacing: 36){
+                ScrollView(){
+                    if (searchData == ""){
+                        VStack(alignment: .leading, spacing: 36){
+                            VStack(alignment: .leading, spacing: 16){
+                                HStack(){
+                                    Text("최근 검색어").font(.Body01)
+                                    Spacer()
+                                }
+                                VStack(spacing: 8){
+                                    HStack(spacing: 8){
+                                        ForEach(0..<3, id: \.self){index in
+                                            SearchCategoryButton(content: dummyData3[index], isDelete: true)
+                                        }
+                                        Spacer()
+                                    }
+                                    HStack(spacing: 8){
+                                        ForEach(0..<3, id: \.self){index in
+                                            SearchCategoryButton(content: dummyData3[3+index], isDelete: true)
+                                        }
+                                        Spacer()
+                                    }
+                                    HStack(spacing: 8){
+                                        ForEach(0..<2, id: \.self){index in
+                                            SearchCategoryButton(content: dummyData3[6+index], isDelete: true)
+                                        }
+                                        Spacer()
+                                    }
+                                }
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 16){
+                                Text("스포너스 추천 검색어").font(.Body01)
+                                HStack(spacing: 8){
+                                    SearchCategoryButton(content: "마케팅", isDelete: false)
+                                    SearchCategoryButton(content: "디자인", isDelete: false)
+                                    SearchCategoryButton(content: "연계 프로젝트", isDelete: false)
+                                }
+                            }
+                            Spacer()
+                        }.padding(.horizontal, 20)
+                    } else {
                         VStack(alignment: .leading, spacing: 16){
                             HStack(){
-                                Text("최근 검색어").font(.Body01)
+                                Text("공고 정보").font(.Body06)
                                 Spacer()
                             }
-                            VStack(spacing: 8){
-                                HStack(spacing: 8){
-                                    ForEach(0..<3, id: \.self){index in
-                                        SearchCategoryButton(content: dummyData3[index], isDelete: true)
-                                    }
-                                    Spacer()
-                                }
-                                HStack(spacing: 8){
-                                    ForEach(0..<3, id: \.self){index in
-                                        SearchCategoryButton(content: dummyData3[3+index], isDelete: true)
-                                    }
-                                    Spacer()
-                                }
-                                HStack(spacing: 8){
-                                    ForEach(0..<2, id: \.self){index in
-                                        SearchCategoryButton(content: dummyData3[6+index], isDelete: true)
-                                    }
-                                    Spacer()
-                                }
-                            }
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 16){
-                            Text("스포너스 추천 검색어").font(.Body01)
-                            HStack(spacing: 8){
-                                SearchCategoryButton(content: "마케팅", isDelete: false)
-                                SearchCategoryButton(content: "디자인", isDelete: false)
-                                SearchCategoryButton(content: "연계 프로젝트", isDelete: false)
-                            }
-                        }
-                        Spacer()
-                    }.padding(.horizontal, 20)
-                } else {
-                    VStack(alignment: .leading, spacing: 16){
-                        HStack(){
-                            Text("공고 정보").font(.Body06)
-                            Spacer()
-                        }
-                        ForEach(viewModelAnnouncement.searchAnnouncementContents, id: \.self){ index in
-                            NavigationLink(destination: /*SearchPostView()*/Text("")){
-                                HStack(spacing: 0) {
-                                    ForEach(splitText(index.title, with: searchData), id: \.self) { text in
+                            ForEach(viewModelAnnouncement.searchAnnouncementContents, id: \.self){ index in
+                                NavigationLink(destination: SearchPostView(announcementId: index.id, selectedSaveButton: .constant(false))){
+                                    HStack(spacing: 0) {
+                                        ForEach(splitText(index.title, with: searchData), id: \.self) { text in
                                             Text(text)
-                                            .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
+                                                .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
+                                        }
+                                        Spacer()
+                                    }
+                                }
+                                SponUsDivider().foregroundColor(.sponusGrey100)
+                            }
+                            
+                            Text("기업 정보").font(.Body06)
+                            VStack(){
+                                ForEach(viewModel.searchOrganizationContents, id: \.self) {index in
+                                    NavigationLink(destination: ProfileView(rootIsActive: .constant(false))){
+                                        HStack(spacing: 12){
+                                            AsyncImageView(url: URL(string: index.image ?? ""))
+                                                .frame(width: 46, height: 46)
+                                            //                                    Image("company_dummy").frame(width: 46, height: 46)
+                                            VStack(spacing: 1){
+                                                HStack(spacing: 0) {
+                                                    ForEach(splitText(index.name, with: searchData), id: \.self) { text in
+                                                        Text(text)
+                                                            .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
+                                                    }
+                                                    Spacer()
+                                                }
+                                                if (index.tags.count != 0){
+                                                    HStack() {
+                                                        Text("\(index.tags[0].name), \(index.tags[1].name)").foregroundColor(.sponusGrey700).font(.Body10)
+                                                        Spacer()
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
-                            SponUsDivider().foregroundColor(.sponusGrey100)
-                        }
-    
-                        Text("기업 정보").font(.Body06)
-                        VStack(){
-                            ForEach(viewModel.searchOrganizationContents, id: \.self) {index in
-                                HStack(spacing: 12){
-                                    AsyncImageView(url: URL(string: index.image ?? ""))
-                                        .frame(width: 46, height: 46)
-//                                    Image("company_dummy").frame(width: 46, height: 46)
-                                    VStack(spacing: 1){
-                                        HStack(spacing: 0) {
-                                            ForEach(splitText(index.name, with: searchData), id: \.self) { text in
-                                                Text(text)
-                                                    .foregroundColor(text == searchData ? .sponusPrimary : .sponusGrey800).font(.Body05)
-                                            }
-                                            Spacer()
-                                        }
-                                        if (index.tags.count != 0){
-                                            HStack() {
-                                                Text("\(index.tags[0].name), \(index.tags[1].name)").foregroundColor(.sponusGrey700).font(.Body10)
-                                                Spacer()
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        Spacer()
-                    }.padding(.horizontal, 20)
+                            Spacer()
+                        }.padding(.horizontal, 20)
+                    }
+                    Spacer()
                 }
-                Spacer()
             }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)

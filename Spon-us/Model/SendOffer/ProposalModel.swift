@@ -25,6 +25,7 @@ struct Propose: Codable, Hashable {
     let proposedOrganizationId: Int
     let proposedOrganizationName: String
     let proposingOrganizationId: Int
+    let proposingOrganizationImageUrl: String?
     let proposingOrganizationName: String
     let isReported: Bool
     let reportId: Int?

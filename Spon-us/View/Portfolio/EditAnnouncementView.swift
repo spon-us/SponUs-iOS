@@ -10,6 +10,7 @@ import PhotosUI
 import Moya
 
 struct EditAnnouncementView: View {
+    @StateObject var editAnnouncementViewModel = EditAnnouncementViewModel()
     @State var announcementID: Int?
     @State private var postTitle = ""
     @State private var selectedImages: [UIImage] = []
@@ -132,6 +133,7 @@ struct EditAnnouncementView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
         .onDisappear{
+            editAnnouncementViewModel.modifyAnnouncement(announcementId: announcementID ?? 0, title: postTitle, type: changeToEnglish(type: postSelectedCategory), category: changeToEnglish(category: postSelectedField), content: postDetail)
             print("disappear")
         }.onAppear() {
             let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
@@ -152,6 +154,7 @@ struct EditAnnouncementView: View {
                     }
 
                 case let .failure(error):
+                    print(error.localizedDescription)
                     print("error")
                 }
             }

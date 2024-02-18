@@ -35,8 +35,6 @@ enum SponusAPI {
     case searchAnnouncement(keyword: String)
     case getMyOffer
     case patchPullUp(announcementID: Int)
-    //MARK: 알림
-    case getNotification
 }
 
 extension SponusAPI: TargetType {
@@ -93,8 +91,6 @@ extension SponusAPI: TargetType {
             return "/api/v1/proposes/received"
         case .patchPullUp(let announcementID):
             return "/api/v1/announcements/\(announcementID)/pullUp"
-        case .getNotification:
-            return "/api/v1/organizations/notifications"
         }
     }
     
@@ -147,8 +143,6 @@ extension SponusAPI: TargetType {
             return .get
         case .patchPullUp:
             return .patch
-        case .getNotification:
-            return .get
         }
     }
     
@@ -230,8 +224,6 @@ extension SponusAPI: TargetType {
         case .getMyOffer:
             return Data()
         case .patchPullUp:
-            return Data()
-        case .getNotification:
             return Data()
         }
     }
@@ -354,8 +346,6 @@ extension SponusAPI: TargetType {
             return .requestPlain
         case .patchPullUp:
             return .requestPlain
-        case .getNotification:
-            return .requestPlain
         }
     }
     
@@ -411,8 +401,6 @@ extension SponusAPI: TargetType {
         case .getMyOffer:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .patchPullUp:
-            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
-        case .getNotification:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

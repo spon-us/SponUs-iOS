@@ -10,6 +10,8 @@ import SwiftUI
 struct MyNoticeListView: View {
     @Binding var rootIsActive: Bool
     
+    @StateObject var receivedOfferMyAnnouncementsViewModel = ReceivedOfferMyAnnouncementsViewModel()
+    
     var body: some View {
         
 //        NavigationView {
@@ -54,6 +56,9 @@ struct MyNoticeListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
+            .onAppear {
+                receivedOfferMyAnnouncementsViewModel.fetchReceivedOfferMyAnnouncements()
+            }
 //        }
         .toolbar(.hidden, for: .tabBar)
     }

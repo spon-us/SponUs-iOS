@@ -39,6 +39,7 @@ enum SponusAPI {
     case getNotification
     case postReport(title: String, content: String, proposeID: Int, images: [UIImage], attatchments: [URL])
     case patchProposeReportId(proposeId: Int, reportId: Int)
+    case getReceivedOfferMyAnnouncements
 }
 
 extension SponusAPI: TargetType {
@@ -101,6 +102,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/reports"
         case .patchProposeReportId(let proposeId, _):
             return "/api/v1/proposes/\(proposeId)"
+        case .getReceivedOfferMyAnnouncements:
+            return "/api/v1/announcements/me"
         }
     }
     
@@ -158,6 +161,8 @@ extension SponusAPI: TargetType {
             return .post
         case .patchProposeReportId:
             return .patch
+        case .getReceivedOfferMyAnnouncements:
+            return .get
         }
     }
     
@@ -245,6 +250,8 @@ extension SponusAPI: TargetType {
         case .postReport:
             return Data()
         case .patchProposeReportId:
+            return Data()
+        case .getReceivedOfferMyAnnouncements:
             return Data()
         }
     }
@@ -402,6 +409,8 @@ extension SponusAPI: TargetType {
                 multipartData.append(MultipartFormData(provider: .data(requestData), name: "request"))
             }
             return .uploadMultipart(multipartData)
+        case .getReceivedOfferMyAnnouncements:
+            return  .requestPlain
         }
     }
     
@@ -463,6 +472,8 @@ extension SponusAPI: TargetType {
         case .postReport:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .patchProposeReportId:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .getReceivedOfferMyAnnouncements:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

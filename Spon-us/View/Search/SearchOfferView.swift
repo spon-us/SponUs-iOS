@@ -229,6 +229,7 @@ struct SearchOfferView: View {
                             .font(.Caption02)
                             .foregroundStyle(.sponusGrey600)
                             .padding(.bottom, 16)
+                        /*
                         HStack {
                             Spacer()
                             Button {
@@ -243,7 +244,7 @@ struct SearchOfferView: View {
                                 Text("미리보기").font(.Body10).foregroundStyle(.sponusGrey700).frame(width: 73, height: 37)
                             }.border(.sponusGrey700)
                             Spacer()
-                        }.padding(.bottom, 55)
+                        }.padding(.bottom, 55)*/
                         
                         Spacer().frame(height: 62)
                     }

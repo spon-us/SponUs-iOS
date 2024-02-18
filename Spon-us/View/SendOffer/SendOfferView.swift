@@ -77,6 +77,8 @@ struct SendOfferView: View {
             return ""
         case "SUSPENDED":
             return "중단"
+        case "COMPLETED":
+            return "수락"
         default:
             return "DefaultStatus"
         }
@@ -95,8 +97,6 @@ func statusChangeToKorean(english: String) -> String{
     switch english {
     case "ACCEPTED":
         return "수락"
-    case "OPENED":
-        return "수락"
     case "REJECTED":
         return "거절"
     case "VIEWED":
@@ -105,6 +105,8 @@ func statusChangeToKorean(english: String) -> String{
         return ""
     case "SUSPENDED":
         return "중단"
+    case "COMPLETED":
+        return "수락"
     default:
         return "DefaultStatus"
     }

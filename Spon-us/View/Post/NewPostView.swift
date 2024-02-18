@@ -101,9 +101,11 @@ struct NewPostView: View {
                         TextEditor(text: $postDetail)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 8)
+                            .font(.Caption02)
                         
                     }
                     
+                    /*
                     HStack {
                         Spacer()
                         Button {
@@ -118,9 +120,9 @@ struct NewPostView: View {
                         Text("미리보기").font(.Body10).foregroundStyle(.sponusGrey700).frame(width: 73, height: 37)
                     }.border(.sponusGrey700)
                         Spacer()
-                    }.padding(.top, 32)
+                    }.padding(.top, 32)*/
                     
-                    Spacer().frame(height: 127)
+                    //Spacer().frame(height: 127)
                     
                 }
                 .font(.Heading09)

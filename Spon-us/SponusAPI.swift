@@ -33,6 +33,8 @@ enum SponusAPI {
     //MARK: 검색
     case searchOrganization(keyword: String)
     case searchAnnouncement(keyword: String)
+    case getMyOffer
+    case patchPullUp(announcementID: Int)
 }
 
 extension SponusAPI: TargetType {
@@ -85,6 +87,10 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations"
         case .searchAnnouncement(keyword: let keyword):
             return "/api/v1/announcements"
+        case .getMyOffer:
+            return "/api/v1/proposes/received"
+        case .patchPullUp(let announcementID):
+            return "/api/v1/announcements/\(announcementID)/pullUp"
         }
     }
     
@@ -133,6 +139,10 @@ extension SponusAPI: TargetType {
             return .get
         case .searchAnnouncement(keyword: let keyword):
             return .get
+        case .getMyOffer:
+            return .get
+        case .patchPullUp:
+            return .patch
         }
     }
     
@@ -210,6 +220,10 @@ extension SponusAPI: TargetType {
         case .searchOrganization(keyword: let keyword):
             return Data()
         case .searchAnnouncement(keyword: let keyword):
+            return Data()
+        case .getMyOffer:
+            return Data()
+        case .patchPullUp:
             return Data()
         }
     }
@@ -328,6 +342,10 @@ extension SponusAPI: TargetType {
             return .requestParameters(parameters: ["search": keyword], encoding: URLEncoding.queryString)
         case .searchAnnouncement(keyword: let keyword):
             return .requestParameters(parameters: ["search": keyword], encoding: URLEncoding.queryString)
+        case .getMyOffer:
+            return .requestPlain
+        case .patchPullUp:
+            return .requestPlain
         }
     }
     
@@ -379,6 +397,10 @@ extension SponusAPI: TargetType {
         case .searchOrganization(keyword: let keyword):
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .searchAnnouncement(keyword: let keyword):
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .getMyOffer:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .patchPullUp:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

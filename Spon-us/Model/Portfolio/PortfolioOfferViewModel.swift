@@ -52,8 +52,8 @@ class PortfolioOfferViewModel: ObservableObject {
     }
     
     func getOffers(completion: @escaping (Bool) -> Void) {
-        for aID in announcementIDs {
-            provider.request(.getReceived(announcementId: aID)) { result in
+        
+            provider.request(.getMyOffer) { result in
                 switch result {
                 case let .success(response):
                     do {
@@ -71,7 +71,7 @@ class PortfolioOfferViewModel: ObservableObject {
                     completion(false)
                 }
             }
-        }
+        
     }
     func getProposes() {
         for elem in offerContents {
@@ -80,8 +80,13 @@ class PortfolioOfferViewModel: ObservableObject {
                 myProposes.append(prop)
             }
         }
-        myProposes = Array(Set(myProposes))
-        myProposes.sort { $0.createdDate > $1.createdDate }
+//        myProposes = Array(Set(myProposes))
+//        myProposes.sort { $0.createdDate > $1.createdDate }
+//        for content in myProposes {
+//            if content.status == "SUSPENDED" || content.status == "COMPLETED" {
+//                
+//            }
+//        }
         self.isLoading = false
     }
     

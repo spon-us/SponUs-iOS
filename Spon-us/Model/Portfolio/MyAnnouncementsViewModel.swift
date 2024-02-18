@@ -93,4 +93,20 @@ class MyAnnouncementsViewModel: ObservableObject {
         }
     }
     
+    func pullUp(announcementID: Int, completion: @escaping (Bool) -> Void) {
+        provider.request(.patchPullUp(announcementID: announcementID)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let responseBody = try response.map(LogoutModel400.self)
+                    print("pullup responseBody : \(responseBody)")
+                } catch {
+                    print("pullup json parsing error")
+                }
+            case .failure(let error):
+                print("pullup failure error")
+            }
+        }
+    }
+    
 }

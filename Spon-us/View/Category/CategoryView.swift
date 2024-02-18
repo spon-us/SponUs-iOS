@@ -17,6 +17,7 @@ struct CategoryView: View {
     @State var selectedCategoryList = "전체"
     @State var selectedCategoryDetailList = "전체"
     @StateObject private var categoryModelData = CategoryModelData()
+    @StateObject var changeBookMarkViewModel = ChangeBookMarkViewModel()
     
     private func updateCategoryModelData() {
         let category = changeToEnglish(category: selectedCategoryList)
@@ -78,7 +79,9 @@ struct CategoryView: View {
                         VStack{
                             Spacer().frame(height: 30)
                             ForEach(categoryModelData.categoryModelDatas, id: \.id) { categoryContent in
-                                CategoryCell(categoryContent: categoryContent)
+                                CategoryCell(categoryContent: categoryContent, categoryModelData: categoryModelData, changeBookMarkViewModel: changeBookMarkViewModel,
+                                             announcementId: categoryContent.id
+                                )
                             }
                         }
                         .padding(.horizontal, 20)
@@ -164,6 +167,9 @@ struct CategoryCell: View {
     
     var categoryContent: CategoryContent
     @State private var isBookmarked = false
+    @ObservedObject var categoryModelData: CategoryModelData
+    @ObservedObject var changeBookMarkViewModel: ChangeBookMarkViewModel
+    var announcementId: Int
     
     var body: some View {
         NavigationLink{SearchPostView(announcementId: categoryContent.id, selectedSaveButton: $isBookmarked)} label: {
@@ -203,9 +209,12 @@ struct CategoryCell: View {
                             Spacer()
                         }
                     }.frame(width: 160, height: 95).padding(.trailing, 36)
-                    Button(action: {toggleBookmark()
-                        print(categoryContent.id)}){
-                        Image(isBookmarked ? "ic_saved_check" : "ic_saved")
+                    Button(action: {
+                        toggleBookmark()
+                        print(categoryContent.id)
+                        print(changeBookMarkViewModel.changeBookmark?.bookmarked ?? "qwe")
+                    }){
+                        Image(Bool(changeBookMarkViewModel.changeBookmark?.bookmarked ?? false) ? "ic_saved_check" : "ic_saved")
                                 .frame(width: 28, height: 28)
                     }
                 }.padding(.bottom, 16)
@@ -217,14 +226,16 @@ struct CategoryCell: View {
         isBookmarked.toggle()
         if isBookmarked {
             print("추가") //api
+            changeBookMarkViewModel.fetchBookMark(announcementID: categoryContent.id)
         } else {
             print("해제") //api
+            changeBookMarkViewModel.fetchBookMark(announcementID: categoryContent.id)
         }
     }
 }
 
 
-#Preview {
-    CategoryView()
-}
+//#Preview {
+//    CategoryView()
+//}
 

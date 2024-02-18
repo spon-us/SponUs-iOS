@@ -33,6 +33,7 @@ enum SponusAPI {
     //MARK: 검색
     case searchOrganization(keyword: String)
     case searchAnnouncement(keyword: String)
+    case postChangeBookMark(announcementId: Int)
 }
 
 extension SponusAPI: TargetType {
@@ -85,6 +86,8 @@ extension SponusAPI: TargetType {
             return "/api/v1/organizations"
         case .searchAnnouncement(keyword: let keyword):
             return "/api/v1/announcements"
+        case .postChangeBookMark(announcementId: let announcementId):
+            return "/api/v1/me/announcements/bookmarked"
         }
     }
     
@@ -133,6 +136,8 @@ extension SponusAPI: TargetType {
             return .get
         case .searchAnnouncement(keyword: let keyword):
             return .get
+        case .postChangeBookMark(announcementId: let announcementId):
+            return .post
         }
     }
     
@@ -210,6 +215,8 @@ extension SponusAPI: TargetType {
         case .searchOrganization(keyword: let keyword):
             return Data()
         case .searchAnnouncement(keyword: let keyword):
+            return Data()
+        case .postChangeBookMark(announcementId: let announcementId):
             return Data()
         }
     }
@@ -328,6 +335,8 @@ extension SponusAPI: TargetType {
             return .requestParameters(parameters: ["search": keyword], encoding: URLEncoding.queryString)
         case .searchAnnouncement(keyword: let keyword):
             return .requestParameters(parameters: ["search": keyword], encoding: URLEncoding.queryString)
+        case .postChangeBookMark(announcementId: let announcementId):
+            return .requestParameters(parameters: ["announcementId": announcementId], encoding: URLEncoding.queryString)
         }
     }
     
@@ -379,6 +388,8 @@ extension SponusAPI: TargetType {
         case .searchOrganization(keyword: let keyword):
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .searchAnnouncement(keyword: let keyword):
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .postChangeBookMark(announcementId: let announcementId):
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

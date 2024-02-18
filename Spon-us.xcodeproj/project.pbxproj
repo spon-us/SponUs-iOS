@@ -62,6 +62,9 @@
 		3B81BCBA2B622F280067E9CB /* MyNoticeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */; };
 		3B81BCBE2B62312C0067E9CB /* Product.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3B81BCBD2B62312C0067E9CB /* Product.storekit */; };
 		3B81BCC02B6231680067E9CB /* ProductList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B81BCBF2B6231680067E9CB /* ProductList.plist */; };
+		3BA7C0852B81D6C300654B62 /* ChangeBookMarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA7C0842B81D6C300654B62 /* ChangeBookMarkModel.swift */; };
+		3BA7C0872B81D73F00654B62 /* ChangeBookMarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA7C0862B81D73F00654B62 /* ChangeBookMarkViewModel.swift */; };
+		3BA7C0892B81DA7400654B62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BA7C0882B81DA7400654B62 /* GoogleService-Info.plist */; };
 		3BD26D062B62342C0035FE80 /* ChargerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8AC642B5EA69B00B40547 /* ChargerInfoView.swift */; };
 		3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D142B54AA55000D6006 /* EditPostView.swift */; };
 		3BFC8D1B2B54D46D000D6006 /* MultiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */; };
@@ -124,7 +127,6 @@
 		DF5B7E922B7FA430001C009C /* PortfolioOfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */; };
 		DF5B7E942B808DF1001C009C /* EditAnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */; };
 		DF5B7E962B809257001C009C /* EditAnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */; };
-		DF5B7EAA2B81036A001C009C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF5B7EA92B810369001C009C /* GoogleService-Info.plist */; };
 		DF692B182B7E3DA700BF9B75 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */; };
 		DF692B1A2B7E970F00BF9B75 /* EditAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */; };
 		DF692B1C2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF692B1B2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift */; };
@@ -196,6 +198,9 @@
 		3B81BCB92B622F280067E9CB /* MyNoticeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoticeDetailView.swift; sourceTree = "<group>"; };
 		3B81BCBD2B62312C0067E9CB /* Product.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Product.storekit; sourceTree = "<group>"; };
 		3B81BCBF2B6231680067E9CB /* ProductList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductList.plist; sourceTree = "<group>"; };
+		3BA7C0842B81D6C300654B62 /* ChangeBookMarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeBookMarkModel.swift; sourceTree = "<group>"; };
+		3BA7C0862B81D73F00654B62 /* ChangeBookMarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeBookMarkViewModel.swift; sourceTree = "<group>"; };
+		3BA7C0882B81DA7400654B62 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3BFC8D142B54AA55000D6006 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		3BFC8D1A2B54D46D000D6006 /* MultiImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiImagePicker.swift; sourceTree = "<group>"; };
 		3BFC8D1E2B5597C9000D6006 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -226,7 +231,6 @@
 		DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioOfferViewModel.swift; sourceTree = "<group>"; };
 		DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementViewModel.swift; sourceTree = "<group>"; };
 		DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementModel.swift; sourceTree = "<group>"; };
-		DF5B7EA92B810369001C009C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF692B172B7E3DA700BF9B75 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
 		DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementView.swift; sourceTree = "<group>"; };
 		DF692B1B2B7EFC6F00BF9B75 /* ChangeAnnouncementStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAnnouncementStatusModel.swift; sourceTree = "<group>"; };
@@ -364,7 +368,7 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
-				DF5B7EA92B810369001C009C /* GoogleService-Info.plist */,
+				3BA7C0882B81DA7400654B62 /* GoogleService-Info.plist */,
 				80B41FFF2B77F0DF0021DD90 /* Spon-us.entitlements */,
 				100D389F2B44833F00498977 /* Info.plist */,
 				3B36F09F2B6FEBCB0000ACFB /* PortOne */,
@@ -580,6 +584,8 @@
 			children = (
 				806AF8692B79DBD0008F7F62 /* CategoryModel.swift */,
 				806AF86B2B79EB3F008F7F62 /* CategoryModelData.swift */,
+				3BA7C0842B81D6C300654B62 /* ChangeBookMarkModel.swift */,
+				3BA7C0862B81D73F00654B62 /* ChangeBookMarkViewModel.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -740,7 +746,7 @@
 			files = (
 				3B81BCC02B6231680067E9CB /* ProductList.plist in Resources */,
 				100D389C2B44833500498977 /* SUIT-Medium.otf in Resources */,
-				DF5B7EAA2B81036A001C009C /* GoogleService-Info.plist in Resources */,
+				3BA7C0892B81DA7400654B62 /* GoogleService-Info.plist in Resources */,
 				3B81BCBE2B62312C0067E9CB /* Product.storekit in Resources */,
 				100D38A32B44834700498977 /* Preview Assets.xcassets in Resources */,
 				100D389E2B44833500498977 /* Pretendard-SemiBold.otf in Resources */,
@@ -765,6 +771,7 @@
 				10EBD8132B6FF2350082CD8E /* ImagePicker.swift in Sources */,
 				DF91F4042B4864330021291A /* Portfolio.swift in Sources */,
 				DF3AD3E32B621FFA00DBFCCC /* SearchPostView.swift in Sources */,
+				3BA7C0872B81D73F00654B62 /* ChangeBookMarkViewModel.swift in Sources */,
 				10025B3D2B7BA14900DCCC5A /* ProposalDetailViewModel.swift in Sources */,
 				3BFC8D152B54AA55000D6006 /* EditPostView.swift in Sources */,
 				10025B3B2B7BA13D00DCCC5A /* ProposalDetailModel.swift in Sources */,
@@ -823,6 +830,7 @@
 				3B36F09A2B6FEB800000ACFB /* PaymentSettingView.swift in Sources */,
 				DF498F2C2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift in Sources */,
 				8042C3932B80BDFC003DE096 /* SearchAnnouncementViewModel.swift in Sources */,
+				3BA7C0852B81D6C300654B62 /* ChangeBookMarkModel.swift in Sources */,
 				10025B412B7C024200DCCC5A /* OrganizationViewModel.swift in Sources */,
 				DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */,
 				DFB22ED72B766FF3007903DF /* JoinModel.swift in Sources */,

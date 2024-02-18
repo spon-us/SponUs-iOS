@@ -35,7 +35,6 @@
 		100D38B82B4EF54100498977 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B72B4EF54100498977 /* CategoryView.swift */; };
 		100D38BA2B4EF54C00498977 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D38B92B4EF54C00498977 /* MyView.swift */; };
 		1031EC7C2B68B9F20016655B /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031EC7B2B68B9F20016655B /* AnnouncementView.swift */; };
-		10584CBE2B81E45E007F7A3F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10584CBD2B81E45D007F7A3F /* GoogleService-Info.plist */; };
 		106720022B5835FA00493354 /* SendOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106720012B5835FA00493354 /* SendOfferView.swift */; };
 		107D6E692B7A8273005B6261 /* OrganizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107D6E682B7A8273005B6261 /* OrganizationModel.swift */; };
 		107D6E6B2B7A83AB005B6261 /* MyOrganizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107D6E6A2B7A83AB005B6261 /* MyOrganizationViewModel.swift */; };
@@ -122,6 +121,7 @@
 		DF498F2C2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */; };
 		DF498F2E2B7DF4F600ADE078 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */; };
 		DF498F302B7DF50200ADE078 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */; };
+		DF5AB1522B81ED890061F421 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF5AB1512B81ED880061F421 /* GoogleService-Info.plist */; };
 		DF5B7E922B7FA430001C009C /* PortfolioOfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */; };
 		DF5B7E942B808DF1001C009C /* EditAnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */; };
 		DF5B7E962B809257001C009C /* EditAnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */; };
@@ -169,7 +169,6 @@
 		100D38B72B4EF54100498977 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		100D38B92B4EF54C00498977 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		1031EC7B2B68B9F20016655B /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
-		10584CBD2B81E45D007F7A3F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		106720012B5835FA00493354 /* SendOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferView.swift; sourceTree = "<group>"; };
 		107D6E682B7A8273005B6261 /* OrganizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationModel.swift; sourceTree = "<group>"; };
 		107D6E6A2B7A83AB005B6261 /* MyOrganizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrganizationViewModel.swift; sourceTree = "<group>"; };
@@ -224,6 +223,7 @@
 		DF498F2B2B7CDDB200ADE078 /* MyAnnouncementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncementsViewModel.swift; sourceTree = "<group>"; };
 		DF498F2D2B7DF4F500ADE078 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
 		DF498F2F2B7DF50200ADE078 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
+		DF5AB1512B81ED880061F421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioOfferViewModel.swift; sourceTree = "<group>"; };
 		DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementViewModel.swift; sourceTree = "<group>"; };
 		DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementModel.swift; sourceTree = "<group>"; };
@@ -364,7 +364,7 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
-				10584CBD2B81E45D007F7A3F /* GoogleService-Info.plist */,
+				DF5AB1512B81ED880061F421 /* GoogleService-Info.plist */,
 				80B41FFF2B77F0DF0021DD90 /* Spon-us.entitlements */,
 				100D389F2B44833F00498977 /* Info.plist */,
 				3B36F09F2B6FEBCB0000ACFB /* PortOne */,
@@ -740,11 +740,11 @@
 			files = (
 				3B81BCC02B6231680067E9CB /* ProductList.plist in Resources */,
 				100D389C2B44833500498977 /* SUIT-Medium.otf in Resources */,
+				DF5AB1522B81ED890061F421 /* GoogleService-Info.plist in Resources */,
 				3B81BCBE2B62312C0067E9CB /* Product.storekit in Resources */,
 				100D38A32B44834700498977 /* Preview Assets.xcassets in Resources */,
 				100D389E2B44833500498977 /* Pretendard-SemiBold.otf in Resources */,
 				100D38AD2B44844F00498977 /* Assets.xcassets in Resources */,
-				10584CBE2B81E45E007F7A3F /* GoogleService-Info.plist in Resources */,
 				100D389B2B44833500498977 /* SUIT-Bold.otf in Resources */,
 				100D389D2B44833500498977 /* Pretendard-Medium.otf in Resources */,
 			);

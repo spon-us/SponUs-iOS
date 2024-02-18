@@ -49,7 +49,7 @@ struct MyNoticeDetailView: View {
                         .padding(.top, 23)
                         
                         
-                        Text("2024 스포대학교\n대동제 협찬")
+                        Text("Dummy")
                             .font(.Heading05)
                             .padding(.top, 16)
                         
@@ -134,6 +134,38 @@ struct ImageScrollView: View {
     }
 }
 
+struct AsyncImageScrollView: View {
+    @State var imageURLs: [URL]
+    var body: some View {
+
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 10) {
+                ForEach(imageURLs.indices) { index in
+                    
+                    AsyncImageView(url:imageURLs[index])
+                        .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenWidth * 0.8)
+                    
+
+                        .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 10)
+                        .scrollTransition(.animated, axis: .horizontal) { content, phase in
+                            content
+                                .opacity(phase.isIdentity ? 1.0 : 0.8)
+                                .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
+                        }
+                    
+                }
+            }
+            .scrollTargetLayout()
+            .padding(.bottom, 20)
+            
+        }
+        .scrollTargetBehavior(.viewAligned)
+        .safeAreaPadding(.horizontal, (CGFloat(UIScreen.screenWidth) / 8))
+
+    }
+}
+
+
 struct DivisionCell: View {
     var body: some View {
         
@@ -182,6 +214,6 @@ struct DivisionCell: View {
 
 
 
-#Preview {
-    MyNoticeDetailView(rootIsActive: .constant(false))
-}
+//#Preview {
+//    MyNoticeDetailView(rootIsActive: .constant(false))
+//}

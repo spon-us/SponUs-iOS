@@ -161,7 +161,7 @@ struct NewPostView: View {
         .toolbar(.hidden, for: .tabBar)
         .onDisappear{
             let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
-            provider.request(.postAnnouncement(title: postTitle, type: changeToEnglish(type: postSelectedCategory) ?? "ㄹㄹ"  , category: changeToEnglish(category: postSelectedField) ?? "ㄹㅇ" , content: postDetail, images: [UIImage()])) { result
+            provider.request(.postAnnouncement(title: postTitle, type: changeToEnglish(type: postSelectedCategory) ?? "ㄹㄹ"  , category: changeToEnglish(category: postSelectedField) ?? "ㄹㅇ" , content: postDetail, images: selectedImages)) { result
                 in
                 switch result {
                 case .success(let response):

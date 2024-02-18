@@ -40,6 +40,8 @@ enum SponusAPI {
     case postReport(title: String, content: String, proposeID: Int, images: [UIImage], attatchments: [URL])
     case patchProposeReportId(proposeId: Int, reportId: Int)
     case getReport(reportId: Int)
+    case postBookmarked(organizationId: Int)
+    case getBookmarked(sort: String)
 }
 
 extension SponusAPI: TargetType {
@@ -104,6 +106,10 @@ extension SponusAPI: TargetType {
             return "/api/v1/proposes/\(proposeId)"
         case .getReport(let reportId):
             return "/api/v1/reports/\(reportId)"
+        case .postBookmarked(let organizationId):
+            return "/api/v1/me/announcements/bookmarked"
+        case .getBookmarked:
+            return "/api/v1/me/announcements/bookmarked"
         }
     }
     
@@ -162,6 +168,9 @@ extension SponusAPI: TargetType {
         case .patchProposeReportId:
             return .patch
         case .getReport:
+        case .postBookmarked:
+            return .post
+        case .getBookmarked:
             return .get
         }
     }
@@ -252,6 +261,9 @@ extension SponusAPI: TargetType {
         case .patchProposeReportId:
             return Data()
         case .getReport:
+        case .postBookmarked:
+            return Data()
+        case .getBookmarked:
             return Data()
         }
     }
@@ -411,6 +423,12 @@ extension SponusAPI: TargetType {
             return .uploadMultipart(multipartData)
         case .getReport:
             return .requestPlain
+        case .postBookmarked(let announcementId):
+            let requestBody = ["announcementId" : announcementId]
+            return .requestJSONEncodable(requestBody)
+        case let .getBookmarked(sort):
+            let params: [String: Any] = ["sort": sort]
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         }
     }
     
@@ -474,6 +492,9 @@ extension SponusAPI: TargetType {
         case .patchProposeReportId:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getReport:
+        case .postBookmarked:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .getBookmarked:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }

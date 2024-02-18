@@ -18,6 +18,8 @@ struct CategoryView: View {
     @State var selectedCategoryDetailList = "전체"
     @StateObject private var categoryModelData = CategoryModelData()
     
+    @StateObject var savedViewModel = SavedViewModel()
+    
     private func updateCategoryModelData() {
         let category = changeToEnglish(category: selectedCategoryList)
         let type = changeToEnglish(type: selectedCategoryDetailList)
@@ -163,10 +165,11 @@ struct CategoryListDetailCell: View {
 }
 
 struct CategoryCell: View {
-    
     var categoryContent: CategoryContent
     @State private var isBookmarked = false
     
+    @StateObject var savedViewModel = SavedViewModel()
+   
     var body: some View {
         NavigationLink{SearchPostView(announcementId: categoryContent.id, selectedSaveButton: $isBookmarked)} label: {
             VStack(spacing: 0){
@@ -217,9 +220,17 @@ struct CategoryCell: View {
                     
                     Button(action: {toggleBookmark()
                         print(categoryContent.id)}){
-                        Image(isBookmarked ? "ic_saved_check" : "ic_saved")
+                            Image(isBookmarked ? "ic_saved_check" : "ic_saved")
+                        }
+                    /*
+                    Button(action: {
+                        toggleBookmark()
+                        
+                        print("북마크 아이디\(categoryContent.id)")
+                    }) {
+                        Image(savedViewModel.savedResponse?.bookmarked == true ? "ic_saved_check" : "ic_saved")
                                 .frame(width: 28, height: 28)
-                    }
+                     }*/
                 }
                 .padding(.bottom, 16)
                 .padding(.top, 7)
@@ -232,8 +243,10 @@ struct CategoryCell: View {
     func toggleBookmark(){
         isBookmarked.toggle()
         if isBookmarked {
+            savedViewModel.fetchSaved(organizationId: categoryContent.id)
             print("추가") //api
         } else {
+            savedViewModel.fetchSaved(organizationId: categoryContent.id)
             print("해제") //api
         }
     }

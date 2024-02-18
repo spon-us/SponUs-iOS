@@ -130,7 +130,8 @@ func changeToKorean(category: String? = nil, type: String? = nil) -> String? {
 }
 
 final class AuthInterceptor: RequestInterceptor {
-
+    static var currentRetryCount = 0
+    static var maximumRetryCount = 1
     static let shared = AuthInterceptor()
     let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
     private init() {}
@@ -159,7 +160,11 @@ final class AuthInterceptor: RequestInterceptor {
             completion(.doNotRetryWithError(error))
             return
         }
-        print("a")
+        guard AuthInterceptor.currentRetryCount < AuthInterceptor.maximumRetryCount else {
+            AuthInterceptor.currentRetryCount = 0
+            completion(.doNotRetry)
+            return
+        }
         provider.request(.getRenewToken) { result in
             switch result {
             case let .success(response):
@@ -178,6 +183,7 @@ final class AuthInterceptor: RequestInterceptor {
                     print("token renew error")
                     print(response.statusCode)
                     print(response.data)
+                    completion(.doNotRetry)
                 }
             case let .failure(response):
                 print("failure")

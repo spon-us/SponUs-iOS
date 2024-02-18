@@ -46,7 +46,7 @@ struct OrganizationResponse: Codable {
     let location: String?
     let description: String?
 //    let imageUrl: String?
-    let imageUrl: String
+    let imageUrl: String?
     let organizationType: String
 //    let suborganizationType: String
     let suborganizationType: String?

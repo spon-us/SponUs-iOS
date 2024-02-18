@@ -125,6 +125,7 @@
 		DF5AB1542B8228CC0061F421 /* MakeReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5AB1532B8228CC0061F421 /* MakeReportViewModel.swift */; };
 		DF5AB1572B8266D90061F421 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF5AB1562B8266D90061F421 /* GoogleService-Info.plist */; };
 		DF5AB1592B826ABB0061F421 /* CompanyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5AB1582B826ABB0061F421 /* CompanyPostView.swift */; };
+		DF5AB15B2B827BAB0061F421 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5AB15A2B827BAB0061F421 /* ReportViewModel.swift */; };
 		DF5B7E922B7FA430001C009C /* PortfolioOfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */; };
 		DF5B7E942B808DF1001C009C /* EditAnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */; };
 		DF5B7E962B809257001C009C /* EditAnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */; };
@@ -231,6 +232,7 @@
 		DF5AB1532B8228CC0061F421 /* MakeReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeReportViewModel.swift; sourceTree = "<group>"; };
 		DF5AB1562B8266D90061F421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF5AB1582B826ABB0061F421 /* CompanyPostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyPostView.swift; sourceTree = "<group>"; };
+		DF5AB15A2B827BAB0061F421 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
 		DF5B7E912B7FA430001C009C /* PortfolioOfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioOfferViewModel.swift; sourceTree = "<group>"; };
 		DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementViewModel.swift; sourceTree = "<group>"; };
 		DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnnouncementModel.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				DF5B7E932B808DF0001C009C /* EditAnnouncementViewModel.swift */,
 				DF5B7E952B809257001C009C /* EditAnnouncementModel.swift */,
 				DF5AB1532B8228CC0061F421 /* MakeReportViewModel.swift */,
+				DF5AB15A2B827BAB0061F421 /* ReportViewModel.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				1031EC7C2B68B9F20016655B /* AnnouncementView.swift in Sources */,
 				106720022B5835FA00493354 /* SendOfferView.swift in Sources */,
 				3B81BCB22B622EBF0067E9CB /* StoreKitManager.swift in Sources */,
+				DF5AB15B2B827BAB0061F421 /* ReportViewModel.swift in Sources */,
 				10C8AC612B5C340D00B40547 /* SendOfferPostView.swift in Sources */,
 				807BF83F2B51BCD400A659B9 /* SearchView.swift in Sources */,
 				806AF86A2B79DBD0008F7F62 /* CategoryModel.swift in Sources */,

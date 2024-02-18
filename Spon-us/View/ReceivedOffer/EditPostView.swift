@@ -253,7 +253,7 @@ struct SponUsPostFileCell: View {
                 Text(text)
                 
                 if (selectedURLsFile1.isEmpty && selectedURLsFile2.isEmpty && selectedURLsFile3.isEmpty) {
-                    Image("ic_check")
+                    Text("")
                 }
                 else{
                     Text("")

@@ -196,6 +196,9 @@ struct NewPostView: View {
             }
             print("disappear")
         }
+        .onTapGesture {
+            UIApplication.shared.endEditing()
+        }
     }
 }
 #Preview {

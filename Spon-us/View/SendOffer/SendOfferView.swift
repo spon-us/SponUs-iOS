@@ -125,7 +125,6 @@ struct SendOfferCell: View {
                     ZStack {
                         ForEach(sentResponse.proposes, id: \.self) { propose in
                             AsyncImageView(url: URL(string: propose.announcementSummary.mainImage.url))
-                                .aspectRatio(contentMode: .fill)
                                 .frame(width: 158, height: 158)
                                 .clipped()
                                 .padding(.trailing, 20)

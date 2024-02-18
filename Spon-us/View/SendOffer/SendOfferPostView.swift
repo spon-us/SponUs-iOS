@@ -19,7 +19,7 @@ struct SendOfferPostView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     AsyncImageView(url: URL(string: proposalDetailViewModel.proposalDetail?.proposingOrganizationImage ?? "profile_test"))
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: 335)
+                        .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
                         .clipped()
                     NavigationLink(
                         destination: ProfileView(rootIsActive: .constant(false), organizationId: proposalDetailViewModel.proposalDetail?.proposingOrganizationId ?? 1),

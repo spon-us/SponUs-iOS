@@ -18,8 +18,10 @@ struct ProposalDetailResponse: Codable {
     let title, content, status: String
     let proposedOrganizationId: Int
     let proposedOrganizationName: String
+    let proposedOrganizationImage: String
     let proposingOrganizationId: Int
     let proposingOrganizationName: String
+    let proposingOrganizationImage: String
     let proposeAttachmentUrl: [ProposeAttachmentUrl]
     let announcementDetails: AnnouncementDetails
     let createdDate, createdDay: String
@@ -54,7 +56,7 @@ struct AnnouncementDetails: Codable {
     }
 }
 
-struct AnnouncementImage: Codable {
+struct AnnouncementImage: Codable, Hashable {
     let id: Int
     let name, url: String
 }

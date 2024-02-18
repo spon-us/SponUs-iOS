@@ -121,13 +121,13 @@ struct SendOfferCell: View {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     ZStack {
-                        Image("musinsa")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 158, height: 158)
-                            .padding(.trailing, 20)
-                        
                         ForEach(sentResponse.proposes, id: \.self) { propose in
+                            AsyncImageView(url: URL(string: propose.announcementSummary.mainImage.url))
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 158, height: 158)
+                                .clipped()
+                                .padding(.trailing, 20)
+                            
                             StatusBadge(status: statusChangeToKorean(english: propose.status))
                                 .offset(x: 50.5, y: -66.5)
                         }

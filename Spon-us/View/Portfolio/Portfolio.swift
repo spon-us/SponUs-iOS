@@ -10,6 +10,7 @@ import SwiftUI
 import PopupView
 import UniformTypeIdentifiers
 import MobileCoreServices
+import Moya
 
 // 버튼 탭 애니메이션 X
 struct CustomButtonStyle: ButtonStyle {
@@ -143,8 +144,12 @@ struct Portfolio: View {
             Text("협업이 완료되었습니다").font(.Body03).foregroundStyle(.sponusPrimary).padding(.leading, 32)
             Spacer()
             Button {
-                showingCoworkCompletedPopup = false
-                showingCoworkCompletedCancelPopup = true
+                portfolioOfferViewModel.cancelCompleteOffer(proposeId: currentProgressingID, status: currentProgressingStatus) { success in
+                    if success {
+                        showingCoworkCompletedPopup = false
+                        showingCoworkCompletedCancelPopup = true
+                    }
+                }
             } label: {
                 Text("취소").font(.Body04).foregroundStyle(.sponusGrey700).padding(.trailing, 32)
             }
@@ -364,7 +369,7 @@ struct Portfolio: View {
                         
                         VStack {
                             ForEach(portfolioOfferViewModel.myProposes, id: \.proposeId) { cell in
-                                if cell.status != "SUSPENDED" && cell.announcementSummary.status == "OPENED" {
+                                if cell.status != "SUSPENDED" && cell.status != "COMPLETED" {
                                     NavigationLink(
                                         destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
                                         //                                        destination: DetailView(post: dummy),
@@ -419,7 +424,12 @@ struct Portfolio: View {
                                                     Spacer()
                                                     Button {
                                                         currentProgressingID = cell.proposeId
-                                                        showingCoworkCompletedPopup = true
+                                                        currentProgressingStatus = cell.status
+                                                        portfolioOfferViewModel.completeOffer(proposeId: currentProgressingID) { success in
+                                                            if success {
+                                                                showingCoworkCompletedPopup = true
+                                                            }
+                                                        }
                                                     } label: {
                                                         Text("협업 완료")
                                                             .font(.Caption01)
@@ -429,8 +439,6 @@ struct Portfolio: View {
                                                     }
                                                 }
                                                 Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-                                            }.onAppear() {
-                                                print(cell.title)
                                             }
                                         }
                                     )
@@ -457,7 +465,14 @@ struct Portfolio: View {
                         .autohideIn(3)
                 }
                 .popup(isPresented: $showingCoworkCompletedPopup) {
-                    createCoworkCompletedToastMessage()
+                    createCoworkCompletedToastMessage().onDisappear() {
+                        portfolioOfferViewModel.offerContents.removeAll()
+                        portfolioOfferViewModel.getOffers() { success in
+                            if success {
+                                portfolioOfferViewModel.getProposes()
+                            }
+                        }
+                    }
                 } customize: {
                     $0.type(.floater(verticalPadding: 16))
                         .position(.bottom)
@@ -484,7 +499,14 @@ struct Portfolio: View {
                         .autohideIn(2)
                 }
                 .popup(isPresented: $showingCoworkCompletedCancelPopup) {
-                    createCoworkCompletedCancelToastMessage()
+                    createCoworkCompletedCancelToastMessage().onDisappear() {
+                        portfolioOfferViewModel.offerContents.removeAll()
+                        portfolioOfferViewModel.getOffers() { success in
+                            if success {
+                                portfolioOfferViewModel.getProposes()
+                            }
+                        }
+                    }
                 } customize: {
                     $0.type(.floater(verticalPadding: 16))
                         .position(.bottom)
@@ -493,8 +515,6 @@ struct Portfolio: View {
                         .closeOnTapOutside(true)
                         .autohideIn(2)
                 }
-                
-                
             }
             
             
@@ -511,10 +531,9 @@ struct Portfolio: View {
                     ScrollView {
                         VStack {
                             ForEach(portfolioOfferViewModel.myProposes, id: \.proposeId) { cell in
-                                if (cell.status == "SUSPENDED" || cell.announcementSummary.status == "CLOSED") {
+                                if (cell.status == "SUSPENDED" || cell.status == "COMPLETED" || cell.announcementSummary.status == "CLOSED") {
                                     NavigationLink(
                                         destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-                                        //                                    destination: DetailView(post: dummy),
                                         label: {
                                             VStack(alignment:.leading, spacing: 0) {
                                                 HStack(spacing: 0) {
@@ -597,108 +616,19 @@ struct Portfolio: View {
                 }
                 
             }
-            //            if ($progressStatus.isCompleted.wrappedValue == true) {
-            //                ScrollView {
-            //                    VStack {
-            //                        ForEach(dummyData) { dummy in
-            //                            if (dummy.postProgressStatus == .completed) {
-            //                                NavigationLink(
-            //                                    destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-            //                                    //                                    destination: DetailView(post: dummy),
-            //                                    label: {
-            //                                        VStack(alignment:.leading, spacing: 0) {
-            //                                            HStack(spacing: 0) {
-            //                                                (dummy.thumbNail ?? Image(.icCancel))
-            //                                                    .resizable().frame(width: 158, height: 158)
-            //                                                    .border(.sponusGrey100)
-            //
-            //                                                VStack(alignment: .leading, spacing: 5) {
-            //                                                    switch dummy.postCategory {
-            //                                                    case .sponsorship:
-            //                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-            //                                                    case .linkedproject:
-            //                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-            //                                                    case nil:
-            //                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
-            //                                                    }
-            //                                                    Text(dummy.postTitle ?? "nil").font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
-            //
-            //                                                    HStack(spacing: 6) {
-            //                                                        (dummy.companyImage ?? Image(.icCancel)).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-            //                                                        Text("with \(dummy.companyName ?? "nil")").font(.English16).foregroundStyle(.sponusGrey700)
-            //                                                    }.padding(.bottom)
-            //
-            //                                                }.padding(.leading, 20)
-            //                                            }.padding(.top, 32).padding(.bottom, 24)
-            //                                            VStack(spacing: 0) {
-            //                                                switch dummy.completedReportStatus {
-            //                                                case .reportNotSubmitted:
-            //                                                    Button {
-            //                                                        currentMakeReportID = dummy.id
-            //                                                        activeNavLinkToMakeReport = true
-            //                                                    } label: {
-            //                                                        Text("보고서 작성하기")
-            //                                                            .font(.Caption01)
-            //                                                            .frame(height: 40)
-            //                                                            .frame(maxWidth: .infinity)
-            //                                                            .foregroundStyle(.sponusRed)
-            //                                                            .border(.sponusRed)
-            //                                                    }
-            //                                                case .unsuccessfulTermination:
-            //                                                    Text("협업이 중단된 공고입니다")
-            //                                                        .font(.Caption01)
-            //                                                        .frame(height: 40)
-            //                                                        .frame(maxWidth: .infinity)
-            //                                                        .foregroundStyle(.sponusGrey700)
-            //                                                        .border(.sponusGrey100)
-            //                                                case .reportSubmitted:
-            //                                                    Button {
-            //                                                        currentReportID = dummy.id
-            //                                                        activeNavLinkToReport = true
-            //                                                    } label: {
-            //                                                        Text("보고서 보러가기")
-            //                                                            .font(.Caption01)
-            //                                                            .frame(height: 40)
-            //                                                            .frame(maxWidth: .infinity)
-            //                                                            .foregroundStyle(.sponusPrimary)
-            //                                                            .border(.sponusPrimary)
-            //                                                    }
-            //                                                case nil:
-            //                                                    Text("nil")
-            //                                                        .font(.Caption01)
-            //                                                        .frame(height: 40)
-            //                                                        .foregroundStyle(.sponusRed)
-            //                                                        .border(.sponusRed)
-            //                                                }
-            //                                            }
-            //                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-            //                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            //                                    }
-            //                                )
-            //                            }
-            //                        }
-            //                    }
-            //                }.scrollIndicators(.hidden)
-            //            }
         }.padding()
             .navigationTitle("포트폴리오").font(.Body01)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
             .navigationDestination(isPresented: $activeNavLinkToEdit) {
-                //                if let index = dummyData.firstIndex(where: { $0.id == currentConfirmationDialogID }) {
-                //                    ModifyView(post: dummyData[index])
-                //                }
                 EditAnnouncementView(announcementID: currentDialogID, popup: .constant(false))
             }
             .navigationDestination(isPresented: $activeNavLinkToMakeReport) {
-                MakeReportView(rootIsActive: self.$rootIsActive)
+                MakeReportView(rootIsActive: self.$rootIsActive, proposeID: currentMakeReportID)
             }
             .navigationDestination(isPresented: $activeNavLinkToReport) {
                 ReportView(popToRootView: self.$rootIsActive)
-                //                if let index = dummyData.firstIndex(where: { $0.id == currentReportID }) {
-                //                    ReportView()
-                //                }
             }
             .toolbar(.hidden, for: .tabBar)
             .onAppear() {
@@ -715,7 +645,9 @@ struct Portfolio: View {
 
 
 struct MakeReportView: View {
+    @StateObject var makeReportViewModel = MakeReportViewModel()
     @Binding var rootIsActive: Bool
+    @State var proposeID: Int
     @State private var postTitle = ""
     @State private var selectedImages: [UIImage] = []
     @State private var postSelectedCategory = ""
@@ -741,6 +673,8 @@ struct MakeReportView: View {
     
     
     @Environment(\.presentationMode) var presentationMode
+    
+    let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
     
     func createPopup() -> some View {
         HStack {
@@ -874,13 +808,7 @@ struct MakeReportView: View {
                             Image(fileButton1Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
                         }.fileImporter(
                             isPresented: $isDocumentPicker1Presented,
-                            allowedContentTypes: [UTType.pdf,
-                                                  UTType.doc,
-                                                  UTType.docx,
-                                                  UTType.hwp,
-                                                  UTType.hwpx,
-                                                  UTType.ppt,
-                                                  UTType.pptx],
+                            allowedContentTypes: [UTType.pdf],
                             allowsMultipleSelection: false,
                             onCompletion: { result in
                                 do {
@@ -893,76 +821,8 @@ struct MakeReportView: View {
                         )
                         .padding(.trailing, 20)
                         }.padding(.vertical, 16).border(.sponusGrey100)
-                        HStack {
-                            Text(fileButton2Text).font(.Body10).foregroundStyle(fileButton2Text == "파일 선택" ? .sponusGrey700 : .sponusBlack).padding(.leading, 20)
-                            Spacer()
-                            Button {
-                                if (fileButton2Text != "파일 선택") {
-                                    fileButton2Text = "파일 선택"
-                                }
-                                else {
-                                    isDocumentPicker2Presented.toggle()
-                                }
-                                selectedURLsFile2 = []
-                            }
-                        label: {
-                            Image(fileButton2Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
-                        }.fileImporter(
-                            isPresented: $isDocumentPicker2Presented,
-                            allowedContentTypes: [UTType.pdf,
-                                                  UTType.doc,
-                                                  UTType.docx,
-                                                  UTType.hwp,
-                                                  UTType.hwpx,
-                                                  UTType.ppt,
-                                                  UTType.pptx],
-                            allowsMultipleSelection: false,
-                            onCompletion: { result in
-                                do {
-                                    selectedURLsFile2 = try result.get()
-                                    fileButton2Text = selectedURLsFile2[0].lastPathComponent
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
-                            }
-                        ).padding(.trailing, 20)
-                        }.padding(.vertical, 16).border(.sponusGrey100)
-                        HStack {
-                            Text(fileButton3Text).font(.Body10).foregroundStyle(fileButton3Text == "파일 선택" ? .sponusGrey700 : .sponusBlack).padding(.leading, 20)
-                            Spacer()
-                            Button {
-                                if (fileButton3Text != "파일 선택") {
-                                    fileButton3Text = "파일 선택"
-                                }
-                                else {
-                                    isDocumentPicker3Presented.toggle()
-                                }
-                                selectedURLsFile3 = []
-                            }
-                        label: {
-                            Image(fileButton3Text == "파일 선택" ? .icUpload : .icCancel).resizable().frame(width: 24, height: 24)
-                        }.fileImporter(
-                            isPresented: $isDocumentPicker3Presented,
-                            allowedContentTypes: [UTType.pdf,
-                                                  UTType.doc,
-                                                  UTType.docx,
-                                                  UTType.hwp,
-                                                  UTType.hwpx,
-                                                  UTType.ppt,
-                                                  UTType.pptx],
-                            allowsMultipleSelection: false,
-                            onCompletion: { result in
-                                do {
-                                    selectedURLsFile3 = try result.get()
-                                    fileButton3Text = selectedURLsFile3[0].lastPathComponent
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
-                            }
-                        ).padding(.trailing, 20)
-                        }.padding(.vertical, 16).border(.sponusGrey100)
                         
-                        Text("상세 내용이 적힌 파일을 첨부해 주세요\n(MS Word, MS PowerPoint, HWP, PDF)")
+                        Text("상세 내용이 적힌 PDF 파일을 첨부해 주세요")
                             .font(.Caption02)
                             .foregroundStyle(.sponusGrey600)
                             .padding(.bottom, 16)
@@ -1022,7 +882,36 @@ struct MakeReportView: View {
             
         }.popup(isPresented: $showingPopup) {
             createPopup().onDisappear(){
-                self.presentationMode.wrappedValue.dismiss()
+                provider.request(.postReport(title: postTitle, content: postDetail, proposeID: proposeID, images: selectedImages, attatchments: selectedURLsFile1)) { result in
+                    let innerProposeID = proposeID
+                    switch result {
+                    case let .success(response):
+                        do {
+                            let responseBody = try response.map(PostReportResponse.self)
+                            print("report success")
+                            print(responseBody)
+                            presentationMode.wrappedValue.dismiss()
+                        } catch {
+                            print("postreport parse error")
+                        }
+                        
+                    case let .failure(response):
+                        if let responsee = response.response {
+                            // 실패한 요청의 응답 본문이 있는 경우
+                            if let responseBody = String(data: responsee.data, encoding: .utf8) {
+                                print("Response body: \(responseBody)")
+                            } else {
+                                print("Failed to decode response body.")
+                            }
+                        } else {
+                            print("No response body.")
+                        }
+                        print(response.localizedDescription)
+                        print(response.errorDescription)
+                        print("postreport error")
+                    }
+                }
+                
             }
         } customize: {
             $0.type(.floater(verticalPadding: 16))
@@ -1157,10 +1046,7 @@ struct ReportPreviewView: View {
                     .padding(.horizontal, 20)
                 }
                 .padding(.bottom, 20)
-                
             }
-            
-            
         }.navigationTitle("미리보기").font(.Body01)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)

@@ -80,8 +80,9 @@ class PortfolioOfferViewModel: ObservableObject {
                 myProposes.append(prop)
             }
         }
-//        myProposes = Array(Set(myProposes))
-//        myProposes.sort { $0.createdDate > $1.createdDate }
+        
+        myProposes = Array(Set(myProposes))
+        myProposes.sort {$0.proposeId > $1.proposeId}
 //        for content in myProposes {
 //            if content.status == "SUSPENDED" || content.status == "COMPLETED" {
 //                
@@ -96,6 +97,7 @@ class PortfolioOfferViewModel: ObservableObject {
             case let .success(response):
                 if response.statusCode == 200 {
                     do {
+                        print("stopoffer")
                         let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
                         print(responseBody)
                         completion(true)
@@ -131,6 +133,80 @@ class PortfolioOfferViewModel: ObservableObject {
     }
     
     func cancelStopOffer(proposeId: Int, status: String, completion: @escaping (Bool) -> Void) {
+        provider.request(.patchChangeOfferStatus(proposeID: proposeId, status: status)) { result in
+            switch result {
+            case let .success(response):
+                if response.statusCode == 200 {
+                    do {
+                        let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
+                        print(responseBody)
+                        completion(true)
+                    }
+                    catch {
+                        print("200 successError")
+                        completion(false)
+                    }
+                }
+                else {
+                    do {
+                        let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
+                        print(responseBody)
+                        completion(false)
+                    }
+                    catch {
+                        print("40x successError")
+                        completion(false)
+                    }
+                }
+            case .failure(_):
+                print("failureError")
+                completion(false)
+            }
+        }
+    }
+    
+    func completeOffer(proposeId: Int, completion: @escaping (Bool) -> Void) {
+        provider.request(.patchChangeOfferStatus(proposeID: proposeId, status: "COMPLETED")) { result in
+            switch result {
+            case let .success(response):
+                if response.statusCode == 200 {
+                    do {
+                        print("여기")
+                        let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
+                        print(responseBody)
+                        completion(true)
+                    }
+                    catch {
+                        print("200 successError")
+                        completion(false)
+                    }
+                }
+                else {
+                    do {
+                        print(response.statusCode)
+                        let responseBody = try JSONDecoder().decode(ChangeAnnouncementStatusModel400.self, from: response.data)
+                        print(responseBody)
+                        completion(false)
+                    }
+                    catch {
+                        print("40x successError")
+                        completion(false)
+                    }
+                }
+            case let .failure(response):
+                print(response.errorDescription)
+                if let moyaError = response as? MoyaError, let response = moyaError.response {
+                    if let responseBody = String(data: response.data, encoding: .utf8) {
+                        print("실패 응답 본문: \(responseBody)")
+                    }
+                }
+                print("failureError")
+                completion(false)
+            }
+        }
+    }
+
+    func cancelCompleteOffer(proposeId: Int, status: String, completion: @escaping (Bool) -> Void) {
         provider.request(.patchChangeOfferStatus(proposeID: proposeId, status: status)) { result in
             switch result {
             case let .success(response):

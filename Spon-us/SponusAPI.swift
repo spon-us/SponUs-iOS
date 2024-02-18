@@ -37,6 +37,8 @@ enum SponusAPI {
     case patchPullUp(announcementID: Int)
     //MARK: 알림
     case getNotification
+    case postReport(title: String, content: String, proposeID: Int, images: [UIImage], attatchments: [URL])
+    case patchProposeReportId(proposeId: Int, reportId: Int)
 }
 
 extension SponusAPI: TargetType {
@@ -84,7 +86,7 @@ extension SponusAPI: TargetType {
             return "/api/v1/announcements/\(announcementId)"
         case .patchModifyAnnouncement(let announcementId, _, _, _, _):
             return "/api/v1/announcements/\(announcementId)"
-        //MARK: 검색
+            //MARK: 검색
         case .searchOrganization(keyword: let keyword):
             return "/api/v1/organizations"
         case .searchAnnouncement(keyword: let keyword):
@@ -95,6 +97,10 @@ extension SponusAPI: TargetType {
             return "/api/v1/announcements/\(announcementID)/pullUp"
         case .getNotification:
             return "/api/v1/organizations/notifications"
+        case .postReport:
+            return "/api/v1/reports"
+        case .patchProposeReportId(let proposeId, _):
+            return "/api/v1/proposes/\(proposeId)"
         }
     }
     
@@ -111,7 +117,7 @@ extension SponusAPI: TargetType {
         case .getAnnouncement(announcementId: let announcementId):
             return .get
         case .propose(title: let title, content: let content, announcementId: let announcementId, attachments: let attachments):
-                return .post
+            return .post
         case .postLogin:
             return .post
         case .getLogout:
@@ -138,7 +144,6 @@ extension SponusAPI: TargetType {
             return .delete
         case .patchModifyAnnouncement:
             return .patch
-        //MARK: 검색
         case .searchOrganization(keyword: let keyword):
             return .get
         case .searchAnnouncement(keyword: let keyword):
@@ -149,6 +154,10 @@ extension SponusAPI: TargetType {
             return .patch
         case .getNotification:
             return .get
+        case .postReport:
+            return .post
+        case .patchProposeReportId:
+            return .patch
         }
     }
     
@@ -168,21 +177,21 @@ extension SponusAPI: TargetType {
             ]
             return try! JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
         case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
-                let sampleResponse: [String: Any] = [
-                    "statusCode": "string",
-                    "message": "string",
-                    "content": [
-                        "id": 0,
-                        "writerId": 0,
-                        "title": "string",
-                        "type": "SPONSORSHIP",
-                        "category": "IDEA",
-                        "content": "string",
-                        "status": "OPENED",
-                        "viewCount": 0
-                    ]
+            let sampleResponse: [String: Any] = [
+                "statusCode": "string",
+                "message": "string",
+                "content": [
+                    "id": 0,
+                    "writerId": 0,
+                    "title": "string",
+                    "type": "SPONSORSHIP",
+                    "category": "IDEA",
+                    "content": "string",
+                    "status": "OPENED",
+                    "viewCount": 0
                 ]
-                return try! JSONSerialization.data(withJSONObject: sampleResponse, options: .prettyPrinted)
+            ]
+            return try! JSONSerialization.data(withJSONObject: sampleResponse, options: .prettyPrinted)
         case .getCategory(category: let category, type: let type):
             return Data()
         case .getAnnouncement(announcementId: let announcementId):
@@ -233,6 +242,10 @@ extension SponusAPI: TargetType {
             return Data()
         case .getNotification:
             return Data()
+        case .postReport:
+            return Data()
+        case .patchProposeReportId:
+            return Data()
         }
     }
     
@@ -258,24 +271,24 @@ extension SponusAPI: TargetType {
             }
         case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
             let requestParams = [
-               "title": title,
-               "type": type,
-               "category": category,
-               "content": content
-           ]
-           let requestJSON = try? JSONEncoder().encode(requestParams)
-
-           let imageMultipartData = images.enumerated().map { (index, image) -> MultipartFormData in
-               let imageData = image.jpegData(compressionQuality: 0.7) ?? Data()
-               return MultipartFormData(provider: .data(imageData), name: "images", fileName: "image\(index).jpg", mimeType: "image/jpeg")
-           }
-           var multipartData = [MultipartFormData]()
-           if let requestData = requestJSON {
-               multipartData.append(MultipartFormData(provider: .data(requestData), name: "request"))
-           }
-           multipartData.append(contentsOf: imageMultipartData)
-           
-           return .uploadMultipart(multipartData)
+                "title": title,
+                "type": type,
+                "category": category,
+                "content": content
+            ]
+            let requestJSON = try? JSONEncoder().encode(requestParams)
+            
+            let imageMultipartData = images.enumerated().map { (index, image) -> MultipartFormData in
+                let imageData = image.jpegData(compressionQuality: 0.7) ?? Data()
+                return MultipartFormData(provider: .data(imageData), name: "images", fileName: "image\(index).jpg", mimeType: "image/jpeg")
+            }
+            var multipartData = [MultipartFormData]()
+            if let requestData = requestJSON {
+                multipartData.append(MultipartFormData(provider: .data(requestData), name: "request"))
+            }
+            multipartData.append(contentsOf: imageMultipartData)
+            
+            return .uploadMultipart(multipartData)
         case .getCategory(category: let category, type: let type):
             var parameters: [String: Any] = [:]
             if let category = category {
@@ -345,7 +358,7 @@ extension SponusAPI: TargetType {
                 "content" : content
             ]
             return .requestJSONEncodable(requestBody)
-        //MARK: 검색
+            //MARK: 검색
         case .searchOrganization(keyword: let keyword):
             return .requestParameters(parameters: ["search": keyword], encoding: URLEncoding.queryString)
         case .searchAnnouncement(keyword: let keyword):
@@ -356,6 +369,39 @@ extension SponusAPI: TargetType {
             return .requestPlain
         case .getNotification:
             return .requestPlain
+        case .postReport(let title, let content, let proposeID, let images, let attatchments):
+            let requestParams = RequestParams(title: title, content: content, proposeId: proposeID)
+            let requestJSON = try? JSONEncoder().encode(requestParams)
+            let imageMultipartData = images.enumerated().map { (index, image) -> MultipartFormData in
+                let imageData = image.jpegData(compressionQuality: 0.7) ?? Data()
+                return MultipartFormData(provider: .data(imageData), name: "images", fileName: "image\(index).jpg", mimeType: "image/jpeg")
+            }
+            let test = images.enumerated().map { (index, image) -> MultipartFormData in
+                let imageData = image.jpegData(compressionQuality: 0.7) ?? Data()
+                return MultipartFormData(provider: .data(imageData), name: "attatchments", fileName: "image\(index).jpg", mimeType: "image/jpeg")
+            }
+            let filename = attatchments[0].lastPathComponent
+            
+            let pdfMultipartData = attatchments.enumerated().map { (index, pdf) -> MultipartFormData in
+                let pdfData = try! Data(contentsOf: attatchments[0])
+                print(attatchments[0])
+                return MultipartFormData(provider: .data(pdfData), name: "attachments", fileName: attatchments[0].lastPathComponent, mimeType: "application/pdf")
+            }
+            var multipartData = [MultipartFormData]()
+            if let requestData = requestJSON {
+                multipartData.append(MultipartFormData(provider: .data(requestData), name: "request"))
+            }
+            multipartData.append(contentsOf: imageMultipartData)
+            multipartData.append(contentsOf: pdfMultipartData)
+            return .uploadMultipart(multipartData)
+        case .patchProposeReportId(_, let reportId):
+            let requestBody = PatchProposeReportBody(isReported: true, reportId: reportId)
+            let requestJSON = try? JSONEncoder().encode(requestBody)
+            var multipartData = [MultipartFormData]()
+            if let requestData = requestJSON {
+                multipartData.append(MultipartFormData(provider: .data(requestData), name: "request"))
+            }
+            return .uploadMultipart(multipartData)
         }
     }
     
@@ -377,11 +423,11 @@ extension SponusAPI: TargetType {
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getOrganization:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
-        /*
-        case .postLike:
-            return ["Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "atk": KeychainSwift().get("accessToken") ?? ""] */
+            /*
+             case .postLike:
+             return ["Content-Type": "application/json",
+             "Accept": "application/json",
+             "atk": KeychainSwift().get("accessToken") ?? ""] */
         case .postAnnouncement(title: let title, type: let type, category: let category, content: let content, images: let images):
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getCategory(category: let category, type: let type):
@@ -414,12 +460,16 @@ extension SponusAPI: TargetType {
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getNotification:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .postReport:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
+        case .patchProposeReportId:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         }
     }
 }
 
 extension SponusAPI {
-  var validationType: ValidationType {
-      return .successCodes
-  }
+    var validationType: ValidationType {
+        return .successCodes
+    }
 }

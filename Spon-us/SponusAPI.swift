@@ -168,6 +168,7 @@ extension SponusAPI: TargetType {
         case .patchProposeReportId:
             return .patch
         case .getReport:
+            return .get
         case .postBookmarked:
             return .post
         case .getBookmarked:
@@ -261,6 +262,7 @@ extension SponusAPI: TargetType {
         case .patchProposeReportId:
             return Data()
         case .getReport:
+            return Data()
         case .postBookmarked:
             return Data()
         case .getBookmarked:
@@ -492,6 +494,7 @@ extension SponusAPI: TargetType {
         case .patchProposeReportId:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getReport:
+            return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .postBookmarked:
             return ["Authorization": "Bearer \(loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error"))"]
         case .getBookmarked:

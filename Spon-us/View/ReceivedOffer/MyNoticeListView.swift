@@ -44,8 +44,8 @@ struct MyNoticeListView: View {
                     SponUsDivider()
                         .padding(.top, 8)
                     
-                    ForEach(1 ..< 5) { item in
-                        MyNoticeListCell(rootIsActive: $rootIsActive)
+                    ForEach(receivedOfferMyAnnouncementsViewModel.myAnnouncementsContents, id: \.self.id) { content in
+                        MyNoticeListCell(rootIsActive: $rootIsActive, title: content.title)
                     }
                 }
                 .foregroundColor(Color.sponusBlack)
@@ -65,6 +65,7 @@ struct MyNoticeListView: View {
 
 struct MyNoticeListCell: View {
     @Binding var rootIsActive: Bool
+    var title: String
     
     var body: some View {
         HStack(spacing: 0){

@@ -27,20 +27,21 @@ struct SendOfferPostView: View {
                         .frame(height: 335)
                         .clipped()
                     
-
-                    NavigationLink {
-                        // ProfileView(rootIsActive: $rootIsActive)
-                        Text("더미 채우기")
-                    } label: {
-                        HStack {
-                            Text(proposalDetailViewModel.proposalDetail?.proposedOrganizationName ?? "")
-                                .font(.Body10)
-                                .foregroundColor(Color.sponusPrimary)
-                            
-                            Image("ic_go_blue")
-                                .frame(width: 16, height: 16)
+                    NavigationLink(
+                        destination: ProfileView(rootIsActive: .constant(false), organizationId: proposalDetailViewModel.proposalDetail?.proposingOrganizationId ?? 1),
+                        //isActive: .constant(selectedProposeId == proposalDetailViewModel.proposalDetail?.proposingOrganizationId),
+                        label: {
+                            HStack {
+                                Text(proposalDetailViewModel.proposalDetail?.proposingOrganizationName ?? "")
+                                    .font(.Body10)
+                                    .foregroundColor(Color.sponusPrimary)
+                                
+                                Image("ic_go_blue")
+                                    .frame(width: 16, height: 16)
+                            }
+                            .padding(.top, 23)
                         }
-                    }.padding(.top, 23)
+                    )
                     
                     Text(proposalDetailViewModel.proposalDetail?.title ?? "")
                         .font(.Heading05)
@@ -99,6 +100,9 @@ struct SendOfferPostView: View {
             }
             .background(Color.sponusBlack)
         }
+        .onAppear(){
+            proposalDetailViewModel.fetchProposalDetail(proposeId: proposeId)
+        }
         .gesture(
             DragGesture().onEnded { value in
                 if value.translation.width > 100 {
@@ -114,9 +118,6 @@ struct SendOfferPostView: View {
                 .renderingMode(.template)
                 .foregroundStyle(.black)
         }))
-        .onAppear(){
-            proposalDetailViewModel.fetchProposalDetail(proposeId: proposeId)
-        }
     }
 }
 

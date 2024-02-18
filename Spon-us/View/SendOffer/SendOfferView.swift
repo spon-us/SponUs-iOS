@@ -151,7 +151,7 @@ struct SendOfferCell: View {
                             
                             NavigationLink(
                                 destination: SendOfferPostView(proposeId: propose.proposeId, rootIsActive: $rootIsActive),
-                                isActive: .constant(selectedProposeId == propose.proposeId),
+                                //isActive: .constant(selectedProposeId == propose.proposeId),
                                 label: {
                                     HStack {
                                         Text("보낸 제안서")

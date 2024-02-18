@@ -51,7 +51,8 @@ struct CompanyPostView: View {
                         .padding(.top, 15)
                         
                         NavigationLink {
-                            ProfileView(rootIsActive: $rootIsActive)
+//                            ProfileView(rootIsActive: $rootIsActive, organizationId: <#Int#>)
+                            Text("더미데이터!")
                         } label: {
                             HStack {
                                 Text("무신사")

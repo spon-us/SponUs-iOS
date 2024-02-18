@@ -83,6 +83,8 @@ struct Spon_usApp: App {
                     OnBoardingView()
                 }
                 
+            }.onAppear(){
+                loadAccessToken(userID: UserDefaults.standard.string(forKey: "loginAccount") ?? "loadAccessToken Error")
             }
 //            if ((UserDefaults.standard.string(forKey: "loginAccount") != nil) && (rootIsActive == true)) {
 //                

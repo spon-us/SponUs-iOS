@@ -30,43 +30,44 @@ struct SearchView: View {
                 ScrollView(){
                     if (searchData == ""){
                         VStack(alignment: .leading, spacing: 36){
-                            VStack(alignment: .leading, spacing: 16){
-                                HStack(){
-                                    Text("최근 검색어").font(.Body01)
-                                    Spacer()
-                                }
-                                VStack(spacing: 8){
-                                    HStack(spacing: 8){
-                                        ForEach(0..<3, id: \.self){index in
-                                            SearchCategoryButton(content: dummyData3[index], isDelete: true)
-                                        }
-                                        Spacer()
-                                    }
-                                    HStack(spacing: 8){
-                                        ForEach(0..<3, id: \.self){index in
-                                            SearchCategoryButton(content: dummyData3[3+index], isDelete: true)
-                                        }
-                                        Spacer()
-                                    }
-                                    HStack(spacing: 8){
-                                        ForEach(0..<2, id: \.self){index in
-                                            SearchCategoryButton(content: dummyData3[6+index], isDelete: true)
-                                        }
-                                        Spacer()
-                                    }
-                                }
-                            }
+//                            VStack(alignment: .leading, spacing: 16){
+//                                HStack(){
+//                                    Text("최근 검색어").font(.Body01)
+//                                    Spacer()
+//                                }
+//                                VStack(spacing: 8){
+//                                    HStack(spacing: 8){
+//                                        ForEach(0..<3, id: \.self){index in
+//                                            SearchCategoryButton(content: dummyData3[index], isDelete: true)
+//                                        }
+//                                        Spacer()
+//                                    }
+//                                    HStack(spacing: 8){
+//                                        ForEach(0..<3, id: \.self){index in
+//                                            SearchCategoryButton(content: dummyData3[3+index], isDelete: true)
+//                                        }
+//                                        Spacer()
+//                                    }
+//                                    HStack(spacing: 8){
+//                                        ForEach(0..<2, id: \.self){index in
+//                                            SearchCategoryButton(content: dummyData3[6+index], isDelete: true)
+//                                        }
+//                                        Spacer()
+//                                    }
+//                                }
+//                            }
                             
                             VStack(alignment: .leading, spacing: 16){
                                 Text("스포너스 추천 검색어").font(.Body01)
                                 HStack(spacing: 8){
-                                    SearchCategoryButton(content: "마케팅", isDelete: false)
-                                    SearchCategoryButton(content: "디자인", isDelete: false)
-                                    SearchCategoryButton(content: "연계 프로젝트", isDelete: false)
+                                    SearchCategoryButton(content: "스포너스", isDelete: false, searchData: $searchData)
+                                    SearchCategoryButton(content: "학생회", isDelete: false, searchData: $searchData)
+                                    SearchCategoryButton(content: "공고", isDelete: false, searchData: $searchData)
+                                    Spacer()
                                 }
                             }
                             Spacer()
-                        }.padding(.horizontal, 20)
+                        }.padding(.horizontal, 20).padding(.vertical, 0)
                     } else {
                         VStack(alignment: .leading, spacing: 16){
                             HStack(){
@@ -89,7 +90,7 @@ struct SearchView: View {
                             Text("기업 정보").font(.Body06)
                             VStack(){
                                 ForEach(viewModel.searchOrganizationContents, id: \.self) {index in
-                                    NavigationLink(destination: ProfileView(rootIsActive: .constant(false))){
+                                    NavigationLink(destination: ProfileView(rootIsActive: .constant(false), organizationId:index.id)){
                                         HStack(spacing: 12){
                                             AsyncImageView(url: URL(string: index.image ?? ""))
                                                 .frame(width: 46, height: 46)
@@ -117,7 +118,7 @@ struct SearchView: View {
                         }.padding(.horizontal, 20)
                     }
                     Spacer()
-                }
+                }.padding(0)
             }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
@@ -178,22 +179,25 @@ struct SearchTextfieldStyle: TextFieldStyle {
 struct SearchCategoryButton: View {
     let content: String
     let isDelete: Bool
+    @Binding var searchData: String
     var body: some View {
-        HStack(){
-            Text(content).font(.Body08).foregroundColor(.sponusBlack)
-            if isDelete {
-                Button(action: {}){
-                    Image("ic_cancel").frame(width: 16, height: 16)
+        Button(action: {searchData = content}){
+            HStack(){
+                Text(content).font(.Body08).foregroundColor(.sponusBlack)
+                if isDelete {
+                    Button(action: {}){
+                        Image("ic_cancel").frame(width: 16, height: 16)
+                    }
                 }
             }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .frame(height: 40)
+            .overlay(
+                RoundedRectangle(cornerRadius: 99)
+                    .stroke(.sponusGrey500)
+            )
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .frame(height: 40)
-        .overlay(
-            RoundedRectangle(cornerRadius: 99)
-                .stroke(.sponusGrey500)
-        )
     }
 }
 

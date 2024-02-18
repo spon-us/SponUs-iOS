@@ -1093,7 +1093,8 @@ struct ReportPreviewView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         
                         NavigationLink {
-                            ProfileView(rootIsActive: $popToRootView)
+//                            ProfileView(rootIsActive: $popToRootView)
+                            Text("더미 채우기")
                         } label: {
                             HStack{
                                 Text("스포대학교 총학생회")
@@ -1227,7 +1228,8 @@ struct ReportView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         
                         NavigationLink {
-                            ProfileView(rootIsActive: $popToRootView)
+//                            ProfileView(rootIsActive: $popToRootView)
+                            Text("더미 채우기")
                         }
                     label: {
                         HStack{

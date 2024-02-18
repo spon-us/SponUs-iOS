@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
     @Binding var rootIsActive: Bool
-    
+    var organizationId: Int
+    @ObservedObject var organizationViewModel: OrganizationViewModel = OrganizationViewModel()
     var body: some View {
         VStack(spacing: 0) {
             
@@ -23,13 +24,14 @@ struct ProfileView: View {
 
                 VStack(alignment: .leading, spacing: 16){
                     
-                    Text("기업 소개")
+                    Text(organizationViewModel.organization?.name ?? "안불러와짐.")
                         .font(.Heading09)
                     
                     SponUsDivider()
                         .padding(.bottom, 8)
                     
-                    Text("무신사는 700만 회원을 보유한 국내 1위 온라인 패션 플랫폼입니다. 스트릿, 글로벌 명품, 디자이너 등 5천여 개 브랜드가 입점한 「무신사 스토어」와 국내·외 최신 패션 트렌드와 정보를 전달하는 패션 매거진 「무신사 매거진」을 운영하고 있습니다.")
+                    Text(organizationViewModel.organization?.description ?? "안불러와짐.")
+                        .multilineTextAlignment(.leading)
                         .font(.Body10)
                       .foregroundColor(Color.sponusGrey800)
                       .padding(.trailing, 20)
@@ -64,6 +66,9 @@ struct ProfileView: View {
                 .padding(.leading, 40)
             }
             
+        }
+        .onAppear(){
+            organizationViewModel.fetchOrganization(organizationId: organizationId)
         }
         .navigationTitle("프로필").font(.Body01)
         .navigationBarTitleDisplayMode(.inline)
@@ -177,6 +182,6 @@ struct ProfileHistoryCell: View {
     }
 }
 
-#Preview {
-    ProfileView(rootIsActive: .constant(false))
-}
+//#Preview {
+//    ProfileView(rootIsActive: .constant(false))
+//}

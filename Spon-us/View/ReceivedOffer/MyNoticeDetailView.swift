@@ -36,7 +36,7 @@ struct MyNoticeDetailView: View {
                         .foregroundColor(Color.sponusGrey700)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         
-                        NavigationLink(destination: ProfileView(rootIsActive: $rootIsActive), label: {
+                        NavigationLink(destination: Text("더미를 만들어야해요!"), label: {
                             HStack{
                                 Text("스포대학교 총학생회")
                                     .font(.Body10)

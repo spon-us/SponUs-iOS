@@ -25,7 +25,8 @@ struct ChargerInfoView: View {
                             .clipped()
                         
                         VStack(spacing: 0) {
-                            NavigationLink(destination: ProfileView(rootIsActive: $rootIsActive), label: {
+                            NavigationLink(destination: /*ProfileView(rootIsActive: $rootIsActive)*/
+                                        Text("더미 채우기"), label: {
                                 HStack {
                                     Text("Profile")
                                         .font(.English15)

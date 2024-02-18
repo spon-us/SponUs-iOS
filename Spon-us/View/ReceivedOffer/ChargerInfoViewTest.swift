@@ -26,7 +26,7 @@ struct ChargerInfoViewTest: View {
                                 .padding(.trailing, 12)
                             
                             VStack(alignment: .leading, spacing: 0) {
-                                NavigationLink(destination: ProfileView(rootIsActive: $rootIsActive), label: {
+                                NavigationLink(destination: /*ProfileView(rootIsActive: $rootIsActive)*/Text("더미 만드세요!"), label: {
                                     HStack(spacing: 0) {
                                         Text("Profile")
                                             .font(.English15)

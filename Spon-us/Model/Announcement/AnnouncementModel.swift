@@ -12,7 +12,7 @@ struct Tags: Decodable {
     let name: String
 }
 
-struct AnnouncementImages: Decodable {
+struct AnnouncementImages: Decodable, Identifiable, Hashable {
     let id: Int
     let name, url: String
 }

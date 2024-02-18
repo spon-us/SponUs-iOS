@@ -39,15 +39,15 @@ struct OrganizationModel: Codable {
 }
 
 struct OrganizationResponse: Codable {
-    let organizationId: Int
-    let name: String
-    let email: String
-    let password: String
+    let organizationId: Int?
+    let name: String?
+    let email: String?
+    let password: String?
     let location: String?
     let description: String?
 //    let imageUrl: String?
     let imageUrl: String?
-    let organizationType: String
+    let organizationType: String?
 //    let suborganizationType: String
     let suborganizationType: String?
     let managerName: String?
@@ -57,19 +57,19 @@ struct OrganizationResponse: Codable {
     let managerAvailableDay: String?
     let managerAvailableHour: String?
     let managerContactPreference: String?
-    let organizationStatus: String
+    let organizationStatus: String?
     let tags: [Tag]
     let links: [Links] // 'Links'에서 'Link'로 변경
 }
 
 struct Links: Codable { // 'Links'에서 'Link'로 이름 변경
-    let organizationLinkId: Int
-    let organizationId: Int
-    let name: String
-    let url: String
+    let organizationLinkId: Int?
+    let organizationId: Int?
+    let name: String?
+    let url: String?
 }
 
 struct PatchOrganizationModel: Codable {
-    let statusCode: String
-    let message: String
+    let statusCode: String?
+    let message: String?
 }

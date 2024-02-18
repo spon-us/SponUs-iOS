@@ -88,6 +88,7 @@ struct MyNoticeDetailView: View {
                     .foregroundColor(Color.sponusPrimaryDarkmode)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 20)
+                    .padding(.bottom, 20)
                     .background(Color.sponusBlack)
             })
         }

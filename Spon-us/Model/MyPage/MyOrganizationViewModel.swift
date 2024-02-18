@@ -64,6 +64,16 @@ class MyOrganizationViewModel: ObservableObject {
                 }
                 
             case let .failure(error):
+                if let responsee = error.response {
+                    // 실패한 요청의 응답 본문이 있는 경우
+                    if let responseBody = String(data: responsee.data, encoding: .utf8) {
+                        print("Response body: \(responseBody)")
+                    } else {
+                        print("Failed to decode response body.")
+                    }
+                } else {
+                    print("No response body.")
+                }
                 print("Network request failed: \(error)")
             }
         }

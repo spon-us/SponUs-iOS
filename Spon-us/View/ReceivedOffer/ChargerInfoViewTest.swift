@@ -244,7 +244,7 @@ struct ChargerInfoViewTest: View {
                         
                         
                     }
-                    .background(Color.sponusBlack)
+                    .padding(.bottom, 20).background(Color.sponusBlack)
                 }
                 
                 

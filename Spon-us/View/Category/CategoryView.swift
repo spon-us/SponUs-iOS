@@ -34,6 +34,7 @@ struct CategoryView: View {
                         )
                         .foregroundColor(Color.sponusBlack)
                         .padding(.bottom, 20)
+                    
                     ZStack(alignment: .top) {
                         SponUsDivider()
                             .foregroundColor(.sponusGrey100)
@@ -67,6 +68,7 @@ struct CategoryView: View {
                     .padding(.bottom, 10)
                 }
                 .padding(.leading, 20)
+                
                 if categoryModelData.isLoading {
                     VStack(){
                         Spacer()
@@ -75,15 +77,15 @@ struct CategoryView: View {
                     }
                 } else {
                     ScrollView{
-                        VStack{
+                        VStack {
                             Spacer().frame(height: 30)
+                            
                             ForEach(categoryModelData.categoryModelDatas, id: \.id) { categoryContent in
                                 CategoryCell(categoryContent: categoryContent)
                             }
                         }
                         .padding(.horizontal, 20)
                     }
-                    
                 }
             }
             .navigationBarItems(trailing: Image("ic_search"))
@@ -133,8 +135,8 @@ struct CategoryListCell: View {
 }
 
 struct CategoryListDetailCell: View {
-
     var categoryDetailList: String
+    
     @Binding var selectedCategoryList: String
     @Binding var selectedCategoryDetailList: String
     
@@ -169,11 +171,19 @@ struct CategoryCell: View {
         NavigationLink{SearchPostView(announcementId: categoryContent.id, selectedSaveButton: $isBookmarked)} label: {
             VStack(spacing: 0){
                 HStack(alignment: .top, spacing: 0){
-                    Image("musinsa").resizable().frame(width: 95, height: 95).padding(.trailing, 16)
+                    AsyncImageView(url: URL(string: categoryContent.mainImage.url))
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 95, height: 95)
+                        .clipped()
+                        .padding(.trailing, 16)
+                    
                     VStack(alignment: .leading, spacing: 0){
                         Text(categoryContent.writerName).font(.Caption04).foregroundColor(.sponusGrey700).padding(.bottom, 4)
+                        
                         Text(categoryContent.title).font(.Body10).multilineTextAlignment(.leading).padding(.bottom, 8).foregroundColor(.sponusBlack)
+                        
                         Spacer()
+                        
                         HStack{
                             Text(changeToKorean(category: categoryContent.category) ?? "전체")
                                     .font(
@@ -187,6 +197,7 @@ struct CategoryCell: View {
                                         Rectangle()
                                             .fill(Color.sponusSecondary)
                                     )
+                            
                             Text(changeToKorean(type: categoryContent.type) ?? "전체")
                                     .font(
                                         Font.custom("Pretendard", size: 10)
@@ -203,16 +214,21 @@ struct CategoryCell: View {
                             Spacer()
                         }
                     }.frame(width: 160, height: 95).padding(.trailing, 36)
+                    
                     Button(action: {toggleBookmark()
                         print(categoryContent.id)}){
                         Image(isBookmarked ? "ic_saved_check" : "ic_saved")
                                 .frame(width: 28, height: 28)
                     }
-                }.padding(.bottom, 16)
+                }
+                .padding(.bottom, 16)
+                .padding(.top, 7)
+                
                 SponUsDivider().foregroundColor(.sponusGrey100)
             }
         }
     }
+    
     func toggleBookmark(){
         isBookmarked.toggle()
         if isBookmarked {
@@ -223,8 +239,6 @@ struct CategoryCell: View {
     }
 }
 
-
 #Preview {
     CategoryView()
 }
-

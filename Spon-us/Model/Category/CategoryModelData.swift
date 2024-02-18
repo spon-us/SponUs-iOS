@@ -22,24 +22,24 @@ class CategoryModelData: ObservableObject {
         provider.request(.getCategory(category: category, type: type)) { result in
             switch result {
             case .success(let response):
-                    if let jsonString = String(data: response.data, encoding: .utf8) {
-                        print("서버 응답 JSON 데이터: \(jsonString)")
+                if let jsonString = String(data: response.data, encoding: .utf8) {
+                    print("서버 응답 JSON 데이터: \(jsonString)")
+                }
+                
+                do {
+                    let categoryModelData = try JSONDecoder().decode(CategoryModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        self.categoryModelDatas = categoryModelData.content
+                            .sorted(by: { $0.updatedAt > $1.updatedAt }) // 최신 업데이트순으로 정렬
+                        self.isLoading = false
+                        print(self.categoryModelDatas)
                     }
-
-                    do {
-                        let categoryModelData = try JSONDecoder().decode(CategoryModel.self, from: response.data)
-                        DispatchQueue.main.async {
-                            self.categoryModelDatas = categoryModelData.content
-                            self.isLoading = false
-                            print(self.categoryModelDatas)
-                        }
-                    } catch {
-                        print("JSON 디코딩 오류: \(error)")
-                    }
+                } catch {
+                    print("JSON 디코딩 오류: \(error)")
+                }
             case .failure(let error):
                 print(error)
             }
         }
     }
-
 }

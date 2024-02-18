@@ -35,7 +35,8 @@ struct AsyncImageView: View {
                 Image(uiImage: image)
                     .resizable()
             } else {
-                ProgressView()
+                Image(.profileTest)
+                    .resizable()
             }
         }
         .onAppear {

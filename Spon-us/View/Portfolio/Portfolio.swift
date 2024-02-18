@@ -75,7 +75,7 @@ struct Portfolio: View {
         var isProgressing = false
         var isCompleted = false
     }
-
+    
     var publishingButton: some View {
         Button {
             $progressStatus.isPublishing.wrappedValue = true
@@ -238,26 +238,30 @@ struct Portfolio: View {
                                                         HStack(spacing: 4) {
                                                             withAnimation {
                                                                 Button() {
-                                                                    //                                                                showingPublishingToTopAlert = true
-                                                                    //                                                                currentToTopID = dummy.id
+                                                                    currentDialogID = cell.id
+                                                                    showingPublishingToTopAlert = true
                                                                 } label: {
                                                                     Text("끌어올리기").font(.Caption01).foregroundStyle(.sponusBlack)
                                                                         .frame(height: 40).frame(maxWidth: .infinity).border(.sponusGrey100)
                                                                 }.alert(isPresented: $showingPublishingToTopAlert) {
-//                                                                    if let index = dummyData.firstIndex(where: { $0.id == currentToTopID }) {
-//                                                                        return Alert(
-//                                                                            title: Text("끌어올리시겠습니까?"),
-//                                                                            message: Text("공고가 상단으로 끌어올려집니다."),
-//                                                                            primaryButton: .destructive(
-//                                                                                Text("아니오").foregroundStyle(Color.red)
-//                                                                            ),
-//                                                                            secondaryButton: .default(
-//                                                                                Text("끌어올리기"),
-//                                                                                action: withAnimation{{ movePostToTop(index: index) }}
-//                                                                            )
-//                                                                        )
-//                                                                    }
-                                                                    return Alert(title: Text("Default Title"), message: Text("Default Message"))
+                                                                    return Alert(
+                                                                        title: Text("끌어올리시겠습니까?"),
+                                                                        message: Text("공고가 상단으로 끌어올려집니다."),
+                                                                        primaryButton: .destructive(
+                                                                            Text("아니오").foregroundStyle(Color.red)
+                                                                        ),
+                                                                        secondaryButton: .default(
+                                                                            Text("끌어올리기"),
+                                                                            action: { myAnnouncementsViewModel.pullUp(announcementID: currentDialogID) { success in
+                                                                                if success {
+                                                                                    myAnnouncementsViewModel.myAnnouncementsContents.removeAll()
+                                                                                    myAnnouncementsViewModel.getMyAnnouncements()
+                                                                                }
+                                                                            }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    
                                                                 }
                                                             }
                                                             
@@ -350,146 +354,146 @@ struct Portfolio: View {
             // 진행 중
             if ($progressStatus.isProgressing.wrappedValue == true) {
                 
-                    ZStack {
-                        ScrollView {
-//                            Button {
-//                                print(portfolioOfferViewModel.myProposes)
-//                            } label: {
-//                                Text("gg")
-//                            }
-
-                            VStack {
-                                ForEach(portfolioOfferViewModel.myProposes, id: \.proposeId) { cell in
-                                    if cell.status != "SUSPENDED" && cell.announcementSummary.status == "OPENED" {
-                                        NavigationLink(
-                                            destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-                                            //                                        destination: DetailView(post: dummy),
-                                            label: {
-                                                VStack(alignment:.leading, spacing: 0) {
-                                                    HStack(spacing: 0) {
-                                                        AsyncImageView(url: URL(string: cell.announcementSummary.mainImage.url))
-                                                            .frame(width: 158, height: 158)
-                                                            .border(.sponusGrey100)
+                ZStack {
+                    ScrollView {
+                        //                            Button {
+                        //                                print(portfolioOfferViewModel.myProposes)
+                        //                            } label: {
+                        //                                Text("gg")
+                        //                            }
+                        
+                        VStack {
+                            ForEach(portfolioOfferViewModel.myProposes, id: \.proposeId) { cell in
+                                if cell.status != "SUSPENDED" && cell.announcementSummary.status == "OPENED" {
+                                    NavigationLink(
+                                        destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
+                                        //                                        destination: DetailView(post: dummy),
+                                        label: {
+                                            VStack(alignment:.leading, spacing: 0) {
+                                                HStack(spacing: 0) {
+                                                    AsyncImageView(url: URL(string: cell.announcementSummary.mainImage.url))
+                                                        .frame(width: 158, height: 158)
+                                                        .border(.sponusGrey100)
+                                                    
+                                                    VStack(alignment: .leading, spacing: 5) {
+                                                        switch cell.announcementSummary.type {
+                                                        case "SPONSORSHIP":
+                                                            Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        case "COLLABORATION":
+                                                            Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        case "PARTNERSHIP":
+                                                            Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        default:
+                                                            Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                        }
+                                                        Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                                                        HStack(spacing: 6) {
+                                                            if cell.proposingOrganizationImageUrl != nil{
+                                                                AsyncImageView(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                            }
+                                                            else {
+                                                                Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                            }
+                                                            Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
+                                                        }.padding(.bottom)
                                                         
-                                                        VStack(alignment: .leading, spacing: 5) {
-                                                            switch cell.announcementSummary.type {
-                                                            case "SPONSORSHIP":
-                                                                Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                            case "COLLABORATION":
-                                                                Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                            case "PARTNERSHIP":
-                                                                Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                            default:
-                                                                Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    }.padding(.leading, 20)
+                                                }.padding(.top, 32).padding(.bottom, 24)
+                                                HStack {
+                                                    Button {
+                                                        currentProgressingID = cell.proposeId
+                                                        currentProgressingStatus = cell.status
+                                                        portfolioOfferViewModel.stopOffer(proposeId: currentProgressingID) { success in
+                                                            if success {
+                                                                showingStopCoworkPopup = true
                                                             }
-                                                            Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
-                                                            HStack(spacing: 6) {
-                                                                if cell.proposingOrganizationImageUrl != nil{
-                                                                    AsyncImageView(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                                }
-                                                                else {
-                                                                    Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                                }
-                                                                Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
-                                                            }.padding(.bottom)
-                                                            
-                                                        }.padding(.leading, 20)
-                                                    }.padding(.top, 32).padding(.bottom, 24)
-                                                    HStack {
-                                                        Button {
-                                                            currentProgressingID = cell.proposeId
-                                                            currentProgressingStatus = cell.status
-                                                            portfolioOfferViewModel.stopOffer(proposeId: currentProgressingID) { success in
-                                                                if success {
-                                                                    showingStopCoworkPopup = true
-                                                                }
-                                                            }
-                                                        } label: {
-                                                            Text("협업 중단")
-                                                                .font(.Caption01)
-                                                                .frame(width: 157, height: 40)
-                                                                .foregroundStyle(.sponusRed)
-                                                                .border(.sponusRed)
-                                                            
                                                         }
-                                                        Spacer()
-                                                        Button {
-                                                            currentProgressingID = cell.proposeId
-                                                            showingCoworkCompletedPopup = true
-                                                        } label: {
-                                                            Text("협업 완료")
-                                                                .font(.Caption01)
-                                                                .frame(width: 157, height: 40)
-                                                                .foregroundStyle(.sponusPrimary)
-                                                                .border(.sponusPrimary)
-                                                        }
+                                                    } label: {
+                                                        Text("협업 중단")
+                                                            .font(.Caption01)
+                                                            .frame(width: 157, height: 40)
+                                                            .foregroundStyle(.sponusRed)
+                                                            .border(.sponusRed)
+                                                        
                                                     }
-                                                    Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-                                                }.onAppear() {
-                                                    print(cell.title)
+                                                    Spacer()
+                                                    Button {
+                                                        currentProgressingID = cell.proposeId
+                                                        showingCoworkCompletedPopup = true
+                                                    } label: {
+                                                        Text("협업 완료")
+                                                            .font(.Caption01)
+                                                            .frame(width: 157, height: 40)
+                                                            .foregroundStyle(.sponusPrimary)
+                                                            .border(.sponusPrimary)
+                                                    }
                                                 }
+                                                Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+                                            }.onAppear() {
+                                                print(cell.title)
                                             }
-                                        )
-                                    }
-                                }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                            }
-                        }.scrollIndicators(.hidden)
-                    }
-                    .popup(isPresented: $showingStopCoworkPopup) {
-                        createStopCoworkToastMessage().onDisappear() {
-                            portfolioOfferViewModel.offerContents.removeAll()
-                            portfolioOfferViewModel.getOffers() { success in
-                                if success {
-                                    portfolioOfferViewModel.getProposes()
+                                        }
+                                    )
                                 }
+                            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                    }.scrollIndicators(.hidden)
+                }
+                .popup(isPresented: $showingStopCoworkPopup) {
+                    createStopCoworkToastMessage().onDisappear() {
+                        portfolioOfferViewModel.offerContents.removeAll()
+                        portfolioOfferViewModel.getOffers() { success in
+                            if success {
+                                portfolioOfferViewModel.getProposes()
                             }
                         }
-                    } customize: {
-                        $0.type(.floater(verticalPadding: 16))
-                            .position(.bottom)
-                            .animation(.spring)
-                            .closeOnTap(false)
-                            .closeOnTapOutside(true)
-                            .autohideIn(3)
                     }
-                    .popup(isPresented: $showingCoworkCompletedPopup) {
-                        createCoworkCompletedToastMessage()
-                    } customize: {
-                        $0.type(.floater(verticalPadding: 16))
-                            .position(.bottom)
-                            .animation(.spring)
-                            .closeOnTap(false)
-                            .closeOnTapOutside(true)
-                            .autohideIn(3)
-                    }
-                    .popup(isPresented: $showingStopCoworkCancelPopup) {
-                        createStopCoworkCancelToastMessage().onDisappear() {
-                            portfolioOfferViewModel.offerContents.removeAll()
-                            portfolioOfferViewModel.getOffers() { success in
-                                if success {
-                                    portfolioOfferViewModel.getProposes()
-                                }
+                } customize: {
+                    $0.type(.floater(verticalPadding: 16))
+                        .position(.bottom)
+                        .animation(.spring)
+                        .closeOnTap(false)
+                        .closeOnTapOutside(true)
+                        .autohideIn(3)
+                }
+                .popup(isPresented: $showingCoworkCompletedPopup) {
+                    createCoworkCompletedToastMessage()
+                } customize: {
+                    $0.type(.floater(verticalPadding: 16))
+                        .position(.bottom)
+                        .animation(.spring)
+                        .closeOnTap(false)
+                        .closeOnTapOutside(true)
+                        .autohideIn(3)
+                }
+                .popup(isPresented: $showingStopCoworkCancelPopup) {
+                    createStopCoworkCancelToastMessage().onDisappear() {
+                        portfolioOfferViewModel.offerContents.removeAll()
+                        portfolioOfferViewModel.getOffers() { success in
+                            if success {
+                                portfolioOfferViewModel.getProposes()
                             }
                         }
-                    } customize: {
-                        $0.type(.floater(verticalPadding: 16))
-                            .position(.bottom)
-                            .animation(.spring)
-                            .closeOnTap(true)
-                            .closeOnTapOutside(true)
-                            .autohideIn(2)
                     }
-                    .popup(isPresented: $showingCoworkCompletedCancelPopup) {
-                        createCoworkCompletedCancelToastMessage()
-                    } customize: {
-                        $0.type(.floater(verticalPadding: 16))
-                            .position(.bottom)
-                            .animation(.spring)
-                            .closeOnTap(true)
-                            .closeOnTapOutside(true)
-                            .autohideIn(2)
-                    }
-               
+                } customize: {
+                    $0.type(.floater(verticalPadding: 16))
+                        .position(.bottom)
+                        .animation(.spring)
+                        .closeOnTap(true)
+                        .closeOnTapOutside(true)
+                        .autohideIn(2)
+                }
+                .popup(isPresented: $showingCoworkCompletedCancelPopup) {
+                    createCoworkCompletedCancelToastMessage()
+                } customize: {
+                    $0.type(.floater(verticalPadding: 16))
+                        .position(.bottom)
+                        .animation(.spring)
+                        .closeOnTap(true)
+                        .closeOnTapOutside(true)
+                        .autohideIn(2)
+                }
+                
                 
             }
             

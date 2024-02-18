@@ -81,6 +81,7 @@ class MyAnnouncementsViewModel: ObservableObject {
                     let myAnnouncements = try JSONDecoder().decode(MyAnnouncementsModel.self, from: response.data)
                     DispatchQueue.main.async {
                         self.myAnnouncementsContents = myAnnouncements.content
+                        self.myAnnouncementsContents.sort {$0.updatedAt > $1.updatedAt}
                         self.isLoading = false
                         print(self.myAnnouncementsContents)
                     }
@@ -100,11 +101,14 @@ class MyAnnouncementsViewModel: ObservableObject {
                 do {
                     let responseBody = try response.map(LogoutModel400.self)
                     print("pullup responseBody : \(responseBody)")
+                    completion(true)
                 } catch {
                     print("pullup json parsing error")
+                    completion(false)
                 }
             case .failure(let error):
                 print("pullup failure error")
+                completion(false)
             }
         }
     }

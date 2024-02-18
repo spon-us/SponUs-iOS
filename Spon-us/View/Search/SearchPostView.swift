@@ -143,7 +143,7 @@ struct SearchPostView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.top, 20)
                 }
-            }.background(Color.sponusBlack)
+            }.padding(.bottom, 20).background(Color.sponusBlack)
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle("기업 공고").font(.Body01)

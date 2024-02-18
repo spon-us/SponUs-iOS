@@ -299,6 +299,7 @@ struct PaymentSettingView: View {
                     .foregroundColor(paymentBtnInActive ? Color.sponusPrimaryDarkmode : Color.sponusGrey200)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 20)
+                    .padding(.bottom, 20)
                     .background(paymentBtnInActive ? Color.sponusBlack : Color.sponusGrey600)
             })
             .disabled(!paymentBtnInActive)

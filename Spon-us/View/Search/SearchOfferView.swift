@@ -262,6 +262,7 @@ struct SearchOfferView: View {
                         .foregroundColor(compleBtnInActive ? Color.sponusGrey200 : Color.sponusPrimaryDarkmode)
                         .frame(maxWidth: .infinity)
                         .padding(.top, 20)
+                        .padding(.bottom, 20)
                         .background(compleBtnInActive ? Color.sponusGrey600 : Color.sponusBlack)
                 }).disabled(compleBtnInActive)
                 

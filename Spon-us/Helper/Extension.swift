@@ -133,7 +133,7 @@ final class AuthInterceptor: RequestInterceptor {
     static var currentRetryCount = 0
     static var maximumRetryCount = 1
     static let shared = AuthInterceptor()
-    let provider = MoyaProvider<SponusAPI>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<SponusAPI>()
     private init() {}
 
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {

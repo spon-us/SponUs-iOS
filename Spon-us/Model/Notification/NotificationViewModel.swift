@@ -11,7 +11,7 @@ import Moya
 class NotificationViewModel: ObservableObject {
     @Published var notificationContents: [NotificationContent] = []
     @Published var isLoading = false
-    let provider = MoyaProvider<SponusAPI>()
+    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func getNotifications(){
         self.isLoading = true

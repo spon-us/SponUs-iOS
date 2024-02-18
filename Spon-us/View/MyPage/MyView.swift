@@ -36,8 +36,7 @@ struct MyView: View {
                         .foregroundColor(Color.sponusWhite)
                     
                     HStack(spacing: 0) {
-                        Image(.profileTest)
-                            .resizable()
+                        AsyncImageView(url: URL(string: myOrganizationViewModel.myOrganization?.imageUrl ?? "profile_test"))
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100, height: 100)
                             .clipped()

@@ -29,11 +29,11 @@ struct MyProfileView: View {
             ScrollView {
                 ZStack(alignment: .topTrailing) {
                     ZStack(alignment: .bottomLeading) {
-                        Image(.profileTest)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(maxWidth: .infinity, maxHeight: 540)
-                        
+                        AsyncImageView(url: URL(string: myOrganizationViewModel.myOrganization?.imageUrl ?? "profile_test"))
+                            .frame(height: 540)
+                            .frame(maxWidth: .infinity)
+                            .clipped()
+                    
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(maxWidth: .infinity).frame(height: 178)
@@ -50,11 +50,7 @@ struct MyProfileView: View {
                             )
                         
                         VStack(alignment:.leading, spacing: 8) {
-                            Text(myOrganizationViewModel.myOrganization?.suborganizationType == "STUDENT_COUNCIL" ?
-                                 "Student Council" :
-                                    (myOrganizationViewModel.myOrganization?.suborganizationType == "STUDENT_CLUB" ?
-                                     "Student Club" :
-                                        "Company"))
+                            Text(myOrganizationViewModel.myOrganization?.suborganizationType ?? "")
                             .font(.English15)
                             .foregroundColor(Color.sponusPrimary)
                             .padding(.horizontal, 10)

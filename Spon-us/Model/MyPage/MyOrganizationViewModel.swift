@@ -59,6 +59,7 @@ class MyOrganizationViewModel: ObservableObject {
                     self.myOrganization = myOrganizationResponse.content
                     print(myOrganizationResponse)
                 } catch {
+                    print(try! response.mapJSON())
                     print("Error parsing response: \(error)")
                 }
                 

@@ -171,8 +171,8 @@ struct CategoryCell: View {
         NavigationLink{SearchPostView(announcementId: categoryContent.id, selectedSaveButton: $isBookmarked)} label: {
             VStack(spacing: 0){
                 HStack(alignment: .top, spacing: 0){
+                    
                     AsyncImageView(url: URL(string: categoryContent.mainImage.url))
-                        .aspectRatio(contentMode: .fill)
                         .frame(width: 95, height: 95)
                         .clipped()
                         .padding(.trailing, 16)

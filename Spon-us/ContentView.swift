@@ -13,7 +13,7 @@ import PhotosUI
 struct ContentView: View {
     @AppStorage("loginAccount") var isLoggedIn: String?
     @State private var selectedTab: Int = 0
-
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             HomeView()
@@ -31,7 +31,7 @@ struct ContentView: View {
                         .font(.English18)
                 }
                 .tag(1)
-
+            
             CategoryView()
                 .tabItem {
                     Image(selectedTab == 2 ? "ic_discovery_check" : "ic_discovery")
@@ -39,7 +39,7 @@ struct ContentView: View {
                         .font(.English18)
                 }
                 .tag(2)
-
+            
             MyView(rootIsActive: .constant(false))
                 .tabItem {
                     Image(selectedTab == 3 ? "ic_mypage_check" : "ic_mypage")

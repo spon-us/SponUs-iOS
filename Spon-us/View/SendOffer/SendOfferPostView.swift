@@ -27,8 +27,10 @@ struct SendOfferPostView: View {
                         .frame(height: 335)
                         .clipped()
                     
+
                     NavigationLink {
-                        ProfileView(rootIsActive: $rootIsActive)
+                        // ProfileView(rootIsActive: $rootIsActive)
+                        Text("더미 채우기")
                     } label: {
                         HStack {
                             Text(proposalDetailViewModel.proposalDetail?.proposedOrganizationName ?? "")
@@ -68,6 +70,7 @@ struct SendOfferPostView: View {
                     
                     SendOfferPostCell(rootIsActive: $rootIsActive, status: statusChangeToKorean(english: proposalDetailViewModel.proposalDetail?.announcementDetails.status ?? ""), cellData: proposalDetailViewModel.proposalDetail?.announcementDetails ?? AnnouncementDetails())
                         .padding(.vertical, 16)
+
                 }
                 .padding(.all, 20)
             }

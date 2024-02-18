@@ -40,7 +40,9 @@ struct SearchPostView: View {
           }
           .scrollTargetBehavior(.viewAligned)
           .safeAreaPadding(.horizontal, 40.0)
+            
           LazyVStack(alignment: .leading, spacing: 0) {
+              /*
             HStack(){
               Spacer()
               HStack(spacing: 1){
@@ -51,7 +53,7 @@ struct SearchPostView: View {
                 Image("ic_saved_small")
                 Text("34").font(.English16).foregroundColor(.sponusGrey700)
               }.padding(.leading, 16)
-            }
+            }*/
             NavigationLink {
             } label: {
               HStack {

@@ -113,6 +113,7 @@ struct MyProfileView: View {
                     MyProfileSNSView()
                         .padding(.bottom, 24)
                     
+                    /*
                     Text("활동 기록")
                         .font(.Heading09)
                     
@@ -126,6 +127,7 @@ struct MyProfileView: View {
                         .padding(.bottom, 4)
                     
                     MyProfileHistoryCell(stateMessage: "완료된 공고")
+                     */
                 }
                 .foregroundColor(Color.sponusBlack)
                 .padding(.top, 43)

@@ -78,7 +78,7 @@ struct HomeView: View {
                                 Image("main_ad\(index)")
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 335, height: 402)
+                                    .frame(width: 345, height: 415)
                                     .cornerRadius(4)
                                     .containerRelativeFrame(.horizontal)
                                     .scrollTransition(.animated, axis: .horizontal) { content, phase in
@@ -257,7 +257,7 @@ struct HomeView: View {
                 
                 ScrollView(.horizontal) {
                     HStack(spacing: 8) {
-                        NavigationLink(destination: AnnouncementView(sectionTitle: "RECOMMEND", listStatus: AnnouncementView.ListStatus(recommend: true, best: false, recent: false))) {
+                        //NavigationLink(destination: AnnouncementView(sectionTitle: "RECOMMEND", listStatus: AnnouncementView.ListStatus(recommend: true, best: false, recent: false))) {
                             VStack(alignment: .leading) {
                                 HStack {
                                     Image("ic_sponus_blue")
@@ -289,9 +289,9 @@ struct HomeView: View {
                                             .stroke(Color("sponus_grey200"), lineWidth: 1)
                                     )
                             )
-                        }
+                        //}
                         
-                        NavigationLink(destination: AnnouncementView(sectionTitle: "BEST", listStatus: AnnouncementView.ListStatus(recommend: false, best: true, recent: false))) {
+                        //NavigationLink(destination: AnnouncementView(sectionTitle: "BEST", listStatus: AnnouncementView.ListStatus(recommend: false, best: true, recent: false))) {
                             VStack(alignment: .leading) {
                                 HStack {
                                     Image("ic_graph_blue")
@@ -324,9 +324,9 @@ struct HomeView: View {
                                             .stroke(Color("sponus_grey200"), lineWidth: 1)
                                     )
                             )
-                        }
+                        //}
                         
-                        NavigationLink(destination: AnnouncementView(sectionTitle: "RECENT", listStatus: AnnouncementView.ListStatus(recommend: false, best: false, recent: true))) {
+                        //NavigationLink(destination: AnnouncementView(sectionTitle: "RECENT", listStatus: AnnouncementView.ListStatus(recommend: false, best: false, recent: true))) {
                             VStack(alignment: .leading) {
                                 HStack {
                                     Image("ic_eye_blue")
@@ -359,7 +359,7 @@ struct HomeView: View {
                                             .stroke(Color("sponus_grey200"), lineWidth: 1)
                                     )
                             )
-                        }
+                        //}
                     }
                     .padding(.top, 40)
                 }

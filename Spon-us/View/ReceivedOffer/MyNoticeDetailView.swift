@@ -23,7 +23,7 @@ struct MyNoticeDetailView: View {
                     ImageScrollView()
                     
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        
+                        /*
                         HStack(spacing: 6){
                             Image("ic_eye_small")
                             Text("989")
@@ -34,7 +34,7 @@ struct MyNoticeDetailView: View {
                         }
                         .font(.English16)
                         .foregroundColor(Color.sponusGrey700)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)*/
                         
                         NavigationLink(destination: Text("더미를 만들어야해요!"), label: {
                             HStack{

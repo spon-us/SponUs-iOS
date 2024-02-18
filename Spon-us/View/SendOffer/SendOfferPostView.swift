@@ -77,6 +77,7 @@ struct SendOfferPostView: View {
                 NavigationLink(destination: ChargerInfoView(rootIsActive: $rootIsActive)) {
                     Text("담당자 정보 확인하기")
                         .font(.Body01)
+                        .padding(.bottom, 20)
                         .foregroundColor(Color.sponusPrimaryDarkmode)
                         .frame(maxWidth: .infinity)
                         .padding(.top, 20)
@@ -110,13 +111,13 @@ struct SendOfferPostCell: View {
     var cellData: AnnouncementDetails
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(cellData.announcementImages, id: \.self) { image in
-                AsyncImageView(url: URL(string: image.url))
+//            ForEach(cellData.announcementImages, id: \.self) { image in
+            AsyncImageView(url: URL(string: cellData.announcementImages.count != 0 ? cellData.announcementImages[0].url : "") )
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 158, height: 158)
                     .clipped()
                     .padding(.trailing, 20)
-            }
+//            }
             VStack(alignment: .leading, spacing: 12) {
                 Text("\(changeToKorean(type: cellData.type) ?? "전체")")
                     .font(.Caption02)

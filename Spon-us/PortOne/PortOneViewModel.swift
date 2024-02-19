@@ -57,7 +57,7 @@ public class PortOneViewModel: ObservableObject, Then {
             order.orderName.value = "주문할건데요?"
             order.name.value = "박포트"
             order.pg.value = PG.kcp.rawValue
-            order.appScheme.value = "instagram://"
+            order.appScheme.value = ""
         }
 
 

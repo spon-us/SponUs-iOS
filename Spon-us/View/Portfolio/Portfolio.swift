@@ -65,6 +65,7 @@ struct Portfolio: View {
     @State var activeToCompletedDetail = false
     
     @State var activeNavLinkToAnnouncement = false
+    @State var activeNavLinkToPropose = false
     
     @State private var currentDialogID = 0
     @State private var currentProgressingID = 0
@@ -72,7 +73,7 @@ struct Portfolio: View {
     @State private var currentMakeReportID = 0
     @State private var currentReportProposeID = 0
     @State private var currentReportID = 0
-    
+    @State private var currentProposeID = 0
     
     
     struct ProgressStatus {
@@ -376,78 +377,77 @@ struct Portfolio: View {
                         VStack {
                             ForEach(portfolioOfferViewModel.myProposes, id: \.proposeId) { cell in
                                 if cell.status != "SUSPENDED" && cell.status != "COMPLETED" {
-                                    NavigationLink(
-                                        destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-                                        //                                        destination: DetailView(post: dummy),
-                                        label: {
-                                            VStack(alignment:.leading, spacing: 0) {
-                                                HStack(spacing: 0) {
-                                                    AsyncImageView(url: URL(string: cell.announcementSummary.mainImage.url))
-                                                        .frame(width: 158, height: 158)
-                                                        .border(.sponusGrey100)
+                                    Button {
+                                        currentProposeID = cell.proposeId
+                                        activeNavLinkToPropose = true
+                                    } label: {
+                                        VStack(alignment:.leading, spacing: 0) {
+                                            HStack(spacing: 0) {
+                                                AsyncImageView(url: URL(string: cell.announcementSummary.mainImage.url))
+                                                    .frame(width: 158, height: 158)
+                                                    .border(.sponusGrey100)
+                                                
+                                                VStack(alignment: .leading, spacing: 5) {
+                                                    switch cell.announcementSummary.type {
+                                                    case "SPONSORSHIP":
+                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    case "COLLABORATION":
+                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    case "PARTNERSHIP":
+                                                        Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    default:
+                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    }
+                                                    Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                                                    HStack(spacing: 6) {
+                                                        if cell.proposingOrganizationImageUrl != nil{
+                                                            AsyncImageView(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                        }
+                                                        else {
+                                                            Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                        }
+                                                        Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
+                                                    }.padding(.bottom)
                                                     
-                                                    VStack(alignment: .leading, spacing: 5) {
-                                                        switch cell.announcementSummary.type {
-                                                        case "SPONSORSHIP":
-                                                            Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        case "COLLABORATION":
-                                                            Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        case "PARTNERSHIP":
-                                                            Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        default:
-                                                            Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                }.padding(.leading, 20)
+                                            }.padding(.top, 32).padding(.bottom, 24)
+                                            HStack {
+                                                Button {
+                                                    currentProgressingID = cell.proposeId
+                                                    currentProgressingStatus = cell.status
+                                                    portfolioOfferViewModel.stopOffer(proposeId: currentProgressingID) { success in
+                                                        if success {
+                                                            showingStopCoworkPopup = true
                                                         }
-                                                        Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
-                                                        HStack(spacing: 6) {
-                                                            if cell.proposingOrganizationImageUrl != nil{
-                                                                AsyncImageView(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                            }
-                                                            else {
-                                                                Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                            }
-                                                            Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
-                                                        }.padding(.bottom)
-                                                        
-                                                    }.padding(.leading, 20)
-                                                }.padding(.top, 32).padding(.bottom, 24)
-                                                HStack {
-                                                    Button {
-                                                        currentProgressingID = cell.proposeId
-                                                        currentProgressingStatus = cell.status
-                                                        portfolioOfferViewModel.stopOffer(proposeId: currentProgressingID) { success in
-                                                            if success {
-                                                                showingStopCoworkPopup = true
-                                                            }
-                                                        }
-                                                    } label: {
-                                                        Text("협업 중단")
-                                                            .font(.Caption01)
-                                                            .frame(width: 157, height: 40)
-                                                            .foregroundStyle(.sponusRed)
-                                                            .border(.sponusRed)
-                                                        
                                                     }
-                                                    Spacer()
-                                                    Button {
-                                                        currentProgressingID = cell.proposeId
-                                                        currentProgressingStatus = cell.status
-                                                        portfolioOfferViewModel.completeOffer(proposeId: currentProgressingID) { success in
-                                                            if success {
-                                                                showingCoworkCompletedPopup = true
-                                                            }
-                                                        }
-                                                    } label: {
-                                                        Text("협업 완료")
-                                                            .font(.Caption01)
-                                                            .frame(width: 157, height: 40)
-                                                            .foregroundStyle(.sponusPrimary)
-                                                            .border(.sponusPrimary)
-                                                    }
+                                                } label: {
+                                                    Text("협업 중단")
+                                                        .font(.Caption01)
+                                                        .frame(width: 157, height: 40)
+                                                        .foregroundStyle(.sponusRed)
+                                                        .border(.sponusRed)
+                                                    
                                                 }
-                                                Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+                                                Spacer()
+                                                Button {
+                                                    currentProgressingID = cell.proposeId
+                                                    currentProgressingStatus = cell.status
+                                                    portfolioOfferViewModel.completeOffer(proposeId: currentProgressingID) { success in
+                                                        if success {
+                                                            showingCoworkCompletedPopup = true
+                                                        }
+                                                    }
+                                                } label: {
+                                                    Text("협업 완료")
+                                                        .font(.Caption01)
+                                                        .frame(width: 157, height: 40)
+                                                        .foregroundStyle(.sponusPrimary)
+                                                        .border(.sponusPrimary)
+                                                }
                                             }
+                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
                                         }
-                                    )
+                                    }
                                 }
                             }.frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
@@ -538,85 +538,85 @@ struct Portfolio: View {
                         VStack {
                             ForEach(portfolioOfferViewModel.myProposes, id: \.proposeId) { cell in
                                 if (cell.status == "SUSPENDED" || cell.status == "COMPLETED" || cell.announcementSummary.status == "CLOSED") {
-                                    NavigationLink(
-                                        destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-                                        label: {
-                                            VStack(alignment:.leading, spacing: 0) {
-                                                HStack(spacing: 0) {
-                                                    AsyncImageView(url: URL(string: cell.announcementSummary.mainImage.url))
-                                                        .frame(width: 158, height: 158)
-                                                        .border(.sponusGrey100)
-                                                    
-                                                    VStack(alignment: .leading, spacing: 5) {
-                                                        switch cell.announcementSummary.type {
-                                                        case "SPONSORSHIP":
-                                                            Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        case "COLLABORATION":
-                                                            Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        case "PARTNERSHIP":
-                                                            Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        default:
-                                                            Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
-                                                        }
-                                                        Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
-                                                        
-                                                        HStack(spacing: 6) {
-                                                            if cell.proposingOrganizationImageUrl != nil{
-                                                                AsyncImageView(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                            }
-                                                            else {
-                                                                Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
-                                                            }
-                                                            Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
-                                                        }.padding(.bottom)
-                                                        
-                                                    }.padding(.leading, 20)
-                                                }.padding(.top, 32).padding(.bottom, 24)
-                                                VStack(spacing: 0) {
-                                                    if cell.status == "SUSPENDED" {
-                                                        Text("협업이 중단된 공고입니다")
-                                                            .font(.Caption01)
-                                                            .frame(height: 40)
-                                                            .frame(maxWidth: .infinity)
-                                                            .foregroundStyle(.sponusGrey700)
-                                                            .border(.sponusGrey100)
+                                    Button {
+                                        currentProposeID = cell.proposeId
+                                        activeNavLinkToPropose = true
+                                    } label: {
+                                        VStack(alignment:.leading, spacing: 0) {
+                                            HStack(spacing: 0) {
+                                                AsyncImageView(url: URL(string: cell.announcementSummary.mainImage.url))
+                                                    .frame(width: 158, height: 158)
+                                                    .border(.sponusGrey100)
+                                                
+                                                VStack(alignment: .leading, spacing: 5) {
+                                                    switch cell.announcementSummary.type {
+                                                    case "SPONSORSHIP":
+                                                        Text("협찬").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    case "COLLABORATION":
+                                                        Text("연계프로젝트").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    case "PARTNERSHIP":
+                                                        Text("제휴").font(.Caption02).foregroundStyle(.sponusGrey700)
+                                                    default:
+                                                        Text("nil").font(.Caption02).foregroundStyle(.sponusGrey700)
                                                     }
-                                                    else {
-                                                        if cell.isReported == true {
-                                                            Button {
-                                                                currentReportProposeID = cell.proposeId
-                                                                currentReportID = cell.reportId!
-                                                                activeNavLinkToReport = true
-                                                            } label: {
-                                                                Text("보고서 보러가기")
-                                                                    .font(.Caption01)
-                                                                    .frame(height: 40)
-                                                                    .frame(maxWidth: .infinity)
-                                                                    .foregroundStyle(.sponusPrimary)
-                                                                    .border(.sponusPrimary)
-                                                            }
+                                                    Text(cell.title).font(.Body07).foregroundStyle(.sponusBlack).multilineTextAlignment(.leading).padding(.bottom, 16)
+                                                    
+                                                    HStack(spacing: 6) {
+                                                        if cell.proposingOrganizationImageUrl != nil{
+                                                            AsyncImageView(url: URL(string: cell.proposingOrganizationImageUrl!)).aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
                                                         }
                                                         else {
-                                                            Button {
-                                                                currentReportProposeID = cell.proposeId
-                                                                
-                                                                activeNavLinkToMakeReport = true
-                                                            } label: {
-                                                                Text("보고서 작성하기")
-                                                                    .font(.Caption01)
-                                                                    .frame(height: 40)
-                                                                    .frame(maxWidth: .infinity)
-                                                                    .foregroundStyle(.sponusRed)
-                                                                    .border(.sponusRed)
-                                                            }
+                                                            Image(.profileTest).resizable().aspectRatio(contentMode: .fill).frame(width:24, height:24).clipShape(Circle())
+                                                        }
+                                                        Text("with \(cell.proposingOrganizationName)").font(.English16).foregroundStyle(.sponusGrey700)
+                                                    }.padding(.bottom)
+                                                    
+                                                }.padding(.leading, 20)
+                                            }.padding(.top, 32).padding(.bottom, 24)
+                                            VStack(spacing: 0) {
+                                                if cell.status == "SUSPENDED" {
+                                                    Text("협업이 중단된 공고입니다")
+                                                        .font(.Caption01)
+                                                        .frame(height: 40)
+                                                        .frame(maxWidth: .infinity)
+                                                        .foregroundStyle(.sponusGrey700)
+                                                        .border(.sponusGrey100)
+                                                }
+                                                else {
+                                                    if cell.isReported == true {
+                                                        Button {
+                                                            currentReportProposeID = cell.proposeId
+                                                            currentReportID = cell.reportId!
+                                                            activeNavLinkToReport = true
+                                                        } label: {
+                                                            Text("보고서 보러가기")
+                                                                .font(.Caption01)
+                                                                .frame(height: 40)
+                                                                .frame(maxWidth: .infinity)
+                                                                .foregroundStyle(.sponusPrimary)
+                                                                .border(.sponusPrimary)
                                                         }
                                                     }
-                                                    
+                                                    else {
+                                                        Button {
+                                                            currentReportProposeID = cell.proposeId
+                                                            
+                                                            activeNavLinkToMakeReport = true
+                                                        } label: {
+                                                            Text("보고서 작성하기")
+                                                                .font(.Caption01)
+                                                                .frame(height: 40)
+                                                                .frame(maxWidth: .infinity)
+                                                                .foregroundStyle(.sponusRed)
+                                                                .border(.sponusRed)
+                                                        }
+                                                    }
                                                 }
-                                                Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
-                                            }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                        }
-                                    )
+                                                
+                                            }
+                                            Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
+                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    }
                                 }
                             }
                         }
@@ -640,6 +640,9 @@ struct Portfolio: View {
             }
             .navigationDestination(isPresented: $activeNavLinkToAnnouncement) {
                 AnnouncementDetailView(rootIsActive: self.$rootIsActive, announcementId: self.currentDialogID)
+            }
+            .navigationDestination(isPresented: $activeNavLinkToPropose) {
+                MyProposeView(proposeId: self.currentProposeID, rootIsActive: self.$rootIsActive)
             }
             .toolbar(.hidden, for: .tabBar)
             .onAppear() {

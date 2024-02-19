@@ -13,7 +13,7 @@ struct ChargerInfoViewTest: View {
     @Binding var rootIsActive: Bool
     
     var body: some View {
-        NavigationView {
+        
             VStack(spacing: 0) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
@@ -254,7 +254,7 @@ struct ChargerInfoViewTest: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
-        }
+        
     }
 }
 

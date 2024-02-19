@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import KeychainSwift
+import FirebaseMessaging
 
 struct LoginView: View {
     @ObservedObject var loginViewModel = LoginViewModel()

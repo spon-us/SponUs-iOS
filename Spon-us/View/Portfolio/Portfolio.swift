@@ -64,6 +64,8 @@ struct Portfolio: View {
     @State var activeToProgressingDetail = false
     @State var activeToCompletedDetail = false
     
+    @State var activeNavLinkToAnnouncement = false
+    
     @State private var currentDialogID = 0
     @State private var currentProgressingID = 0
     @State private var currentProgressingStatus = ""
@@ -212,9 +214,10 @@ struct Portfolio: View {
                         VStack(alignment: .leading, spacing: 0) {
                             ForEach(myAnnouncementsViewModel.myAnnouncementsContents, id: \.id) { cell in
                                 if cell.status == "OPENED" {
-                                    NavigationLink(
-                                        destination: MyNoticeDetailView(rootIsActive: $rootIsActive),
-                                        label: {
+                                    Button {
+                                        currentDialogID = cell.id
+                                        activeNavLinkToAnnouncement = true
+                                    } label: {
                                             VStack(spacing: 0) {
                                                 HStack(spacing: 0) {
                                                     AsyncImageView(url: URL(string: cell.mainImage.url))
@@ -351,7 +354,7 @@ struct Portfolio: View {
                                                 Divider().backgroundStyle(.sponusGrey200).padding(.top, 16)
                                             }.frame(maxWidth: .infinity, maxHeight: .infinity)
                                         }
-                                    )
+                                    
                                 }
                             }
                         }
@@ -634,6 +637,9 @@ struct Portfolio: View {
             }
             .navigationDestination(isPresented: $activeNavLinkToReport) {
                 ReportView(currentReportId: currentReportID, popToRootView: self.$rootIsActive)
+            }
+            .navigationDestination(isPresented: $activeNavLinkToAnnouncement) {
+                AnnouncementDetailView(rootIsActive: self.$rootIsActive, announcementId: self.currentDialogID)
             }
             .toolbar(.hidden, for: .tabBar)
             .onAppear() {
@@ -1148,7 +1154,7 @@ struct ReportView: View {
                                     .frame(width: 16, height: 16)
                                     .foregroundStyle(.sponusPrimary)
                             }
-                        }.padding(.top, 23)
+                        }.padding(.top, 23).disabled(true)
                             // Korean/Heading/Heading05
                             Text(reportTitle)
                                 .font(.Heading05)

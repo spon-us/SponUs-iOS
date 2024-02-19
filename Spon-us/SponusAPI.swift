@@ -283,7 +283,7 @@ extension SponusAPI: TargetType {
                     let requestBody = JoinRequestBody(name: name, email: email, password: password, organizationType: "STUDENT", suborganizationType: "STUDENT_COUNCIL")
                     return .requestJSONEncodable(requestBody)
                 case .studentClub:
-                    let requestBody = JoinRequestBody(name: name, email: email, password: password, organizationType: "STUDENT", suborganizationType: "STUDENT_CLUB")
+                    let requestBody = JoinRequestBody(name: name, email: email, password: password, organizationType: "STUDENT", suborganizationType: "CLUB")
                     return .requestJSONEncodable(requestBody)
                 }
             case .company:

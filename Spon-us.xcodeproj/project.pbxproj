@@ -803,7 +803,6 @@
 				3B81BCC02B6231680067E9CB /* ProductList.plist in Resources */,
 				100D389C2B44833500498977 /* SUIT-Medium.otf in Resources */,
 				80A25CAA2B828E6800BDDDE4 /* GoogleService-Info.plist in Resources */,
-				80A25CB02B82D1A700BDDDE4 /* GoogleService-Info.plist in Resources */,
 				3B81BCBE2B62312C0067E9CB /* Product.storekit in Resources */,
 				100D38A32B44834700498977 /* Preview Assets.xcassets in Resources */,
 				100D389E2B44833500498977 /* Pretendard-SemiBold.otf in Resources */,

@@ -18,7 +18,7 @@ struct ChargerInfoViewTest: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(alignment: .center, spacing: 0) {
-                            Image("musinsa")
+                            Image("post_list_dummy_image")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 79, height: 79)
@@ -47,7 +47,7 @@ struct ChargerInfoViewTest: View {
                                 .padding(.bottom, 11)
                                 
                                 
-                                Text("무신사 담당자")
+                                Text("스포너스 무신사 담당자")
                                     .font(.Body07)
                                     .foregroundColor(Color.sponusBlack)
                                     .padding(.leading, 6)
@@ -71,7 +71,7 @@ struct ChargerInfoViewTest: View {
                                     .foregroundColor(Color.sponusGrey800)
                                     .frame(width: 88, alignment: .leading)
                                 
-                                Text("musinsa@gmail.com")
+                                Text("sponus@gmail.com")
                                     .foregroundColor(Color.sponusBlack)
                             }
                             .font(.English08)

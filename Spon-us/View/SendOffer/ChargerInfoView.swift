@@ -18,25 +18,22 @@ struct ChargerInfoView: View {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 0) {
                     HStack(alignment: .center) {
-                        Image("musinsa")
+                        Image("post_list_dummy_image")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 79, height: 79)
                             .clipped()
                         
                         VStack(spacing: 0) {
-                            NavigationLink(destination: /*ProfileView(rootIsActive: $rootIsActive)*/
-                                        Text("더미 채우기"), label: {
-                                HStack {
-                                    Text("Profile")
-                                        .font(.English15)
-                                        .foregroundColor(Color.sponusPrimary)
-                                    
-                                    Image("ic_go_12px")
-                                        .frame(width: 12, height: 12)
-                                        .padding(.leading, -6)
-                                }
-                            })
+                            HStack {
+                                Text("Profile")
+                                    .font(.English15)
+                                    .foregroundColor(Color.sponusPrimary)
+                                
+                                Image("ic_go_12px")
+                                    .frame(width: 12, height: 12)
+                                    .padding(.leading, -6)
+                            }
                             .padding(.leading, 12)
                             .padding(.trailing, 7)
                             .padding(.vertical, 4)
@@ -45,7 +42,7 @@ struct ChargerInfoView: View {
                             .cornerRadius(99)
                             
                             
-                            Text("무신사 담당자")
+                            Text("스포너스 담당자")
                                 .font(.Body07)
                                 .foregroundColor(Color.sponusBlack)
                                 .padding(.top, 11)
@@ -68,7 +65,7 @@ struct ChargerInfoView: View {
                             .font(.English08)
                             .foregroundColor(Color.sponusGrey800)
                         
-                        Text("musinsa@gmail.com")
+                        Text("sponus@gmail.com")
                             .font(.English08)
                             .foregroundColor(Color.sponusBlack)
                             .padding(.leading, 33)

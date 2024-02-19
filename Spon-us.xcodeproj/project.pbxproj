@@ -149,8 +149,8 @@
 		DFB22ED72B766FF3007903DF /* JoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB22ED62B766FF3007903DF /* JoinModel.swift */; };
 		DFB22ED92B767003007903DF /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB22ED82B767003007903DF /* JoinViewModel.swift */; };
 		DFC5901E2B82D88E00A5B61D /* AnnouncementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC5901D2B82D88E00A5B61D /* AnnouncementDetailView.swift */; };
-		DFC590202B830B9F00A5B61D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFC5901F2B830B9F00A5B61D /* GoogleService-Info.plist */; };
-		DFC590222B830D6800A5B61D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFC590212B830D6800A5B61D /* GoogleService-Info.plist */; };
+		DFC590242B830EB100A5B61D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFC590232B830EB100A5B61D /* GoogleService-Info.plist */; };
+		DFC590262B8311AE00A5B61D /* MyProposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC590252B8311AE00A5B61D /* MyProposeView.swift */; };
 		DFCD247C2B54D08100B00515 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = DFCD247B2B54D08100B00515 /* PopupView */; };
 		DFCD24822B5A67FC00B00515 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCD24812B5A67FC00B00515 /* DocumentPicker.swift */; };
 /* End PBXBuildFile section */
@@ -265,7 +265,8 @@
 		DFB22ED82B767003007903DF /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
 		DFC5901D2B82D88E00A5B61D /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
 		DFC5901F2B830B9F00A5B61D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DFC590212B830D6800A5B61D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DFC590232B830EB100A5B61D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DFC590252B8311AE00A5B61D /* MyProposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProposeView.swift; sourceTree = "<group>"; };
 		DFCD24812B5A67FC00B00515 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -394,7 +395,7 @@
 		100D387F2B44826500498977 /* Spon-us */ = {
 			isa = PBXGroup;
 			children = (
-				DFC590212B830D6800A5B61D /* GoogleService-Info.plist */,
+				DFC590232B830EB100A5B61D /* GoogleService-Info.plist */,
 				80B41FFF2B77F0DF0021DD90 /* Spon-us.entitlements */,
 				100D389F2B44833F00498977 /* Info.plist */,
 				3B36F09F2B6FEBCB0000ACFB /* PortOne */,
@@ -512,6 +513,7 @@
 				DF91F4032B4864330021291A /* Portfolio.swift */,
 				DF692B192B7E970F00BF9B75 /* EditAnnouncementView.swift */,
 				DFC5901D2B82D88E00A5B61D /* AnnouncementDetailView.swift */,
+				DFC590252B8311AE00A5B61D /* MyProposeView.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -802,12 +804,11 @@
 			files = (
 				3B81BCC02B6231680067E9CB /* ProductList.plist in Resources */,
 				100D389C2B44833500498977 /* SUIT-Medium.otf in Resources */,
+				DFC590242B830EB100A5B61D /* GoogleService-Info.plist in Resources */,
 				3B81BCBE2B62312C0067E9CB /* Product.storekit in Resources */,
 				100D38A32B44834700498977 /* Preview Assets.xcassets in Resources */,
 				100D389E2B44833500498977 /* Pretendard-SemiBold.otf in Resources */,
 				100D38AD2B44844F00498977 /* Assets.xcassets in Resources */,
-				DFC590202B830B9F00A5B61D /* GoogleService-Info.plist in Resources */,
-				DFC590222B830D6800A5B61D /* GoogleService-Info.plist in Resources */,
 				100D389B2B44833500498977 /* SUIT-Bold.otf in Resources */,
 				100D389D2B44833500498977 /* Pretendard-Medium.otf in Resources */,
 			);
@@ -905,6 +906,7 @@
 				DF3AD3E12B61696000DBFCCC /* LoginView.swift in Sources */,
 				3B81BCB82B622F080067E9CB /* MyNoticeListView.swift in Sources */,
 				3B81BCBA2B622F280067E9CB /* MyNoticeDetailView.swift in Sources */,
+				DFC590262B8311AE00A5B61D /* MyProposeView.swift in Sources */,
 				DF498F252B791EB400ADE078 /* LoginViewModel.swift in Sources */,
 				DF90A5B42B664EE700BC54D0 /* ThirdPartyView.swift in Sources */,
 				109F9E2A2B6E7536006B7D63 /* CouponView.swift in Sources */,

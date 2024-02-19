@@ -128,7 +128,7 @@ struct PaymentSettingView: View {
                                         .font(.Body06)
                                     .foregroundColor(Color.sponusBlack)
                                     
-                                    Image(selectedPayment == "tosspayments" ? "ic_check1_filled" : "ic_check1")
+                                    Image(selectedPayment == "tosspayments" ? "ic_check_filled" : "ic_check1")
                                 }
                             )
                     })
@@ -148,7 +148,7 @@ struct PaymentSettingView: View {
                                         .font(.Body06)
                                     .foregroundColor(Color.sponusBlack)
                                     
-                                    Image(selectedPayment == "kcp" ? "ic_check1_filled" : "ic_check1")
+                                    Image(selectedPayment == "kcp" ? "ic_check_filled" : "ic_check1")
                                     
                                 }
                             )
@@ -169,7 +169,7 @@ struct PaymentSettingView: View {
                                         .font(.Body06)
                                     .foregroundColor(Color.sponusBlack)
                                     
-                                    Image(selectedPayment == "kakaopay" ? "ic_check1_filled" : "ic_check1")
+                                    Image(selectedPayment == "kakaopay" ? "ic_check_filled" : "ic_check1")
                                 }
                             )
                     })

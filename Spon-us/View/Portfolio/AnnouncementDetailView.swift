@@ -70,7 +70,7 @@ struct AnnouncementDetailView: View {
                                 .disabled(true)
                                 
                                 
-                                Text(String(announcementId))
+                                Text(String(announcementTitle))
                                     .font(.Heading05)
                                     .padding(.top, 16)
                                 

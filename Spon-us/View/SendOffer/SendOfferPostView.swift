@@ -127,7 +127,7 @@ struct SendOfferPostCell: View {
                     .font(.Body07)
                     .foregroundColor(Color.sponusBlack)
                 Spacer()
-                NavigationLink(destination: CompanyPostView(rootIsActive: $rootIsActive)) {
+                NavigationLink(destination: CompanyPostView(rootIsActive: $rootIsActive, announcementId: cellData.id)) {
                     HStack {
                         Text("공고 보기")
                             .font(.Body10)

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseMessaging
 
 struct SelectUserTypeView: View {
     @State var userID: String

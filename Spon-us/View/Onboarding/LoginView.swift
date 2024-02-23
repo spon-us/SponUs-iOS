@@ -113,11 +113,12 @@ struct LoginView: View {
                     .padding(.bottom, 48)
                 Button {
                     disableButton = true
-                    Messaging.messaging().token { token, error in
-                        if let error = error {
-                            print("Error fetching FCM registration token: \(error)")
-                        } else if let token = token {
-                            print("FCM registration token: \(token)")
+//                    Messaging.messaging().token { token, error in
+//                        if let error = error {
+//                            print("Error fetching FCM registration token: \(error)")
+//                        } else if let token = token {
+//                            print("FCM registration token: \(token)")
+                            let token = "cEQV7QaJtk4Zt1JZR_-y1I:APA91bHkiwyniibiaiQaAr409gHVohlejI2EqZbUIHVlSLIHV_eMPat9NHVTCYCvCHLYL2vB-zaERx5ddqf7PXZVa7chC0AZirYV1AkFFHkmOkwNHioW6ZdvGQ7pSTmGxTTw4gynpeWH"
                             loginViewModel.postLogin(email: userID, password: userPW, fcmToken: token) { success in
                                 if success {
                                     // 로그인한 유저의 이메일 정보 -> UserDefaults Key "loginAccount"로 저장
@@ -133,8 +134,8 @@ struct LoginView: View {
                                 else {
                                     print("401\n\(String(describing: loginViewModel.login401?.message))")
                                 }
-                            }
-                        }
+//                            }
+//                        }
                     }
                     disableButton = false
                 } label: {

@@ -21,6 +21,7 @@ class LogoutViewModel: ObservableObject {
                 switch response.statusCode {
                 case 200:
                     do {
+                        print(response.statusCode)
                         let logoutResponse = try response.map(LogoutModel200.self)
                         self.logoutModel200 = logoutResponse
                         completion(true)
@@ -43,7 +44,19 @@ class LogoutViewModel: ObservableObject {
                     print("Unexpected StatusCode")
                     completion(false)
                 }
-            case let .failure(response):
+            case let .failure(res):
+                if let responsee = res.response {
+                    // 실패한 요청의 응답 본문이 있는 경우
+                    if let responseBody = String(data: responsee.data, encoding: .utf8) {
+                        print("Response body: \(responseBody)")
+                    } else {
+                        print("Failed to decode response body.")
+                    }
+                } else {
+                    print("No response body.")
+                }
+                print("logout error")
+                print(res.errorDescription)
                 print("response error")
                 completion(false)
             }

@@ -103,5 +103,8 @@ struct MyProposeView: View {
                 .renderingMode(.template)
                 .foregroundStyle(.black)
         }))
+        .onTapGesture {
+            UIApplication.shared.endEditing()
+        }
     }
 }

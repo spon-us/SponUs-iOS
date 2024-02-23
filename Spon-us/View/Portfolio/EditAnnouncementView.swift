@@ -160,6 +160,9 @@ struct EditAnnouncementView: View {
             }
             
         }
+        .onTapGesture {
+            UIApplication.shared.endEditing()
+        }
         //        }
     }
 }

@@ -21,7 +21,7 @@ struct AnnouncementDetailView: View {
     @State var announcementImages: [URL] = []
     @State var proposingID = 0
     
-    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared))
+    let provider = MoyaProvider<SponusAPI>(session: Session(interceptor: AuthInterceptor.shared), plugins: [NetworkLoggerPlugin()])
     
     var body: some View {
         ZStack {
@@ -184,6 +184,17 @@ struct AnnouncementDetailView: View {
                     }
                     
                 case let .failure(response):
+                    if let responsee = response.response {
+                        // 실패한 요청의 응답 본문이 있는 경우
+                        if let responseBody = String(data: responsee.data, encoding: .utf8) {
+                            print("Response body: \(responseBody)")
+                        } else {
+                            print("Failed to decode response body.")
+                        }
+                    } else {
+                        print("No response body.")
+                    }
+
                     print("failure")
                 }
                 
